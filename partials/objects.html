@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Объекты - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -37,108 +38,323 @@
     </header>
 
     <main class="container">
-        <h2>Объекты в JavaScript</h2>
-        <p>Объекты - это неупорядоченные коллекции пар "ключ-значение". Ключи - это строки (или символы), а значения
-            могут быть любого типа данных.</p>
+        <h2 id="объекты">Объекты</h2>
+        <p>Объекты в JavaScript - это коллекции пар ключ-значение, которые используются для хранения и организации
+            данных.</p>
 
-        <section id="creating-objects" class="fade-in">
+        <section id="создание-объектов" class="fade-in">
             <h3>Создание объектов</h3>
-            <p>Объекты можно создавать с помощью литералов или конструктора.</p>
             <div class="code-block">
-                <pre><code class="language-javascript">// Литерал объекта (предпочтительный способ)
+                <pre><code class="language-javascript">// Литерал объекта
 const person = {
-  name: "Алексей",
-  age: 35,
-  city: "Екатеринбург",
-  isAdmin: false,
-  greet: function() { // Метод объекта
-    console.log(`Привет от ${this.name}`);
+  name: "Иван",
+  age: 30,
+  city: "Москва"
+};
+
+// Конструктор Object
+const user = new Object();
+user.name = "Мария";
+user.age = 25;
+user.city = "Санкт-Петербург";
+
+// Функция-конструктор
+function Employee(name, position, salary) {
+  this.name = name;
+  this.position = position;
+  this.salary = salary;
+  this.isActive = true;
+}
+
+const employee1 = new Employee("Алексей", "Разработчик", 100000);
+console.log(employee1); // Employee { name: "Алексей", position: "Разработчик", salary: 100000, isActive: true }
+
+// Object.create()
+const personProto = {
+  greet: function() {
+    return `Привет, меня зовут ${this.name}`;
   }
 };
 
-// С помощью конструктора Object
-const car = new Object();
-car.brand = "Toyota";
-car.model = "Camry";
-car.year = 2022;</code></pre>
+const john = Object.create(personProto);
+john.name = "Джон";
+console.log(john.greet()); // "Привет, меня зовут Джон"</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="accessing-properties" class="fade-in">
-            <h3>Доступ к свойствам</h3>
-            <p>Доступ к свойствам объекта осуществляется через точку или квадратные скобки.</p>
+        <section id="доступ-к-свойствам-объекта" class="fade-in">
+            <h3>Доступ к свойствам объекта</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log(person.name); // "Алексей" (через точку)
-console.log(person["age"]); // 35 (через квадратные скобки)
+                <pre><code class="language-javascript">const person = {
+  name: "Иван",
+  age: 30,
+  "home address": "ул. Ленина, 10"
+};
 
-// Использование переменной для доступа к свойству
-const propertyName = "city";
-console.log(person[propertyName]); // "Екатеринбург"
+// Через точку (точечная нотация)
+console.log(person.name); // "Иван"
+console.log(person.age);  // 30
 
-// Вызов метода
-person.greet(); // "Привет от Алексей"</code></pre>
+// Через квадратные скобки (скобочная нотация)
+console.log(person["name"]); // "Иван"
+console.log(person["age"]);  // 30
+console.log(person["home address"]); // "ул. Ленина, 10"
+
+// Динамический доступ к свойствам через переменную
+const propertyName = "name";
+console.log(person[propertyName]); // "Иван"
+
+// Проверка наличия свойства
+console.log("name" in person); // true
+console.log("job" in person);  // false
+
+// Проверка собственных свойств
+console.log(person.hasOwnProperty("name")); // true</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="modifying-objects" class="fade-in">
-            <h3>Изменение объектов</h3>
-            <p>Свойства объектов можно добавлять, изменять и удалять.</p>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Добавление свойства
-person.job = "Инженер";
-
-// Изменение свойства
-person.age = 36;
-
-// Удаление свойства
-delete person.isAdmin;
-
-console.log(person);
-/*
-{
-  name: "Алексей",
-  age: 36,
-  city: "Екатеринбург",
-  greet: [Function: greet],
-  job: "Инженер"
-}
-*/</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
-
-        <section id="object-methods" class="fade-in">
+        <section id="методы-объектов" class="fade-in">
             <h3>Методы объектов</h3>
-            <p>Объекты могут содержать функции, которые называются методами.</p>
             <div class="code-block">
-                <pre><code class="language-javascript">const calculator = {
+                <pre><code class="language-javascript">// Объект с методами
+const calculator = {
   a: 0,
   b: 0,
-  setValues(valA, valB) {
-    this.a = valA;
-    this.b = valB;
-  },
-  add() {
+
+  // Метод как свойство-функция
+  add: function() {
     return this.a + this.b;
   },
-  subtract() {
-    return this.a - this.b;
+
+  // Сокращенный синтаксис методов (ES6+)
+  multiply() {
+    return this.a * this.b;
+  },
+
+  // Стрелочная функция (не рекомендуется для методов из-за this)
+  subtract: () => {
+    // this здесь не указывает на calculator!
+    // return this.a - this.b; // Приведет к ошибке или неверному результату
+    console.warn("Стрелочные функции не имеют собственного this для методов объекта");
+    return undefined;
   }
 };
 
-calculator.setValues(10, 5);
-console.log(calculator.add()); // 15
-console.log(calculator.subtract()); // 5</code></pre>
+calculator.a = 5;
+calculator.b = 3;
+console.log(calculator.add());       // 8
+console.log(calculator.multiply()); // 15
+console.log(calculator.subtract()); // undefined (и предупреждение в консоли)</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
+        <section id="перебор-свойств-объекта" class="fade-in">
+            <h3>Перебор свойств объекта</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">const person = {
+  name: "Иван",
+  age: 30,
+  city: "Москва",
+  job: "Программист"
+};
+
+// for...in - перебирает все перечисляемые свойства
+for (const key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+
+// Object.keys() - возвращает массив ключей
+const keys = Object.keys(person);
+console.log(keys); // ["name", "age", "city", "job"]
+
+// Перебор с помощью Object.keys() и forEach
+Object.keys(person).forEach(key => {
+  console.log(`${key}: ${person[key]}`);
+});
+
+// Object.values() - возвращает массив значений
+const values = Object.values(person);
+console.log(values); // ["Иван", 30, "Москва", "Программист"]
+
+// Object.entries() - возвращает массив пар [ключ, значение]
+const entries = Object.entries(person);
+console.log(entries); // [["name", "Иван"], ["age", 30], ...]
+
+// Перебор с помощью Object.entries() и деструктуризации
+Object.entries(person).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`);
+});</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="копирование-и-объединение-объектов" class="fade-in">
+            <h3>Копирование и объединение объектов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Копирование по ссылке
+const original = { a: 1, b: 2 };
+const copy = original; // Обе переменные указывают на один объект
+copy.a = 10;
+console.log(original.a); // 10 (изменение в copy отразилось в original)
+
+// Поверхностное копирование с Object.assign()
+const person = { name: "Иван", age: 30, address: { city: "Москва" } };
+const personCopy = Object.assign({}, person);
+personCopy.name = "Петр";
+personCopy.address.city = "Казань"; // Изменит город и в оригинале!
+console.log(person.name);       // "Иван"
+console.log(personCopy.name);   // "Петр"
+console.log(person.address.city); // "Казань" (Поверхностное копирование!)
+
+// Поверхностное копирование с оператором spread (...)
+const anotherCopy = { ...person };
+anotherCopy.age = 40;
+anotherCopy.address.city = "Тверь"; // Тоже изменит город в оригинале!
+console.log(person.age);          // 30
+console.log(anotherCopy.age);     // 40
+console.log(person.address.city); // "Тверь"
+
+// Глубокое копирование (простой способ для JSON-совместимых данных)
+const deepCopy = JSON.parse(JSON.stringify(person));
+deepCopy.address.city = "Сочи";
+console.log(person.address.city);   // "Тверь" (Оригинал не изменился)
+console.log(deepCopy.address.city); // "Сочи"
+
+// Объединение объектов
+const defaults = { theme: "light", language: "ru" };
+const userSettings = { theme: "dark" };
+const settings = { ...defaults, ...userSettings };
+console.log(settings); // { theme: "dark", language: "ru" }</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="деструктуризация-объектов" class="fade-in">
+            <h3>Деструктуризация объектов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">const person = {
+  name: "Иван",
+  age: 30,
+  city: "Москва",
+  job: "Программист"
+};
+
+// Базовая деструктуризация
+const { name, age } = person;
+console.log(name); // "Иван"
+console.log(age);  // 30
+
+// Деструктуризация с переименованием
+const { name: userName, age: userAge } = person;
+console.log(userName); // "Иван"
+console.log(userAge);  // 30
+
+// Деструктуризация с значениями по умолчанию
+const { job, salary = 0 } = person;
+console.log(job);    // "Программист"
+console.log(salary); // 0 (значение по умолчанию)
+
+// Вложенная деструктуризация
+const company = {
+  name: "ABC Corp",
+  address: {
+    street: "Ленина 10",
+    city: "Москва",
+    country: "Россия"
+  }
+};
+
+const { address: { city: companyCity, country } } = company;
+console.log(companyCity); // "Москва"
+console.log(country);     // "Россия"</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="геттеры-и-сеттеры" class="fade-in">
+            <h3>Геттеры и сеттеры</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">const product = {
+  name: "Телефон",
+  _price: 1000, // Соглашение: префикс _ указывает на "приватное" свойство
+
+  // Геттер - вызывается при чтении свойства
+  get price() {
+    console.log("Вызван геттер price");
+    return `$${this._price}`;
+  },
+
+  // Сеттер - вызывается при записи свойства
+  set price(value) {
+    console.log(`Вызван сеттер price со значением ${value}`);
+    if (value < 0) {
+      throw new Error("Цена не может быть отрицательной");
+    }
+    this._price = value;
+  }
+};
+
+// Использование геттера (выглядит как чтение свойства)
+console.log(product.price); // "$1000"
+
+// Использование сеттера (выглядит как запись свойства)
+product.price = 1200;
+console.log(product.price); // "$1200"
+
+// Валидация в сеттере
+try {
+  product.price = -100;
+} catch (error) {
+  console.log(error.message); // "Цена не может быть отрицательной"
+}</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="прототипное-наследование" class="fade-in">
+            <h3>Прототипное наследование</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Создание объекта с прототипом
+const animal = {
+  eats: true,
+  walk() {
+    console.log("Животное гуляет");
+  }
+};
+
+// Object.create создает новый объект с указанным прототипом
+const rabbit = Object.create(animal);
+rabbit.jumps = true;
+
+// Доступ к унаследованным свойствам
+console.log(rabbit.eats);  // true (унаследовано от animal)
+console.log(rabbit.jumps); // true (собственное свойство)
+rabbit.walk();             // "Животное гуляет" (унаследованный метод)
+
+// Проверка прототипа
+console.log(Object.getPrototypeOf(rabbit) === animal); // true
+console.log(rabbit.__proto__ === animal); // true (не рекомендуется использовать __proto__)
+
+// Цепочка прототипов
+const longEar = Object.create(rabbit); // longEar -> rabbit -> animal -> Object.prototype -> null
+longEar.earLength = 10;
+console.log(longEar.jumps); // true (унаследовано от rabbit)
+console.log(longEar.eats);  // true (унаследовано от animal через rabbit)
+console.log(longEar.toString()); // Унаследовано от Object.prototype</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
 
         <div class="navigation-buttons">
             <a href="loops.html" class="button">← Циклы</a>
@@ -148,13 +364,19 @@ console.log(calculator.subtract()); // 5</code></pre>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/js/05_objects.js" defer></script>
-    <script src="/main.js" defer></script>
+    <script src="../js/05_objects.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

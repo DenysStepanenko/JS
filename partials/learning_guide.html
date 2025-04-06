@@ -8,11 +8,12 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Гайд по обучению - Руководство по JavaScript</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Улучшения для изучения JavaScript</title>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html" class="active">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -146,10 +147,8 @@ console.log("Результаты операций:");
 //    - Условное выражение
 
 // Ваш код здесь...</code></pre>
-                <div class="controls">
-                    <button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
-                </div>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
@@ -187,10 +186,8 @@ const students = [
 // 5. Вычислите среднюю оценку всех студентов
 
 // Ваш код здесь...</code></pre>
-                <div class="controls">
-                    <button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
-                </div>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
@@ -222,10 +219,8 @@ function add(a, b) {
 // 3. Создайте два разных счетчика и проверьте их независимость
 
 // Ваш код здесь...</code></pre>
-                <div class="controls">
-                    <button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
-                </div>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
@@ -257,10 +252,8 @@ function add(a, b) {
 // 3. Используйте try...catch для обработки этой ошибки
 
 // Ваш код здесь...</code></pre>
-                <div class="controls">
-                    <button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
-                </div>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
@@ -286,10 +279,8 @@ function add(a, b) {
 // 4. Продемонстрируйте наследование методов
 
 // Ваш код здесь...</code></pre>
-                <div class="controls">
-                    <button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
-                </div>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
@@ -301,7 +292,7 @@ function add(a, b) {
             <ol>
                 <li>
                     <p><strong>Типы данных в JavaScript</strong></p>
-                    <div class="diagram-wrapper">
+                    <div class="code-block">
                         <pre><code class="diagram">
 JavaScript Типы Данных
 │
@@ -326,7 +317,7 @@ JavaScript Типы Данных
                 </li>
                 <li>
                     <p><strong>Область видимости переменных</strong></p>
-                    <div class="diagram-wrapper">
+                    <div class="code-block">
                         <pre><code class="diagram">
 Область видимости переменных
 │
@@ -349,7 +340,7 @@ JavaScript Типы Данных
                 </li>
                 <li>
                     <p><strong>Жизненный цикл переменных</strong></p>
-                    <div class="diagram-wrapper">
+                    <div class="code-block">
                         <pre><code class="diagram">
 Жизненный цикл переменных
 │
@@ -559,54 +550,6 @@ JavaScript Типы Данных
                                 <td>Отсортированный массив</td>
                                 <td>Да</td>
                             </tr>
-                            <tr>
-                                <td>reverse()</td>
-                                <td>Обращает порядок элементов</td>
-                                <td>Измененный массив</td>
-                                <td>Да</td>
-                            </tr>
-                            <tr>
-                                <td>join()</td>
-                                <td>Объединяет элементы в строку</td>
-                                <td>Строка</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>indexOf()</td>
-                                <td>Находит первый индекс элемента</td>
-                                <td>Индекс или -1</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>includes()</td>
-                                <td>Проверяет наличие элемента</td>
-                                <td>true/false</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>find()</td>
-                                <td>Находит первый элемент по условию</td>
-                                <td>Элемент или undefined</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>findIndex()</td>
-                                <td>Находит индекс первого элемента по условию</td>
-                                <td>Индекс или -1</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>some()</td>
-                                <td>Проверяет, есть ли хоть один элемент по условию</td>
-                                <td>true/false</td>
-                                <td>Нет</td>
-                            </tr>
-                            <tr>
-                                <td>every()</td>
-                                <td>Проверяет, все ли элементы удовлетворяют условию</td>
-                                <td>true/false</td>
-                                <td>Нет</td>
-                            </tr>
                         </tbody>
                     </table>
                 </li>
@@ -618,8 +561,8 @@ JavaScript Типы Данных
 
         <section id="интерактивные-упражнения" class="fade-in">
             <h3>Интерактивные упражнения</h3>
-            <p>Вы можете выполнять упражнения прямо здесь:</p>
-            <div class="exercise code-block">
+            <p>Примеры интерактивных упражнений с возможностью запуска кода прямо на странице:</p>
+            <div class="exercise">
                 <h4>Пример: Интерактивное упражнение по массивам</h4>
                 <div class="task">
                     <p>Задание: Используйте методы массивов для решения следующих задач:</p>
@@ -630,7 +573,8 @@ JavaScript Типы Данных
                     </ol>
                     <p>Исходный массив: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
                 </div>
-                <textarea class="code-editor" id="exercise1-code" rows="15">// Ваш код здесь
+                <div class="code-block">
+                    <textarea class="code-editor" id="exercise1-code" rows="15">// Ваш код здесь
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // 1. Фильтрация четных чисел
@@ -646,13 +590,12 @@ const sum = numbers.reduce((acc, num) => acc + num, 0);
 console.log("Четные числа:", evenNumbers);
 console.log("Числа, умноженные на 2:", doubledNumbers);
 console.log("Сумма всех чисел:", sum);</textarea>
-                <div class="controls">
-                    <button class="run-code">Запустить</button>
+                    <button class="run-code">Запустить код</button>
+                    <div class="result" id="exercise1-result"></div>
                 </div>
-                <div class="result" id="exercise1-result"></div>
             </div>
 
-            <div class="exercise code-block">
+            <div class="exercise">
                 <h4>Пример: Работа с объектами в массиве</h4>
                 <div class="task">
                     <p>Задание: Используйте методы массивов для работы с массивом объектов:</p>
@@ -662,7 +605,8 @@ console.log("Сумма всех чисел:", sum);</textarea>
                         <li>Создайте массив, содержащий только имена студентов</li>
                     </ol>
                 </div>
-                <textarea class="code-editor" id="exercise2-code" rows="18">// Ваш код здесь
+                <div class="code-block">
+                    <textarea class="code-editor" id="exercise2-code" rows="18">// Ваш код здесь
 const students = [
   { name: "Анна", grade: 85 },
   { name: "Иван", grade: 92 },
@@ -683,18 +627,17 @@ const names = students.map(student => student.name);
 
 // Выводим результаты
 console.log("Отсортированные студенты:", sortedStudents);
-console.log("Средний балл:", averageGrade.toFixed(2)); // Округляем средний балл
+console.log("Средний балл:", averageGrade);
 console.log("Имена студентов:", names);</textarea>
-                <div class="controls">
-                    <button class="run-code">Запустить</button>
+                    <button class="run-code">Запустить код</button>
+                    <div class="result" id="exercise2-result"></div>
                 </div>
-                <div class="result" id="exercise2-result"></div>
             </div>
         </section>
 
         <section id="интерактивные-демонстрации" class="fade-in">
             <h3>Интерактивные демонстрации</h3>
-            <p>Визуализируйте работу методов массивов:</p>
+            <p>Пример интерактивной демонстрации для визуализации концепций JavaScript:</p>
             <div class="demo-container">
                 <h4>Демонстрация методов массивов</h4>
                 <h5>Исходный массив</h5>
@@ -826,13 +769,13 @@ console.log("Имена студентов:", names);</textarea>
             <h3>YouTube-каналы</h3>
             <ul>
                 <li><a href="https://www.youtube.com/@TraversyMedia" target="_blank" rel="noopener noreferrer">Traversy
-                        Media</a></li>
+                        Media</a> (Англ.)</li>
                 <li><a href="https://www.youtube.com/@NetNinja" target="_blank" rel="noopener noreferrer">The Net
-                        Ninja</a></li>
+                        Ninja</a> (Англ.)</li>
                 <li><a href="https://www.youtube.com/@funfunfunction" target="_blank" rel="noopener noreferrer">Fun Fun
-                        Function</a></li>
+                        Function</a> (Англ.)</li>
                 <li><a href="https://www.youtube.com/@Academind" target="_blank" rel="noopener noreferrer">Academind</a>
-                </li>
+                    (Англ.)</li>
             </ul>
         </section>
 
@@ -863,8 +806,9 @@ console.log("Имена студентов:", names);</textarea>
                         Weekly</a> - еженедельная рассылка новостей</li>
             </ul>
         </section>
+
         <div class="navigation-buttons">
-            <a href="index.html" class="button">← На главную</a>
+            <a href="../index.html" class="button">← На главную</a>
             <a href="basics.html" class="button">Основы →</a>
         </div>
     </main>
@@ -874,91 +818,14 @@ console.log("Имена студентов:", names);</textarea>
             <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
+    <script src="../main.js" defer></script>
     <script>
-        // --- Скрипт для интерактивных упражнений ---
-        document.querySelectorAll('.run-code').forEach(button => {
-            const block = button.closest('.code-block'); // Находим родительский блок
-            if (!block) return;
-            const textarea = block.querySelector('.code-editor');
-            const resultDiv = block.querySelector('.result');
-
-            if (textarea && resultDiv) {
-                button.addEventListener('click', () => {
-                    resultDiv.innerHTML = ''; // Очищаем предыдущий результат
-
-                    const originalConsoleLog = console.log;
-                    const logs = [];
-                    const capturedErrors = []; // Для перехвата ошибок
-
-                    console.log = function (...args) {
-                        const formattedArgs = args.map(arg => {
-                            if (typeof arg === 'object' && arg !== null) {
-                                try {
-                                    return JSON.stringify(arg, null, 2);
-                                } catch (e) { return '[Circular Object]'; }
-                            }
-                            return String(arg);
-                        });
-                        logs.push(formattedArgs.join(" "));
-                        originalConsoleLog.apply(console, args);
-                    };
-
-                    // Временный обработчик ошибок окна
-                    const oldOnError = window.onerror;
-                    window.onerror = function (message, source, lineno, colno, error) {
-                        capturedErrors.push(`Ошибка: ${message} (строка ${lineno})`);
-                        return true; // Подавляем стандартный вывод
-                    };
-
-                    try {
-                        const runCode = new Function(textarea.value);
-                        runCode();
-
-                        if (logs.length > 0) {
-                            logs.forEach(log => {
-                                const logElement = document.createElement("pre"); // Используем pre
-                                logElement.style.margin = '0 0 5px 0';
-                                logElement.textContent = log;
-                                resultDiv.appendChild(logElement);
-                            });
-                        } else if (capturedErrors.length === 0) { // Показываем "нет вывода" только если не было ошибок
-                            const noOutputElement = document.createElement("p");
-                            noOutputElement.textContent = "Код выполнен без вывода в console.log.";
-                            noOutputElement.style.fontStyle = "italic";
-                            resultDiv.appendChild(noOutputElement);
-                        }
-
-                        // Выводим перехваченные ошибки
-                        capturedErrors.forEach(errMsg => {
-                            const errorElement = document.createElement("p");
-                            errorElement.style.color = "red";
-                            errorElement.textContent = errMsg;
-                            resultDiv.appendChild(errorElement);
-                        });
-
-                    } catch (error) {
-                        const errorElement = document.createElement("p");
-                        errorElement.style.color = "red";
-                        errorElement.textContent = "Ошибка выполнения: " + error.message;
-                        resultDiv.appendChild(errorElement);
-                    } finally {
-                        console.log = originalConsoleLog; // Восстанавливаем
-                        window.onerror = oldOnError; // Восстанавливаем обработчик ошибок
-                    }
-                });
-            }
-        });
-
-        // --- Скрипт для интерактивной демонстрации массивов ---
         let currentArray = [1, 2, 3, 4, 5];
-        const originalArrayContainer = document.getElementById("original-array");
 
         function renderArray(containerId, array) {
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = "";
-            if (!Array.isArray(array)) return; // Добавим проверку, что это массив
-
             array.forEach(item => {
                 const element = document.createElement("div");
                 element.className = "array-element";
@@ -994,26 +861,26 @@ console.log("Имена студентов:", names);</textarea>
                 const el = document.getElementById(id);
                 if (el) el.innerHTML = "";
             });
-            // Сбрасываем текст у текстовых полей
-            const mapText = document.getElementById("map-result-text");
-            const filterText = document.getElementById("filter-result-text");
-            if (mapText) mapText.innerHTML = "";
-            if (filterText) filterText.innerHTML = "";
+            // Также очищаем текстовые поля под массивами map и filter
+            const mapTextEl = document.getElementById("map-result-text");
+            if (mapTextEl) mapTextEl.innerHTML = "";
+            const filterTextEl = document.getElementById("filter-result-text");
+            if (filterTextEl) filterTextEl.innerHTML = "";
         }
 
         function demonstratePush() {
             clearDemoResults();
             const arrayCopy = [...currentArray];
             const result = arrayCopy.push(99);
-            renderArray("original-array", arrayCopy); // Обновляем отображение исходного массива
+            renderArray("original-array", arrayCopy);
             const resultEl = document.getElementById("push-result");
             if (resultEl) {
                 resultEl.innerHTML = `
                 <p>Результат вызова <code>push(99)</code>: ${result} (новая длина массива)</p>
-                <p>Исходный массив <strong>изменен</strong>.</p>
+                <p>Исходный массив изменен.</p>
                `;
             }
-            currentArray = arrayCopy; // Сохраняем измененный массив
+            currentArray = arrayCopy;
         }
 
         function demonstratePop() {
@@ -1031,7 +898,7 @@ console.log("Имена студентов:", names);</textarea>
             renderArray("original-array", arrayCopy);
             resultEl.innerHTML = `
               <p>Результат вызова <code>pop()</code>: ${result} (удаленный элемент)</p>
-              <p>Исходный массив <strong>изменен</strong>.</p>
+              <p>Исходный массив изменен.</p>
           `;
             currentArray = arrayCopy;
         }
@@ -1044,7 +911,7 @@ console.log("Имена студентов:", names);</textarea>
             if (resultTextEl) {
                 resultTextEl.innerHTML = `
                 <p>Результат вызова <code>map(x => x * 2)</code></p>
-                <p>Исходный массив <strong>не изменен</strong>.</p>
+                <p>Исходный массив не изменен.</p>
               `;
             }
         }
@@ -1057,7 +924,7 @@ console.log("Имена студентов:", names);</textarea>
             if (resultTextEl) {
                 resultTextEl.innerHTML = `
                     <p>Результат вызова <code>filter(x => x % 2 === 0)</code></p>
-                    <p>Исходный массив <strong>не изменен</strong>.</p>
+                    <p>Исходный массив не изменен.</p>
                 `;
             }
         }
@@ -1069,20 +936,24 @@ console.log("Имена студентов:", names);</textarea>
             if (resultEl) {
                 resultEl.innerHTML = `
                     <p>Результат вызова <code>reduce((sum, x) => sum + x, 0)</code>: ${result}</p>
-                    <p>Исходный массив <strong>не изменен</strong>.</p>
+                    <p>Исходный массив не изменен.</p>
                 `;
             }
         }
 
         // Инициализация демонстрации массивов при загрузке
-        if (originalArrayContainer) { // Проверяем наличие контейнера
+        window.addEventListener('load', () => {
             renderArray("original-array", currentArray);
-        }
-
+        });
     </script>
-    <script src="/main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

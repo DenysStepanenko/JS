@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Массивы - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html" class="active">Массивы</a></li>
@@ -37,74 +38,187 @@
     </header>
 
     <main class="container">
-        <h2>Массивы в JavaScript</h2>
-        <p>Массивы - это упорядоченные коллекции данных. Они позволяют хранить несколько значений в одной переменной.
-        </p>
+        <h2 id="массивы">Массивы</h2>
+        <p>Массивы в JavaScript - это упорядоченные коллекции элементов, которые могут быть разных типов.</p>
 
-        <section id="creating-arrays" class="fade-in">
+        <section id="создание-массивов" class="fade-in">
             <h3>Создание массивов</h3>
-            <p>Массивы можно создавать несколькими способами:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">// Литерал массива (предпочтительный способ)
-const fruits = ["Яблоко", "Банан", "Апельсин"];
+                <pre><code class="language-javascript">// Создание массива с помощью литерала массива
+let fruits = ["яблоко", "банан", "апельсин"];
 
-// С помощью конструктора Array
-const numbers = new Array(1, 2, 3, 4, 5);
+// Создание массива с помощью конструктора Array
+let numbers = new Array(1, 2, 3, 4, 5);
 
 // Создание пустого массива
-const emptyArray = [];</code></pre>
+let emptyArray = [];
+
+// Создание массива с разными типами данных
+let mixedArray = [1, "два", true, { name: "Иван" }, [5, 6]];
+
+// Создание массива определенной длины
+let arrayWithLength = new Array(5); // Создает массив с 5 пустыми элементами</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="accessing-elements" class="fade-in">
-            <h3>Доступ к элементам</h3>
-            <p>Доступ к элементам массива осуществляется по их индексу (начиная с 0):</p>
+        <section id="доступ-к-элементам-массива" class="fade-in">
+            <h3>Доступ к элементам массива</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">const fruits = ["Яблоко", "Банан", "Апельсин"];
+                <pre><code class="language-javascript">let fruits = ["яблоко", "банан", "апельсин", "киви"];
 
-console.log(fruits[0]); // "Яблоко"
-console.log(fruits[1]); // "Банан"
+// Доступ по индексу (индексы начинаются с 0)
+console.log(fruits[0]); // "яблоко"
+console.log(fruits[2]); // "апельсин"
 
-// Изменение элемента
-fruits[1] = "Груша";
-console.log(fruits); // ["Яблоко", "Груша", "Апельсин"]
+// Изменение элемента по индексу
+fruits[1] = "груша";
+console.log(fruits); // ["яблоко", "груша", "апельсин", "киви"]
 
 // Длина массива
-console.log(fruits.length); // 3</code></pre>
+console.log(fruits.length); // 4
+
+// Доступ к последнему элементу
+console.log(fruits[fruits.length - 1]); // "киви"</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="array-methods" class="fade-in">
-            <h3>Методы массивов</h3>
-            <p>JavaScript предоставляет множество полезных методов для работы с массивами:</p>
-            <ul>
-                <li><code>push()</code> / <code>pop()</code>: Добавление/удаление элемента в конце.</li>
-                <li><code>unshift()</code> / <code>shift()</code>: Добавление/удаление элемента в начале.</li>
-                <li><code>splice()</code>: Добавление/удаление/замена элементов в любом месте.</li>
-                <li><code>slice()</code>: Создание копии части массива.</li>
-                <li><code>concat()</code>: Объединение массивов.</li>
-                <li><code>indexOf()</code> / <code>lastIndexOf()</code>: Поиск индекса элемента.</li>
-                <li><code>includes()</code>: Проверка наличия элемента.</li>
-                <li><code>forEach()</code>: Перебор элементов.</li>
-                <li><code>map()</code>: Создание нового массива на основе существующего.</li>
-                <li><code>filter()</code>: Создание нового массива с отфильтрованными элементами.</li>
-                <li><code>reduce()</code>: Сведение массива к одному значению.</li>
-                <li><code>sort()</code>: Сортировка массива.</li>
-                <li><code>reverse()</code>: Изменение порядка элементов на обратный.</li>
-            </ul>
+        <section id="основные-методы-массивов" class="fade-in">
+            <h3>Основные методы массивов</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Пример использования map
-const numbers = [1, 2, 3, 4];
-const doubled = numbers.map(num => num * 2);
-console.log(doubled); // [2, 4, 6, 8]
+                <pre><code class="language-javascript">let fruits = ["яблоко", "банан", "апельсин"];
 
-// Пример использования filter
-const evenNumbers = numbers.filter(num => num % 2 === 0);
-console.log(evenNumbers); // [2, 4]</code></pre>
+// Добавление элементов
+fruits.push("киви");       // Добавляет в конец массива
+console.log(fruits);       // ["яблоко", "банан", "апельсин", "киви"]
+
+fruits.unshift("манго");   // Добавляет в начало массива
+console.log(fruits);       // ["манго", "яблоко", "банан", "апельсин", "киви"]
+
+// Удаление элементов
+let lastFruit = fruits.pop();  // Удаляет последний элемент и возвращает его
+console.log(lastFruit);        // "киви"
+console.log(fruits);           // ["манго", "яблоко", "банан", "апельсин"]
+
+let firstFruit = fruits.shift(); // Удаляет первый элемент и возвращает его
+console.log(firstFruit);       // "манго"
+console.log(fruits);           // ["яблоко", "банан", "апельсин"]
+
+// Поиск элементов
+console.log(fruits.indexOf("банан")); // 1
+console.log(fruits.includes("киви")); // false
+
+// Объединение массивов
+let moreFruits = ["киви", "груша"];
+let allFruits = fruits.concat(moreFruits);
+console.log(allFruits); // ["яблоко", "банан", "апельсин", "киви", "груша"]
+
+// Создание строки из массива
+console.log(fruits.join(", ")); // "яблоко, банан, апельсин"
+
+// Получение части массива
+let citrusFruits = allFruits.slice(2, 4); // Элементы с индекса 2 до 4 (не включая 4)
+console.log(citrusFruits); // ["апельсин", "киви"]
+
+// Изменение массива (удаление, замена, добавление элементов)
+// splice(startIndex, deleteCount, item1, item2, ...)
+fruits.splice(1, 1, "груша", "виноград"); // Удаляет 1 элемент начиная с индекса 1 и добавляет новые
+console.log(fruits); // ["яблоко", "груша", "виноград", "апельсин"]</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="методы-перебора-массивов" class="fade-in">
+            <h3>Методы перебора массивов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">let numbers = [1, 2, 3, 4, 5];
+
+// forEach - выполняет функцию для каждого элемента массива
+numbers.forEach(function(number, index) {
+  console.log(`Элемент ${index}: ${number}`);
+});
+
+// map - создает новый массив с результатами вызова функции для каждого элемента
+let doubled = numbers.map(function(number) {
+  return number * 2;
+});
+console.log(doubled); // [2, 4, 6, 8, 10]
+
+// filter - создает новый массив с элементами, прошедшими проверку
+let evenNumbers = numbers.filter(function(number) {
+  return number % 2 === 0;
+});
+console.log(evenNumbers); // [2, 4]
+
+// find - возвращает первый элемент, прошедший проверку
+let firstEven = numbers.find(function(number) {
+  return number % 2 === 0;
+});
+console.log(firstEven); // 2
+
+// some - проверяет, удовлетворяет ли хотя бы один элемент условию
+let hasEven = numbers.some(function(number) {
+  return number % 2 === 0;
+});
+console.log(hasEven); // true
+
+// every - проверяет, удовлетворяют ли все элементы условию
+let allEven = numbers.every(function(number) {
+  return number % 2 === 0;
+});
+console.log(allEven); // false
+
+// reduce - сводит массив к одному значению
+let sum = numbers.reduce(function(accumulator, current) {
+  return accumulator + current;
+}, 0);
+console.log(sum); // 15 (1 + 2 + 3 + 4 + 5)
+
+// sort - сортирует элементы массива
+let unsortedNumbers = [5, 2, 8, 1, 4];
+unsortedNumbers.sort(function(a, b) {
+  return a - b; // Для числового сравнения
+});
+console.log(unsortedNumbers); // [1, 2, 4, 5, 8]</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="деструктуризация-массивов" class="fade-in">
+            <h3>Деструктуризация массивов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Деструктуризация массива
+let colors = ["красный", "зеленый", "синий"];
+let [red, green, blue] = colors;
+console.log(red);   // "красный"
+console.log(green); // "зеленый"
+console.log(blue);  // "синий"
+
+// Пропуск элементов
+let [first, , third] = colors;
+console.log(first); // "красный"
+console.log(third); // "синий"
+
+// Значения по умолчанию
+let [a, b, c, d = "желтый"] = colors;
+console.log(d); // "желтый"
+
+// Обмен значениями переменных
+let x = 1;
+let y = 2;
+[x, y] = [y, x];
+console.log(x); // 2
+console.log(y); // 1
+
+// Остаточные параметры
+let [head, ...tail] = [1, 2, 3, 4];
+console.log(head); // 1
+console.log(tail); // [2, 3, 4]</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
@@ -118,13 +232,19 @@ console.log(evenNumbers); // [2, 4]</code></pre>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/js/02_arrays.js" defer></script>
-    <script src="/main.js" defer></script>
+    <script src="../js/02_arrays.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

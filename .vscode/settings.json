@@ -1,4 +1,5 @@
 {
   "cSpell.words": ["Переменные"],
-  "CodeGPT.apiKey": "CodeGPT Plus Beta"
+  "CodeGPT.apiKey": "CodeGPT Plus Beta",
+  "editor.inlineSuggest.suppressSuggestions": true
 }

@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Проекты - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -37,7 +38,7 @@
     </header>
 
     <main class="container">
-        <h2>Проекты для закрепления</h2>
+        <h2 id="проекты-для-закрепления">Проекты для закрепления</h2>
         <p>Лучший способ научиться программировать - это практика. Реализуйте эти проекты, чтобы применить полученные
             знания.</p>
 
@@ -89,6 +90,18 @@
             строки, числа, условные конструкции).
         </section>
 
+        <section id="проект-среднего-уровня-гайд" class="fade-in">
+            <h3>Проект среднего уровня</h3>
+            <p><strong>Приложение для управления финансами</strong></p>
+            <ul>
+                <li>Создайте приложение для отслеживания доходов и расходов.</li>
+                <li>Реализуйте добавление, удаление и редактирование транзакций.</li>
+                <li>Добавьте категории транзакций и фильтрацию.</li>
+                <li>Реализуйте визуализацию данных (графики, диаграммы).</li>
+                <li>Добавьте сохранение данных в localStorage.</li>
+            </ul>
+        </section>
+
         <div class="navigation-buttons">
             <a href="exercises.html" class="button">← Упражнения</a>
             <a href="resources.html" class="button">Ресурсы →</a>
@@ -97,12 +110,18 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/main.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Ресурсы - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -37,7 +38,7 @@
     </header>
 
     <main class="container">
-        <h2>Ресурсы для дальнейшего изучения JavaScript</h2>
+        <h2 id="ресурсы-для-дальнейшего-изучения">Ресурсы для дальнейшего изучения JavaScript</h2>
         <p>Продолжайте свое обучение с помощью этих полезных ресурсов:</p>
 
         <section id="documentation" class="fade-in">
@@ -76,6 +77,7 @@
                 <li>"JavaScript. Подробное руководство" (Дэвид Флэнаган)</li>
                 <li>"Выразительный JavaScript" (Марейн Хавербеке) - Доступна онлайн бесплатно.</li>
                 <li>Серия книг "You Don't Know JS" (Кайл Симпсон) - Глубокое погружение в язык.</li>
+                <li>"JavaScript: The Good Parts" (Дуглас Крокфорд)</li>
             </ul>
         </section>
 
@@ -94,20 +96,54 @@
             </ul>
         </section>
 
+        <section id="youtube-каналы-гайд" class="fade-in">
+            <h3>YouTube-каналы</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/@TraversyMedia" target="_blank" rel="noopener noreferrer">Traversy
+                        Media</a> (Англ.)</li>
+                <li><a href="https://www.youtube.com/@NetNinja" target="_blank" rel="noopener noreferrer">The Net
+                        Ninja</a> (Англ.)</li>
+                <li><a href="https://www.youtube.com/@funfunfunction" target="_blank" rel="noopener noreferrer">Fun Fun
+                        Function</a> (Англ.)</li>
+                <li><a href="https://www.youtube.com/@Academind" target="_blank" rel="noopener noreferrer">Academind</a>
+                    (Англ.)</li>
+            </ul>
+        </section>
+
+        <section id="сообщества" class="fade-in">
+            <h3>Сообщества</h3>
+            <ul>
+                <li><a href="https://stackoverflow.com/questions/tagged/javascript" target="_blank"
+                        rel="noopener noreferrer">Stack Overflow</a> - вопросы и ответы</li>
+                <li><a href="https://www.reddit.com/r/javascript/" target="_blank" rel="noopener noreferrer">Reddit
+                        r/javascript</a> - обсуждения и новости</li>
+                <li><a href="https://dev.to/t/javascript" target="_blank" rel="noopener noreferrer">Dev.to</a> - статьи
+                    и обсуждения</li>
+                <li><a href="https://javascriptweekly.com/" target="_blank" rel="noopener noreferrer">JavaScript
+                        Weekly</a> - еженедельная рассылка новостей</li>
+            </ul>
+        </section>
+
         <div class="navigation-buttons">
             <a href="projects.html" class="button">← Проекты</a>
-            <a href="index.html" class="button">На главную →</a>
+            <a href="../index.html" class="button">На главную →</a>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/main.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

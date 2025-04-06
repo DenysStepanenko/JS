@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Функции - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -37,84 +38,176 @@
     </header>
 
     <main class="container">
-        <h2>Функции в JavaScript</h2>
-        <p>Функции - это блоки кода, которые можно определить один раз и вызывать многократно для выполнения
-            определенной задачи.</p>
+        <h2 id="функции">Функции</h2>
+        <p>Функции в JavaScript - это блоки кода, которые можно вызывать многократно.</p>
 
-        <section id="declaring-functions" class="fade-in">
+        <section id="объявление-функций" class="fade-in">
             <h3>Объявление функций</h3>
-            <p>Существует несколько способов объявления функций:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">// Function Declaration
+                <pre><code class="language-javascript">// Объявление функции (Function Declaration)
 function greet(name) {
-  console.log(`Привет, ${name}!`);
+  return `Привет, ${name}!`;
 }
 
-// Function Expression
-const sayBye = function(name) {
-  console.log(`Пока, ${name}!`);
-};
+// Вызов функции
+console.log(greet("Иван")); // "Привет, Иван!"
 
-// Arrow Function (стрелочная функция)
-const add = (a, b) => {
+// Функциональное выражение (Function Expression)
+const add = function(a, b) {
   return a + b;
 };
+console.log(add(5, 3)); // 8
 
-// Сокращенная стрелочная функция
+// Стрелочная функция (Arrow Function)
 const multiply = (a, b) => a * b;
+console.log(multiply(4, 2)); // 8
 
-greet("Иван");
-sayBye("Мария");
-console.log(add(2, 3)); // 5
-console.log(multiply(4, 5)); // 20</code></pre>
+// Стрелочная функция с блоком кода
+const divide = (a, b) => {
+  if (b === 0) {
+    return "Деление на ноль невозможно";
+  }
+  return a / b;
+};
+console.log(divide(10, 2)); // 5
+console.log(divide(10, 0)); // "Деление на ноль невозможно"</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="parameters-arguments" class="fade-in">
-            <h3>Параметры и аргументы</h3>
-            <p>Функции могут принимать параметры (переменные, перечисленные в определении функции) и аргументы
-                (значения, передаваемые при вызове функции).</p>
+        <section id="параметры-функций" class="fade-in">
+            <h3>Параметры функций</h3>
             <div class="code-block">
                 <pre><code class="language-javascript">// Параметры по умолчанию
-function createUser(name = "Гость", age = 18) {
-  console.log(`Пользователь: ${name}, Возраст: ${age}`);
+function greet(name = "Гость") {
+  return `Привет, ${name}!`;
 }
+console.log(greet());       // "Привет, Гость!"
+console.log(greet("Иван"));  // "Привет, Иван!"
 
-createUser("Алиса", 25); // Пользователь: Алиса, Возраст: 25
-createUser("Боб");       // Пользователь: Боб, Возраст: 18
-createUser();          // Пользователь: Гость, Возраст: 18
-
-// Rest-параметр (...) для сбора оставшихся аргументов в массив
+// Остаточные параметры
 function sum(...numbers) {
   return numbers.reduce((total, num) => total + num, 0);
 }
+console.log(sum(1, 2, 3, 4, 5)); // 15
 
-console.log(sum(1, 2, 3));    // 6
-console.log(sum(10, 20, 30, 40)); // 100</code></pre>
+// Деструктуризация параметров
+function printPersonInfo({ name, age, city = "Неизвестно" }) {
+  console.log(`${name}, ${age} лет, город: ${city}`);
+}
+printPersonInfo({ name: "Иван", age: 30 }); // "Иван, 30 лет, город: Неизвестно"
+printPersonInfo({ name: "Мария", age: 25, city: "Москва" }); // "Мария, 25 лет, город: Москва"</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
         </section>
 
-        <section id="scope-closures" class="fade-in">
+        <section id="область-видимости-и-замыкания" class="fade-in">
             <h3>Область видимости и замыкания</h3>
-            <p>Область видимости определяет, где переменные доступны. Замыкания позволяют функции "запоминать"
-                переменные из внешней области видимости.</p>
             <div class="code-block">
-                <pre><code class="language-javascript">function createCounter() {
-  let count = 0; // Локальная переменная, захваченная замыканием
+                <pre><code class="language-javascript">// Глобальная и локальная область видимости
+let globalVar = "Я глобальная переменная";
+
+function testScope() {
+  let localVar = "Я локальная переменная";
+  console.log(globalVar); // Доступ к глобальной переменной
+  console.log(localVar);  // Доступ к локальной переменной
+}
+
+testScope();
+// console.log(localVar); // Ошибка! localVar не определена в глобальной области
+
+// Замыкания
+function createCounter() {
+  let count = 0;
+
   return function() {
     count++;
-    console.log(count);
+    return count;
   };
 }
 
 const counter = createCounter();
-counter(); // 1
-counter(); // 2
-counter(); // 3</code></pre>
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+
+// Другой пример замыкания
+function createGreeting(greeting) {
+  return function(name) {
+    return `${greeting}, ${name}!`;
+  };
+}
+
+const sayHello = createGreeting("Привет");
+const sayGoodbye = createGreeting("До свидания");
+
+console.log(sayHello("Иван"));    // "Привет, Иван!"
+console.log(sayGoodbye("Мария")); // "До свидания, Мария!"</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="рекурсия" class="fade-in">
+            <h3>Рекурсия</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Рекурсивная функция для вычисления факториала
+function factorial(n) {
+  // Базовый случай
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  // Рекурсивный случай
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // 120 (5 * 4 * 3 * 2 * 1)
+
+// Рекурсивная функция для вычисления чисел Фибоначчи
+function fibonacci(n) {
+  if (n <= 1) {
+    return n;
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(7)); // 13 (0, 1, 1, 2, 3, 5, 8, 13)</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="функции-высшего-порядка" class="fade-in">
+            <h3>Функции высшего порядка</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Функция высшего порядка - принимает или возвращает другие функции
+function applyOperation(a, b, operation) {
+  return operation(a, b);
+}
+
+// Функции для передачи в качестве аргументов
+const add = (x, y) => x + y;
+const subtract = (x, y) => x - y;
+const multiply = (x, y) => x * y;
+
+console.log(applyOperation(5, 3, add));       // 8
+console.log(applyOperation(5, 3, subtract)); // 2
+console.log(applyOperation(5, 3, multiply)); // 15
+
+// Создание функции с помощью функции высшего порядка
+function createMultiplier(factor) {
+  return function(number) {
+    return number * factor;
+  };
+}
+
+const double = createMultiplier(2);
+const triple = createMultiplier(3);
+
+console.log(double(5)); // 10
+console.log(triple(5)); // 15</code></pre>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
             </div>
@@ -128,13 +221,19 @@ counter(); // 3</code></pre>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/js/03_functions.js" defer></script>
-    <script src="/main.js" defer></script>
+    <script src="../js/03_functions.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>

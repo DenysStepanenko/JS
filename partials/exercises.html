@@ -8,10 +8,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Упражнения - Руководство по JavaScript</title>
 </head>
 
@@ -21,7 +22,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -37,7 +38,7 @@
     </header>
 
     <main class="container">
-        <h2>Практические упражнения</h2>
+        <h2 id="практические-упражнения">Практические упражнения</h2>
         <p>Закрепите свои знания, выполнив следующие упражнения. Попробуйте решить их самостоятельно перед тем, как
             смотреть решения.</p>
 
@@ -49,6 +50,33 @@
                 <li>Напишите условную конструкцию, которая проверяет, является ли число четным или нечетным.</li>
                 <li>Создайте строку и выведите ее длину и первый символ.</li>
             </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Примерный код для упражнений по основам (можно использовать как шаблон)
+// 1. Имя
+let myName = "ВашеИмя";
+console.log(myName);
+
+// 2. Сложение
+let num1 = 15;
+let num2 = 7;
+console.log(num1 + num2);
+
+// 3. Чет/Нечет
+let checkNum = 10;
+if (checkNum % 2 === 0) {
+    console.log(checkNum + " - четное");
+} else {
+    console.log(checkNum + " - нечетное");
+}
+
+// 4. Строка
+let myString = "JavaScript";
+console.log("Длина:", myString.length);
+console.log("Первый символ:", myString[0]);
+</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
         </section>
 
         <section id="exercise-arrays" class="fade-in">
@@ -61,6 +89,31 @@
                     исходного массива строк.</li>
                 <li>Найдите сумму всех чисел в массиве с помощью метода `reduce`.</li>
             </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Примерный код для упражнений по массивам
+// 1. Фрукты
+let favFruits = ["Яблоко", "Банан"];
+favFruits.push("Манго");
+console.log(favFruits);
+
+// 2. Map
+const numbersMap = [1, 2, 3, 4];
+const doubled = numbersMap.map(n => n * 2);
+console.log(doubled);
+
+// 3. Filter
+const words = ["Привет", "Мир", "JavaScript", "Кот", "Программирование"];
+const longWords = words.filter(word => word.length > 5);
+console.log(longWords);
+
+// 4. Reduce
+const numbersReduce = [5, 10, 15, 20];
+const sum = numbersReduce.reduce((acc, current) => acc + current, 0);
+console.log(sum);
+</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
         </section>
 
         <section id="exercise-functions" class="fade-in">
@@ -72,6 +125,37 @@
                 <li>Создайте функцию, которая возвращает другую функцию (замыкание). Внутренняя функция должна
                     использовать переменную из внешней функции.</li>
             </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Примерный код для упражнений по функциям
+// 1. Сумма
+function sumNumbers(a, b) {
+    return a + b;
+}
+console.log(sumNumbers(5, 3));
+
+// 2. Максимум в массиве
+function findMax(arr) {
+    if (arr.length === 0) return undefined;
+    return Math.max(...arr); // Используем spread оператор
+}
+console.log(findMax([1, 5, 2, 9, 3]));
+
+// 3. Верхний регистр (стрелочная)
+const toUpper = str => str.toUpperCase();
+console.log(toUpper("hello"));
+
+// 4. Замыкание
+function createGreeter(greeting) {
+    return function(name) {
+        console.log(`${greeting}, ${name}!`);
+    }
+}
+const greetHello = createGreeter("Здравствуйте");
+greetHello("Ирина");
+</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
         </section>
 
         <section id="exercise-loops" class="fade-in">
@@ -82,6 +166,38 @@
                 <li>Переберите массив строк с помощью `for...of` и выведите каждую строку.</li>
                 <li>Переберите свойства объекта с помощью `for...in` и выведите их ключи и значения.</li>
             </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Примерный код для упражнений по циклам
+// 1. Цикл for 1-10
+for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}
+
+// 2. Факториал (while)
+let numFact = 5;
+let resultFact = 1;
+let iFact = numFact;
+while (iFact > 1) {
+    resultFact *= iFact;
+    iFact--;
+}
+console.log(`Факториал ${numFact}:`, resultFact);
+
+// 3. for...of
+const loopWords = ["Один", "Два", "Три"];
+for (const word of loopWords) {
+    console.log(word);
+}
+
+// 4. for...in
+const loopPerson = { name: "Олег", age: 40 };
+for (const key in loopPerson) {
+    console.log(`${key}: ${loopPerson[key]}`);
+}
+</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
         </section>
 
         <section id="exercise-objects" class="fade-in">
@@ -94,6 +210,38 @@
                 <li>Напишите функцию, которая принимает массив книг и возвращает массив названий книг, опубликованных
                     после 2000 года.</li>
             </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Примерный код для упражнений по объектам
+// 1, 2. Объект Книга
+const book = {
+    title: "Мастер и Маргарита",
+    author: "М. Булгаков",
+    year: 1967,
+    getInfo: function() {
+        console.log(`${this.title} - ${this.author} (${this.year})`);
+    }
+};
+book.getInfo();
+
+// 3. Массив книг
+const library = [
+    book,
+    { title: "1984", author: "Дж. Оруэлл", year: 1949 },
+    { title: "Гарри Поттер и философский камень", author: "Дж. Роулинг", year: 1997 },
+    { title: "Код да Винчи", author: "Д. Браун", year: 2003 }
+];
+
+// 4. Фильтр по году
+function getModernBooks(books) {
+    return books
+        .filter(b => b.year > 2000)
+        .map(b => b.title);
+}
+console.log("Книги после 2000:", getModernBooks(library));
+</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
         </section>
 
         <div class="navigation-buttons">
@@ -104,12 +252,18 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
-    <script src="/main.js" defer></script>
+    <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Вызываем подсветку Prism после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
 </body>
 
 </html>
