@@ -77,7 +77,7 @@ body.light-theme #theme-toggle:hover {
 
 nav ul {
   background: transparent; /* Убираем фон у ul */
-  padding: 10px 0; /* Паддинг сверху/снизу */
+  padding: 10px 0; /* Паддинг crepey/снизу */
   list-style: none;
   margin: 0;
   text-align: center;
