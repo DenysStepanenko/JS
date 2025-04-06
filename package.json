@@ -1,5 +1,5 @@
 {
-  "name": "js-cheatsheet",
+  "name": "js",
   "version": "1.0.0",
   "description": "JavaScript cheatsheet project",
   "main": "index.js",
@@ -11,13 +11,13 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DenysStepanenko/js-cheatsheet1.git"
+    "url": "git+https://github.com/DenysStepanenko/js.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DenysStepanenko/js-cheatsheet1/issues"
+    "url": "https://github.com/DenysStepanenko/js/issues"
   },
-  "homepage": "https://github.com/DenysStepanenko/js-cheatsheet1#readme"
+  "homepage": "https://github.com/DenysStepanenko/js#readme"
 }
