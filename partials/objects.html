@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Объекты - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html" class="active">Объекты</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Объекты в JavaScript</h2>
+        <p>Объекты - это неупорядоченные коллекции пар "ключ-значение". Ключи - это строки (или символы), а значения
+            могут быть любого типа данных.</p>
+
+        <section id="creating-objects" class="fade-in">
+            <h3>Создание объектов</h3>
+            <p>Объекты можно создавать с помощью литералов или конструктора.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Литерал объекта (предпочтительный способ)
+const person = {
+  name: "Алексей",
+  age: 35,
+  city: "Екатеринбург",
+  isAdmin: false,
+  greet: function() { // Метод объекта
+    console.log(`Привет от ${this.name}`);
+  }
+};
+
+// С помощью конструктора Object
+const car = new Object();
+car.brand = "Toyota";
+car.model = "Camry";
+car.year = 2022;</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="accessing-properties" class="fade-in">
+            <h3>Доступ к свойствам</h3>
+            <p>Доступ к свойствам объекта осуществляется через точку или квадратные скобки.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log(person.name); // "Алексей" (через точку)
+console.log(person["age"]); // 35 (через квадратные скобки)
+
+// Использование переменной для доступа к свойству
+const propertyName = "city";
+console.log(person[propertyName]); // "Екатеринбург"
+
+// Вызов метода
+person.greet(); // "Привет от Алексей"</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="modifying-objects" class="fade-in">
+            <h3>Изменение объектов</h3>
+            <p>Свойства объектов можно добавлять, изменять и удалять.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Добавление свойства
+person.job = "Инженер";
+
+// Изменение свойства
+person.age = 36;
+
+// Удаление свойства
+delete person.isAdmin;
+
+console.log(person);
+/*
+{
+  name: "Алексей",
+  age: 36,
+  city: "Екатеринбург",
+  greet: [Function: greet],
+  job: "Инженер"
+}
+*/</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="object-methods" class="fade-in">
+            <h3>Методы объектов</h3>
+            <p>Объекты могут содержать функции, которые называются методами.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">const calculator = {
+  a: 0,
+  b: 0,
+  setValues(valA, valB) {
+    this.a = valA;
+    this.b = valB;
+  },
+  add() {
+    return this.a + this.b;
+  },
+  subtract() {
+    return this.a - this.b;
+  }
+};
+
+calculator.setValues(10, 5);
+console.log(calculator.add()); // 15
+console.log(calculator.subtract()); // 5</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+
+        <div class="navigation-buttons">
+            <a href="loops.html" class="button">← Циклы</a>
+            <a href="exercises.html" class="button">Упражнения →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+    <script src="/js/05_objects.js" defer></script>
+    <script src="/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+
+</html>

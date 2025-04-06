@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Упражнения - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="exercises.html" class="active">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Практические упражнения</h2>
+        <p>Закрепите свои знания, выполнив следующие упражнения. Попробуйте решить их самостоятельно перед тем, как
+            смотреть решения.</p>
+
+        <section id="exercise-basics" class="fade-in">
+            <h3>Упражнения по основам</h3>
+            <ol>
+                <li>Объявите переменную для хранения вашего имени и выведите ее в консоль.</li>
+                <li>Создайте две числовые переменные, сложите их и выведите результат.</li>
+                <li>Напишите условную конструкцию, которая проверяет, является ли число четным или нечетным.</li>
+                <li>Создайте строку и выведите ее длину и первый символ.</li>
+            </ol>
+        </section>
+
+        <section id="exercise-arrays" class="fade-in">
+            <h3>Упражнения по массивам</h3>
+            <ol>
+                <li>Создайте массив ваших любимых фруктов. Добавьте новый фрукт в конец массива.</li>
+                <li>Используя метод `map`, создайте новый массив, где каждый элемент исходного числового массива умножен
+                    на 2.</li>
+                <li>Используя метод `filter`, создайте новый массив, содержащий только строки длиннее 5 символов из
+                    исходного массива строк.</li>
+                <li>Найдите сумму всех чисел в массиве с помощью метода `reduce`.</li>
+            </ol>
+        </section>
+
+        <section id="exercise-functions" class="fade-in">
+            <h3>Упражнения по функциям</h3>
+            <ol>
+                <li>Напишите функцию, которая принимает два числа и возвращает их сумму.</li>
+                <li>Создайте функцию, которая принимает массив чисел и возвращает наибольшее число в этом массиве.</li>
+                <li>Напишите стрелочную функцию, которая принимает строку и возвращает ее в верхнем регистре.</li>
+                <li>Создайте функцию, которая возвращает другую функцию (замыкание). Внутренняя функция должна
+                    использовать переменную из внешней функции.</li>
+            </ol>
+        </section>
+
+        <section id="exercise-loops" class="fade-in">
+            <h3>Упражнения по циклам</h3>
+            <ol>
+                <li>Используя цикл `for`, выведите числа от 1 до 10.</li>
+                <li>Используя цикл `while`, найдите факториал числа 5.</li>
+                <li>Переберите массив строк с помощью `for...of` и выведите каждую строку.</li>
+                <li>Переберите свойства объекта с помощью `for...in` и выведите их ключи и значения.</li>
+            </ol>
+        </section>
+
+        <section id="exercise-objects" class="fade-in">
+            <h3>Упражнения по объектам</h3>
+            <ol>
+                <li>Создайте объект, представляющий книгу (свойства: title, author, year).</li>
+                <li>Добавьте метод к объекту книги, который выводит информацию о книге в формате "Название - Автор
+                    (Год)".</li>
+                <li>Создайте массив объектов книг.</li>
+                <li>Напишите функцию, которая принимает массив книг и возвращает массив названий книг, опубликованных
+                    после 2000 года.</li>
+            </ol>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="objects.html" class="button">← Объекты</a>
+            <a href="projects.html" class="button">Проекты →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+    <script src="/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+
+</html>

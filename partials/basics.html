@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Основы - Руководство по JavaScript</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>JavaScript: Полное руководство для изучения</h1>
+      <nav>
+        <ul>
+          <li><a href="/index.html">Главная</a></li>
+          <li><a href="learning_guide.html">Гайд по обучению</a></li>
+          <li><a href="basics.html" class="active">Основы</a></li>
+          <li><a href="arrays.html">Массивы</a></li>
+          <li><a href="functions.html">Функции</a></li>
+          <li><a href="loops.html">Циклы</a></li>
+          <li><a href="objects.html">Объекты</a></li>
+          <li><a href="exercises.html">Упражнения</a></li>
+          <li><a href="projects.html">Проекты</a></li>
+          <li><a href="resources.html">Ресурсы</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 id="основы-javascript">Основы JavaScript</h2>
+    <p>Основы JavaScript включают переменные, типы данных, операторы, строки и условные конструкции. Эти концепции
+      являются фундаментом для дальнейшего изучения языка.</p>
+
+    <section id="переменные-и-типы-данных" class="fade-in">
+      <h3>Переменные и типы данных</h3>
+      <p>В JavaScript существует три способа объявления переменных:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// var - устаревший способ (не рекомендуется в современном коде)
+var oldVariable = "старая переменная";
+
+// let - для переменных, значение которых может изменяться
+let name = "Иван";
+name = "Петр"; // можно изменить значение
+
+// const - для констант, значение которых не должно изменяться
+const PI = 3.14159;
+// PI = 3; // Ошибка! Нельзя изменить константу</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+      <p>JavaScript имеет следующие основные типы данных:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Примитивные типы данных
+let string = "Это строка"; // Строка (String)
+let number = 42;           // Число (Number)
+let bigInt = 9007199254740991n; // BigInt (для очень больших чисел)
+let boolean = true;        // Логический тип (Boolean): true или false
+let nullValue = null;      // Null (пустое значение)
+let undefinedValue;        // Undefined (неопределенное значение)
+let symbol = Symbol("id"); // Symbol (уникальный идентификатор)
+
+// Ссылочный тип данных
+let object = {             // Объект (Object)
+  name: "Иван",
+  age: 30
+};</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
+
+    <section id="операторы" class="fade-in">
+      <h3>Операторы</h3>
+      <p>JavaScript поддерживает различные типы операторов:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Арифметические операторы
+let sum = 5 + 3;        // 8 (сложение)
+let difference = 5 - 3; // 2 (вычитание)
+let product = 5 * 3;    // 15 (умножение)
+let quotient = 5 / 3;   // 1.6666... (деление)
+let remainder = 5 % 3;  // 2 (остаток от деления)
+let power = 5 ** 3;     // 125 (возведение в степень)
+
+// Операторы присваивания
+let x = 5;
+x += 3; // x = x + 3 (8)
+x -= 2; // x = x - 2 (6)
+x *= 2; // x = x * 2 (12)
+x /= 4; // x = x / 4 (3)
+
+// Операторы сравнения
+let isEqual = 5 == "5";     // true (равно с приведением типов)
+let isStrictEqual = 5 === "5"; // false (строго равно, без приведения типов)
+let isNotEqual = 5 != "6";  // true (не равно)
+let isGreater = 5 > 3;      // true (больше)
+let isLess = 5 < 10;        // true (меньше)
+let isGreaterOrEqual = 5 >= 5; // true (больше или равно)
+let isLessOrEqual = 5 <= 6;    // true (меньше или равно)
+
+// Логические операторы
+let and = true && false; // false (логическое И)
+let or = true || false;  // true (логическое ИЛИ)
+let not = !true;         // false (логическое НЕ)
+
+// Инкремент и декремент
+let a = 5;
+let b = a++; // b = 5, a = 6 (постфиксный инкремент)
+let c = 5;
+let d = ++c; // d = 6, c = 6 (префиксный инкремент)</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
+
+    <section id="строки-и-шаблонные-строки" class="fade-in">
+      <h3>Строки и шаблонные строки</h3>
+      <p>Строки в JavaScript можно создавать с помощью одинарных, двойных кавычек или обратных кавычек (для шаблонных
+        строк):</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Создание строк
+let singleQuotes = 'Строка в одинарных кавычках';
+let doubleQuotes = "Строка в двойных кавычках";
+
+// Экранирование символов
+let escapeQuote = "Он сказал: \"Привет!\"";
+let escapePath = "C:\\Program Files\\App"; // Двойной обратный слеш для экранирования
+
+// Шаблонные строки (template literals)
+let name = "Иван";
+let age = 30;
+let greeting = `Привет, меня зовут ${name} и мне ${age} лет.`;
+console.log(greeting); // "Привет, меня зовут Иван и мне 30 лет."
+
+// Многострочные шаблонные строки
+let multiline = `Это первая строка.
+Это вторая строка.
+А это третья строка.`;</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
+
+    <section id="методы-строк" class="fade-in">
+      <h3>Методы строк</h3>
+      <p>JavaScript предоставляет множество встроенных методов для работы со строками:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">let text = "Привет, мир!";
+
+// Получение длины строки
+console.log(text.length); // 12
+
+// Получение символа по индексу
+console.log(text[0]); // "П"
+console.log(text.charAt(0)); // "П"
+
+// Поиск подстроки
+console.log(text.indexOf("мир")); // 8
+console.log(text.includes("Привет")); // true
+
+// Извлечение подстроки
+console.log(text.substring(0, 6)); // "Привет"
+console.log(text.slice(8, 11)); // "мир"
+
+// Замена подстроки
+console.log(text.replace("мир", "JavaScript")); // "Привет, JavaScript!"
+
+// Преобразование регистра
+console.log(text.toUpperCase()); // "ПРИВЕТ, МИР!"
+console.log(text.toLowerCase()); // "привет, мир!"
+
+// Удаление пробелов в начале и конце
+let paddedText = "   Текст с пробелами   ";
+console.log(paddedText.trim()); // "Текст с пробелами"
+
+// Разделение строки на массив
+console.log("яблоко,банан,киви".split(",")); // ["яблоко", "банан", "киви"]</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
+
+    <section id="условные-конструкции" class="fade-in">
+      <h3>Условные конструкции</h3>
+      <p>Условные конструкции позволяют выполнять различный код в зависимости от условий:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// if...else
+let age = 18;
+
+if (age >= 18) {
+  console.log("Вы совершеннолетний");
+} else {
+  console.log("Вы несовершеннолетний");
+}
+
+// if...else if...else
+let score = 85;
+
+if (score >= 90) {
+  console.log("Отлично");
+} else if (score >= 80) {
+  console.log("Хорошо");
+} else if (score >= 70) {
+  console.log("Удовлетворительно");
+} else {
+  console.log("Неудовлетворительно");
+}
+
+// Тернарный оператор
+let message = age >= 18 ? "Совершеннолетний" : "Несовершеннолетний";
+console.log(message);
+
+// switch
+let day = 2;
+let dayName;
+
+switch (day) {
+  case 1:
+    dayName = "Понедельник";
+    break;
+  case 2:
+    dayName = "Вторник";
+    break;
+  case 3:
+    dayName = "Среда";
+    break;
+  case 4:
+    dayName = "Четверг";
+    break;
+  case 5:
+    dayName = "Пятница";
+    break;
+  case 6:
+    dayName = "Суббота";
+    break;
+  case 7:
+    dayName = "Воскресенье";
+    break;
+  default:
+    dayName = "Неизвестный день";
+}
+
+console.log(dayName); // "Вторник"</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
+
+    <div class="navigation-buttons">
+      <a href="../index.html" class="button">← На главную</a>
+      <a href="arrays.html" class="button">Массивы →</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 JavaScript: Полное руководство для изучения</p>
+    </div>
+  </footer>
+  <script src="/js/01_basics.js" defer></script>
+  <script src="/main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script>
+    // Вызываем подсветку Prism после загрузки DOM
+    document.addEventListener('DOMContentLoaded', (event) => {
+      Prism.highlightAll();
+    });
+  </script>
+</body>
+
+</html>

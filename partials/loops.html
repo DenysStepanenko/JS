@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Циклы - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html" class="active">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Циклы и управление потоком в JavaScript</h2>
+        <p>Циклы позволяют многократно выполнять блок кода. Управление потоком определяет порядок выполнения инструкций.
+        </p>
+
+        <section id="for-loop" class="fade-in">
+            <h3>Цикл `for`</h3>
+            <p>Классический цикл `for` используется, когда известно количество итераций.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Вывод чисел от 0 до 4
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="while-loop" class="fade-in">
+            <h3>Цикл `while`</h3>
+            <p>Цикл `while` выполняется, пока заданное условие истинно.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">let count = 0;
+while (count < 3) {
+  console.log(`Счетчик: ${count}`);
+  count++;
+}
+// Вывод:
+// Счетчик: 0
+// Счетчик: 1
+// Счетчик: 2</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="do-while-loop" class="fade-in">
+            <h3>Цикл `do...while`</h3>
+            <p>Цикл `do...while` похож на `while`, но гарантирует выполнение тела цикла хотя бы один раз.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">let attempts = 0;
+do {
+  console.log(`Попытка ${attempts + 1}`);
+  attempts++;
+} while (attempts < 2);
+// Вывод:
+// Попытка 1
+// Попытка 2</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="for-of-loop" class="fade-in">
+            <h3>Цикл `for...of`</h3>
+            <p>Цикл `for...of` используется для перебора итерируемых объектов (массивы, строки, Map, Set).</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">const colors = ["красный", "зеленый", "синий"];
+for (const color of colors) {
+  console.log(color);
+}
+// Вывод:
+// красный
+// зеленый
+// синий</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="for-in-loop" class="fade-in">
+            <h3>Цикл `for...in`</h3>
+            <p>Цикл `for...in` используется для перебора свойств объекта.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">const person = { name: "Анна", age: 28 };
+for (const key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+// Вывод:
+// name: Анна
+// age: 28</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="control-flow" class="fade-in">
+            <h3>Управление потоком (`break` и `continue`)</h3>
+            <p>`break` используется для досрочного выхода из цикла, а `continue` - для пропуска текущей итерации.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">for (let i = 0; i < 10; i++) {
+  if (i === 3) {
+    continue; // Пропустить итерацию, когда i равно 3
+  }
+  if (i === 7) {
+    break; // Выйти из цикла, когда i равно 7
+  }
+  console.log(i); // Выведет: 0, 1, 2, 4, 5, 6
+}</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="functions.html" class="button">← Функции</a>
+            <a href="objects.html" class="button">Объекты →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+    <script src="/js/04_loops_and_control_flow.js" defer></script>
+    <script src="/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+
+</html>

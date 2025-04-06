@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Проекты - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html" class="active">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Проекты для закрепления</h2>
+        <p>Лучший способ научиться программировать - это практика. Реализуйте эти проекты, чтобы применить полученные
+            знания.</p>
+
+        <section id="project-todo-list" class="fade-in">
+            <h3>Проект 1: Список дел (To-Do List)</h3>
+            <p>Создайте простое веб-приложение для управления списком задач.</p>
+            <strong>Функционал:</strong>
+            <ul>
+                <li>Добавление новой задачи в список.</li>
+                <li>Пометка задачи как выполненной (например, зачеркиванием).</li>
+                <li>Удаление задачи из списка.</li>
+                <li>(Опционально) Сохранение списка в `localStorage`, чтобы он не пропадал при перезагрузке страницы.
+                </li>
+                <li>(Опционально) Фильтрация задач (все, активные, выполненные).</li>
+            </ul>
+            <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, массивы,
+            функции, опционально `localStorage`).
+        </section>
+
+        <section id="project-quiz" class="fade-in">
+            <h3>Проект 2: Викторина (Quiz)</h3>
+            <p>Разработайте интерактивную викторину с вопросами и вариантами ответов.</p>
+            <strong>Функционал:</strong>
+            <ul>
+                <li>Отображение вопроса и нескольких вариантов ответа.</li>
+                <li>Проверка ответа пользователя.</li>
+                <li>Подсчет правильных ответов.</li>
+                <li>Отображение результата по окончании викторины.</li>
+                <li>(Опционально) Таймер для ответа на каждый вопрос.</li>
+                <li>(Опционально) Загрузка вопросов из массива объектов или JSON-файла.</li>
+            </ul>
+            <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, массивы,
+            объекты, функции, условные конструкции, циклы).
+        </section>
+
+        <section id="project-calculator" class="fade-in">
+            <h3>Проект 3: Калькулятор</h3>
+            <p>Создайте веб-версию простого калькулятора.</p>
+            <strong>Функционал:</strong>
+            <ul>
+                <li>Кнопки для цифр (0-9) и основных арифметических операций (+, -, *, /).</li>
+                <li>Кнопка для сброса (C).</li>
+                <li>Кнопка для вычисления результата (=).</li>
+                <li>Отображение вводимых чисел и результата на экране калькулятора.</li>
+                <li>(Опционально) Обработка десятичных чисел.</li>
+                <li>(Опционально) Поддержка скобок или более сложных операций.</li>
+            </ul>
+            <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, функции,
+            строки, числа, условные конструкции).
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="exercises.html" class="button">← Упражнения</a>
+            <a href="resources.html" class="button">Ресурсы →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+    <script src="/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+
+</html>

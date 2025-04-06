@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Функции - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html" class="active">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Функции в JavaScript</h2>
+        <p>Функции - это блоки кода, которые можно определить один раз и вызывать многократно для выполнения
+            определенной задачи.</p>
+
+        <section id="declaring-functions" class="fade-in">
+            <h3>Объявление функций</h3>
+            <p>Существует несколько способов объявления функций:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Function Declaration
+function greet(name) {
+  console.log(`Привет, ${name}!`);
+}
+
+// Function Expression
+const sayBye = function(name) {
+  console.log(`Пока, ${name}!`);
+};
+
+// Arrow Function (стрелочная функция)
+const add = (a, b) => {
+  return a + b;
+};
+
+// Сокращенная стрелочная функция
+const multiply = (a, b) => a * b;
+
+greet("Иван");
+sayBye("Мария");
+console.log(add(2, 3)); // 5
+console.log(multiply(4, 5)); // 20</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="parameters-arguments" class="fade-in">
+            <h3>Параметры и аргументы</h3>
+            <p>Функции могут принимать параметры (переменные, перечисленные в определении функции) и аргументы
+                (значения, передаваемые при вызове функции).</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Параметры по умолчанию
+function createUser(name = "Гость", age = 18) {
+  console.log(`Пользователь: ${name}, Возраст: ${age}`);
+}
+
+createUser("Алиса", 25); // Пользователь: Алиса, Возраст: 25
+createUser("Боб");       // Пользователь: Боб, Возраст: 18
+createUser();          // Пользователь: Гость, Возраст: 18
+
+// Rest-параметр (...) для сбора оставшихся аргументов в массив
+function sum(...numbers) {
+  return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3));    // 6
+console.log(sum(10, 20, 30, 40)); // 100</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="scope-closures" class="fade-in">
+            <h3>Область видимости и замыкания</h3>
+            <p>Область видимости определяет, где переменные доступны. Замыкания позволяют функции "запоминать"
+                переменные из внешней области видимости.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">function createCounter() {
+  let count = 0; // Локальная переменная, захваченная замыканием
+  return function() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = createCounter();
+counter(); // 1
+counter(); // 2
+counter(); // 3</code></pre>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="arrays.html" class="button">← Массивы</a>
+            <a href="loops.html" class="button">Циклы →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+    <script src="/js/03_functions.js" defer></script>
+    <script src="/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+
+</html>
