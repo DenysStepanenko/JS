@@ -5,6 +5,8 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
@@ -75,9 +77,10 @@ body.light-theme #theme-toggle:hover {
   color: white;
 }
 
+/* Исправление: убрано лишнее слово "crepey" в комментарии выше */
 nav ul {
   background: transparent; /* Убираем фон у ul */
-  padding: 10px 0; /* Паддинг crepey/снизу */
+  padding: 10px 0; /* Паддинг сверху/снизу */
   list-style: none;
   margin: 0;
   text-align: center;
