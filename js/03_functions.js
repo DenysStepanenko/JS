@@ -262,3 +262,96 @@ boundAdd(10); // Значение: 15 (this теперь правильный)
 
 // setTimeout(calculator.add, 1000, 20); // Ошибка this внутри setTimeout
 setTimeout(calculator.add.bind(calculator), 100, 20); // Работает! Значение: 35
+
+
+// ===== КОД ИЗ РАЗДЕЛА КОЛБЭК-ФУНКЦИИ =====
+console.log("\n\n===== КОЛБЭК-ФУНКЦИИ =====");
+
+// === Функция как значение (повтор для раздела) ===
+console.log("\n--- Функция как значение (Callbacks) ---");
+function greetCallbackExample(name) {
+  return `Добро пожаловать, ${name}!`;
+}
+console.log("Вызов greetCallbackExample:", greetCallbackExample("Манго"));
+console.log("Ссылка на greetCallbackExample:", greetCallbackExample);
+
+function makePizzaTask1() {
+  return "Ваша пицца готовится, пожалуйста, подождите.";
+}
+const resultPizza = makePizzaTask1();
+const pointerPizza = makePizzaTask1;
+console.log("Результат вызова makePizzaTask1:", resultPizza);
+console.log("Ссылка на функцию makePizzaTask1:", pointerPizza);
+
+// === Колбэки и ФВП (Callbacks) ===
+console.log("\n--- Колбэки и ФВП (Callbacks) ---");
+function greetClb(name) {
+  console.log(`Добро пожаловать, ${name}!`);
+}
+function notifyClb(name) {
+  console.log(`Уважаемый(ая) ${name}, ваша комната будет готова через 30 минут`);
+}
+function registerGuestClb(name, callback) {
+  console.log(`Регистрируем гостя ${name}!`);
+  callback(name);
+}
+registerGuestClb("Манго", greetClb);
+registerGuestClb("Поли", notifyClb);
+
+function deliverPizzaClb(pizzaName) { return `Доставляем пиццу ${pizzaName}.`; }
+function makePizzaClb(pizzaName) { return `Пицца ${pizzaName} готовится, подождите...`; }
+function makeMessageClb(pizzaName, callback) {
+  return callback(pizzaName);
+}
+console.log("Сообщение 1:", makeMessageClb("Роял Гранд", makePizzaClb));
+console.log("Сообщение 2:", makeMessageClb("Ультрасыр", deliverPizzaClb));
+
+// === Инлайн-колбеки (Callbacks) ===
+console.log("\n--- Инлайн-колбеки (Callbacks) ---");
+function registerGuestInline(name, callback) {
+  console.log(`Регистрируем гостя ${name}! (inline)`);
+  callback(name);
+}
+registerGuestInline("Манго", function (guestName) {
+  console.log(`Добро пожаловать инлайн, ${guestName}!`);
+});
+registerGuestInline("Поли", function notifyInline(guestName) {
+  console.log(`Комната готова инлайн через 30 мин, ${guestName}`);
+});
+
+function makePizzaInlineTask(pizzaName, callback) {
+  console.log(`Готовим пиццу инлайн: ${pizzaName}`);
+  callback(pizzaName);
+}
+makePizzaInlineTask("Ультрасыр", function eatPizza(nameOfPizza) {
+  console.log(`Едим пиццу инлайн: ${nameOfPizza}`);
+});
+
+// === Метод forEach() (Callbacks) ===
+console.log("\n--- Метод forEach() (Callbacks) ---");
+const numbersForEach = [5, 10, 15, 20, 25];
+console.log("Массив для forEach:", numbersForEach);
+console.log("Цикл for (сравнение):");
+for (let i = 0; i < numbersForEach.length; i++) { console.log(`  Индекс ${i}, значение ${numbersForEach[i]}`); }
+console.log("Метод forEach:");
+numbersForEach.forEach(function (number, index) { console.log(`  Индекс ${index}, значение ${number}`); });
+
+function calculateTotalPriceForEach(orderedItems) {
+  let totalPrice = 0;
+  orderedItems.forEach(function (item) { totalPrice += item; });
+  return totalPrice;
+}
+console.log("Сумма [12, 85, 37, 4]:", calculateTotalPriceForEach([12, 85, 37, 4]));
+console.log("Сумма [164, 48, 291]:", calculateTotalPriceForEach([164, 48, 291]));
+
+function filterArrayForEach(numbers, value) {
+  const filteredNumbers = [];
+  numbers.forEach(function (number) {
+    if (number > value) { filteredNumbers.push(number); }
+  });
+  return filteredNumbers;
+}
+console.log("Фильтр > 3 из [1, 2, 3, 4, 5]:", filterArrayForEach([1, 2, 3, 4, 5], 3));
+console.log("Фильтр > 38 из [12, 24, 8, 41, 76]:", filterArrayForEach([12, 24, 8, 41, 76], 38));
+
+console.log("\n===== КОНЕЦ РАЗДЕЛА ФУНКЦИИ (ПОКА ЧТО) =====");

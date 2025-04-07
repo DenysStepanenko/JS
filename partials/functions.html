@@ -2,115 +2,124 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Функции - Руководство по JavaScript</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Функции - Руководство по JavaScript</title>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>JavaScript: Полное руководство для изучения</h1>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Главная</a></li>
-                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="basics.html">Основы</a></li>
-                    <li><a href="arrays.html">Массивы</a></li>
-                    <li><a href="functions.html" class="active">Функции</a></li>
-                    <li><a href="loops.html">Циклы</a></li>
-                    <li><a href="objects.html">Объекты</a></li>
-                    <li><a href="exercises.html">Упражнения</a></li>
-                    <li><a href="projects.html">Проекты</a></li>
-                    <li><a href="resources.html">Ресурсы</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <h1>JavaScript: Полное руководство для изучения</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Главная</a></li>
+          <li><a href="learning_guide.html">Гайд по обучению</a></li>
+          <li><a href="basics.html">Основы</a></li>
+          <li><a href="arrays.html">Массивы</a></li>
+          <li><a href="functions.html" class="active">Функции</a></li>
+          <li><a href="loops.html">Циклы</a></li>
+          <li><a href="objects.html">Объекты</a></li>
+          <li><a href="exercises.html">Упражнения</a></li>
+          <li><a href="projects.html">Проекты</a></li>
+          <li><a href="resources.html">Ресурсы</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <h2 id="функции">Функции</h2>
-        <p>Функции в JavaScript - это блоки кода, которые можно вызывать многократно.</p>
+  <main class="container">
+    <h2 id="функции">Функции</h2>
+    <p>Функции в JavaScript - это блоки кода, которые можно вызывать многократно.</p>
 
-        <section id="объявление-функций" class="fade-in">
-            <h3>Объявление функций</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Объявление функции (Function Declaration)
-function greet(name) {
+    <section id="объявление-функций" class="fade-in">
+      <h3>Объявление функций</h3>
+      <p>Существует несколько способов объявить функцию:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Объявление функции (Function Declaration)
+// Можно вызывать до объявления в коде (hoisting)
+function greetDec(name) {
   return `Привет, ${name}!`;
 }
 
 // Вызов функции
-console.log(greet("Иван")); // "Привет, Иван!"
+console.log(greetDec("Иван")); // "Привет, Иван!"
 
 // Функциональное выражение (Function Expression)
-const add = function(a, b) {
+// Присваивается переменной, нельзя вызвать до присвоения
+const addExpr = function(a, b) {
   return a + b;
 };
-console.log(add(5, 3)); // 8
+console.log(addExpr(5, 3)); // 8
 
-// Стрелочная функция (Arrow Function)
-const multiply = (a, b) => a * b;
-console.log(multiply(4, 2)); // 8
+// Стрелочная функция (Arrow Function) - ES6+
+// Компактный синтаксис, также нельзя вызвать до присвоения
+const multiplyArrow = (a, b) => a * b;
+console.log(multiplyArrow(4, 2)); // 8
 
-// Стрелочная функция с блоком кода
-const divide = (a, b) => {
+// Стрелочная функция с блоком кода (если нужно больше одной строки)
+const divideArrow = (a, b) => {
   if (b === 0) {
     return "Деление на ноль невозможно";
   }
   return a / b;
 };
-console.log(divide(10, 2)); // 5
-console.log(divide(10, 0)); // "Деление на ноль невозможно"</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+console.log(divideArrow(10, 2)); // 5
+console.log(divideArrow(10, 0)); // "Деление на ноль невозможно"</code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
 
-        <section id="параметры-функций" class="fade-in">
-            <h3>Параметры функций</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Параметры по умолчанию
-function greet(name = "Гость") {
+    <section id="параметры-функций" class="fade-in">
+      <h3>Параметры функций</h3>
+      <p>Функции могут принимать входные данные через параметры.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Параметры по умолчанию (ES6+)
+// Задаются, если при вызове аргумент не передан или передан undefined
+function greetDefault(name = "Гость") {
   return `Привет, ${name}!`;
 }
-console.log(greet());       // "Привет, Гость!"
-console.log(greet("Иван"));  // "Привет, Иван!"
+console.log(greetDefault());       // "Привет, Гость!"
+console.log(greetDefault("Иван"));  // "Привет, Иван!"
 
-// Остаточные параметры
-function sum(...numbers) {
+// Остаточные параметры (Rest Parameters, ES6+)
+// Собирают все оставшиеся аргументы в массив
+function sumRest(...numbers) { // ...numbers - это массив
   return numbers.reduce((total, num) => total + num, 0);
 }
-console.log(sum(1, 2, 3, 4, 5)); // 15
+console.log(sumRest(1, 2, 3, 4, 5)); // 15
 
-// Деструктуризация параметров
+// Деструктуризация параметров (ES6+)
+// Удобно для работы с объектами или массивами в качестве аргументов
 function printPersonInfo({ name, age, city = "Неизвестно" }) {
   console.log(`${name}, ${age} лет, город: ${city}`);
 }
 printPersonInfo({ name: "Иван", age: 30 }); // "Иван, 30 лет, город: Неизвестно"
 printPersonInfo({ name: "Мария", age: 25, city: "Москва" }); // "Мария, 25 лет, город: Москва"</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
 
-        <section id="область-видимости-и-замыкания" class="fade-in">
-            <h3>Область видимости и замыкания</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Глобальная и локальная область видимости
+    <section id="область-видимости-и-замыкания" class="fade-in">
+      <h3>Область видимости и замыкания</h3>
+      <p>Область видимости определяет, где в коде доступны переменные. Замыкания - это механизм, позволяющий функции
+        "помнить" свое лексическое окружение.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Глобальная и локальная область видимости
 let globalVar = "Я глобальная переменная";
 
 function testScope() {
-  let localVar = "Я локальная переменная";
+  let localVar = "Я локальная переменная"; // Видна только внутри testScope
   console.log(globalVar); // Доступ к глобальной переменной
   console.log(localVar);  // Доступ к локальной переменной
 }
@@ -118,122 +127,398 @@ function testScope() {
 testScope();
 // console.log(localVar); // Ошибка! localVar не определена в глобальной области
 
-// Замыкания
+// Замыкания (Closures)
+// Внутренняя функция имеет доступ к переменным внешней функции,
+// даже после того, как внешняя функция завершила свою работу.
 function createCounter() {
-  let count = 0;
+  let count = 0; // Эта переменная "замыкается"
 
+  // Возвращаем внутреннюю функцию
   return function() {
     count++;
     return count;
   };
 }
 
-const counter = createCounter();
+const counter = createCounter(); // counter теперь - это внутренняя функция с доступом к 'count'
 console.log(counter()); // 1
 console.log(counter()); // 2
 console.log(counter()); // 3
 
-// Другой пример замыкания
+// Другой пример замыкания: генератор приветствий
 function createGreeting(greeting) {
   return function(name) {
     return `${greeting}, ${name}!`;
   };
 }
 
-const sayHello = createGreeting("Привет");
-const sayGoodbye = createGreeting("До свидания");
+const sayHello = createGreeting("Привет"); // greeting="Привет" замкнулась
+const sayGoodbye = createGreeting("До свидания"); // greeting="До свидания" замкнулась
 
 console.log(sayHello("Иван"));    // "Привет, Иван!"
 console.log(sayGoodbye("Мария")); // "До свидания, Мария!"</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
 
-        <section id="рекурсия" class="fade-in">
-            <h3>Рекурсия</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Рекурсивная функция для вычисления факториала
+    <section id="рекурсия" class="fade-in">
+      <h3>Рекурсия</h3>
+      <p>Рекурсия — это когда функция вызывает саму себя. Важно иметь базовый случай (условие выхода), чтобы избежать
+        бесконечного цикла.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Рекурсивная функция для вычисления факториала
 function factorial(n) {
-  // Базовый случай
+  // Базовый случай (условие выхода)
   if (n === 0 || n === 1) {
     return 1;
   }
-  // Рекурсивный случай
+  // Рекурсивный случай (шаг рекурсии)
   return n * factorial(n - 1);
 }
 
 console.log(factorial(5)); // 120 (5 * 4 * 3 * 2 * 1)
 
-// Рекурсивная функция для вычисления чисел Фибоначчи
+// Рекурсивная функция для вычисления чисел Фибоначчи (менее эффективный способ)
 function fibonacci(n) {
-  if (n <= 1) {
+  if (n <= 1) { // Базовые случаи F(0)=0, F(1)=1
     return n;
   }
+  // Рекурсивный шаг
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 console.log(fibonacci(7)); // 13 (0, 1, 1, 2, 3, 5, 8, 13)</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
 
-        <section id="функции-высшего-порядка" class="fade-in">
-            <h3>Функции высшего порядка</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Функция высшего порядка - принимает или возвращает другие функции
+    <section id="функции-высшего-порядка" class="fade-in">
+      <h3>Функции высшего порядка (Higher-Order Functions)</h3>
+      <p>Функции высшего порядка — это функции, которые либо принимают другие функции в качестве аргументов, либо
+        возвращают функцию как результат.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Пример 1: Функция принимает другую функцию (операцию)
 function applyOperation(a, b, operation) {
-  return operation(a, b);
+  return operation(a, b); // Вызываем переданную функцию 'operation'
 }
 
 // Функции для передачи в качестве аргументов
-const add = (x, y) => x + y;
-const subtract = (x, y) => x - y;
-const multiply = (x, y) => x * y;
+const addHOF = (x, y) => x + y;
+const subtractHOF = (x, y) => x - y;
+const multiplyHOF = (x, y) => x * y;
 
-console.log(applyOperation(5, 3, add));       // 8
-console.log(applyOperation(5, 3, subtract)); // 2
-console.log(applyOperation(5, 3, multiply)); // 15
+console.log(applyOperation(5, 3, addHOF));       // 8
+console.log(applyOperation(5, 3, subtractHOF)); // 2
+console.log(applyOperation(5, 3, multiplyHOF)); // 15
 
-// Создание функции с помощью функции высшего порядка
+// Пример 2: Функция ВОЗВРАЩАЕТ другую функцию
 function createMultiplier(factor) {
+  // Возвращаем новую функцию, которая "запомнила" factor (замыкание)
   return function(number) {
     return number * factor;
   };
 }
 
-const double = createMultiplier(2);
-const triple = createMultiplier(3);
+const double = createMultiplier(2); // double - это теперь функция number => number * 2
+const triple = createMultiplier(3); // triple - это теперь функция number => number * 3
 
 console.log(double(5)); // 10
 console.log(triple(5)); // 15</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+      </div>
+    </section>
 
-        <div class="navigation-buttons">
-            <a href="arrays.html" class="button">← Массивы</a>
-            <a href="loops.html" class="button">Циклы →</a>
-        </div>
-    </main>
+    <section id="callback-functions" class="fade-in">
+      <h2 id="колбэк-функции">Тема: Колбэк-функции (Callback Functions)</h2>
+      <p>Теперь, когда мы знакомы с функциями высшего порядка, углубимся в понятие колбэков.</p>
 
-    <footer>
-        <div class="container">
-            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+      <section id="callback-function-as-value">
+        <h3>1. Функция как значение (Повторение)</h3>
+        <p>Как мы уже видели, функции можно передавать как значения.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Объявляем простую функцию
+function greetCallbackExample(name) {
+  return `Добро пожаловать, ${name}!`;
+}
+
+// 1. ВЫЗОВ функции
+console.log(greetCallbackExample("Манго")); // "Добро пожаловать, Манго!"
+
+// 2. ССЫЛКА на функцию
+console.log(greetCallbackExample); // Выведет код функции</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
         </div>
-    </footer>
-    <script src="../js/03_functions.js" defer></script>
-    <script src="../main.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        // Вызываем подсветку Prism после загрузки DOM
-        document.addEventListener('DOMContentLoaded', (event) => {
-            Prism.highlightAll();
-        });
-    </script>
+
+        <h4>Практическое задание:</h4>
+        <p>Разница между вызовом функции и ссылкой на неё.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Функция для примера
+function makePizza() {
+  return "Ваша пицца готовится, пожалуйста, подождите.";
+}
+
+// В result должен быть РЕЗУЛЬТАТ вызова
+const result = makePizza();
+
+// В pointer должна быть ССЫЛКА
+const pointer = makePizza;
+
+console.log("Результат вызова:", result);
+console.log("Ссылка на функцию:", pointer);</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p>*(Это задание можно разместить в интерактивном редакторе или просто показать решение).*</p>
+      </section>
+
+      <section id="callback-definition">
+        <h3>2. Колбэк-функции (Callback) - Определение</h3>
+        <p><strong>Что это такое?</strong></p>
+        <ul>
+          <li><strong>Колбэк-функция (callback)</strong> — это функция, которую мы передаем в <em>другую</em> функцию
+            как аргумент. Та, другая функция, затем <em>сама решает, когда и как вызвать</em> переданный ей колбэк.</li>
+        </ul>
+        <p><strong>Аналогия:</strong> Представь, ты даешь своему другу инструкцию (это колбэк-функция) и говоришь:
+          "Выполни эту инструкцию, <em>когда</em> доставишь посылку". Твой друг (это основная функция) берет инструкцию
+          и выполняет её в нужный момент (после доставки посылки).</p>
+        <p><strong>(Идея для визуализации):</strong> Можно нарисовать схему: большой блок "Основная функция"
+          (<code>registerGuest</code>). У него есть "вход" для данных (<code>name</code>) и специальный "слот"
+          <code>callback</code>. Рядом отдельные блоки-инструкции (<code>greet</code>, <code>notify</code>), которые
+          можно "вставить" в этот "слот".
+        </p>
+        <p><strong>Зачем нужны колбэки?</strong></p>
+        <ol>
+          <li><strong>Асинхронные операции:</strong> Обработка событий, таймеры, сетевые запросы.</li>
+          <li><strong>Обработка событий:</strong> Реакция на действия пользователя.</li>
+          <li><strong>Гибкость и переиспользование:</strong> Настройка поведения функций высшего порядка.</li>
+        </ol>
+
+        <p><strong>Пример:</strong></p>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Колбэк-функции
+function greetClb(name) { // Добавил Clb к именам, чтобы избежать конфликтов
+  console.log(`Добро пожаловать, ${name}!`);
+}
+function notifyClb(name) {
+  console.log(`Уважаемый(ая) ${name}, ваша комната будет готова через 30 минут`);
+}
+
+// Функция высшего порядка
+function registerGuestClb(name, callback) {
+  console.log(`Регистрируем гостя ${name}!`);
+  callback(name); // Вызов колбэка
+}
+
+// Использование
+registerGuestClb("Манго", greetClb);
+registerGuestClb("Поли", notifyClb);</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p><strong>Важно:</strong> Передаем <code>greetClb</code> и <code>notifyClb</code> <strong>без круглых
+            скобок</strong>!</p>
+
+        <h4>Мини-квиз:</h4>
+        <p>Как правильно передать колбэк <code>updateEmail</code> в <code>makeAction</code>?</p>
+        <ul>
+          <li><code>makeAction(updateEmail())</code></li>
+          <li><code>updateEmail(makeAction)</code></li>
+          <li><code>makeAction(updateEmail)</code> <strong>(Правильный ответ)</strong></li>
+          <li><code>updateEmail(makeAction())</code></li>
+        </ul>
+
+        <h4>Практическое задание:</h4>
+        <p>Доработать функцию <code>makeMessage</code>.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">function deliverPizzaClb(pizzaName) { return `Доставляем пиццу ${pizzaName}.`; }
+function makePizzaClb(pizzaName) { return `Пицца ${pizzaName} готовится, подождите...`; }
+
+function makeMessageClb(pizzaName, callback) {
+  return callback(pizzaName);
+}
+
+console.log(makeMessageClb("Роял Гранд", makePizzaClb));
+console.log(makeMessageClb("Ультрасыр", deliverPizzaClb));</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p>*(Это задание можно разместить в интерактивном редакторе)*</p>
+      </section>
+
+      <section id="inline-callbacks">
+        <h3>3. Инлайн-колбеки (Inline Callbacks)</h3>
+        <p>Если колбэк-функция простая и используется только один раз, её можно определить прямо "на месте" – внутри
+          вызова основной функции (анонимно или с именем).</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">function registerGuestInline(name, callback) {
+                       console.log(`Регистрируем гостя ${name}! (inline)`);
+                       callback(name);
+                     }
+
+// Передаем инлайн-функцию (анонимную)
+registerGuestInline("Манго", function (guestName) {
+  console.log(`Добро пожаловать инлайн, ${guestName}!`);
+});
+
+// Передаем инлайн-функцию (именованную, имя доступно только внутри)
+registerGuestInline("Поли", function notifyInline(guestName) {
+  console.log(`Комната готова инлайн через 30 мин, ${guestName}`);
+});</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p><strong>Замечание о читаемости:</strong> Для сложной логики лучше использовать отдельные именованные функции.
+        </p>
+
+        <h4>Практическое задание:</h4>
+        <p>Использовать инлайн-колбэк для <code>makePizza</code>.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">function makePizzaInlineTask(pizzaName, callback) { // Переименовал
+                      console.log(`Готовим пиццу инлайн: ${pizzaName}`);
+                      callback(pizzaName);
+                    }
+makePizzaInlineTask("Ультрасыр", function eatPizza(nameOfPizza) {
+  console.log(`Едим пиццу инлайн: ${nameOfPizza}`);
+});</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p>*(Это задание можно разместить в интерактивном редакторе)*</p>
+      </section>
+
+      <section id="foreach-method-callback">
+        <h3>4. Метод `forEach()` - Колбэки в действии!</h3>
+        <p>Метод <code>forEach</code> позволяет выполнить действие для каждого элемента массива, используя колбэк.</p>
+        <p><strong>Синтаксис:</strong></p>
+        <div class="code-block">
+          <pre><code class="language-javascript">массив.forEach(function (element, index, array) {
+  // Тело колбэка
+});</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p><strong>Ключевые особенности <code>forEach</code>:</strong> Перебирает массив, вызывает колбэк, **всегда
+          возвращает `undefined`**, нельзя прервать (`break`).</p>
+        <p><strong>Пример сравнения `for` и `forEach`:</strong></p>
+        <div class="code-block">
+          <pre><code class="language-javascript">const numbersForEach = [5, 10, 15];
+console.log("--- Цикл for ---");
+for (let i = 0; i < numbersForEach.length; i++) { console.log(`Индекс ${i}, значение ${numbersForEach[i]}`); }
+console.log("--- Метод forEach ---");
+numbersForEach.forEach(function (number, index) { console.log(`Индекс ${index}, значение ${number}`); });</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+
+        <p><strong>Сравнительная таблица: <code>for</code> vs <code>forEach</code></strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Критерий</th>
+              <th><code>for</code> цикл</th>
+              <th><code>forEach</code> метод</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Основная цель</strong></td>
+              <td>Универсальный перебор</td>
+              <td>Выполнить действие для каждого</td>
+            </tr>
+            <tr>
+              <td><strong>Синтаксис</strong></td>
+              <td><code>for (let i=0; ...)</code></td>
+              <td><code>array.forEach(callback)</code></td>
+            </tr>
+            <tr>
+              <td><strong>Прерывание</strong></td>
+              <td>Можно (<code>break</code>, <code>continue</code>)</td>
+              <td>Нельзя</td>
+            </tr>
+            <tr>
+              <td><strong>Возврат знач.</strong></td>
+              <td>Неприменимо (сам цикл)</td>
+              <td>Всегда <code>undefined</code></td>
+            </tr>
+            <tr>
+              <td><strong>Доступ к index</strong></td>
+              <td>Через счетчик (<code>i</code>)</td>
+              <td>Через параметр колбэка (<code>index</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>Читаемость</strong></td>
+              <td>Может быть сложнее для массивов</td>
+              <td>Обычно проще для массивов</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Мини-квиз:</h4>
+        <p>Что возвращает метод <code>forEach</code>?</p>
+        <ul>
+          <li>Новый массив</li>
+          <li><code>undefined</code> <strong>(Правильный ответ)</strong></li>
+          <li>То, что указано в <code>return</code> колбэк-функции</li>
+        </ul>
+
+        <h4>Практическое задание 1: Сумма элементов</h4>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Функция для расчета общей суммы элементов массива
+function calculateTotalPriceForEach(orderedItems) { // Переименовал
+  let totalPrice = 0;
+  orderedItems.forEach(function (item) { totalPrice += item; });
+  return totalPrice;
+}
+console.log(calculateTotalPriceForEach([12, 85, 37, 4])); // 138</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p>*(Это задание можно разместить в интерактивном редакторе)*</p>
+
+        <h4>Практическое задание 2: Фильтрация (имитация)</h4>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Функция для фильтрации (возвращает НОВЫЙ массив)
+function filterArrayForEach(numbers, value) { // Переименовал
+  const filteredNumbers = [];
+  numbers.forEach(function (number) {
+    if (number > value) { filteredNumbers.push(number); }
+  });
+  return filteredNumbers;
+}
+console.log(filterArrayForEach([1, 2, 3, 4, 5], 3)); // [4, 5]</code></pre>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+        </div>
+        <p>*(Это задание можно разместить в интерактивном редакторе)*</p>
+      </section>
+
+    </section>
+    <div class="navigation-buttons">
+      <a href="arrays.html" class="button">← Массивы</a>
+      <a href="loops.html" class="button">Циклы →</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 JavaScript: Полное руководство для изучения</p>
+    </div>
+  </footer>
+
+  <script src="../js/03_functions.js" defer></script>
+  <script src="../main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script>
+    // Инициализация Prism для подсветки синтаксиса
+    document.addEventListener('DOMContentLoaded', (event) => {
+      Prism.highlightAll();
+    });
+  </script>
 </body>
 
 </html>
