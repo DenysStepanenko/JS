@@ -46,7 +46,6 @@ try {
     setTheme(false); // Устанавливаем темную тему по умолчанию при ошибке
 }
 
-
 // --- Прогресс-бар при прокрутке ---
 const progressBar = document.getElementById('progress-bar');
 
@@ -71,7 +70,6 @@ if (progressBar) {
     // console.warn("Элемент прогресс-бара ('progress-bar') не найден.");
 }
 
-
 // --- Кнопка "Наверх" ---
 const scrollTopBtn = document.getElementById('scroll-top');
 
@@ -89,9 +87,7 @@ if (scrollTopBtn) {
     // console.warn("Кнопка 'Наверх' ('scroll-top') не найдена.");
 }
 
-
 // --- Скрытие/показ кода ---
-// Находим все кнопки с классом 'toggle-code'
 document.querySelectorAll('.toggle-code').forEach(button => {
     button.addEventListener('click', () => {
         // Находим элемент <pre>, который должен быть перед кнопками copy и toggle
@@ -111,7 +107,6 @@ document.querySelectorAll('.toggle-code').forEach(button => {
         button.textContent = 'Показать код';
     }
 });
-
 
 // --- Копирование кода ---
 document.querySelectorAll('.copy-code').forEach(button => {
@@ -146,10 +141,9 @@ document.querySelectorAll('.copy-code').forEach(button => {
     });
 });
 
-
 // --- Выполнение кода из редактора (если используется) ---
 // Этот блок оставлен на случай, если вы решите добавить редактируемые блоки
-document.querySelectorAll('.run-code').forEach(button => {
+document.querySelectorAll('.run-code-editor').forEach(button => {
     button.addEventListener('click', () => {
         // Ищем textarea и div.result внутри родителя кнопки
         const textarea = button.parentElement.querySelector('.code-editor'); // Используем класс редактора
@@ -213,34 +207,20 @@ document.querySelectorAll('.run-code').forEach(button => {
     });
 });
 
-
 // --- Анимация появления секций ---
-// Находим все секции с классом 'fade-in'
 const sectionsToFade = document.querySelectorAll('.fade-in');
 
-// Проверяем, поддерживает ли браузер IntersectionObserver
 if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // Если секция пересекает область видимости
             if (entry.isIntersecting) {
-                // Добавляем класс 'visible' для запуска анимации
                 entry.target.classList.add('visible');
-                // Отключаем наблюдение за этой секцией после анимации (опционально)
-                // observer.unobserve(entry.target);
             }
-            // Можно добавить логику для скрытия при выходе из видимости, если нужно
-            // else {
-            //     entry.target.classList.remove('visible');
-            // }
         });
-    }, { threshold: 0.1 }); // Анимация начнется, когда 10% секции видно
+    }, { threshold: 0.1 });
 
-    // Начинаем наблюдение за каждой секцией
     sectionsToFade.forEach(section => observer.observe(section));
 } else {
-    // Если IntersectionObserver не поддерживается, просто делаем секции видимыми
-    // console.warn("IntersectionObserver не поддерживается. Анимация 'fade-in' не будет работать динамически.");
     sectionsToFade.forEach(section => section.classList.add('visible'));
 }
 

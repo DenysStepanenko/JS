@@ -112,7 +112,6 @@ body.light-theme nav ul li a.active {
   border-bottom-color: #1f6feb;
 }
 
-
 /* --- Стили для выпадающего меню (если оно будет) --- */
 nav ul li ul.submenu {
   display: none;
@@ -140,7 +139,6 @@ nav ul li ul.submenu li {
   margin: 5px 0;
 }
 /* --- Конец стилей для выпадающего меню --- */
-
 
 main {
   max-width: 900px;
@@ -195,7 +193,6 @@ body.light-theme h3 {
   border-bottom-color: #d8dee4; /* Светлая линия */
 }
 
-
 /* Стили для блоков кода */
 .code-block {
     margin-bottom: 1.5em;
@@ -223,10 +220,10 @@ body.light-theme .code-block pre {
   display: block;
   color: #c9d1d9; /* Цвет текста кода */
 }
+
 body.light-theme .code-block pre code {
     color: #24292f; /* Цвет текста кода для светлой темы */
 }
-
 
 /* Стили для кнопок управления кодом */
 .code-block button {
@@ -260,6 +257,59 @@ body.light-theme .code-block button:hover {
     border-color: #afb8c1;
 }
 
+/* Стили для кнопок запуска примеров */
+button.run-code {
+  background: #1f6feb; /* Синий фон для кнопки запуска */
+  color: white;
+  border: 1px solid #1f6feb;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 8px 0 0 0;
+  font-size: 0.85em;
+  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+button.run-code:hover {
+  background: #58a6ff;
+  border-color: #58a6ff;
+}
+
+button.run-code:active {
+  transform: scale(0.95);
+}
+
+body.light-theme button.run-code {
+  background: #58a6ff;
+  border: 1px solid #58a6ff;
+  color: #0d1117;
+}
+
+body.light-theme button.run-code:hover {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: white;
+}
+
+/* Стили для вывода результатов */
+.output {
+  background: #101a27;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  min-height: 40px;
+  border: 1px solid #30363d;
+  font-family: monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+}
+
+body.light-theme .output {
+  background: #e9eef2;
+  border: 1px solid #d0d7de;
+  color: #333;
+}
+
 /* Стили для редактора кода (если используется) */
 .code-editor {
   width: 100%;
@@ -279,25 +329,6 @@ body.light-theme .code-editor {
   background: #f6f8fa;
   color: #24292f;
   border: 1px solid #d0d7de;
-}
-
-/* Стили для блока результатов */
-.result {
-  background: #101a27;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
-  min-height: 40px;
-  border: 1px solid #30363d;
-  font-family: monospace;
-  font-size: 0.9em;
-  white-space: pre-wrap;
-}
-
-body.light-theme .result {
-  background: #e9eef2;
-  border: 1px solid #d0d7de;
-  color: #333;
 }
 
 /* Стили для демонстрации массивов */
@@ -353,7 +384,6 @@ body.light-theme .array-container {
     background: #30363d;
     border-color: #8b949e;
 }
-
 
 body.light-theme #scroll-top {
      background: #f6f8fa; /* Светлый фон */
@@ -416,10 +446,11 @@ th {
 body.light-theme th, body.light-theme td {
    border: 1px solid #d0d7de; /* Светлая граница */
 }
- body.light-theme th {
+body.light-theme th {
    background-color: #f6f8fa; /* Светлый фон */
    color: #24292f; /* Темный текст */
 }
+
 /* Чередование строк */
 tbody tr:nth-child(odd) {
     background-color: #10151d; /* Темнее для темной темы */
@@ -427,7 +458,6 @@ tbody tr:nth-child(odd) {
 body.light-theme tbody tr:nth-child(odd) {
     background-color: #f6f8fa; /* Светлее для светлой темы */
 }
-
 
 /* --- Стили для схем --- */
 pre code.diagram {
@@ -448,7 +478,7 @@ pre code.diagram {
      border-radius: 8px;
      background-color: #10151d;
 }
- body.light-theme .demo-container {
+body.light-theme .demo-container {
     border: 1px solid #d0d7de;
     background-color: #f6f8fa;
 }
@@ -472,7 +502,6 @@ body.light-theme .demo-container h5,
 body.light-theme .demo-container h6 {
     color: #57606a;
 }
-
 
 .demo-container button {
      margin-right: 8px;
@@ -505,7 +534,6 @@ body.light-theme .demo-container button:hover {
     border-color: #afb8c1;
 }
 
-
 .code { /* Стиль для отображения примера кода внутри демо */
      background-color: #0d1117;
      padding: 10px;
@@ -516,31 +544,30 @@ body.light-theme .demo-container button:hover {
      white-space: pre-wrap;
      font-size: 0.9em;
 }
- body.light-theme .code {
+body.light-theme .code {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     color: #333;
 }
 /* --- Конец стилей из learning_guide.html --- */
 
-
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
     nav ul li {
         margin: 0 8px;
     }
-     nav ul li a {
+    nav ul li a {
         font-size: 1rem;
     }
     main {
         padding: 20px;
         margin: 20px 15px; /* Добавим боковые отступы */
     }
-     h1 { font-size: 2em; }
-     h2 { font-size: 1.6em; }
-     h3 { font-size: 1.3em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.3em; }
 
-     #theme-toggle {
+    #theme-toggle {
         padding: 6px 10px;
         font-size: 0.9em;
     }
@@ -552,13 +579,12 @@ body.light-theme .demo-container button:hover {
     }
 }
 
-
 @media (max-width: 600px) {
   nav ul li {
     display: block; /* Меню в столбик */
     margin: 10px 0;
   }
-   nav ul li a {
+  nav ul li a {
         padding: 8px 0; /* Увеличим область клика */
         border-bottom-width: 1px; /* Тоньше подчеркивание */
     }
@@ -566,7 +592,7 @@ body.light-theme .demo-container button:hover {
     padding: 15px;
     margin: 15px 10px;
   }
-   #theme-toggle {
+  #theme-toggle {
         top: 15px;
         right: 15px;
     }
@@ -575,6 +601,10 @@ body.light-theme .demo-container button:hover {
     h3 { font-size: 1.2em; }
 
     .code-block button {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+    button.run-code {
         font-size: 0.8em;
         padding: 4px 8px;
     }
