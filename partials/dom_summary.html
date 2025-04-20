@@ -257,13 +257,17 @@ console.log("Классы после замены:", box.classList); // ["new-bo
                     <code>string</code> в позицию <code>position</code>.
                 </li>
             </ul>
-            <p>Пример:</p>
+            <p>Пример (элемент появится на странице и удалится через 3 секунды):</p>
             <div class="code-block">
                 <pre><code class="language-javascript">console.log("===== Создание и удаление элементов =====");
 
 // Создаём элемент
 const newDiv = document.createElement("div");
 newDiv.textContent = "Новый элемент";
+newDiv.style.padding = "10px";
+newDiv.style.backgroundColor = "#e0f7fa";
+newDiv.style.border = "1px solid #ccc";
+newDiv.style.margin = "10px 0";
 
 // Добавляем в начало body
 document.body.prepend(newDiv);
@@ -273,9 +277,11 @@ console.log("Добавлен элемент:", document.body.firstElementChild)
 newDiv.insertAdjacentHTML("beforeend", "<p>Внутри div</p>");
 console.log("HTML внутри div:", newDiv.innerHTML);
 
-// Удаляем элемент
-newDiv.remove();
-console.log("Элемент удалён:", document.body.firstElementChild);
+// Удаляем элемент через 3 секунды, чтобы пользователь увидел
+setTimeout(() => {
+    newDiv.remove();
+    console.log("Элемент удалён:", document.body.firstElementChild);
+}, 3000);
 </code></pre>
                 <button class="run-code" data-example="create-remove">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -304,7 +310,7 @@ console.log("Элемент удалён:", document.body.firstElementChild);
                 <li><strong><code>focus</code></strong> — срабатывает, когда элемент получает фокус.</li>
                 <li><strong><code>blur</code></strong> — срабатывает, когда элемент теряет фокус.</li>
             </ul>
-            <p>Пример:</p>
+            <p>Пример (кнопка и поле ввода появятся на странице и удалятся через 5 секунд):</p>
             <div class="code-block">
                 <pre><code class="language-javascript">console.log("===== Работа с событиями =====");
 
@@ -320,8 +326,16 @@ const handleClick = () => {
 // Добавляем слушатель
 btn.addEventListener("click", handleClick);
 
-// Пример события input
+// Создаём поле ввода
 const input = document.createElement("input");
+input.placeholder = "Введи текст для тестирования событий";
+input.style.margin = "10px 0"; // Добавим небольшой отступ для красоты
+
+// Добавляем элементы в DOM, чтобы пользователь мог с ними взаимодействовать
+document.body.appendChild(btn);
+document.body.appendChild(input);
+
+// Пример события input
 input.addEventListener("input", event => {
     console.log("Введено:", event.target.value);
 });
@@ -344,6 +358,14 @@ console.log("Слушатель клика удалён");
 document.addEventListener("keydown", event => {
     console.log("Клавиша нажата:", event.key, "Код:", event.code);
 });
+
+// Удаляем элементы после выполнения примера (чтобы не накапливались)
+setTimeout(() => {
+    btn.remove();
+    input.remove();
+}, 5000); // Удаляем через 5 секунд, чтобы пользователь успел прот��
+
+естировать
 </code></pre>
                 <button class="run-code" data-example="events">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
