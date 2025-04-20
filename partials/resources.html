@@ -17,8 +17,11 @@
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+
     <header>
         <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
@@ -29,9 +32,11 @@
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
                     <li><a href="exercises.html">Упражнения</a></li>
                     <li><a href="projects.html">Проекты</a></li>
                     <li><a href="resources.html" class="active">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -124,6 +129,46 @@
             </ul>
         </section>
 
+        <section id="interactive-example" class="fade-in">
+            <h3>Интерактивный пример: Случайный выбор ресурса</h3>
+            <p>Ниже приведен пример кода, который выбирает случайный ресурс из списка выше, чтобы вы могли попробовать
+                его прямо сейчас.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Случайный выбор ресурса для изучения =====");
+
+// Список ресурсов
+const resources = [
+    { name: "MDN Web Docs", url: "https://developer.mozilla.org/ru/docs/Web/JavaScript" },
+    { name: "Современный учебник JavaScript", url: "https://learn.javascript.ru/" },
+    { name: "The Modern JavaScript Tutorial", url: "https://javascript.info/" },
+    { name: "W3Schools JavaScript Tutorial", url: "https://www.w3schools.com/js/" },
+    { name: "Coursera", url: "https://www.coursera.org/" },
+    { name: "Udemy", url: "https://www.udemy.com/" },
+    { name: "Codecademy", url: "https://www.codecademy.com/" },
+    { name: "freeCodeCamp", url: "https://www.freecodecamp.org/" },
+    { name: "Codewars", url: "https://www.codewars.com/" },
+    { name: "LeetCode", url: "https://leetcode.com/" },
+    { name: "HackerRank", url: "https://www.hackerrank.com/" },
+    { name: "Stack Overflow", url: "https://stackoverflow.com/questions/tagged/javascript" }
+];
+
+// Функция для выбора случайного ресурса
+function getRandomResource() {
+    const randomIndex = Math.floor(Math.random() * resources.length);
+    const resource = resources[randomIndex];
+    console.log(`Случайный ресурс: ${resource.name}`);
+    console.log(`Ссылка: ${resource.url}`);
+}
+
+// Демонстрация работы
+getRandomResource();</code></pre>
+                <button class="run-code" data-example="random-resource">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
         <div class="navigation-buttons">
             <a href="projects.html" class="button">← Проекты</a>
             <a href="../index.html" class="button">На главную →</a>
@@ -135,11 +180,14 @@
             <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../js/09_resources.js" defer></script>
     <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
-        // Вызываем подсветку Prism после загрузки DOM
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();
         });

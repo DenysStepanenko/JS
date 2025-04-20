@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Памятка по DOM - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html" class="active">Памятка по DOM</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 id="памятка-по-dom">Памятка по работе с DOM</h2>
+        <p>В этом разделе собраны основные методы и свойства для работы с DOM, которые мы изучили. Каждый метод
+            сопровождается кратким описанием и примером.</p>
+
+        <!-- Поиск DOM-элементов -->
+        <section id="поиск-dom-элементов" class="fade-in">
+            <h3>Поиск DOM-элементов</h3>
+            <p>Методы для поиска элементов на странице:</p>
+            <ul>
+                <li><strong><code>element.querySelector(selector)</code></strong> — возвращает <strong>первый</strong>
+                    элемент, соответствующий CSS-селектору <code>selector</code> внутри <code>element</code>.</li>
+                <li><strong><code>element.querySelectorAll(selector)</code></strong> — возвращает <strong>все</strong>
+                    элементы (в виде <code>NodeList</code>), соответствующие CSS-селектору <code>selector</code> внутри
+                    <code>element</code>.
+                </li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Поиск DOM-элементов =====");
+
+// Находим первый заголовок <h1>
+const heading = document.querySelector("h1");
+console.log("Первый заголовок:", heading);
+
+// Находим все элементы с классом 'item'
+const items = document.querySelectorAll(".item");
+console.log("Все элементы с классом 'item':", items);
+</code></pre>
+                <button class="run-code" data-example="search-elements">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- Навигация по DOM -->
+        <section id="навигация-по-dom" class="fade-in">
+            <h3>Навигация по DOM</h3>
+            <p>DOM представляет собой иерархическое дерево, где элементы связаны как родитель, дети, братья и сестры.
+                Вот основные свойства для навигации:</p>
+            <ul>
+                <li><strong><code>element.parentElement</code></strong> — возвращает родительский элемент.</li>
+                <li><strong><code>element.children</code></strong> — возвращает коллекцию дочерних элементов (только
+                    элементы, без текстовых узлов).</li>
+                <li><strong><code>element.firstElementChild</code></strong> — возвращает первый дочерний элемент.</li>
+                <li><strong><code>element.lastElementChild</code></strong> — возвращает последний дочерний элемент.</li>
+                <li><strong><code>element.nextElementSibling</code></strong> — возвращает следующий соседний элемент.
+                </li>
+                <li><strong><code>element.previousElementSibling</code></strong> — возвращает предыдущий соседний
+                    элемент.</li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Навигация по DOM =====");
+
+// Создаём структуру
+const ul = document.createElement("ul");
+const li1 = document.createElement("li");
+li1.textContent = "Элемент 1";
+const li2 = document.createElement("li");
+li2.textContent = "Элемент 2";
+ul.append(li1, li2);
+
+// Находим родителя первого <li>
+console.log("Родитель li1:", li1.parentElement); // <ul>
+
+// Находим детей <ul>
+console.log("Дети ul:", ul.children); // [li1, li2]
+
+// Находим первый и последний дочерний элемент
+console.log("Первый ребёнок ul:", ul.firstElementChild); // li1
+console.log("Последний ребёнок ul:", ul.lastElementChild); // li2
+
+// Находим соседей li1
+console.log("Следующий сосед li1:", li1.nextElementSibling); // li2
+console.log("Предыдущий сосед li2:", li2.previousElementSibling); // li1
+</code></pre>
+                <button class="run-code" data-example="dom-navigation">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- Свойства DOM-элемента -->
+        <section id="свойства-dom-элемента" class="fade-in">
+            <h3>Свойства DOM-элемента</h3>
+            <p>Свойства для чтения и изменения содержимого, стилей и атрибутов:</p>
+            <ul>
+                <li><strong><code>element.textContent</code></strong> — содержит только текст внутри элемента, игнорируя
+                    HTML-теги. Можно читать и изменять.</li>
+                <li><strong><code>element.innerHTML</code></strong> — содержит HTML-код внутри элемента (включая теги).
+                    Можно читать и изменять.</li>
+                <li><strong><code>element.style</code></strong> — объект, содержащий встроенные стили элемента (свойства
+                    в camelCase).</li>
+                <li><strong><code>element.hasAttribute(name)</code></strong> — проверяет, есть ли атрибут
+                    <code>name</code> у элемента.
+                </li>
+                <li><strong><code>element.getAttribute(name)</code></strong> — возвращает значение атрибута
+                    <code>name</code>.
+                </li>
+                <li><strong><code>element.setAttribute(name, value)</code></strong> — устанавливает атрибут
+                    <code>name</code> со значением <code>value</code>.
+                </li>
+                <li><strong><code>element.removeAttribute(name)</code></strong> — удаляет атрибут <code>name</code>.
+                </li>
+                <li><strong><code>element.dataset</code></strong> — объект для работы с data-атрибутами (например,
+                    <code>data-action</code> → <code>dataset.action</code>).
+                </li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Свойства DOM-элемента =====");
+
+// Создаём элемент
+const div = document.createElement("div");
+div.innerHTML = "<p>Привет</p>";
+
+// Читаем textContent
+console.log("textContent:", div.textContent); // "Привет"
+
+// Читаем innerHTML
+console.log("innerHTML:", div.innerHTML); // "<p>Привет</p>"
+
+// Меняем стиль
+div.style.backgroundColor = "lightblue";
+console.log("style.backgroundColor:", div.style.backgroundColor); // "lightblue"
+
+// Работа с атрибутами
+div.setAttribute("data-type", "info");
+console.log("Есть ли атрибут data-type?", div.hasAttribute("data-type")); // true
+console.log("Значение data-type:", div.getAttribute("data-type")); // "info"
+console.log("dataset.type:", div.dataset.type); // "info"
+
+// Удаляем атрибут
+div.removeAttribute("data-type");
+console.log("Атрибут data-type удалён:", !div.hasAttribute("data-type")); // true
+</code></pre>
+                <button class="run-code" data-example="element-properties">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- CSS-классы -->
+        <section id="css-классы" class="fade-in">
+            <h3>CSS-классы на DOM-элементах</h3>
+            <p>Методы для управления классами через <code>classList</code>:</p>
+            <ul>
+                <li><strong><code>element.classList.contains(className)</code></strong> — проверяет, есть ли класс
+                    <code>className</code>.
+                </li>
+                <li><strong><code>element.classList.add(className)</code></strong> — добавляет класс
+                    <code>className</code>.
+                </li>
+                <li><strong><code>element.classList.remove(className)</code></strong> — удаляет класс
+                    <code>className</code>.
+                </li>
+                <li><strong><code>element.classList.toggle(className)</code></strong> — переключает класс
+                    <code>className</code>.
+                </li>
+                <li><strong><code>element.classList.replace(oldClassName, newClassName)</code></strong> — заменяет класс
+                    <code>oldClassName</code> на <code>newClassName</code>.
+                </li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Управление CSS-классами =====");
+
+// Создаём элемент
+const box = document.createElement("div");
+box.classList.add("box");
+
+// Проверяем класс
+console.log("Есть ли класс 'box'?", box.classList.contains("box")); // true
+
+// Добавляем класс
+box.classList.add("active");
+console.log("Классы после добавления:", box.classList); // ["box", "active"]
+
+// Переключаем класс
+box.classList.toggle("active");
+console.log("Классы после toggle:", box.classList); // ["box"]
+
+// Заменяем класс
+box.classList.replace("box", "new-box");
+console.log("Классы после замены:", box.classList); // ["new-box"]
+</code></pre>
+                <button class="run-code" data-example="css-classes">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- Создание и удаление DOM-элементов -->
+        <section id="создание-и-удаление" class="fade-in">
+            <h3>Создание и удаление DOM-элементов</h3>
+            <p>Методы для создания, добавления и удаления элементов:</p>
+            <ul>
+                <li><strong><code>document.createElement(tagName)</code></strong> — создаёт новый HTML-элемент с тегом
+                    <code>tagName</code>.
+                </li>
+                <li><strong><code>element.append(el)</code></strong> — добавляет <code>el</code> в конец списка дочерних
+                    элементов <code>element</code>.</li>
+                <li><strong><code>element.prepend(el)</code></strong> — добавляет <code>el</code> в начало списка
+                    дочерних элементов <code>element</code>.</li>
+                <li><strong><code>element.remove()</code></strong> — удаляет элемент <code>element</code> из DOM-дерева.
+                </li>
+                <li><strong><code>element.insertAdjacentHTML(position, string)</code></strong> — вставляет HTML-строку
+                    <code>string</code> в позицию <code>position</code>.
+                </li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Создание и удаление элементов =====");
+
+// Создаём элемент
+const newDiv = document.createElement("div");
+newDiv.textContent = "Новый элемент";
+
+// Добавляем в начало body
+document.body.prepend(newDiv);
+console.log("Добавлен элемент:", document.body.firstElementChild);
+
+// Добавляем HTML через insertAdjacentHTML
+newDiv.insertAdjacentHTML("beforeend", "<p>Внутри div</p>");
+console.log("HTML внутри div:", newDiv.innerHTML);
+
+// Удаляем элемент
+newDiv.remove();
+console.log("Элемент удалён:", document.body.firstElementChild);
+</code></pre>
+                <button class="run-code" data-example="create-remove">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- События -->
+        <section id="события" class="fade-in">
+            <h3>События</h3>
+            <p>Методы и события для обработки действий пользователя:</p>
+            <ul>
+                <li><strong><code>element.addEventListener(event, handler)</code></strong> — добавляет обработчик
+                    <code>handler</code> для события <code>event</code>.
+                </li>
+                <li><strong><code>element.removeEventListener(event, handler)</code></strong> — удаляет обработчик
+                    <code>handler</code> для события <code>event</code>.
+                </li>
+                <li><strong><code>click</code></strong> — срабатывает при клике мышью.</li>
+                <li><strong><code>keydown</code></strong> — срабатывает при нажатии клавиши.</li>
+                <li><strong><code>keyup</code></strong> — срабатывает при отпускании клавиши.</li>
+                <li><strong><code>submit</code></strong> — срабатывает при отправке формы.</li>
+                <li><strong><code>change</code></strong> — срабатывает после изменения значения элемента формы.</li>
+                <li><strong><code>input</code></strong> — срабатывает при каждом изменении текстового поля.</li>
+                <li><strong><code>focus</code></strong> — срабатывает, когда элемент получает фокус.</li>
+                <li><strong><code>blur</code></strong> — срабатывает, когда элемент теряет фокус.</li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Работа с событиями =====");
+
+// Создаём кнопку
+const btn = document.createElement("button");
+btn.textContent = "Нажми меня";
+
+// Создаём обработчик
+const handleClick = () => {
+    console.log("Кнопка нажата!");
+};
+
+// Добавляем слушатель
+btn.addEventListener("click", handleClick);
+
+// Пример события input
+const input = document.createElement("input");
+input.addEventListener("input", event => {
+    console.log("Введено:", event.target.value);
+});
+
+// Пример события focus
+input.addEventListener("focus", () => {
+    console.log("Поле в фокусе!");
+});
+
+// Пример события blur
+input.addEventListener("blur", () => {
+    console.log("Поле потеряло фокус!");
+});
+
+// Удаляем слушатель
+btn.removeEventListener("click", handleClick);
+console.log("Слушатель клика удалён");
+
+// Пример события keydown
+document.addEventListener("keydown", event => {
+    console.log("Клавиша нажата:", event.key, "Код:", event.code);
+});
+</code></pre>
+                <button class="run-code" data-example="events">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <!-- Интерактивный пример TODO-списка -->
+        <section id="интерактивный-пример-todo" class="fade-in">
+            <h3>Интерактивный пример: TODO-список</h3>
+            <p>Попробуй добавить задачи, отметить их как выполненные или удалить. Этот пример использует все изученные
+                методы и события.</p>
+            <div class="todo-app">
+                <form class="todo-form">
+                    <input type="text" class="todo-input" placeholder="Введите задачу">
+                    <button type="submit" class="add-btn">Добавить</button>
+                </form>
+                <ul class="todo-list"></ul>
+            </div>
+            <p>Код примера:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Интерактивный TODO-список =====");
+
+// Находим элементы
+const form = document.querySelector(".todo-form");
+const input = document.querySelector(".todo-input");
+const list = document.querySelector(".todo-list");
+
+// Проверяем, найдены ли элементы
+if (!form || !input || !list) {
+    console.log("Элементы не найдены");
+} else {
+    // Слушаем отправку формы
+    form.addEventListener("submit", event => {
+        event.preventDefault(); // Отменяем перезагрузку
+
+        const taskText = input.value.trim(); // Получаем текст задачи
+        if (taskText === "") {
+            console.log("Введите задачу!");
+            return;
+        }
+
+        // Создаём новый элемент списка
+        const li = document.createElement("li");
+        li.classList.add("todo-item");
+
+        // Создаём span для текста задачи
+        const taskSpan = document.createElement("span");
+        taskSpan.textContent = taskText;
+
+        // Создаём кнопку удаления
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Удалить";
+
+        // Добавляем элементы в <li>
+        li.append(taskSpan, deleteBtn);
+
+        // Слушаем клик для отметки задачи как выполненной
+        taskSpan.addEventListener("click", () => {
+            li.classList.toggle("completed");
+        });
+
+        // Слушаем клик для удаления задачи
+        deleteBtn.addEventListener("click", () => {
+            li.remove();
+        });
+
+        // Добавляем задачу в список
+        list.append(li);
+
+        // Очищаем поле ввода и возвращаем фокус
+        input.value = "";
+        input.focus();
+    });
+
+    // Слушаем ввод в реальном времени
+    input.addEventListener("input", event => {
+        if (event.currentTarget.value.length > 20) {
+            input.style.borderColor = "red";
+        } else {
+            input.style.borderColor = "";
+        }
+    });
+
+    // Подсвечиваем поле при фокусе
+    input.addEventListener("focus", () => {
+        input.style.borderColor = "blue";
+    });
+
+    // Проверяем при потере фокуса
+    input.addEventListener("blur", () => {
+        if (input.value.trim() === "") {
+            input.style.borderColor = "";
+        }
+    });
+}
+</code></pre>
+                <button class="run-code" data-example="todo-app">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="resources.html" class="button">← Ресурсы</a>
+            <a href="../index.html" class="button">На главную →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../js/10_dom_summary.js" defer></script>
+    <script src="../main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+
+</html>

@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>ООП и классы в JavaScript</title>
 </head>
 
@@ -25,17 +25,18 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="partials/learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="partials/basics.html">Основы</a></li>
-                    <li><a href="partials/arrays.html">Массивы</a></li>
-                    <li><a href="partials/functions.html">Функции</a></li>
-                    <li><a href="partials/loops.html">Циклы</a></li>
-                    <li><a href="partials/objects.html">Объекты</a></li>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
                     <li><a href="oop-classes.html" class="active">ООП и классы</a></li>
-                    <li><a href="partials/exercises.html">Упражнения</a></li>
-                    <li><a href="partials/projects.html">Проекты</a></li>
-                    <li><a href="partials/resources.html">Ресурсы</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -53,7 +54,8 @@
             <h3>Введение в классы</h3>
             <p>Классы в JavaScript — это шаблоны для создания объектов. Они позволяют описать свойства и методы, которые
                 будут у объектов, созданных на их основе.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class User {
   constructor(name, age) {
     this.name = name; // Сохраняем имя
@@ -67,9 +69,12 @@ class User {
 
 const mango = new User("Mango", 25); // Создаем экземпляр
 mango.sayHello(); // Привет, я Mango, мне 25 лет!
-            </code></pre>
-            <button class="run-code" data-example="class-intro">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="class-intro">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 2: Конструктор и объект параметров -->
@@ -77,7 +82,8 @@ mango.sayHello(); // Привет, я Mango, мне 25 лет!
             <h3>Конструктор и объект параметров</h3>
             <p>Конструктор класса инициализирует свойства объекта. Паттерн "Объект параметров" позволяет передавать
                 данные в виде одного объекта, а не множества аргументов.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class Car {
   constructor(params) {
     this.brand = params.brand; // Сохраняем марку
@@ -88,16 +94,20 @@ class Car {
 
 const car1 = new Car({ brand: "Audi", model: "Q3", price: 36000 });
 console.log(car1); // { brand: "Audi", model: "Q3", price: 36000 }
-            </code></pre>
-            <button class="run-code" data-example="constructor-params">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="constructor-params">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 3: Методы класса и прототипы -->
         <section class="fade-in">
             <h3>Методы класса и прототипы</h3>
             <p>Методы класса добавляются в прототип, чтобы экономить память. Они доступны всем экземплярам класса.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class Car {
   constructor(params) {
     this.brand = params.brand;
@@ -118,9 +128,12 @@ const car = new Car({ brand: "BMW", model: "X5", price: 58900 });
 console.log(car.getPrice()); // 58900
 car.changePrice(60000);
 console.log(car.getPrice()); // 60000
-            </code></pre>
-            <button class="run-code" data-example="methods-prototypes">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="methods-prototypes">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 4: Приватные свойства и методы -->
@@ -128,7 +141,8 @@ console.log(car.getPrice()); // 60000
             <h3>Приватные свойства и методы</h3>
             <p>Приватные свойства и методы (с #) доступны только внутри класса, что обеспечивает инкапсуляцию данных.
             </p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class User {
   name;
   #email;
@@ -160,9 +174,12 @@ const mango = new User({ name: "Mango", email: "mango@mail.com" });
 mango.changeEmail("new@mail.com"); // Email изменен на: new@mail.com
 mango.changeEmail("invalid-email"); // Неверный формат email!
 console.log(mango.getEmail()); // new@mail.com
-            </code></pre>
-            <button class="run-code" data-example="private-props-methods">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="private-props-methods">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 5: Геттеры и сеттеры -->
@@ -170,7 +187,8 @@ console.log(mango.getEmail()); // new@mail.com
             <h3>Геттеры и сеттеры</h3>
             <p>Геттеры и сеттеры позволяют контролировать доступ к свойствам, добавляя логику при чтении или изменении
                 значений.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class Car {
   #brand;
   #model;
@@ -216,9 +234,12 @@ console.log(car.price); // 36000
 car.price = -5000; // Ошибка! Цена должна быть больше 0!
 car.price = 40000;
 console.log(car.price); // 40000
-            </code></pre>
-            <button class="run-code" data-example="getters-setters">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="getters-setters">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 6: Статические свойства и методы -->
@@ -226,7 +247,8 @@ console.log(car.price); // 40000
             <h3>Статические свойства и методы</h3>
             <p>Статические свойства и методы принадлежат классу, а не его экземплярам. Они полезны для общих данных или
                 утилитарных функций.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class Car {
   static maxPrice = 50000; // Статическое свойство
 
@@ -271,9 +293,12 @@ const car = new Car({ brand: "Nissan", model: "Murano", price: 31700 });
 car.price = 45000; // Успешно
 console.log(car.price); // 45000
 car.price = 55000; // Ошибка! Цена превышает максимальную!
-            </code></pre>
-            <button class="run-code" data-example="static-props-methods">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="static-props-methods">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 7: Наследование классов -->
@@ -281,7 +306,8 @@ car.price = 55000; // Ошибка! Цена превышает максимал
             <h3>Наследование классов</h3>
             <p>Наследование позволяет создавать дочерние классы, которые наследуют свойства и методы родительского
                 класса, используя <code>extends</code> и <code>super</code>.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class User {
   #email;
 
@@ -334,9 +360,12 @@ mango.blacklist("poly@mail.com");
 console.log(mango.isBlacklisted("poly@mail.com")); // true
 console.log(mango.isBlacklisted("mango@mail.com")); // false
 console.log(mango.email); // mango@mail.com
-            </code></pre>
-            <button class="run-code" data-example="inheritance">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="inheritance">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 8: Контекст this -->
@@ -344,7 +373,8 @@ console.log(mango.email); // mango@mail.com
             <h3>Контекст <code>this</code></h3>
             <p>Ключевое слово <code>this</code> ссылается на объект, в контексте которого выполняется функция. Его
                 значение зависит от способа вызова функции.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 const pizzaPalace = {
   pizzas: ["Supercheese", "Smoked", "Four meats"],
   checkPizza(pizzaName) {
@@ -361,9 +391,12 @@ const pizzaPalace = {
 
 console.log(pizzaPalace.order("Smoked")); // Order accepted, preparing «Smoked» pizza
 console.log(pizzaPalace.order("Big Mike")); // Sorry, there is no pizza named «Big Mike»
-            </code></pre>
-            <button class="run-code" data-example="context-this">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="context-this">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 9: Прототипы -->
@@ -372,7 +405,8 @@ console.log(pizzaPalace.order("Big Mike")); // Sorry, there is no pizza named «
             <p>Прототипы позволяют объектам наследовать свойства и методы через цепочку прототипов, используя
                 <code>Object.create</code>.
             </p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 const ancestor = {
   name: "Paul",
   age: 83,
@@ -393,9 +427,12 @@ console.log(child.name); // Jason
 console.log(child.surname); // Moore (из parent)
 console.log(child.heritage); // Irish (из ancestor)
 console.log(parent.isPrototypeOf(child)); // true
-            </code></pre>
-            <button class="run-code" data-example="prototypes">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="prototypes">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <!-- Раздел 10: ООП: Основы -->
@@ -403,7 +440,8 @@ console.log(parent.isPrototypeOf(child)); // true
             <h3>ООП: Основы</h3>
             <p>Объектно-ориентированное программирование (ООП) организует код в виде объектов, которые объединяют данные
                 и методы.</p>
-            <pre><code class="language-javascript">
+            <div class="code-block">
+                <pre><code class="language-javascript">
 class Car {
   constructor(color) {
     this.color = color;
@@ -432,10 +470,18 @@ const car = new Car("green");
 car.accelerate(); // Скорость: 10 км/ч, топливо: 95%
 car.brake(); // Скорость: 0 км/ч
 car.refuel(10); // Топливо: 100%
-            </code></pre>
-            <button class="run-code" data-example="oop-basics">Запустить пример</button>
-            <div class="output"></div>
+                </code></pre>
+                <button class="run-code" data-example="oop-basics">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
+
+        <div class="navigation-buttons">
+            <a href="objects.html" class="button">← Объекты</a>
+            <a href="exercises.html" class="button">Упражнения →</a>
+        </div>
     </main>
 
     <footer>
@@ -446,8 +492,8 @@ car.refuel(10); // Топливо: 100%
 
     <button id="scroll-top" style="display: none;">↑</button>
 
-    <script src="main.js" defer></script>
-    <script src="js/06_oop_classes.js" defer></script>
+    <script src="../main.js" defer></script>
+    <script src="../js/06_oop_classes.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>

@@ -17,8 +17,11 @@
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+
     <header>
         <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
@@ -29,9 +32,11 @@
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
                     <li><a href="exercises.html">Упражнения</a></li>
                     <li><a href="projects.html">Проекты</a></li>
                     <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,50 +50,33 @@
         <section id="создание-массивов" class="fade-in">
             <h3>Создание массивов</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// 1. Литерал массива (предпочтительный способ)
-let fruits = ["яблоко", "банан", "апельсин"];
-
-// 2. Конструктор Array
-let numbers = new Array(1, 2, 3, 4, 5); // Массив [1, 2, 3, 4, 5]
-let arrayWithLength = new Array(5); // Создает массив с 5 ПУСТЫМИ слотами! Не [5]!
-
-// 3. Пустой массив
-let emptyArray = [];
-
-// 4. Массив с разными типами данных
-let mixedArray = [1, "два", true, { name: "Иван" }, [5, 6]];
-
-// 5. Array.from() - создает массив из итерируемых объектов (например, строк)
-let letters = Array.from("привет"); // ["п", "р", "и", "в", "е", "т"]
-
-// 6. Array.of() - создает массив из аргументов (надежнее new Array для одного числа)
-let singleNumArray = Array.of(7); // [7]
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                <pre><code class="language-javascript">console.log("===== МАССИВЫ =====");
+console.log("\n--- Создание массивов ---");
+const fruitsCreate = ["яблоко", "банан", "апельсин"]; console.log("Литерал:", fruitsCreate);
+const numbersCreate = new Array(1, 2, 3); console.log("Конструктор:", numbersCreate);
+const arrayWithLengthCreate = new Array(3); console.log("Массив с длиной:", arrayWithLengthCreate);
+const lettersCreate = Array.from("hi"); console.log("Массив из строки:", lettersCreate);
+const digitsCreate = Array.of(1, 2); console.log("Array.of:", digitsCreate);</code></pre>
+                <button class="run-code" data-example="create-arrays">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
         <section id="доступ-к-элементам-массива" class="fade-in">
             <h3>Доступ и изменение элементов</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">let fruitsAccess = ["яблоко", "банан", "апельсин", "киви"]; // Используем новое имя
-
-// Доступ по индексу (индексы начинаются с 0)
-console.log(fruitsAccess[0]); // "яблоко"
-console.log(fruitsAccess[2]); // "апельсин"
-
-// Изменение элемента по индексу
-fruitsAccess[1] = "груша";
-console.log(fruitsAccess); // ["яблоко", "груша", "апельсин", "киви"]
-
-// Длина массива (количество элементов)
-console.log(fruitsAccess.length); // 4
-
-// Доступ к последнему элементу
-console.log(fruitsAccess[fruitsAccess.length - 1]); // "киви"
-
-// Доступ к несуществующему индексу
-console.log(fruitsAccess[10]); // undefined
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                <pre><code class="language-javascript">console.log("\n--- Доступ и изменение ---");
+let fruitsAccess = ["яблоко", "банан", "киви"];
+console.log("Исходный:", fruitsAccess);
+fruitsAccess[1] = "груша"; console.log("Измененный:", fruitsAccess);
+console.log("Длина:", fruitsAccess.length);
+console.log("Последний:", fruitsAccess[fruitsAccess.length - 1]);</code></pre>
+                <button class="run-code" data-example="access-elements">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -97,36 +85,28 @@ console.log(fruitsAccess[10]); // undefined
             <p>Существуют методы, которые изменяют (мутируют) исходный массив, и методы, которые возвращают новый
                 массив, не трогая старый.</p>
             <div class="code-block">
-                <pre><code class="language-javascript">let fruitsMethods = ["яблоко", "банан"]; // Новое имя
-console.log("Исходный:", fruitsMethods);
-
-// --- Методы, ИЗМЕНЯЮЩИЕ исходный массив ---
-// push(), pop(), unshift(), shift(), splice(), reverse(), sort()
-// (Примеры см. в коде js/02_arrays.js)
-console.log("Примеры мутирующих методов в консоли JS...");
-
-
-// --- Методы, ВОЗВРАЩАЮЩИЕ новый массив (не изменяют исходный) ---
-const fruitsOriginal = ["яблоко", "банан", "апельсин"];
-console.log("\nИсходный для не мутирующих:", fruitsOriginal);
-
-// concat(): объединяет массивы
-let moreFruits = ["киви", "груша"];
-let allFruits = fruitsOriginal.concat(moreFruits, ["манго"]);
-console.log("concat:", allFruits);
-console.log("Исходный после concat:", fruitsOriginal); // Не изменился
-
-// slice(startIndex, endIndex): возвращает часть массива
-let slicedFruits = allFruits.slice(1, 4);
-console.log("slice(1, 4):", slicedFruits);
-console.log("Исходный allFruits после slice:", allFruits); // Не изменился
-
-// join(separator): объединяет элементы в строку
-let fruitsString = fruitsOriginal.join(" | ");
-console.log("join:", fruitsString);
-
-// map(), filter(), reduce(), find(), findIndex(), flatMap(), toSorted() - см. ниже
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                <pre><code class="language-javascript">console.log("\n--- Основные методы ---");
+let planetsMethods = ["Земля", "Марс"];
+// Мутирующие
+planetsMethods.push("Венера"); console.log("push:", planetsMethods);
+planetsMethods.pop(); console.log("pop:", planetsMethods);
+planetsMethods.unshift("Меркурий"); console.log("unshift:", planetsMethods);
+planetsMethods.shift(); console.log("shift:", planetsMethods);
+planetsMethods.splice(1, 0, "Юпитер"); console.log("splice (вставка):", planetsMethods);
+planetsMethods.reverse(); console.log("reverse:", planetsMethods);
+// Не мутирующие
+const colorsSearch = ["red", "green", "blue", "green"];
+console.log('indexOf("green"):', colorsSearch.indexOf("green"));
+console.log('includes("blue"):', colorsSearch.includes("blue"));
+const arrConcat1 = [1]; const arrConcat2 = [2];
+const combinedConcat = arrConcat1.concat(arrConcat2, [3]); console.log("concat:", combinedConcat);
+const numsSlice = [1, 2, 3, 4];
+const sliced = numsSlice.slice(1, 3); console.log("slice(1,3):", sliced);
+const joinedStr = numsSlice.join('-'); console.log("join('-'):", joinedStr);</code></pre>
+                <button class="run-code" data-example="array-methods">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -141,25 +121,25 @@ console.log("join:", fruitsString);
                         массив</strong> той же длины.</p>
                 <p><strong>Аналогия:</strong> Конвейер, где каждую деталь красят или изменяют.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const planetsMap = ["Earth", "Mars", "Venus"];
-const planetsInUpperCase = planetsMap.map(planet => planet.toUpperCase());
-console.log("map upper:", planetsInUpperCase); // ["EARTH", "MARS", "VENUS"]
-console.log("Оригинал:", planetsMap); // Не изменился</code></pre><button class="copy-code">Скопировать</button>
+                    <pre><code class="language-javascript">console.log("\n\n===== ЧИСТЫЕ ФУНКЦИИ, MAP, FLATMAP =====");
+// --- Чистые функции ---
+const pureMultiply = (array, value) => { const newArray = []; array.forEach(e => newArray.push(e * value)); return newArray; };
+const originalNumbersPure = [1, 2]; const doubledNumbersPure = pureMultiply(originalNumbersPure, 3);
+console.log("pureMultiply:", originalNumbersPure, "->", doubledNumbersPure);
+// Task: changeEven
+const changeEvenArrow = (numbers, value) => { return numbers.map(num => num % 2 === 0 ? num + value : num); };
+const testNumbersPure = [1, 2, 3]; const changedNumbersPure = changeEvenArrow(testNumbersPure, 10);
+console.log("changeEven:", testNumbersPure, "->", changedNumbersPure);
+// --- Метод map() ---
+const planetsMap = ["Earth", "Mars"]; const planetsUpper = planetsMap.map(p => p.toUpperCase()); console.log("map upper:", planetsUpper);
+const planetsLengths = planetsMap.map(p => p.length); console.log("map lengths:", planetsLengths);
+const studentsMap = [{ name: "Mango" }, { name: "Poly" }]; const namesMap = studentsMap.map(s => s.name); console.log("map names:", namesMap);
+// Task 2: Названия книг (упрощено)
+const booksMap = [{ title: "Book A" }, { title: "Book B" }]; const titlesMap = booksMap.map(b => b.title); console.log("Названия книг:", titlesMap);</code></pre>
+                    <button class="run-code" data-example="array-map">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
                     <button class="toggle-code">Скрыть код</button>
-                </div>
-                <h4>Практическое задание: Длины названий планет</h4>
-                <div class="code-block">
-                    <pre><code class="language-javascript">const planetsForLengthMap = ["Earth", "Mars", "Venus", "Jupiter"];
-const planetsLengths = planetsForLengthMap.map(planet => planet.length);
-console.log("Длины планет:", planetsLengths); // [5, 4, 5, 7]</code></pre><button
-                        class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                </div>
-                <h4>Работа с массивами объектов:</h4>
-                <div class="code-block">
-                    <pre><code class="language-javascript">const studentsMap = [ { name: "Mango", score: 83 }, { name: "Poly", score: 59 } ];
-const names = studentsMap.map(student => student.name);
-console.log("Имена студентов:", names); // ["Mango", "Poly"]</code></pre><button class="copy-code">Скопировать</button>
-                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
             </section>
 
@@ -168,17 +148,14 @@ console.log("Имена студентов:", names); // ["Mango", "Poly"]</code
                 <p>Похож на <code>map()</code>, но дополнительно "разглаживает" результат на один уровень. Полезен,
                     когда колбэк возвращает массив.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const studentsWithCoursesFlatMap = [ { name: "Mango", courses: ["math", "phys"] }, { name: "Poly", courses: ["sci", "math"] } ];
-const flattenedCourses = studentsWithCoursesFlatMap.flatMap(student => student.courses);
-console.log("flatMap courses:", flattenedCourses);</code></pre><button class="copy-code">Скопировать</button> <button
-                        class="toggle-code">Скрыть код</button>
-                </div>
-                <h4>Практическое задание: Список всех жанров книг</h4>
-                <div class="code-block">
-                    <pre><code class="language-javascript">const booksWithGenres = [ { title: "Book 1", genres: ["adv", "hist"] }, { title: "Book 2", genres: ["fic"] } ];
-const genres = booksWithGenres.flatMap(book => book.genres);
-console.log("Все жанры:", genres);</code></pre><button class="copy-code">Скопировать</button> <button
-                        class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">// --- Метод flatMap() ---
+const studentsWithCourses = [{ name: "M", courses: ["math", "phys"] }, { name: "P", courses: ["sci", "math"] }];
+const flattenedCourses = studentsWithCourses.flatMap(s => s.courses); console.log("flatMap courses:", flattenedCourses);
+const booksWithGenres = [{ genres: ["adv", "hist"] }, { genres: ["fic"] }]; const genresFlatMap = booksWithGenres.flatMap(b => b.genres); console.log("flatMap genres:", genresFlatMap);</code></pre>
+                    <button class="run-code" data-example="array-flatmap">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
             </section>
 
@@ -190,20 +167,24 @@ console.log("Все жанры:", genres);</code></pre><button class="copy-code"
                     <p>Отбирает **все элементы**, удовлетворяющие условию. Возвращает **новый массив**.</p>
                     <p><strong>Аналогия:</strong> Сито.</p>
                     <div class="code-block">
-                        <pre><code class="language-javascript">const valuesFilter = [51, -3, 27, 21, -68];
-const positiveValues = valuesFilter.filter(value => value >= 0);
-console.log("filter (>0):", positiveValues); // [51, 27, 21]
-console.log("Оригинал:", valuesFilter); // Не изменился</code></pre><button class="copy-code">Скопировать</button>
+                        <pre><code class="language-javascript">console.log("\n\n===== FILTER И FIND =====");
+// --- Метод filter() ---
+const valuesFilter = [51, -3, 27, -68];
+const positiveValuesFilter = valuesFilter.filter(value => value >= 0); console.log("filter (>0):", positiveValuesFilter);
+// Task 1: Четные/нечетные
+const numbersFilter = [17, 24, 82, 61];
+const evenNumbersFilter = numbersFilter.filter(n => n % 2 === 0); console.log("filter (четные):", evenNumbersFilter);
+// Объекты
+const studentsFilter = [{ name: "Mango", score: 83 }, { name: "Kiwi", score: 94 }]; // Упрощенный
+const HIGH_SCORE_F = 80; const bestStudentsFilter = studentsFilter.filter(s => s.score >= HIGH_SCORE_F); console.log("filter (лучшие):", bestStudentsFilter);
+// Task 3: Цвет глаз (упрощено)
+const usersEyeColorFilter = [{ name: "M", eyeColor: "blue" }, { name: "S", eyeColor: "blue" }];
+const getUsersWithEyeColorFilter = (arr, color) => arr.filter(u => u.eyeColor === color);
+console.log("filter (синеглазые):", getUsersWithEyeColorFilter(usersEyeColorFilter, "blue").map(u => u.name));</code></pre>
+                        <button class="run-code" data-example="array-filter">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
                         <button class="toggle-code">Скрыть код</button>
-                    </div>
-                    <h4>Практическое задание: Четные и нечетные</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const numbersFilter = [17, 24, 82, 61, 36];
-const evenNumbers = numbersFilter.filter(number => number % 2 === 0);
-const oddNumbers = numbersFilter.filter(number => number % 2 !== 0);
-console.log("Четные (filter):", evenNumbers); // [24, 82, 36]
-console.log("Нечетные (filter):", oddNumbers); // [17, 61]</code></pre><button class="copy-code">Скопировать</button>
-                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
                     </div>
                 </section>
                 <section id="array-find">
@@ -211,24 +192,22 @@ console.log("Нечетные (filter):", oddNumbers); // [17, 61]</code></pre><
                     <p>Ищет **первый элемент**, удовлетворяющий условию. Возвращает **элемент** или `undefined`.</p>
                     <p><strong>Аналогия:</strong> Поиск первого человека в красной шляпе.</p>
                     <div class="code-block">
-                        <pre><code class="language-javascript">const colorOptionsFind = [ { label: "red"}, { label: "blue"}, { label: "green"} ];
-const blueOption = colorOptionsFind.find(option => option.label === "blue");
-console.log("find(blue):", blueOption); // { label: 'blue' }
-const yellowOption = colorOptionsFind.find(option => option.label === "yellow");
-console.log("find(yellow):", yellowOption); // undefined</code></pre><button class="copy-code">Скопировать</button>
+                        <pre><code class="language-javascript">// --- Метод find() ---
+const colorOptionsFind = [{ label: "red" }, { label: "blue" }];
+const blueOptionFind = colorOptionsFind.find(o => o.label === "blue"); console.log("find(blue):", blueOptionFind);
+const yellowOptionFind = colorOptionsFind.find(o => o.label === "yellow"); console.log("find(yellow):", yellowOptionFind);
+// Task 2: Поиск email (упрощено)
+const usersFind = [{ name: "M", email: "m@e.co" }, { name: "S", email: "s@e.co" }];
+const getUserWithEmailFind = (arr, email) => arr.find(u => u.email === email);
+const user1Find = getUserWithEmailFind(usersFind, "s@e.co"); console.log("find (user1):", user1Find);</code></pre>
+                        <button class="run-code" data-example="array-find">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
                         <button class="toggle-code">Скрыть код</button>
-                    </div>
-                    <h4>Практическое задание: Поиск книги</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const booksFind = [ { title: "A", author: "X" }, { title: "B", author: "Y" } ];
-const BOOK_TITLE_FIND = "A";
-const bookWithTitleFind = booksFind.find(book => book.title === BOOK_TITLE_FIND);
-console.log("Найдена по названию:", bookWithTitleFind);</code></pre><button class="copy-code">Скопировать</button>
-                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
                     </div>
                 </section>
                 <section id="filter-vs-find-comparison">
-                    <h3>Сравнение `filter()` и `find()`</h3>
+                    <h4>Сравнение `filter()` и `find()`</h4>
                     <table>
                         <thead>
                             <tr>
@@ -269,25 +248,32 @@ console.log("Найдена по названию:", bookWithTitleFind);</code><
                     <h4>Метод `every()` (Все ли?)</h4>
                     <p>Проверяет, удовлетворяют ли **все** элементы условию. Возвращает `true` или `false`.</p>
                     <div class="code-block">
-                        <pre><code class="language-javascript">console.log([1, 2, 3].every(value => value >= 0)); // true
-console.log([1, -2, 3].every(value => value >= 0)); // false</code></pre><button class="copy-code">Скопировать</button>
+                        <pre><code class="language-javascript">console.log("\n\n===== EVERY, SOME, REDUCE =====");
+// --- Метод every() ---
+const allPositive1Every = [1, 2].every(v => v >= 0); console.log("[1,2].every(>=0):", allPositive1Every);
+const allPositive2Every = [1, -2].every(v => v >= 0); console.log("[1,-2].every(>=0):", allPositive2Every);
+const productsEvery = [{ qty: 2 }, { qty: 0 }]; const hasEvery = productsEvery.every(p => p.qty > 0); console.log("Every(qty>0):", hasEvery);
+// Task: Все активны?
+const usersEvery = [{ isActive: true }, { isActive: false }]; const isEveryActive = (arr) => arr.every(u => u.isActive); console.log("Every(active):", isEveryActive(usersEvery));</code></pre>
+                        <button class="run-code" data-example="array-every">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
                         <button class="toggle-code">Скрыть код</button>
-                    </div>
-                    <h4>Практическое задание: Все ли активны?</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const usersEvery = [ { isActive: true }, { isActive: false } ];
-const isEveryUserActive = (users) => users.every(user => user.isActive);
-console.log("Все активны?", isEveryUserActive(usersEvery)); // false</code></pre><button
-                            class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
                     </div>
                 </section>
                 <section id="array-some">
                     <h4>Метод `some()` (Хотя бы один?)</h4>
                     <p>Проверяет, удовлетворяет ли **хотя бы один** элемент условию. Возвращает `true` или `false`.</p>
                     <div class="code-block">
-                        <pre><code class="language-javascript">console.log([-1, -2, 3].some(value => value >= 0)); // true
-console.log([1, 2, 3].some(value => value < 0)); // false</code></pre><button class="copy-code">Скопировать</button>
+                        <pre><code class="language-javascript">// --- Метод some() ---
+const hasPositive1Some = [-1, 3].some(v => v >= 0); console.log("[-1,3].some(>=0):", hasPositive1Some);
+const hasNegative1Some = [1, 2].some(v => v < 0); console.log("[1,2].some(<0):", hasNegative1Some);
+// Task: Есть активные?
+const usersSome = [{ isActive: false }, { isActive: true }]; const isAnyActive = (arr) => arr.some(u => u.isActive); console.log("Some(active):", isAnyActive(usersSome));</code></pre>
+                        <button class="run-code" data-example="array-some">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
                         <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
                     </div>
                     <h4>Сравнение `every()` и `some()`</h4>
                     <table>
@@ -317,13 +303,6 @@ console.log([1, 2, 3].some(value => value < 0)); // false</code></pre><button cl
                             </tr>
                         </tbody>
                     </table>
-                    <h4>Практическое задание: Есть ли активные?</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const usersSome = [ { isActive: false }, { isActive: true } ];
-const isAnyUserActive = (users) => users.some(user => user.isActive);
-console.log("Есть активные?", isAnyUserActive(usersSome)); // true</code></pre><button
-                            class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
                 </section>
                 <section id="array-reduce">
                     <h4>Метод `reduce()` (Сведение)</h4>
@@ -333,99 +312,19 @@ console.log("Есть активные?", isAnyUserActive(usersSome)); // true</
                     <p><strong>Синтаксис:</strong> <code>reduce((acc, el, idx, arr) => newAcc, initialValue)</code></p>
                     <p><code>initialValue</code> - начальное значение аккумулятора (важно!).</p>
                     <div class="code-block">
-                        <pre><code class="language-javascript">const numbersReduce = [2, 7, 3, 10];
-const totalSumReduce = numbersReduce.reduce((sum, number) => sum + number, 0);
-console.log("Reduce(сумма):", totalSumReduce); // 22</code></pre><button class="copy-code">Скопировать</button> <button
-                            class="toggle-code">Скрыть код</button>
+                        <pre><code class="language-javascript">// --- Метод reduce() ---
+const numbersReduce = [2, 7, 3]; const totalSumReduce = numbersReduce.reduce((s, n) => s + n, 0); console.log("Reduce(сумма):", totalSumReduce);
+// Task 1: Общее время
+const playtimesReduce = [1270, 468]; const totalPlayTimeReduce = playtimesReduce.reduce((t, time) => t + time, 0); console.log("Reduce(время):", totalPlayTimeReduce);
+// Объекты: сумма баллов
+const studentsReduce = [{ score: 83 }, { score: 59 }]; const totalScoreReduce = studentsReduce.reduce((t, s) => t + s.score, 0); console.log("Reduce(баллы):", totalScoreReduce);
+// Task 3: Общий баланс (упрощено)
+const usersBalanceReduce = [{ balance: 2811 }, { balance: 3821 }]; const calcTotalBal = (arr) => arr.reduce((t, u) => t + u.balance, 0); console.log("Reduce(баланс):", calcTotalBal(usersBalanceReduce));</code></pre>
+                        <button class="run-code" data-example="array-reduce">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
                     </div>
-                    <h4>Практическое задание 1: Общее игровое время</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const playtimesReduce = [1270, 468, 710, 244];
-const totalPlayTime = playtimesReduce.reduce((total, time) => total + time, 0);
-console.log("Общее время:", totalPlayTime); // 2692</code></pre><button class="copy-code">Скопировать</button> <button
-                            class="toggle-code">Скрыть код</button>
-                    </div>
-                    <h4>Практическое задание 3: Общий баланс</h4>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">const usersBalanceReduce = [ { balance: 2811 }, { balance: 3821 }];
-const calculateTotalBalance = (users) => users.reduce((t, u) => t + u.balance, 0);
-console.log("Общий баланс:", calculateTotalBalance(usersBalanceReduce)); // 6632</code></pre><button
-                            class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
-                </section>
-            </section>
-
-            <section id="array-sorting" class="fade-in">
-                <h3>Метод toSorted() и Сортировка</h3>
-                <p>Метод <code>toSorted()</code> (ES2023) создает **новую** отсортированную копию массива, **не изменяя
-                    оригинал**.</p>
-
-                <section id="tosorted-default">
-                    <h4>1. Сортировка по умолчанию</h4>
-                    <p>Без аргументов сортирует как строки.</p>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">/* ... (код сортировки по умолчанию) ... */</code></pre>
-                        <button class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
-                </section>
-
-                <section id="tosorted-custom">
-                    <h4>2. Пользовательская сортировка - `toSorted(compareFn)`</h4>
-                    <p>Передайте функцию сравнения <code>(a, b) => ...</code>.</p>
-                    <p>Числа: <code>a - b</code> (возр.), <code>b - a</code> (убыв.).</p>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">/* ... (код сортировки чисел) ... */</code></pre><button
-                            class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
-                </section>
-
-                <section id="tosorted-localecompare">
-                    <h4>3. Сортировка строк - `localeCompare()`</h4>
-                    <p>Используйте <code>a.localeCompare(b)</code> для правильной сортировки строк.</p>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">/* ... (код сортировки строк) ... */</code></pre><button
-                            class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
-                </section>
-
-                <section id="tosorted-objects">
-                    <h4>4. Сортировка массива объектов</h4>
-                    <p>Сортируем по значению нужного свойства.</p>
-                    <div class="code-block">
-                        <pre><code class="language-javascript">/* ... (код сортировки объектов) ... */</code></pre>
-                        <button class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
-                    </div>
-                </section>
-
-                <section id="sort-vs-tosorted">
-                    <h4>5. Отличие `toSorted()` от старого `sort()`</h4>
-                    <p><code>sort()</code> **мутирует** оригинал, <code>toSorted()</code> - **нет**.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Характеристика</th>
-                                <th><code>sort()</code></th>
-                                <th><code>toSorted()</code></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Изменяет оригинал?</td>
-                                <td style="color: #ff7b72;">Да</td>
-                                <td style="color: #7ee787;">Нет</td>
-                            </tr>
-                            <tr>
-                                <td>Возвращает</td>
-                                <td>Ссылка на оригинал</td>
-                                <td>Новый массив</td>
-                            </tr>
-                            <tr>
-                                <td>Предпочтение</td>
-                                <td>Осторожно</td>
-                                <td style="color: #7ee787;">Рекомендуемый</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </section>
             </section>
 
@@ -437,66 +336,81 @@ console.log("Общий баланс:", calculateTotalBalance(usersBalanceReduce
                 <h4>1. Сортировка по умолчанию (как алфавит для слов)</h4>
                 <p>Без аргументов сортирует как строки, например, числа будут как слова.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const array = [5, 2, 9, 1, 5, 6];
-const sortedArray = array.toSorted(); // Сортирует как строки
-console.log(sortedArray); // [1, 2, 5, 5, 6, 9]
-console.log("Оригинал:", array); // [5, 2, 9, 1, 5, 6] (не изменился)
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">console.log("\n\n===== toSorted() =====");
+// --- Сортировка по умолчанию ---
+const scoresDefaultSort = [61, 19, 74]; const ascScoresDefSort = scoresDefaultSort.toSorted(); console.log("toSorted() числа (умолч.):", ascScoresDefSort); // Переименовал
+const trickyScoresDefaultSort = [27, 2, 41]; const trickySortedDefSort = trickyScoresDefaultSort.toSorted(); console.log("toSorted() tricky (умолч.):", trickySortedDefSort); // Переименовал
+// Task 1:
+const releaseDatesDefSort = [2016, 1967]; const authorsDefSort = ["Lee", "Cornwell"]; // Переименовал
+const ascRelDatesDefSort = releaseDatesDefSort.toSorted(); console.log("toSorted() даты (умолч.):", ascRelDatesDefSort);
+const alphaAuthDefSort = authorsDefSort.toSorted(); console.log("toSorted() авторы (умолч.):", alphaAuthDefSort);</code></pre>
+                    <button class="run-code" data-example="tosorted-default">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
 
                 <h4>2. Пользовательская сортировка (как выбрать, что важнее)</h4>
                 <p>Можно передать функцию сравнения, например, для чисел: a - b для возрастания, b - a для убывания.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">function compareFn(a, b) {
-    if (a > b) return 1; // a больше, ставим b вперед
-    if (a < b) return -1; // a меньше, ставим a вперед
-    return 0; // равны, не меняем
-}
-
-const array = [5, 2, 9, 1, 5, 6];
-const sortedArray = array.toSorted(compareFn);
-console.log(sortedArray); // [1, 2, 5, 5, 6, 9]
-console.log("Оригинал:", array); // [5, 2, 9, 1, 5, 6] (не изменился)
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">// --- Пользовательская сортировка чисел ---
+const scoresCustomSort = [61, 19, 74];
+const ascScoresCustom = scoresCustomSort.toSorted((a, b) => a - b); console.log("toSorted() числа (возр.):", ascScoresCustom);
+const descScoresCustom = scoresCustomSort.toSorted((a, b) => b - a); console.log("toSorted() числа (убыв.):", descScoresCustom);
+// Task 2: Даты
+const releaseDatesCustomSort = [2016, 1967, 2008];
+const ascDatesCustom = releaseDatesCustomSort.toSorted((a, b) => a - b); console.log("toSorted() даты (возр.):", ascDatesCustom);
+const descDatesCustom = releaseDatesCustomSort.toSorted((a, b) => b - a); console.log("toSorted() даты (убыв.):", descDatesCustom);</code></pre>
+                    <button class="run-code" data-example="tosorted-custom">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
 
                 <h4>3. Сортировка строк (как алфавит для русского языка)</h4>
                 <p>Для строк используем localeCompare(), чтобы правильно сортировать, например, кириллицу.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const array = ['яблоко', 'груша', 'вишня', 'абрикос'];
-const sortedArray = array.toSorted((a, b) => a.localeCompare(b)); // Сортируем по алфавиту
-console.log(sortedArray); // ['абрикос', 'вишня', 'груша', 'яблоко']
-console.log("Оригинал:", array); // ['яблоко', 'груша', 'вишня', 'абрикос'] (не изменился)
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">// --- Пользовательская сортировка строк (localeCompare) ---
+const studentsLocaleSort = ["Jacob", "Artemis"];
+const alphaLocale = studentsLocaleSort.toSorted((a, b) => a.localeCompare(b)); console.log("toSorted() строки (алф):", alphaLocale);
+const revAlphaLocale = studentsLocaleSort.toSorted((a, b) => b.localeCompare(a)); console.log("toSorted() строки (обр):", revAlphaLocale);
+// Task 3: Авторы
+const authorsLocaleSort = ["Lee", "Cornwell"];
+const authorsAlpha = authorsLocaleSort.toSorted((a, b) => a.localeCompare(b)); console.log("toSorted() авторы (алф):", authorsAlpha);
+const authorsRev = authorsLocaleSort.toSorted((a, b) => b.localeCompare(a)); console.log("toSorted() авторы (обр):", authorsRev);</code></pre>
+                    <button class="run-code" data-example="tosorted-localecompare">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
 
                 <h4>4. Сортировка массива объектов (как сортировать по возрасту)</h4>
                 <p>Можно сортировать список людей по возрасту или имени, не меняя оригинал.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const array = [
-    { name: 'John', age: 25 },
-    { name: 'Alice', age: 30 },
-    { name: 'Bob', age: 20 }
-];
-const sortedArray = array.toSorted((a, b) => a.age - b.age); // Сортируем по возрасту
-console.log(sortedArray); // [{ name: 'Bob', age: 20 }, { name: 'John', age: 25 }, { name: 'Alice', age: 30 }]
-console.log("Оригинал:", array); // Оригинал не изменился
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">// --- Сортировка массива объектов ---
+const studentsSortObj = [{ name: "Mango", score: 83 }, { name: "Ajax", score: 37 }];
+const ascScoreObj = studentsSortObj.toSorted((a, b) => a.score - b.score); console.log("toSorted() объекты (балл возр):", ascScoreObj);
+const alphaNameObj = studentsSortObj.toSorted((a, b) => a.name.localeCompare(b.name)); console.log("toSorted() объекты (имя алф):", alphaNameObj);
+// Task 4: Книги
+const booksSort = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }];
+const sortedByAuthorSort = booksSort.toSorted((a, b) => a.author.localeCompare(b.author)); console.log("toSorted() книги (автор):", sortedByAuthorSort.map(b => b.author));
+const sortedByRatingDescSort = booksSort.toSorted((a, b) => b.rating - a.rating); console.log("toSorted() книги (рейт убыв):", sortedByRatingDescSort.map(b => b.rating));</code></pre>
+                    <button class="run-code" data-example="tosorted-objects">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
 
                 <h4>5. Сравнение toSorted() и sort() (как старый и новый способ)</h4>
                 <p>sort() меняет оригинал, а toSorted() — нет. Это как копировать список перед сортировкой.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const array = ['Характеристика', 'Изменяет оригинал?', 'Да', 'Нет'];
-
-const sortedWithSort = array.sort(); // Меняет оригинал
-console.log(sortedWithSort); // ['Да', 'Изменяет оригинал?', 'Нет', 'Характеристика']
-console.log("Оригинал после sort:", array); // ['Да', 'Изменяет оригинал?', 'Нет', 'Характеристика'] (изменился)
-
-const sortedWithToSorted = array.toSorted(); // Создает новый, оригинал не меняется
-console.log(sortedWithToSorted); // ['Да', 'Изменяет оригинал?', 'Нет', 'Характеристика']
-console.log("Оригинал после toSorted:", array); // ['Да', 'Изменяет оригинал?', 'Нет', 'Характеристика'] (не изменился)
-</code></pre><button class="copy-code">Скопировать</button><button class="toggle-code">Скрыть код</button>
+                    <pre><code class="language-javascript">// --- sort() vs toSorted() ---
+const originalArraySort = [3, 1, 4]; const sortedCopy = originalArraySort.toSorted((a, b) => a - b); console.log("toSorted():", originalArraySort, sortedCopy);
+const sortMutates = [3, 1, 4]; const ref = sortMutates.sort((a, b) => a - b); console.log("sort():", sortMutates, ref);</code></pre>
+                    <button class="run-code" data-example="sort-vs-tosorted">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
 
                 <table>
@@ -531,74 +445,36 @@ console.log("Оригинал после toSorted:", array); // ['Да', 'Изм
                 <h3>Цепочки методов (Method Chaining)</h3>
                 <p>Вызов методов последовательно друг за другом.</p>
                 <div class="code-block">
-                    <pre><code class="language-javascript">const studentsChain = [/* ... */];
-const namesChain = studentsChain
-  .toSorted((a, b) => a.score - b.score) // 1. Сортируем
-  .map(student => student.name);          // 2. Извлекаем имена
-console.log("Имена (сорт по баллам):", namesChain);</code></pre><button class="copy-code">Скопировать</button> <button
-                        class="toggle-code">Скрыть код</button>
-                </div>
-                <h4>Практическое задание: Имена авторов (цепочка)</h4>
-                <div class="code-block">
-                    <pre><code class="language-javascript">const booksChain = [/* ... */];
+                    <pre><code class="language-javascript">console.log("\n--- Цепочки методов ---");
+const studentsChain = [{ name: "Poly", score: 59 }, { name: "Mango", score: 83 }];
+const namesChain = studentsChain.toSorted((a, b) => a.score - b.score).map(s => s.name); console.log("Chain (имена по баллам):", namesChain);
+const studentsCoursesChain = [{ courses: ["math", "phys"] }, { courses: ["sci", "math"] }];
+const uniqueCoursesChain = studentsCoursesChain.flatMap(s => s.courses).filter((c, i, a) => a.indexOf(c) === i).toSorted((a, b) => a.localeCompare(b)); console.log("Chain (уник. курсы):", uniqueCoursesChain);
+// Task 5: Имена авторов (цепочка)
+const booksChain = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }, { author: "BC", rating: 8.67 }];
 const MIN_RATING_CHAIN = 8;
-const highRatedUniqueAuthors = booksChain
-  .filter(book => book.rating > MIN_RATING_CHAIN)
-  .map(book => book.author)
-  .filter((author, index, array) => array.indexOf(author) === index) // Уникальные
-  .toSorted((a, b) => a.localeCompare(b));
-console.log(`Авторы (> ${MIN_RATING_CHAIN} рейт., сорт):`, highRatedUniqueAuthors);</code></pre><button
-                        class="copy-code">Скопировать</button> <button class="toggle-code">Скрыть код</button>
+const highRatedUniqueAuthors = booksChain.filter(b => b.rating > MIN_RATING_CHAIN).map(b => b.author).filter((a, i, arr) => arr.indexOf(a) === i).toSorted((a, b) => a.localeCompare(b));
+console.log(`Chain (Авторы >${MIN_RATING_CHAIN} рейт.):`, highRatedUniqueAuthors);</code></pre>
+                    <button class="run-code" data-example="method-chaining">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
             </section>
+        </section>
 
-        </section>
         <section id="деструктуризация-массивов" class="fade-in">
             <h3>Деструктуризация массивов</h3>
             <p>Удобный синтаксис для извлечения значений из массивов.</p>
             <div class="code-block">
-                <pre><code class="language-javascript">let colorsDestr = ["красный", "зеленый", "синий"];
-let [red, green, blue] = colorsDestr; console.log(red, green, blue);
-// ... (остальные примеры деструктуризации) ...</code></pre>
+                <pre><code class="language-javascript">console.log("\n--- Деструктуризация ---");
+let colorsDestr = ["красный", "зеленый"];
+let [red, green] = colorsDestr; console.log(red, green);
+let [head, ...tail] = [1, 2, 3]; console.log("rest:", head, tail);</code></pre>
+                <button class="run-code" data-example="destructure-arrays">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
-        <!-- Деструктуризация массивов -->
-        <section id="деструктуризация-массивов" class="fade-in">
-            <h3>Деструктуризация массивов</h3>
-            <p>Удобный синтаксис для извлечения значений из массивов.</p>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Деструктуризация массива
-        let colors = ["красный", "зеленый", "синий"];
-        let [red, green, blue] = colors;
-        console.log(red);   // "красный"
-        console.log(green); // "зеленый"
-        console.log(blue);  // "синий"
-        
-        // Пропуск элементов
-        let [first, , third] = colors;
-        console.log(first); // "красный"
-        console.log(third); // "синий"
-        
-        // Значения по умолчанию
-        let [a, b, c, d = "желтый"] = colors;
-        console.log(d); // "желтый"
-        
-        // Обмен значениями переменных
-        let x = 1;
-        let y = 2;
-        [x, y] = [y, x];
-        console.log(x); // 2
-        console.log(y); // 1
-        
-        // Остаточные параметры
-        let [head, ...tail] = [1, 2, 3, 4];
-        console.log(head); // 1
-        console.log(tail); // [2, 3, 4]
-        </code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -614,12 +490,13 @@ let [red, green, blue] = colorsDestr; console.log(red, green, blue);
         </div>
     </footer>
 
+    <button id="scroll-top" style="display: none;">↑</button>
+
     <script src="../js/02_arrays.js" defer></script>
     <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
-        // Инициализация Prism для подсветки синтаксиса
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();
         });

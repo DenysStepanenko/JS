@@ -42,12 +42,6 @@ console.log("\n--- Перебор элементов ---");
 const itemsIterate = ["a", "b"];
 itemsIterate.forEach((item, index) => console.log(`  forEach: ${index}: ${item}`));
 
-// === Деструктуризация массивов ===
-console.log("\n--- Деструктуризация ---");
-let colorsDestr = ["красный", "зеленый"];
-let [red, green] = colorsDestr; console.log(red, green);
-let [head, ...tail] = [1, 2, 3]; console.log("rest:", head, tail);
-
 
 // ===== КОД ИЗ РАЗДЕЛА ЧИСТЫЕ ФУНКЦИИ, MAP, FLATMAP =====
 console.log("\n\n===== ЧИСТЫЕ ФУНКЦИИ, MAP, FLATMAP =====");
@@ -69,7 +63,6 @@ const booksMap = [{ title: "Book A" }, { title: "Book B" }]; const titlesMap = b
 const studentsWithCourses = [{ name: "M", courses: ["math", "phys"] }, { name: "P", courses: ["sci", "math"] }];
 const flattenedCourses = studentsWithCourses.flatMap(s => s.courses); console.log("flatMap courses:", flattenedCourses);
 const booksWithGenres = [{ genres: ["adv", "hist"] }, { genres: ["fic"] }]; const genresFlatMap = booksWithGenres.flatMap(b => b.genres); console.log("flatMap genres:", genresFlatMap);
-
 
 // ===== КОД ИЗ РАЗДЕЛА FILTER И FIND =====
 console.log("\n\n===== FILTER И FIND =====");
@@ -95,7 +88,6 @@ const usersFind = [{ name: "M", email: "m@e.co" }, { name: "S", email: "s@e.co" 
 const getUserWithEmailFind = (arr, email) => arr.find(u => u.email === email);
 const user1Find = getUserWithEmailFind(usersFind, "s@e.co"); console.log("find (user1):", user1Find);
 
-
 // ===== КОД ИЗ РАЗДЕЛА EVERY, SOME, REDUCE =====
 console.log("\n\n===== EVERY, SOME, REDUCE =====");
 // --- Метод every() ---
@@ -117,7 +109,6 @@ const playtimesReduce = [1270, 468]; const totalPlayTimeReduce = playtimesReduce
 const studentsReduce = [{ score: 83 }, { score: 59 }]; const totalScoreReduce = studentsReduce.reduce((t, s) => t + s.score, 0); console.log("Reduce(баллы):", totalScoreReduce);
 // Task 3: Общий баланс (упрощено)
 const usersBalanceReduce = [{ balance: 2811 }, { balance: 3821 }]; const calcTotalBal = (arr) => arr.reduce((t, u) => t + u.balance, 0); console.log("Reduce(баланс):", calcTotalBal(usersBalanceReduce));
-
 
 // ===== КОД ИЗ РАЗДЕЛА toSorted() и связанные темы =====
 console.log("\n\n===== toSorted() =====");
@@ -152,6 +143,10 @@ const alphaNameObj = studentsSortObj.toSorted((a, b) => a.name.localeCompare(b.n
 const booksSort = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }];
 const sortedByAuthorSort = booksSort.toSorted((a, b) => a.author.localeCompare(b.author)); console.log("toSorted() книги (автор):", sortedByAuthorSort.map(b => b.author));
 const sortedByRatingDescSort = booksSort.toSorted((a, b) => b.rating - a.rating); console.log("toSorted() книги (рейт убыв):", sortedByRatingDescSort.map(b => b.rating));
+// --- sort() vs toSorted() ---
+const originalArraySort = [3, 1, 4]; const sortedCopy = originalArraySort.toSorted((a, b) => a - b); console.log("toSorted():", originalArraySort, sortedCopy);
+const sortMutates = [3, 1, 4]; const ref = sortMutates.sort((a, b) => a - b); console.log("sort():", sortMutates, ref);
+
 // --- Цепочки методов ---
 console.log("\n--- Цепочки методов ---");
 const studentsChain = [{ name: "Poly", score: 59 }, { name: "Mango", score: 83 }];
@@ -163,9 +158,76 @@ const booksChain = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51
 const MIN_RATING_CHAIN = 8;
 const highRatedUniqueAuthors = booksChain.filter(b => b.rating > MIN_RATING_CHAIN).map(b => b.author).filter((a, i, arr) => arr.indexOf(a) === i).toSorted((a, b) => a.localeCompare(b));
 console.log(`Chain (Авторы >${MIN_RATING_CHAIN} рейт.):`, highRatedUniqueAuthors);
-// --- sort() vs toSorted() ---
-const originalArraySort = [3, 1, 4]; const sortedCopy = originalArraySort.toSorted((a, b) => a - b); console.log("toSorted():", originalArraySort, sortedCopy);
-const sortMutates = [3, 1, 4]; const ref = sortMutates.sort((a, b) => a - b); console.log("sort():", sortMutates, ref);
 
+// === Деструктуризация массивов ===
+console.log("\n--- Деструктуризация ---");
+let colorsDestr = ["красный", "зеленый"];
+let [red, green] = colorsDestr; console.log(red, green);
+let [head, ...tail] = [1, 2, 3]; console.log("rest:", head, tail);
 
 console.log("\n===== КОНЕЦ РАЗДЕЛА МАССИВЫ =====");
+
+// --- Логика для выполнения примеров на странице arrays.html ---
+document.querySelectorAll('.run-code').forEach(button => {
+    button.addEventListener('click', () => {
+        // Ищем элемент <code> внутри <pre> в родительском элементе кнопки
+        const codeElement = button.parentElement.querySelector('pre code');
+        const outputDiv = button.parentElement.querySelector('.output');
+
+        if (!codeElement || !outputDiv) {
+            console.warn("Не найдены элементы 'pre code' или 'div.output' для кнопки 'Запустить'.");
+            return;
+        }
+
+        const exampleId = button.getAttribute('data-example');
+        outputDiv.innerHTML = ''; // Очищаем предыдущий результат
+
+        // Сохраняем оригинальный console.log
+        const originalConsoleLog = console.log;
+        const logs = [];
+
+        // Перехватываем console.log
+        console.log = (...args) => {
+            const formattedArgs = args.map(arg => {
+                if (typeof arg === 'object' && arg !== null) {
+                    try {
+                        return JSON.stringify(arg, null, 2);
+                    } catch (e) { return '[Circular Object]'; }
+                }
+                return String(arg);
+            });
+            logs.push(formattedArgs.join(' '));
+            originalConsoleLog.apply(console, args);
+        };
+
+        try {
+            // Выполняем код из блока <code>
+            const codeText = codeElement.textContent;
+            const userCode = new Function(codeText);
+            userCode();
+
+            // Выводим логи в outputDiv
+            if (logs.length > 0) {
+                logs.forEach(log => {
+                    const p = document.createElement('p');
+                    p.textContent = log;
+                    outputDiv.appendChild(p);
+                });
+            } else {
+                const p = document.createElement('p');
+                p.textContent = "Код выполнен без вывода в console.log.";
+                p.style.fontStyle = "italic";
+                outputDiv.appendChild(p);
+            }
+        } catch (error) {
+            const p = document.createElement('p');
+            p.textContent = `Ошибка выполнения: ${error.message}`;
+            p.style.color = '#ff5555';
+            outputDiv.appendChild(p);
+        } finally {
+            console.log = originalConsoleLog;
+        }
+    });
+});
+
+// --- Конец файла 02_arrays.js ---

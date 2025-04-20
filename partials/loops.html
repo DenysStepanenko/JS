@@ -2,242 +2,318 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Циклы - Руководство по JavaScript</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Циклы - Руководство по JavaScript</title>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>JavaScript: Полное руководство для изучения</h1>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Главная</a></li>
-                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="basics.html">Основы</a></li>
-                    <li><a href="arrays.html">Массивы</a></li>
-                    <li><a href="functions.html">Функции</a></li>
-                    <li><a href="loops.html" class="active">Циклы</a></li>
-                    <li><a href="objects.html">Объекты</a></li>
-                    <li><a href="exercises.html">Упражнения</a></li>
-                    <li><a href="projects.html">Проекты</a></li>
-                    <li><a href="resources.html">Ресурсы</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <div id="progress-bar"></div>
 
-    <main class="container">
-        <h2 id="циклы-и-управление-потоком">Циклы и управление потоком</h2>
-        <p>Циклы позволяют выполнять код многократно, а управление потоком помогает контролировать выполнение программы.
-        </p>
+  <header>
+    <div class="container">
+      <button id="theme-toggle">Светлая тема</button>
+      <h1>JavaScript: Полное руководство для изучения</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Главная</a></li>
+          <li><a href="learning_guide.html">Гайд по обучению</a></li>
+          <li><a href="basics.html">Основы</a></li>
+          <li><a href="arrays.html">Массивы</a></li>
+          <li><a href="functions.html">Функции</a></li>
+          <li><a href="loops.html" class="active">Циклы</a></li>
+          <li><a href="objects.html">Объекты</a></li>
+          <li><a href="oop-classes.html">ООП и классы</a></li>
+          <li><a href="exercises.html">Упражнения</a></li>
+          <li><a href="projects.html">Проекты</a></li>
+          <li><a href="resources.html">Ресурсы</a></li>
+          <li><a href="dom_summary.html">Памятка по DOM</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-        <section id="цикл-for" class="fade-in">
-            <h3>Цикл for</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Базовый цикл for
-for (let i = 0; i < 5; i++) {
-  console.log(`Итерация ${i}`);
+  <main class="container">
+    <h2 id="циклы-и-управление-потоком">Циклы и управление потоком</h2>
+    <p>Циклы позволяют выполнять код многократно, а управление потоком помогает контролировать выполнение программы.</p>
+
+    <section id="цикл-for" class="fade-in">
+      <h3>Цикл for</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("===== ЦИКЛЫ И УПРАВЛЕНИЕ ПОТОКОМ =====");
+
+// === Циклы for ===
+console.log("\n--- Цикл for ---");
+
+// Стандартный цикл for: инициализация; условие; шаг
+console.log("Стандартный for:");
+for (let i = 0; i < 5; i++) { // i от 0 до 4
+  console.log(`  i = ${i}`);
 }
 
-// Цикл for для перебора массива
-const fruits = ["яблоко", "банан", "апельсин"];
-for (let i = 0; i < fruits.length; i++) {
-  console.log(`Фрукт ${i + 1}: ${fruits[i]}`);
+// Цикл for с пропуском частей
+let k = 0;
+console.log("For с пропуском инициализации и шага:");
+for (; k < 3;) { // Используем внешнюю переменную k
+  console.log(`  k = ${k}`);
+  k++;
 }
 
-// Цикл for с несколькими переменными
-for (let i = 0, j = 10; i < 5; i++, j--) {
-  console.log(`i = ${i}, j = ${j}`);
-}
-
-// Вложенные циклы
-for (let i = 1; i <= 3; i++) {
-  for (let j = 1; j <= 3; j++) {
-    console.log(`i = ${i}, j = ${j}`);
-  }
+// Цикл for для перебора массива (менее предпочтительно, чем for...of или forEach)
+const fruitsFor = ["яблоко", "банан", "апельсин"];
+console.log("For для массива:");
+for (let i = 0; i < fruitsFor.length; i++) {
+  console.log(`  Фрукт ${i}: ${fruitsFor[i]}`);
 }</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="run-code" data-example="for-loop">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="цикл-while-и-do-while" class="fade-in">
-            <h3>Цикл while и do-while</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Цикл while
-let i = 0;
-while (i < 5) {
-  console.log(`while: итерация ${i}`);
-  i++;
+    <section id="цикл-while-и-do-while" class="fade-in">
+      <h3>Цикл while и do-while</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Цикл while ---");
+// Выполняется, пока условие истинно (проверка перед итерацией)
+let count = 0;
+console.log("Стандартный while:");
+while (count < 3) {
+  console.log(`  count = ${count}`);
+  count++;
 }
 
-// Цикл do-while (выполняется хотя бы один раз)
-let j = 0;
-do {
-  console.log(`do-while: итерация ${j}`);
-  j++;
-} while (j < 5);
-
-// Пример с условием, которое изначально ложно
-let k = 10;
-while (k < 5) {
-  console.log("Этот код не выполнится");
+// Пример: генерация случайного числа до > 0.5
+let randomNum;
+let attempts = 0;
+console.log("While для случайного числа:");
+while (true) { // Потенциально бесконечный цикл, нужен break
+  attempts++;
+  randomNum = Math.random();
+  console.log(`  Попытка ${attempts}: ${randomNum.toFixed(2)}`);
+  if (randomNum > 0.8) { // Условие выхода
+    console.log(`  Найдено число > 0.8!`);
+    break;
+  }
+  if (attempts > 10) { // Защита от бесконечного цикла
+    console.log("  Превышено число попыток.");
+    break;
+  }
 }
 
+// === Цикл do...while ===
+console.log("\n--- Цикл do...while ---");
+// Выполняется хотя бы один раз, затем проверяется условие
+let choice;
 do {
-  console.log("Этот код выполнится один раз");
-} while (k < 5);</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+  // choice = prompt("Введите 'выход', чтобы закончить:"); // Закомментировано для автоматического выполнения
+  choice = Math.random() > 0.7 ? 'выход' : 'продолжить'; // Имитация ввода
+  console.log(`  Ввод пользователя (имитация): ${choice}`);
+} while (choice !== 'выход');
+console.log("  Цикл do...while завершен.");</code></pre>
+        <button class="run-code" data-example="while-do-while">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="циклы-for-in-и-for-of" class="fade-in">
-            <h3>Циклы for...in и for...of</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// for...in - для перебора свойств объекта
+    <section id="циклы-for-in-и-for-of" class="fade-in">
+      <h3>Циклы for...in и for...of</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Цикл for...of ---");
+// Для перебора значений итерируемых объектов (массивы, строки, Map, Set и др.)
+
+// Перебор массива
+const colors = ["красный", "зеленый", "синий"];
+console.log("for...of для массива:");
+for (const color of colors) {
+  console.log(`  Цвет: ${color}`);
+}
+
+// Перебор строки
+const message = "Привет";
+console.log("for...of для строки:");
+for (const char of message) {
+  console.log(`  Символ: ${char}`);
+}
+
+// Перебор Map
+const map = new Map([['a', 1], ['b', 2]]);
+console.log("for...of для Map:");
+for (const [key, value] of map) { // Деструктуризация пары [ключ, значение]
+  console.log(`  ${key} -> ${value}`);
+}
+
+// Перебор Set
+const set = new Set([1, 2, 2, 3, 1]); // Дубликаты игнорируются
+console.log("for...of для Set:");
+for (const num of set) {
+  console.log(`  Значение: ${num}`);
+}
+
+// === Цикл for...in ===
+console.log("\n--- Цикл for...in ---");
+// Для перебора КЛЮЧЕЙ (свойств) объекта
+// Внимание: порядок перебора не гарантирован! Перебирает и унаследованные свойства.
 const person = {
   name: "Иван",
   age: 30,
   city: "Москва"
 };
+// Добавим метод в прототип для демонстрации
+Object.prototype.inheritedProp = "Это унаследовано";
 
+console.log("for...in для объекта:");
 for (const key in person) {
-  console.log(`${key}: ${person[key]}`);
+  console.log(`  Ключ: ${key}, Значение: ${person[key]}`);
 }
 
-// for...of - для перебора элементов итерируемых объектов (массивы, строки и т.д.)
-const fruits = ["яблоко", "банан", "апельсин"];
-
-for (const fruit of fruits) {
-  console.log(fruit);
+// Перебор только собственных свойств объекта
+console.log("for...in только для собственных свойств:");
+for (const key in person) {
+  if (Object.hasOwnProperty.call(person, key)) { // Проверка на собственное свойство
+    console.log(`  Свой ключ: ${key}, Значение: ${person[key]}`);
+  } else {
+    console.log(`  (Унаследованный ключ: ${key})`);
+  }
 }
+// Удалим унаследованное свойство, чтобы не мешать дальше
+delete Object.prototype.inheritedProp;
 
-const text = "Привет";
-for (const char of text) {
-  console.log(char);
-}</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+// Внимание: Не используйте for...in для перебора массивов! (может перебирать нечисловые ключи)</code></pre>
+        <button class="run-code" data-example="for-in-for-of">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="управление-циклами-break-и-continue" class="fade-in">
-            <h3>Управление циклами: break и continue</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// break - прерывает выполнение цикла
+    <section id="управление-циклами-break-и-continue" class="fade-in">
+      <h3>Управление циклами: break и continue</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- break и continue ---");
+
+// break: досрочный выход из цикла
+console.log("Пример с break:");
 for (let i = 0; i < 10; i++) {
   if (i === 5) {
-    break; // Выход из цикла при i === 5
+    console.log("  Выход из цикла при i = 5");
+    break;
   }
-  console.log(`break: ${i}`);
-}
+  console.log(`  i = ${i}`);
+} // Выведет 0, 1, 2, 3, 4
 
-// continue - пропускает текущую итерацию
-for (let i = 0; i < 10; i++) {
-  if (i % 2 === 0) {
-    continue; // Пропускает четные числа
+// continue: переход к следующей итерации
+console.log("Пример с continue:");
+for (let i = 0; i < 5; i++) {
+  if (i % 2 === 0) { // Пропускаем четные числа
+    console.log(`  Пропуск четного числа ${i}`);
+    continue;
   }
-  console.log(`continue: ${i}`);
-}
+  console.log(`  Нечетное число i = ${i}`);
+} // Выведет 1, 3
 
-// Использование меток для break и continue
-outerLoop: for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 3; j++) {
+// Метки для break/continue во вложенных циклах
+console.log("Пример с метками:");
+outerLoop: for (let i = 1; i <= 3; i++) {
+  console.log(`Внешний цикл: i = ${i}`);
+  for (let j = 1; j <= 3; j++) {
+    console.log(`  Внутренний цикл: j = ${j}`);
+    if (i === 2 && j === 2) {
+      console.log("    Прерываем внешний цикл (break outerLoop)");
+      break outerLoop; // Выход из обоих циклов
+    }
     if (i === 1 && j === 1) {
-      break outerLoop; // Прерывает внешний цикл
+      console.log("    Переходим к след. итерации внешнего цикла (continue outerLoop)");
+      continue outerLoop; // Переход к i = 2
     }
-    console.log(`i = ${i}, j = ${j}`);
   }
 }</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="run-code" data-example="break-continue">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="обработка-ошибок-try-catch" class="fade-in">
-            <h3>Обработка ошибок: try...catch</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Базовый try...catch
+    <section id="обработка-ошибок-try-catch" class="fade-in">
+      <h3>Обработка ошибок: try...catch</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- try...catch...finally ---");
+
 try {
+  console.log("Начало блока try");
   // Код, который может вызвать ошибку
-  console.log(undefinedVariable); // Переменная не определена
-} catch (error) {
-  // Обработка ошибки
-  console.log("Произошла ошибка:", error.message);
+  // let result = 10 / 0; // Ошибка деления на ноль (Infinity) - не вызывает исключение
+  // console.log(nonExistentVariable); // Ошибка ReferenceError
+  throw new Error("Искусственная ошибка!"); // Генерируем ошибку сами
+  console.log("Этот код не выполнится"); // Не выполнится, если была ошибка
+} catch (error) { // Блок выполняется, если в try произошла ошибка
+  console.error("!!! Поймана ошибка !!!");
+  console.error("  Тип ошибки:", error.name); // Имя ошибки (e.g., ReferenceError, Error)
+  console.error("  Сообщение:", error.message); // Сообщение об ошибке
+  // console.error("  Стек вызовов:", error.stack); // Полный стек вызовов
+} finally { // Блок выполняется всегда, независимо от наличия ошибки
+  console.log("Блок finally выполнен.");
 }
 
-// try...catch...finally
-function divide(a, b) {
+console.log("Выполнение программы продолжается после try...catch");
+
+// Пример функции с обработкой ошибок
+function parseJsonSafe(jsonString) {
   try {
-    if (b === 0) {
-      throw new Error("Деление на ноль невозможно");
-    }
-    return a / b;
+    const data = JSON.parse(jsonString);
+    console.log("JSON успешно разобран:", data);
+    return data;
   } catch (error) {
-    console.log("Ошибка:", error.message);
-    return null;
-  } finally {
-    console.log("Операция деления завершена");
+    console.error(`Ошибка разбора JSON: ${error.message}`);
+    return null; // Возвращаем null при ошибке
   }
 }
 
-console.log(divide(10, 2)); // 5
-console.log(divide(10, 0)); // null
+parseJsonSafe('{"name": "Иван", "age": 30}'); // Успешно
+parseJsonSafe('{"name": "Иван", age: 30}'); // Ошибка (age без кавычек)
+parseJsonSafe('невалидный json'); // Ошибка</code></pre>
+        <button class="run-code" data-example="try-catch">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-// Создание собственных ошибок
-function validateAge(age) {
-  if (age < 0) {
-    throw new Error("Возраст не может быть отрицательным");
-  }
-  if (age > 120) {
-    throw new Error("Возраст слишком большой");
-  }
-  return true;
-}
+    <div class="navigation-buttons">
+      <a href="functions.html" class="button">← Функции</a>
+      <a href="objects.html" class="button">Объекты →</a>
+    </div>
+  </main>
 
-try {
-  validateAge(-5);
-} catch (error) {
-  console.log(error.message); // "Возраст не может быть отрицательным"
-}</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+  <footer>
+    <div class="container">
+      <p>© 2025 JavaScript: Полное руководство для изучения</p>
+    </div>
+  </footer>
 
-        <div class="navigation-buttons">
-            <a href="functions.html" class="button">← Функции</a>
-            <a href="objects.html" class="button">Объекты →</a>
-        </div>
-    </main>
+  <button id="scroll-top" style="display: none;">↑</button>
 
-    <footer>
-        <div class="container">
-            <p>© 2025 JavaScript: Полное руководство для изучения</p>
-        </div>
-    </footer>
-    <script src="../js/04_loops_and_control_flow.js" defer></script>
-    <script src="../main.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        // Вызываем подсветку Prism после загрузки DOM
-        document.addEventListener('DOMContentLoaded', (event) => {
-            Prism.highlightAll();
-        });
-    </script>
+  <script src="../js/04_loops_and_control_flow.js" defer></script>
+  <script src="../main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      Prism.highlightAll();
+    });
+  </script>
 </body>
 
 </html>

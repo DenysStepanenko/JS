@@ -17,8 +17,11 @@
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+
     <header>
         <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
@@ -29,9 +32,11 @@
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
                     <li><a href="exercises.html">Упражнения</a></li>
                     <li><a href="projects.html" class="active">Проекты</a></li>
                     <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -50,12 +55,65 @@
                 <li>Добавление новой задачи в список.</li>
                 <li>Пометка задачи как выполненной (например, зачеркиванием).</li>
                 <li>Удаление задачи из списка.</li>
-                <li>(Опционально) Сохранение списка в `localStorage`, чтобы он не пропадал при перезагрузке страницы.
-                </li>
+                <li>(Опционально) Сохранение списка в <code>localStorage</code>, чтобы он не пропадал при перезагрузке
+                    страницы.</li>
                 <li>(Опционально) Фильтрация задач (все, активные, выполненные).</li>
             </ul>
             <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, массивы,
-            функции, опционально `localStorage`).
+            функции, опционально <code>localStorage</code>).
+            <p>Пример базовой реализации (без DOM, только логика):</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Проект: Список дел (To-Do List) =====");
+
+// Массив для хранения задач
+let tasks = [];
+
+// Функция добавления задачи
+function addTask(taskText) {
+    const task = {
+        id: Date.now(), // Уникальный ID
+        text: taskText,
+        completed: false
+    };
+    tasks.push(task);
+    console.log(`Добавлена задача: ${task.text}`);
+    console.log("Текущий список задач:", tasks);
+}
+
+// Функция отметки задачи как выполненной
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.completed = !task.completed;
+        console.log(`Задача "${task.text}" теперь ${task.completed ? 'выполнена' : 'не выполнена'}.`);
+        console.log("Текущий список задач:", tasks);
+    } else {
+        console.log("Задача не найдена.");
+    }
+}
+
+// Функция удаления задачи
+function deleteTask(id) {
+    const index = tasks.findIndex(t => t.id === id);
+    if (index !== -1) {
+        const deletedTask = tasks.splice(index, 1)[0];
+        console.log(`Удалена задача: ${deletedTask.text}`);
+        console.log("Текущий список задач:", tasks);
+    } else {
+        console.log("Задача не найдена.");
+    }
+}
+
+// Демонстрация работы
+addTask("Купить продукты");
+addTask("Позвонить другу");
+toggleTask(tasks[0].id);
+deleteTask(tasks[1].id);</code></pre>
+                <button class="run-code" data-example="todo-list">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <section id="project-quiz" class="fade-in">
@@ -72,6 +130,58 @@
             </ul>
             <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, массивы,
             объекты, функции, условные конструкции, циклы).
+            <p>Пример базовой реализации (без DOM, только логика):</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Проект: Викторина (Quiz) =====");
+
+// Массив вопросов
+const quiz = [
+    {
+        question: "Какой оператор используется для строгого сравнения в JavaScript?",
+        options: ["==", "===", "!=", "!=="],
+        correctAnswer: 1
+    },
+    {
+        question: "Какой метод добавляет элемент в конец массива?",
+        options: ["push()", "pop()", "shift()", "unshift()"],
+        correctAnswer: 0
+    }
+];
+
+// Переменные для отслеживания прогресса
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Функция проверки ответа
+function checkAnswer(selectedIndex) {
+    const currentQuestion = quiz[currentQuestionIndex];
+    if (selectedIndex === currentQuestion.correctAnswer) {
+        score++;
+        console.log("Правильно!");
+    } else {
+        console.log(`Неправильно. Правильный ответ: ${currentQuestion.options[currentQuestion.correctAnswer]}`);
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quiz.length) {
+        console.log(`Следующий вопрос: ${quiz[currentQuestionIndex].question}`);
+        console.log("Варианты ответа:", quiz[currentQuestionIndex].options);
+    } else {
+        console.log(`Викторина завершена! Ваш счет: ${score} из ${quiz.length}`);
+    }
+}
+
+// Демонстрация работы
+console.log(`Вопрос 1: ${quiz[0].question}`);
+console.log("Варианты ответа:", quiz[0].options);
+checkAnswer(1); // Выбираем правильный ответ
+console.log(`Вопрос 2: ${quiz[1].question}`);
+console.log("Варианты ответа:", quiz[1].options);
+checkAnswer(0); // Выбираем правильный ответ</code></pre>
+                <button class="run-code" data-example="quiz">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <section id="project-calculator" class="fade-in">
@@ -88,6 +198,90 @@
             </ul>
             <strong>Необходимые знания:</strong> Основы HTML, CSS, JavaScript (DOM-манипуляции, события, функции,
             строки, числа, условные конструкции).
+            <p>Пример базовой реализации (без DOM, только логика):</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Проект: Калькулятор =====");
+
+// Переменные для хранения состояния калькулятора
+let currentInput = "0";
+let previousInput = "";
+let operation = null;
+
+// Функция добавления числа
+function inputNumber(num) {
+    if (currentInput === "0") {
+        currentInput = num;
+    } else {
+        currentInput += num;
+    }
+    console.log("Текущее значение:", currentInput);
+}
+
+// Функция выбора операции
+function inputOperation(op) {
+    if (operation !== null) {
+        calculate();
+    }
+    previousInput = currentInput;
+    currentInput = "0";
+    operation = op;
+    console.log("Выбрана операция:", operation);
+}
+
+// Функция вычисления
+function calculate() {
+    let result;
+    const prev = parseFloat(previousInput);
+    const curr = parseFloat(currentInput);
+    switch (operation) {
+        case '+':
+            result = prev + curr;
+            break;
+        case '-':
+            result = prev - curr;
+            break;
+        case '*':
+            result = prev * curr;
+            break;
+        case '/':
+            if (curr === 0) {
+                console.error("Деление на ноль!");
+                return;
+            }
+            result = prev / curr;
+            break;
+        default:
+            return;
+    }
+    console.log(`Результат: ${prev} ${operation} ${curr} = ${result}`);
+    currentInput = result.toString();
+    previousInput = "";
+    operation = null;
+}
+
+// Функция сброса
+function clear() {
+    currentInput = "0";
+    previousInput = "";
+    operation = null;
+    console.log("Калькулятор сброшен:", currentInput);
+}
+
+// Демонстрация работы
+inputNumber("5");
+inputOperation("+");
+inputNumber("3");
+calculate();
+clear();
+inputNumber("10");
+inputOperation("*");
+inputNumber("2");
+calculate();</code></pre>
+                <button class="run-code" data-example="calculator">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <section id="проект-среднего-уровня-гайд" class="fade-in">
@@ -100,6 +294,72 @@
                 <li>Реализуйте визуализацию данных (графики, диаграммы).</li>
                 <li>Добавьте сохранение данных в localStorage.</li>
             </ul>
+            <p>Пример базовой реализации (без DOM, только логика):</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">console.log("===== Проект: Приложение для управления финансами =====");
+
+// Массив для хранения транзакций
+let transactions = [];
+
+// Функция добавления транзакции
+function addTransaction(description, amount, category, type) {
+    const transaction = {
+        id: Date.now(),
+        description: description,
+        amount: amount,
+        category: category,
+        type: type // "income" или "expense"
+    };
+    transactions.push(transaction);
+    console.log(`Добавлена транзакция: ${type === 'income' ? 'Доход' : 'Расход'} - ${description}, ${amount} (Категория: ${category})`);
+    console.log("Все транзакции:", transactions);
+}
+
+// Функция удаления транзакции
+function deleteTransaction(id) {
+    const index = transactions.findIndex(t => t.id === id);
+    if (index !== -1) {
+        const deleted = transactions.splice(index, 1)[0];
+        console.log(`Удалена транзакция: ${deleted.description}`);
+        console.log("Все транзакции:", transactions);
+    } else {
+        console.log("Транзакция не найдена.");
+    }
+}
+
+// Функция фильтрации по категории
+function filterByCategory(category) {
+    const filtered = transactions.filter(t => t.category === category);
+    console.log(`Транзакции в категории "${category}":`, filtered);
+    return filtered;
+}
+
+// Функция подсчета баланса
+function calculateBalance() {
+    const income = transactions
+        .filter(t => t.type === 'income')
+        .reduce((sum, t) => sum + t.amount, 0);
+    const expense = transactions
+        .filter(t => t.type === 'expense')
+        .reduce((sum, t) => sum + t.amount, 0);
+    const balance = income - expense;
+    console.log(`Доходы: ${income}, Расходы: ${expense}, Баланс: ${balance}`);
+    return balance;
+}
+
+// Демонстрация работы
+addTransaction("Зарплата", 50000, "Работа", "income");
+addTransaction("Продукты", 5000, "Еда", "expense");
+addTransaction("Премия", 10000, "Работа", "income");
+filterByCategory("Работа");
+calculateBalance();
+deleteTransaction(transactions[1].id);
+calculateBalance();</code></pre>
+                <button class="run-code" data-example="finance-app">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
         </section>
 
         <div class="navigation-buttons">
@@ -113,11 +373,14 @@
             <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../js/08_projects.js" defer></script>
     <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
-        // Вызываем подсветку Prism после загрузки DOM
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();
         });

@@ -17,8 +17,11 @@
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+
     <header>
         <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
@@ -29,9 +32,11 @@
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
                     <li><a href="exercises.html">Упражнения</a></li>
                     <li><a href="projects.html">Проекты</a></li>
                     <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -117,7 +122,9 @@
         <section id="упражнения-по-основам-javascript-гайд" class="fade-in">
             <h3>Упражнения по основам JavaScript</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Упражнение 1: Работа с переменными и типами данных
+                <pre><code class="language-javascript">console.log("===== Упражнения по основам JavaScript =====");
+
+// Упражнение 1: Работа с переменными и типами данных
 // Задание: Создайте переменные разных типов и выполните с ними операции
 
 // 1. Создайте переменные разных типов
@@ -135,7 +142,12 @@ let person = { name: name, age: age };
 
 // 3. Выведите результаты в консоль
 console.log("Результаты операций:");
-// Ваш код здесь...
+console.log("Сложение строки и числа:", name + age);
+console.log("Сравнение числа и булева:", age > isStudent);
+hobbies.push("путешествия");
+console.log("Массив после добавления:", hobbies);
+person.city = "Москва";
+console.log("Объект после добавления свойства:", person);
 
 // Упражнение 2: Шаблонные строки
 // Задание: Создайте шаблонную строку, включающую переменные и выражения
@@ -146,27 +158,47 @@ console.log("Результаты операций:");
 //    - Результат математического выражения
 //    - Условное выражение
 
-// Ваш код здесь...</code></pre>
+const mathResult = 10 * 2;
+const status = isStudent ? "студент" : "не студент";
+console.log(`Меня зовут ${name}, мне ${age} лет.`);
+console.log(`Результат вычисления: ${mathResult}`);
+console.log(`Я ${status}.`);</code></pre>
+                <button class="run-code" data-example="guide-basics">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
         <section id="упражнения-по-массивам-гайд" class="fade-in">
             <h3>Упражнения по массивам</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Упражнение 1: Методы массивов
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по массивам =====");
+
+// Упражнение 1: Методы массивов
 // Задание: Используйте различные методы для работы с массивом
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // 1. Создайте новый массив, содержащий только четные числа
-// 2. Создайте новый массив, где каждое число умножено на 2
-// 3. Найдите сумму всех чисел в массиве
-// 4. Проверьте, есть ли в массиве число больше 8
-// 5. Найдите индекс первого числа, которое больше 5
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log("Четные числа:", evenNumbers);
 
-// Ваш код здесь...
+// 2. Создайте новый массив, где каждое число умножено на 2
+const doubledNumbers = numbers.map(num => num * 2);
+console.log("Умноженные на 2:", doubledNumbers);
+
+// 3. Найдите сумму всех чисел в массиве
+const sumNumbers = numbers.reduce((sum, num) => sum + num, 0);
+console.log("Сумма чисел:", sumNumbers);
+
+// 4. Проверьте, есть ли в массиве число больше 8
+const hasGreaterThan8 = numbers.some(num => num > 8);
+console.log("Есть ли число > 8:", hasGreaterThan8);
+
+// 5. Найдите индекс первого числа, которое больше 5
+const indexGreaterThan5 = numbers.findIndex(num => num > 5);
+console.log("Индекс первого числа > 5:", indexGreaterThan5);
 
 // Упражнение 2: Сортировка и фильтрация
 // Задание: Отсортируйте и отфильтруйте массив объектов
@@ -180,36 +212,85 @@ const students = [
 ];
 
 // 1. Отсортируйте студентов по оценке (от высшей к низшей)
-// 2. Отфильтруйте студентов первого курса
-// 3. Найдите студента с самой высокой оценкой
-// 4. Создайте массив, содержащий только имена студентов
-// 5. Вычислите среднюю оценку всех студентов
+const sortedByGrade = [...students].sort((a, b) => b.grade - a.grade);
+console.log("Отсортированные по оценке:", sortedByGrade);
 
-// Ваш код здесь...</code></pre>
+// 2. Отфильтруйте студентов первого курса
+const firstYearStudents = students.filter(student => student.year === 1);
+console.log("Студенты 1-го курса:", firstYearStudents);
+
+// 3. Найдите студента с самой высокой оценкой
+const topStudent = students.reduce((top, student) => student.grade > top.grade ? student : top, students[0]);
+console.log("Студент с лучшей оценкой:", topStudent);
+
+// 4. Создайте массив, содержащий только имена студентов
+const studentNames = students.map(student => student.name);
+console.log("Имена студентов:", studentNames);
+
+// 5. Вычислите среднюю оценку всех студентов
+const averageGrade = students.reduce((sum, student) => sum + student.grade, 0) / students.length;
+console.log("Средняя оценка:", averageGrade);</code></pre>
+                <button class="run-code" data-example="guide-arrays">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
         <section id="упражнения-по-функциям-гайд" class="fade-in">
             <h3>Упражнения по функциям</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Упражнение 1: Типы функций
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по функциям =====");
+
+// Упражнение 1: Типы функций
 // Задание: Создайте функции разных типов и сравните их поведение
 
 // 1. Создайте функцию-объявление (Function Declaration)
 function add(a, b) {
   return a + b;
 }
+console.log("Function Declaration:", add(5, 3));
 
 // 2. Создайте функциональное выражение (Function Expression)
-// Ваш код здесь...
+const subtract = function(a, b) {
+  return a - b;
+};
+console.log("Function Expression:", subtract(5, 3));
 
 // 3. Создайте стрелочную функцию (Arrow Function)
-// Ваш код здесь...
+const multiply = (a, b) => a * b;
+console.log("Arrow Function:", multiply(5, 3));
 
 // 4. Сравните их поведение при вызове до объявления
+try {
+    console.log("Попытка вызова subtract до объявления:", subtractBefore(5, 3));
+} catch (e) {
+    console.error("Ошибка при вызове subtract до объявления:", e.message);
+}
+const subtractBefore = function(a, b) {
+    return a - b;
+};
+console.log("Вызов add до объявления (hoisting работает):", addBefore(5, 3));
+function addBefore(a, b) {
+    return a + b;
+}
+
 // 5. Сравните их поведение с this (создайте объект с методами)
+const calculator = {
+    value: 0,
+    add: function(x) {
+        this.value += x;
+        return this.value;
+    },
+    subtract: (x) => {
+        // Стрелочная функция не имеет собственного this
+        // this.value += x; // Не сработает
+        console.log("Стрелочная функция не может использовать this в этом контексте");
+        return undefined;
+    }
+};
+console.log("this с Function Declaration:", calculator.add(5));
+console.log("this со стрелочной функцией:", calculator.subtract(3));
 
 // Упражнение 2: Замыкания
 // Задание: Создайте функцию, использующую замыкание
@@ -218,31 +299,62 @@ function add(a, b) {
 // 2. Каждый вызов возвращенной функции должен увеличивать счетчик на 1
 // 3. Создайте два разных счетчика и проверьте их независимость
 
-// Ваш код здесь...</code></pre>
+function createCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+
+const counterA = createCounter();
+const counterB = createCounter();
+
+console.log("Counter A, вызов 1:", counterA());
+console.log("Counter A, вызов 2:", counterA());
+console.log("Counter B, вызов 1:", counterB());
+console.log("Counter A, вызов 3:", counterA());</code></pre>
+                <button class="run-code" data-example="guide-functions">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
         <section id="упражнения-по-циклам-и-управлению-потоком-гайд" class="fade-in">
             <h3>Упражнения по циклам и управлению потоком</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Упражнение 1: Различные типы циклов
-// Задание: Реализуйте одну и ту же задачу с помощью разных циклов
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по циклам и управлению потоком =====");
 
+// Упражнение 1: Различные типы циклов
 // Задача: Вывести числа от 1 до 10 в консоль
 
 // 1. Используйте цикл for
-// Ваш код здесь...
+console.log("Цикл for:");
+for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}
 
 // 2. Используйте цикл while
-// Ваш код здесь...
+console.log("Цикл while:");
+let j = 1;
+while (j <= 10) {
+    console.log(j);
+    j++;
+}
 
 // 3. Используйте цикл do...while
-// Ваш код здесь...
+console.log("Цикл do...while:");
+let k = 1;
+do {
+    console.log(k);
+    k++;
+} while (k <= 10);
 
 // 4. Используйте метод forEach для массива [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-// Ваш код здесь...
+console.log("Метод forEach:");
+const numbersForEach = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+numbersForEach.forEach(num => console.log(num));
 
 // Упражнение 2: Обработка ошибок
 // Задание: Реализуйте функцию с обработкой ошибок
@@ -251,16 +363,33 @@ function add(a, b) {
 // 2. Функция должна выбрасывать ошибку, если b равно 0
 // 3. Используйте try...catch для обработки этой ошибки
 
-// Ваш код здесь...</code></pre>
+function divide(a, b) {
+    try {
+        if (b === 0) {
+            throw new Error("Деление на ноль невозможно");
+        }
+        return a / b;
+    } catch (error) {
+        console.error("Ошибка:", error.message);
+        return null;
+    }
+}
+
+console.log("Результат деления 10 / 2:", divide(10, 2));
+console.log("Результат деления 10 / 0:", divide(10, 0));</code></pre>
+                <button class="run-code" data-example="guide-loops">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
         <section id="упражнения-по-объектам-гайд" class="fade-in">
             <h3>Упражнения по объектам</h3>
             <div class="code-block">
-                <pre><code class="language-javascript">// Упражнение 1: Работа с объектами
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по объектам =====");
+
+// Упражнение 1: Работа с объектами
 // Задание: Создайте и модифицируйте объекты
 
 // 1. Создайте объект, представляющий книгу (title, author, year, isRead)
@@ -268,7 +397,29 @@ function add(a, b) {
 // 3. Добавьте метод, возвращающий строку с информацией о книге
 // 4. Создайте несколько книг и поместите их в массив библиотеки
 
-// Ваш код здесь...
+const book1 = {
+    title: "Война и мир",
+    author: "Лев Толстой",
+    year: 1865,
+    isRead: false,
+    toggleReadStatus: function() {
+        this.isRead = !this.isRead;
+        console.log(`${this.title} теперь ${this.isRead ? 'прочитана' : 'не прочитана'}.`);
+    },
+    getInfo: function() {
+        return `${this.title} (${this.author}, ${this.year})`;
+    }
+};
+
+book1.toggleReadStatus();
+console.log(book1.getInfo());
+
+const library = [
+    book1,
+    { title: "Преступление и наказание", author: "Федор Достоевский", year: 1866, isRead: true },
+    { title: "Гарри Поттер и философский камень", author: "Дж. К. Роулинг", year: 1997, isRead: false }
+];
+console.log("Библиотека:", library);
 
 // Упражнение 2: Прототипное наследование
 // Задание: Реализуйте иерархию объектов
@@ -278,9 +429,26 @@ function add(a, b) {
 // 3. Добавьте в Student дополнительные свойства и методы
 // 4. Продемонстрируйте наследование методов
 
-// Ваш код здесь...</code></pre>
+const Person = {
+    name: "Неизвестный",
+    introduce: function() {
+        console.log(`Привет, я ${this.name}.`);
+    }
+};
+
+const Student = Object.create(Person);
+Student.name = "Иван";
+Student.course = 2;
+Student.study = function() {
+    console.log(`${this.name} учится на ${this.course} курсе.`);
+};
+
+Student.introduce(); // Унаследованный метод
+Student.study(); // Собственный метод</code></pre>
+                <button class="run-code" data-example="guide-objects">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -312,7 +480,7 @@ JavaScript Типы Данных
         ├── Date (дата)
         ├── RegExp (регулярное выражение)
         └── Map, Set, WeakMap, WeakSet
-            </code></pre>
+                        </code></pre>
                     </div>
                 </li>
                 <li>
@@ -335,7 +503,7 @@ JavaScript Типы Данных
 │
 └── Лексическая область (замыкания)
     └── Функция + окружение, где она была создана
-            </code></pre>
+                        </code></pre>
                     </div>
                 </li>
                 <li>
@@ -354,7 +522,7 @@ JavaScript Типы Данных
     ├── Временная мертвая зона (TDZ) - нельзя использовать до объявления
     ├── Инициализация в месте объявления
     └── const: нельзя переприсваивать после инициализации
-            </code></pre>
+                        </code></pre>
                     </div>
                 </li>
             </ol>
@@ -574,24 +742,26 @@ JavaScript Типы Данных
                     <p>Исходный массив: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
                 </div>
                 <div class="code-block">
-                    <textarea class="code-editor" id="exercise1-code" rows="15">// Ваш код здесь
+                    <pre><code class="language-javascript">console.log("===== Интерактивное упражнение по массивам =====");
+
+// Ваш код здесь
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // 1. Фильтрация четных чисел
 const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log("Четные числа:", evenNumbers);
 
 // 2. Умножение каждого числа на 2
 const doubledNumbers = numbers.map(num => num * 2);
+console.log("Числа, умноженные на 2:", doubledNumbers);
 
 // 3. Сумма всех чисел
 const sum = numbers.reduce((acc, num) => acc + num, 0);
-
-// Выводим результаты
-console.log("Четные числа:", evenNumbers);
-console.log("Числа, умноженные на 2:", doubledNumbers);
-console.log("Сумма всех чисел:", sum);</textarea>
-                    <button class="run-code">Запустить код</button>
-                    <div class="result" id="exercise1-result"></div>
+console.log("Сумма всех чисел:", sum);</code></pre>
+                    <button class="run-code" data-example="interactive-arrays">Запустить код</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
             </div>
 
@@ -606,7 +776,9 @@ console.log("Сумма всех чисел:", sum);</textarea>
                     </ol>
                 </div>
                 <div class="code-block">
-                    <textarea class="code-editor" id="exercise2-code" rows="18">// Ваш код здесь
+                    <pre><code class="language-javascript">console.log("===== Работа с объектами в массиве =====");
+
+// Ваш код здесь
 const students = [
   { name: "Анна", grade: 85 },
   { name: "Иван", grade: 92 },
@@ -617,20 +789,20 @@ const students = [
 
 // 1. Сортировка по оценке (от высшей к низшей)
 const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
+console.log("Отсортированные студенты:", sortedStudents);
 
 // 2. Средний балл
 const totalGrade = students.reduce((sum, student) => sum + student.grade, 0);
 const averageGrade = students.length > 0 ? totalGrade / students.length : 0;
+console.log("Средний балл:", averageGrade);
 
 // 3. Массив имен
 const names = students.map(student => student.name);
-
-// Выводим результаты
-console.log("Отсортированные студенты:", sortedStudents);
-console.log("Средний балл:", averageGrade);
-console.log("Имена студентов:", names);</textarea>
-                    <button class="run-code">Запустить код</button>
-                    <div class="result" id="exercise2-result"></div>
+console.log("Имена студентов:", names);</code></pre>
+                    <button class="run-code" data-example="interactive-objects">Запустить код</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
                 </div>
             </div>
         </section>
@@ -674,7 +846,6 @@ console.log("Имена студентов:", names);</textarea>
                 <div class="array-container" id="map-result-array"></div>
                 <div class="result" id="map-result-text"></div>
 
-
                 <h6>filter() - создает новый массив с элементами, прошедшими проверку</h6>
                 <div class="code">array.filter(callback) → возвращает новый массив</div>
                 <div class="controls">
@@ -683,7 +854,6 @@ console.log("Имена студентов:", names);</textarea>
                 <p>Результат:</p>
                 <div class="array-container" id="filter-result-array"></div>
                 <div class="result" id="filter-result-text"></div>
-
 
                 <h6>reduce() - сводит массив к одному значению</h6>
                 <div class="code">array.reduce(callback, initialValue) → возвращает результат</div>
@@ -818,7 +988,13 @@ console.log("Имена студентов:", names);</textarea>
             <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../js/learning_guide.js" defer></script>
     <script src="../main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
         let currentArray = [1, 2, 3, 4, 5];
 
@@ -945,11 +1121,7 @@ console.log("Имена студентов:", names);</textarea>
         window.addEventListener('load', () => {
             renderArray("original-array", currentArray);
         });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        // Вызываем подсветку Prism после загрузки DOM
+
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();
         });

@@ -2,125 +2,159 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Объекты - Руководство по JavaScript</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Объекты - Руководство по JavaScript</title>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <h1>JavaScript: Полное руководство для изучения</h1>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Главная</a></li>
-                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="basics.html">Основы</a></li>
-                    <li><a href="arrays.html">Массивы</a></li>
-                    <li><a href="functions.html">Функции</a></li>
-                    <li><a href="loops.html">Циклы</a></li>
-                    <li><a href="objects.html" class="active">Объекты</a></li>
-                    <li><a href="exercises.html">Упражнения</a></li>
-                    <li><a href="projects.html">Проекты</a></li>
-                    <li><a href="resources.html">Ресурсы</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <div id="progress-bar"></div>
 
-    <main class="container">
-        <h2 id="объекты">Объекты</h2>
-        <p>Объекты в JavaScript - это коллекции пар ключ-значение, которые используются для хранения и организации
-            данных.</p>
+  <header>
+    <div class="container">
+      <button id="theme-toggle">Светлая тема</button>
+      <h1>JavaScript: Полное руководство для изучения</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Главная</a></li>
+          <li><a href="learning_guide.html">Гайд по обучению</a></li>
+          <li><a href="basics.html">Основы</a></li>
+          <li><a href="arrays.html">Массивы</a></li>
+          <li><a href="functions.html">Функции</a></li>
+          <li><a href="loops.html">Циклы</a></li>
+          <li><a href="objects.html" class="active">Объекты</a></li>
+          <li><a href="oop-classes.html">ООП и классы</a></li>
+          <li><a href="exercises.html">Упражнения</a></li>
+          <li><a href="projects.html">Проекты</a></li>
+          <li><a href="resources.html">Ресурсы</a></li>
+          <li><a href="dom_summary.html">Памятка по DOM</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-        <section id="создание-объектов" class="fade-in">
-            <h3>Создание объектов</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Литерал объекта
-const person = {
-  name: "Иван",
+  <main class="container">
+    <h2 id="объекты">Объекты</h2>
+    <p>Объекты в JavaScript - это коллекции пар ключ-значение, которые используются для хранения и организации
+      данных.</p>
+
+    <section id="создание-объектов" class="fade-in">
+      <h3>Создание объектов</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("===== ОБЪЕКТЫ =====");
+console.log("\n--- Создание объектов ---");
+
+// 1. Литерал объекта - самый распространенный способ
+const personLiteral = {
+  name: "Иван", // Свойство: ключ (строка или Symbol) + значение (любой тип)
   age: 30,
-  city: "Москва"
-};
-
-// Конструктор Object
-const user = new Object();
-user.name = "Мария";
-user.age = 25;
-user.city = "Санкт-Петербург";
-
-// Функция-конструктор
-function Employee(name, position, salary) {
-  this.name = name;
-  this.position = position;
-  this.salary = salary;
-  this.isActive = true;
-}
-
-const employee1 = new Employee("Алексей", "Разработчик", 100000);
-console.log(employee1); // Employee { name: "Алексей", position: "Разработчик", salary: 100000, isActive: true }
-
-// Object.create()
-const personProto = {
-  greet: function() {
-    return `Привет, меня зовут ${this.name}`;
+  city: "Москва",
+  isAdmin: false,
+  // Ключи с пробелами или спецсимволами - в кавычках
+  "любимый цвет": "синий",
+  // Метод - свойство, значением которого является функция
+  greet: function () {
+    // 'this' внутри метода указывает на сам объект (personLiteral)
+    console.log(`Привет, меня зовут ${this.name}!`);
+  },
+  // Сокращенный синтаксис метода (ES6+)
+  sayBye() {
+    console.log(`Пока от ${this.name}!`);
   }
 };
+console.log("Литерал объекта:", personLiteral);
 
-const john = Object.create(personProto);
-john.name = "Джон";
-console.log(john.greet()); // "Привет, меня зовут Джон"</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
-
-        <section id="доступ-к-свойствам-объекта" class="fade-in">
-            <h3>Доступ к свойствам объекта</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">const person = {
-  name: "Иван",
-  age: 30,
-  "home address": "ул. Ленина, 10"
+// 2. Конструктор Object (менее популярен)
+const carConstructor = new Object();
+carConstructor.brand = "Toyota";
+carConstructor.model = "Camry";
+carConstructor.year = 2022;
+carConstructor.startEngine = function () {
+  console.log(`${this.brand} ${this.model}: Двигатель запущен!`);
 };
+console.log("Объект через new Object():", carConstructor);
 
-// Через точку (точечная нотация)
-console.log(person.name); // "Иван"
-console.log(person.age);  // 30
+// 3. Функция-конструктор (для создания однотипных объектов)
+function User(name, age) {
+  // this = {}; (неявно создается пустой объект)
+  this.name = name;
+  this.age = age;
+  this.isOnline = false;
+  this.login = function () {
+    this.isOnline = true;
+    console.log(`${this.name} вошел в систему.`);
+  };
+  // return this; (неявно возвращается созданный объект)
+}
+// Вызов через 'new' создает новый объект и устанавливает 'this' внутри функции
+const user1 = new User("Алиса", 28);
+const user2 = new User("Борис", 35);
+console.log("Объект через функцию-конструктор User:", user1);
+user1.login();
+console.log("user1 после login:", user1);
+console.log("Другой объект User:", user2);
 
-// Через квадратные скобки (скобочная нотация)
-console.log(person["name"]); // "Иван"
-console.log(person["age"]);  // 30
-console.log(person["home address"]); // "ул. Ленина, 10"
+// 4. Object.create() - создание объекта с указанным прототипом
+const animalProto = {
+  eats: true,
+  walk() {
+    console.log(`${this.name || 'Животное'} гуляет.`);
+  }
+};
+// Создаем объект rabbit, прототипом которого будет animalProto
+const rabbit = Object.create(animalProto);
+rabbit.name = "Кролик";
+rabbit.jumps = true;
+console.log("Объект через Object.create():", rabbit);
+console.log("rabbit.eats (унаследовано):", rabbit.eats); // true
+rabbit.walk(); // Кролик гуляет.</code></pre>
+        <button class="run-code" data-example="create-objects">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-// Динамический доступ к свойствам через переменную
-const propertyName = "name";
-console.log(person[propertyName]); // "Иван"
+    <section id="доступ-к-свойствам-объекта" class="fade-in">
+      <h3>Доступ к свойствам объекта</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Доступ к свойствам ---");
 
-// Проверка наличия свойства
-console.log("name" in person); // true
-console.log("job" in person);  // false
+// 1. Через точку (.) - если ключ валидный идентификатор
+console.log("Доступ через точку:");
+console.log("  Имя:", personLiteral.name); // Иван
+console.log("  Возраст:", personLiteral.age); // 30
+personLiteral.greet(); // Вызов метода
 
-// Проверка собственных свойств
-console.log(person.hasOwnProperty("name")); // true</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+// 2. Через квадратные скобки [] - если ключ в переменной или содержит спецсимволы
+console.log("Доступ через скобки:");
+console.log('  Имя:', personLiteral["name"]); // Иван
+console.log('  Любимый цвет:', personLiteral["любимый цвет"]); // синий
 
-        <section id="методы-объектов" class="fade-in">
-            <h3>Методы объектов</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Объект с методами
+let propertyKey = "city";
+console.log(`  Свойство "${propertyKey}":`, personLiteral[propertyKey]); // Москва
+
+// Доступ к несуществующему свойству возвращает undefined
+console.log("  Несуществующее свойство 'job':", personLiteral.job); // undefined</code></pre>
+        <button class="run-code" data-example="access-properties">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
+
+    <section id="методы-объектов" class="fade-in">
+      <h3>Методы объектов</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Объект с методами
 const calculator = {
   a: 0,
   b: 0,
@@ -149,234 +183,252 @@ calculator.b = 3;
 console.log(calculator.add());       // 8
 console.log(calculator.multiply()); // 15
 console.log(calculator.subtract()); // undefined (и предупреждение в консоли)</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="run-code" data-example="object-methods">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="перебор-свойств-объекта" class="fade-in">
-            <h3>Перебор свойств объекта</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">const person = {
-  name: "Иван",
-  age: 30,
-  city: "Москва",
-  job: "Программист"
-};
+    <section id="перебор-свойств-объекта" class="fade-in">
+      <h3>Перебор свойств объекта</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Перебор свойств ---");
 
-// for...in - перебирает все перечисляемые свойства
-for (const key in person) {
-  console.log(`${key}: ${person[key]}`);
+// 1. Цикл for...in (перебирает ключи, включая унаследованные)
+console.log("Цикл for...in:");
+// Добавим унаследованное свойство для примера
+Object.prototype.inherited = "унаследовано";
+for (const key in personLiteral) {
+  // Проверка на собственное свойство объекта
+  if (Object.hasOwnProperty.call(personLiteral, key)) {
+    console.log(`  Собств. ключ: ${key}, Значение: ${personLiteral[key]}`);
+  } else {
+    console.log(`  (Унаслед. ключ: ${key}, Значение: ${personLiteral[key]})`);
+  }
 }
+delete Object.prototype.inherited; // Убираем для чистоты
 
-// Object.keys() - возвращает массив ключей
-const keys = Object.keys(person);
-console.log(keys); // ["name", "age", "city", "job"]
+// 2. Object.keys() - массив собственных ключей объекта
+const keys = Object.keys(personLiteral);
+console.log("Object.keys():", keys);
+keys.forEach(key => console.log(`  Ключ: ${key}`));
 
-// Перебор с помощью Object.keys() и forEach
-Object.keys(person).forEach(key => {
-  console.log(`${key}: ${person[key]}`);
-});
+// 3. Object.values() - массив собственных значений объекта
+const values = Object.values(personLiteral);
+console.log("Object.values():", values);
 
-// Object.values() - возвращает массив значений
-const values = Object.values(person);
-console.log(values); // ["Иван", 30, "Москва", "Программист"]
-
-// Object.entries() - возвращает массив пар [ключ, значение]
-const entries = Object.entries(person);
-console.log(entries); // [["name", "Иван"], ["age", 30], ...]
-
-// Перебор с помощью Object.entries() и деструктуризации
-Object.entries(person).forEach(([key, value]) => {
-  console.log(`${key}: ${value}`);
+// 4. Object.entries() - массив пар [ключ, значение] собственных свойств
+const entries = Object.entries(personLiteral);
+console.log("Object.entries():", entries);
+entries.forEach(([key, value]) => { // Деструктуризация пары
+  console.log(`  Пара: ${key} -> ${typeof value === 'function' ? 'function' : value}`);
 });</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="run-code" data-example="iterate-properties">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="копирование-и-объединение-объектов" class="fade-in">
-            <h3>Копирование и объединение объектов</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Копирование по ссылке
-const original = { a: 1, b: 2 };
-const copy = original; // Обе переменные указывают на один объект
-copy.a = 10;
-console.log(original.a); // 10 (изменение в copy отразилось в original)
+    <section id="копирование-и-объединение-объектов" class="fade-in">
+      <h3>Копирование и объединение объектов</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Копирование объектов ---");
+// Присваивание копирует ссылку, а не сам объект!
+const objA = { id: 1 };
+const objB = objA; // objB теперь ссылается на тот же объект, что и objA
+objB.id = 2;
+console.log("objA.id после изменения objB:", objA.id); // 2! Изменился и оригинал
 
-// Поверхностное копирование с Object.assign()
-const person = { name: "Иван", age: 30, address: { city: "Москва" } };
-const personCopy = Object.assign({}, person);
-personCopy.name = "Петр";
-personCopy.address.city = "Казань"; // Изменит город и в оригинале!
-console.log(person.name);       // "Иван"
-console.log(personCopy.name);   // "Петр"
-console.log(person.address.city); // "Казань" (Поверхностное копирование!)
+// Поверхностное копирование (копируются только свойства первого уровня)
+const original = { a: 1, b: { c: 2 } };
 
-// Поверхностное копирование с оператором spread (...)
-const anotherCopy = { ...person };
-anotherCopy.age = 40;
-anotherCopy.address.city = "Тверь"; // Тоже изменит город в оригинале!
-console.log(person.age);          // 30
-console.log(anotherCopy.age);     // 40
-console.log(person.address.city); // "Тверь"
+// Способ 1: Object.assign()
+const shallowCopy1 = Object.assign({}, original);
+shallowCopy1.a = 10; // Не влияет на original
+shallowCopy1.b.c = 20; // Влияет на original.b.c!
+console.log("Object.assign():");
+console.log("  original:", original); // { a: 1, b: { c: 20 } }
+console.log("  shallowCopy1:", shallowCopy1); // { a: 10, b: { c: 20 } }
 
-// Глубокое копирование (простой способ для JSON-совместимых данных)
-const deepCopy = JSON.parse(JSON.stringify(person));
-deepCopy.address.city = "Сочи";
-console.log(person.address.city);   // "Тверь" (Оригинал не изменился)
-console.log(deepCopy.address.city); // "Сочи"
+// Способ 2: Spread оператор (...)
+const shallowCopy2 = { ...original };
+shallowCopy2.a = 100; // Не влияет на original
+shallowCopy2.b.c = 200; // Влияет на original.b.c!
+console.log("Spread (...):");
+console.log("  original:", original); // { a: 1, b: { c: 200 } }
+console.log("  shallowCopy2:", shallowCopy2); // { a: 100, b: { c: 200 } }
 
-// Объединение объектов
-const defaults = { theme: "light", language: "ru" };
-const userSettings = { theme: "dark" };
-const settings = { ...defaults, ...userSettings };
-console.log(settings); // { theme: "dark", language: "ru" }</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+// Глубокое копирование (копируются все уровни вложенности)
+// Простой способ для JSON-совместимых данных (без функций, Symbol, undefined)
+const deepCopy = JSON.parse(JSON.stringify(original));
+deepCopy.a = 1000; // Не влияет на original
+deepCopy.b.c = 2000; // Не влияет на original!
+console.log("Глубокое копирование (JSON):");
+console.log("  original:", original); // { a: 1, b: { c: 200 } } (осталось от shallowCopy2)
+console.log("  deepCopy:", deepCopy); // { a: 1000, b: { c: 2000 } }
+// Для сложного глубокого копирования нужны библиотеки (lodash) или рекурсивные функции</code></pre>
+        <button class="run-code" data-example="copy-merge-objects">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="деструктуризация-объектов" class="fade-in">
-            <h3>Деструктуризация объектов</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">const person = {
-  name: "Иван",
-  age: 30,
-  city: "Москва",
-  job: "Программист"
+    <section id="деструктуризация-объектов" class="fade-in">
+      <h3>Деструктуризация объектов</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Деструктуризация объектов ---");
+const userProfile = {
+  login: "alice",
+  email: "alice@example.com",
+  details: {
+    firstName: "Алиса",
+    lastName: "Смит"
+  },
+  status: "active"
 };
 
 // Базовая деструктуризация
-const { name, age } = person;
-console.log(name); // "Иван"
-console.log(age);  // 30
+const { login, email } = userProfile;
+console.log("login:", login); // alice
+console.log("email:", email); // alice@example.com
 
-// Деструктуризация с переименованием
-const { name: userName, age: userAge } = person;
-console.log(userName); // "Иван"
-console.log(userAge);  // 30
+// Переименование переменных
+const { login: userLogin, status: userStatus } = userProfile;
+console.log("userLogin:", userLogin); // alice
+console.log("userStatus:", userStatus); // active
 
-// Деструктуризация с значениями по умолчанию
-const { job, salary = 0 } = person;
-console.log(job);    // "Программист"
-console.log(salary); // 0 (значение по умолчанию)
+// Значения по умолчанию
+const { city = "Не указан", status = "inactive" } = userProfile;
+console.log("city (по умолчанию):", city); // Не указан
+console.log("status (из объекта):", status); // active
 
 // Вложенная деструктуризация
-const company = {
-  name: "ABC Corp",
-  address: {
-    street: "Ленина 10",
-    city: "Москва",
-    country: "Россия"
-  }
-};
+const { details: { firstName, lastName } } = userProfile;
+console.log("firstName:", firstName); // Алиса
+console.log("lastName:", lastName); // Смит
 
-const { address: { city: companyCity, country } } = company;
-console.log(companyCity); // "Москва"
-console.log(country);     // "Россия"</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+// Rest оператор (...) для сбора оставшихся свойств
+const { login: l, email: e, ...restDetails } = userProfile;
+console.log("Rest детали:", restDetails); // { details: {..}, status: 'active' }</code></pre>
+        <button class="run-code" data-example="destructure-objects">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="геттеры-и-сеттеры" class="fade-in">
-            <h3>Геттеры и сеттеры</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">const product = {
-  name: "Телефон",
-  _price: 1000, // Соглашение: префикс _ указывает на "приватное" свойство
+    <section id="геттеры-и-сеттеры" class="fade-in">
+      <h3>Геттеры и сеттеры</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Геттеры и сеттеры ---");
+// Специальные методы для контроля доступа к свойствам
 
-  // Геттер - вызывается при чтении свойства
-  get price() {
-    console.log("Вызван геттер price");
-    return `$${this._price}`;
+const smartObject = {
+  _temperature: 0, // "Приватное" свойство (соглашение)
+  log: [],
+
+  // Геттер для получения температуры в Цельсиях
+  get temperatureC() {
+    console.log("GET temperatureC");
+    return this._temperature;
   },
 
-  // Сеттер - вызывается при записи свойства
-  set price(value) {
-    console.log(`Вызван сеттер price со значением ${value}`);
-    if (value < 0) {
-      throw new Error("Цена не может быть отрицательной");
+  // Сеттер для установки температуры в Цельсиях
+  set temperatureC(value) {
+    console.log(`SET temperatureC = ${value}`);
+    if (typeof value !== 'number') {
+      throw new Error("Температура должна быть числом.");
     }
-    this._price = value;
+    this._temperature = value;
+    this.log.push(`Установлена температура: ${value}°C`);
+  },
+
+  // Геттер для получения температуры в Фаренгейтах
+  get temperatureF() {
+    console.log("GET temperatureF");
+    return this._temperature * 9 / 5 + 32;
+  },
+
+  // Сеттер для установки температуры через Фаренгейты
+  set temperatureF(value) {
+    console.log(`SET temperatureF = ${value}`);
+    if (typeof value !== 'number') {
+      throw new Error("Температура должна быть числом.");
+    }
+    this._temperature = (value - 32) * 5 / 9;
+    this.log.push(`Установлена температура: ${value}°F (${this._temperature.toFixed(1)}°C)`);
   }
 };
 
-// Использование геттера (выглядит как чтение свойства)
-console.log(product.price); // "$1000"
+console.log("Чтение t°C:", smartObject.temperatureC); // Вызов геттера temperatureC
+smartObject.temperatureC = 25; // Вызов сеттера temperatureC
+console.log("Чтение t°F:", smartObject.temperatureF); // Вызов геттера temperatureF
+smartObject.temperatureF = 77; // Вызов сеттера temperatureF
+console.log("Чтение t°C после установки F:", smartObject.temperatureC);
+console.log("Лог изменений:", smartObject.log);
 
-// Использование сеттера (выглядит как запись свойства)
-product.price = 1200;
-console.log(product.price); // "$1200"
-
-// Валидация в сеттере
 try {
-  product.price = -100;
-} catch (error) {
-  console.log(error.message); // "Цена не может быть отрицательной"
+  smartObject.temperatureC = "жарко"; // Вызовет ошибку в сеттере
+} catch (e) {
+  console.error("Ошибка установки температуры:", e.message);
 }</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+        <button class="run-code" data-example="getters-setters">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-        <section id="прототипное-наследование" class="fade-in">
-            <h3>Прототипное наследование</h3>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Создание объекта с прототипом
-const animal = {
-  eats: true,
-  walk() {
-    console.log("Животное гуляет");
-  }
+    <section id="прототипное-наследование" class="fade-in">
+      <h3>Прототипное наследование</h3>
+      <div class="code-block">
+        <pre><code class="language-javascript">console.log("\n--- Прототипное наследование (кратко) ---");
+const parent = {
+  prop: "Свойство родителя",
+  method() { console.log("Метод родителя"); }
 };
+const child = Object.create(parent); // child наследует от parent
+child.ownProp = "Собственное свойство";
 
-// Object.create создает новый объект с указанным прототипом
-const rabbit = Object.create(animal);
-rabbit.jumps = true;
-
-// Доступ к унаследованным свойствам
-console.log(rabbit.eats);  // true (унаследовано от animal)
-console.log(rabbit.jumps); // true (собственное свойство)
-rabbit.walk();             // "Животное гуляет" (унаследованный метод)
+console.log("child.ownProp:", child.ownProp); // Собственное свойство
+console.log("child.prop:", child.prop); // Свойство родителя (унаследовано)
+child.method(); // Метод родителя (унаследован)
 
 // Проверка прототипа
-console.log(Object.getPrototypeOf(rabbit) === animal); // true
-console.log(rabbit.__proto__ === animal); // true (не рекомендуется использовать __proto__)
+console.log("Прототип child:", Object.getPrototypeOf(child) === parent); // true</code></pre>
+        <button class="run-code" data-example="prototype-inheritance">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
 
-// Цепочка прототипов
-const longEar = Object.create(rabbit); // longEar -> rabbit -> animal -> Object.prototype -> null
-longEar.earLength = 10;
-console.log(longEar.jumps); // true (унаследовано от rabbit)
-console.log(longEar.eats);  // true (унаследовано от animal через rabbit)
-console.log(longEar.toString()); // Унаследовано от Object.prototype</code></pre>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
-            </div>
-        </section>
+    <div class="navigation-buttons">
+      <a href="loops.html" class="button">← Циклы</a>
+      <a href="oop-classes.html" class="button">Упражнения →</a>
+    </div>
+  </main>
 
-        <div class="navigation-buttons">
-            <a href="loops.html" class="button">← Циклы</a>
-            <a href="exercises.html" class="button">Упражнения →</a>
-        </div>
-    </main>
+  <footer>
+    <div class="container">
+      <p>© 2025 JavaScript: Полное руководство для изучения</p>
+    </div>
+  </footer>
 
-    <footer>
-        <div class="container">
-            <p>© 2025 JavaScript: Полное руководство для изучения</p>
-        </div>
-    </footer>
-    <script src="../js/05_objects.js" defer></script>
-    <script src="../main.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        // Вызываем подсветку Prism после загрузки DOM
-        document.addEventListener('DOMContentLoaded', (event) => {
-            Prism.highlightAll();
-        });
-    </script>
+  <button id="scroll-top" style="display: none;">↑</button>
+
+  <script src="../js/05_objects.js" defer></script>
+  <script src="../main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      Prism.highlightAll();
+    });
+  </script>
 </body>
 
 </html>

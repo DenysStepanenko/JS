@@ -17,8 +17,11 @@
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+
     <header>
         <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
@@ -29,9 +32,11 @@
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
                     <li><a href="exercises.html" class="active">Упражнения</a></li>
                     <li><a href="projects.html">Проекты</a></li>
                     <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                 </ul>
             </nav>
         </div>
@@ -51,7 +56,8 @@
                 <li>Создайте строку и выведите ее длину и первый символ.</li>
             </ol>
             <div class="code-block">
-                <pre><code class="language-javascript">// Примерный код для упражнений по основам (можно использовать как шаблон)
+                <pre><code class="language-javascript">console.log("===== Упражнения по основам =====");
+
 // 1. Имя
 let myName = "ВашеИмя";
 console.log(myName);
@@ -72,10 +78,11 @@ if (checkNum % 2 === 0) {
 // 4. Строка
 let myString = "JavaScript";
 console.log("Длина:", myString.length);
-console.log("Первый символ:", myString[0]);
-</code></pre>
+console.log("Первый символ:", myString[0]);</code></pre>
+                <button class="run-code" data-example="exercise-basics">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -90,7 +97,8 @@ console.log("Первый символ:", myString[0]);
                 <li>Найдите сумму всех чисел в массиве с помощью метода `reduce`.</li>
             </ol>
             <div class="code-block">
-                <pre><code class="language-javascript">// Примерный код для упражнений по массивам
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по массивам =====");
+
 // 1. Фрукты
 let favFruits = ["Яблоко", "Банан"];
 favFruits.push("Манго");
@@ -109,10 +117,11 @@ console.log(longWords);
 // 4. Reduce
 const numbersReduce = [5, 10, 15, 20];
 const sum = numbersReduce.reduce((acc, current) => acc + current, 0);
-console.log(sum);
-</code></pre>
+console.log(sum);</code></pre>
+                <button class="run-code" data-example="exercise-arrays">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -126,7 +135,8 @@ console.log(sum);
                     использовать переменную из внешней функции.</li>
             </ol>
             <div class="code-block">
-                <pre><code class="language-javascript">// Примерный код для упражнений по функциям
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по функциям =====");
+
 // 1. Сумма
 function sumNumbers(a, b) {
     return a + b;
@@ -151,10 +161,11 @@ function createGreeter(greeting) {
     }
 }
 const greetHello = createGreeter("Здравствуйте");
-greetHello("Ирина");
-</code></pre>
+greetHello("Ирина");</code></pre>
+                <button class="run-code" data-example="exercise-functions">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -167,7 +178,8 @@ greetHello("Ирина");
                 <li>Переберите свойства объекта с помощью `for...in` и выведите их ключи и значения.</li>
             </ol>
             <div class="code-block">
-                <pre><code class="language-javascript">// Примерный код для упражнений по циклам
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по циклам =====");
+
 // 1. Цикл for 1-10
 for (let i = 1; i <= 10; i++) {
     console.log(i);
@@ -193,10 +205,11 @@ for (const word of loopWords) {
 const loopPerson = { name: "Олег", age: 40 };
 for (const key in loopPerson) {
     console.log(`${key}: ${loopPerson[key]}`);
-}
-</code></pre>
+}</code></pre>
+                <button class="run-code" data-example="exercise-loops">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -211,7 +224,8 @@ for (const key in loopPerson) {
                     после 2000 года.</li>
             </ol>
             <div class="code-block">
-                <pre><code class="language-javascript">// Примерный код для упражнений по объектам
+                <pre><code class="language-javascript">console.log("\n===== Упражнения по объектам =====");
+
 // 1, 2. Объект Книга
 const book = {
     title: "Мастер и Маргарита",
@@ -237,10 +251,11 @@ function getModernBooks(books) {
         .filter(b => b.year > 2000)
         .map(b => b.title);
 }
-console.log("Книги после 2000:", getModernBooks(library));
-</code></pre>
+console.log("Книги после 2000:", getModernBooks(library));</code></pre>
+                <button class="run-code" data-example="exercise-objects">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
                 <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
             </div>
         </section>
 
@@ -255,11 +270,14 @@ console.log("Книги после 2000:", getModernBooks(library));
             <p>© 2025 JavaScript: Полное руководство для изучения</p>
         </div>
     </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../js/07_exercises.js" defer></script>
     <script src="../main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
-        // Вызываем подсветку Prism после загрузки DOM
         document.addEventListener('DOMContentLoaded', (event) => {
             Prism.highlightAll();
         });
