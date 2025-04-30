@@ -191,7 +191,7 @@ const calculator = {
 
   // --- Метод, объявленный через Function Expression ---
   // Классический способ до ES6.
-  add: function () {
+  add: function() {
     // При вызове calculator.add(), 'this' будет равен 'calculator'.
     console.log("   Вызван add: this.a =", this.a, ", this.b =", this.b);
     return this.a + this.b; // Корректно работает с this.a и this.b.
@@ -465,8 +465,8 @@ const smartObject = {
       throw new Error("Температура должна быть числом."); // Выбрасываем ошибку, если значение некорректно.
     }
     if (value < -273.15) {
-      console.warn("   Предупреждение: Температура ниже абсолютного нуля!");
-      // Можно не сохранять или скорректировать значение
+        console.warn("   Предупреждение: Температура ниже абсолютного нуля!");
+        // Можно не сохранять или скорректировать значение
     }
     // Сохраняем проверенное значение во внутреннее свойство.
     this._temperature = value;
@@ -565,8 +565,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Ищем ближайший родительский элемент <div class="code-block">
       const codeBlock = button.closest('.code-block');
       if (!codeBlock) {
-        console.warn("Не найден родительский '.code-block' для кнопки.");
-        return;
+          console.warn("Не найден родительский '.code-block' для кнопки.");
+          return;
       }
 
       // Ищем элемент <pre><code> внутри этого блока
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const logHandler = (type) => (...args) => {
         const formattedArgs = args.map(arg => {
           if (arg instanceof Error) { // Специальная обработка ошибок
-            return `Error: ${arg.message}\n${arg.stack ? arg.stack.split('\n').slice(1, 3).join('\n') : ''}`; // Показываем сообщение и пару строк стека
+              return `Error: ${arg.message}\n${arg.stack ? arg.stack.split('\n').slice(1, 3).join('\n') : ''}`; // Показываем сообщение и пару строк стека
           }
           if (typeof arg === 'object' && arg !== null) {
             try {
@@ -663,11 +663,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Ошибка выполнения кода примера:", error); // Выводим ошибку в реальную консоль и в наш логгер
         // Дополнительно выводим ошибку в outputDiv, если она не попала через перехват console.error
         if (!logs.some(log => log.type === 'error' && log.message.includes(error.message))) {
-          const p = document.createElement('p');
-          p.textContent = `Ошибка выполнения: ${error.name}: ${error.message}`;
-          p.classList.add('log-error');
-          outputDiv.appendChild(p);
-          outputDiv.classList.add('error');
+            const p = document.createElement('p');
+            p.textContent = `Ошибка выполнения: ${error.name}: ${error.message}`;
+            p.classList.add('log-error');
+            outputDiv.appendChild(p);
+            outputDiv.classList.add('error');
         }
       } finally {
         // --- Восстановление оригинальных методов console ---
