@@ -44,32 +44,86 @@
 
     <main class="container">
         <h2 id="памятка-по-dom">Памятка по работе с DOM</h2>
-        <p>В этом разделе собраны основные методы и свойства для работы с DOM, которые мы изучили. Каждый метод
-            сопровождается кратким описанием и примером.</p>
+        <p>В этом разделе собраны основные методы и свойства для работы с <strong>Document Object Model (DOM)</strong> —
+            объектным представлением HTML-документа, которое позволяет JavaScript взаимодействовать со структурой,
+            содержимым и стилями веб-страницы. Каждый метод сопровождается кратким описанием и примером.</p>
+        <p><strong>Важно:</strong> Примеры кода, создающие элементы (например, в разделах "Навигация", "Свойства",
+            "Классы", "Создание/удаление", "События"), могут не отображать визуальный результат напрямую в блоке
+            "Output", так как они создают элементы в памяти. Однако, если элемент добавляется в `document.body` (как в
+            примерах "Создание/удаление" и "События"), он временно появится на самой странице ниже.</p>
 
-        <!-- Поиск DOM-элементов -->
         <section id="поиск-dom-элементов" class="fade-in visible">
-            <h3>Поиск DOM-элементов</h3>
-            <p>Методы для поиска элементов на странице:</p>
+            <h3>1. Поиск DOM-элементов</h3>
+            <p>Чтобы взаимодействовать с элементом на странице, его сначала нужно найти. Основные методы поиска:</p>
             <ul>
-                <li><strong><code>element.querySelector(selector)</code></strong> — возвращает <strong>первый</strong>
-                    элемент, соответствующий CSS-селектору <code>selector</code> внутри <code>element</code>.</li>
-                <li><strong><code>element.querySelectorAll(selector)</code></strong> — возвращает <strong>все</strong>
-                    элементы (в виде <code>NodeList</code>), соответствующие CSS-селектору <code>selector</code> внутри
-                    <code>element</code>.
+                <li><strong><code>document.querySelector(selector)</code></strong><br>
+                    Возвращает <strong>первый</strong> элемент внутри `document`, который соответствует указанному
+                    CSS-селектору `selector`. Если ничего не найдено, возвращает `null`.
+                </li>
+                <li><strong><code>element.querySelector(selector)</code></strong><br>
+                    То же самое, но ищет только внутри конкретного элемента `element`.
+                </li>
+                <li><strong><code>document.querySelectorAll(selector)</code></strong><br>
+                    Возвращает статическую (не "живую") коллекцию <code>NodeList</code>, содержащую <strong>все</strong>
+                    элементы внутри `document`, которые соответствуют селектору `selector`. Если ничего не найдено,
+                    возвращает пустой `NodeList`.
+                </li>
+                <li><strong><code>element.querySelectorAll(selector)</code></strong><br>
+                    То же самое, но ищет только внутри `element`.
+                </li>
+                <li><strong><code>document.getElementById(id)</code></strong> (устаревает, но используется)<br>
+                    Возвращает элемент с указанным `id`. Работает быстрее `querySelector`, но только для `id`.
+                </li>
+                <li><strong><code>document.getElementsByClassName(className)</code></strong> (устаревает)<br>
+                    Возвращает "живую" HTML-коллекцию элементов с указанным классом.
+                </li>
+                <li><strong><code>document.getElementsByTagName(tagName)</code></strong> (устаревает)<br>
+                    Возвращает "живую" HTML-коллекцию элементов с указанным тегом.
                 </li>
             </ul>
+            <p><strong>Рекомендация:</strong> Предпочитайте <code>querySelector</code> и <code>querySelectorAll</code>
+                из-за их универсальности и работы со стандартными CSS-селекторами.</p>
             <p>Пример:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Поиск DOM-элементов =====");
+                <pre><code class="language-javascript">// ===== Поиск DOM-элементов =====
+// Выводим заголовок для наглядности в консоли/output.
+console.log("===== 1. Поиск DOM-элементов =====");
 
-// Находим первый заголовок <h1>
+// --- document.querySelector(selector) ---
+// Ищем ПЕРВЫЙ элемент, соответствующий CSS-селектору "h1", на всей странице.
+// 'document' представляет весь HTML-документ.
 const heading = document.querySelector("h1");
-console.log("Первый заголовок:", heading);
+// Выводим результат поиска. Если элемент найден, увидим его HTML-представление, иначе - null.
+console.log("Первый заголовок (document.querySelector('h1')):", heading);
 
-// Находим все элементы с классом 'item'
+// --- document.querySelectorAll(selector) ---
+// Ищем ВСЕ элементы с CSS-классом 'item' на всей странице.
+// Селектор ".item" означает "элемент с классом 'item'".
+// Возвращает NodeList - коллекцию узлов (похожую на массив).
+// Если таких элементов нет, NodeList будет пустым.
+// ЗАМЕНИТЕ '.item' на реальный класс с ВАШЕЙ страницы, чтобы увидеть результат.
 const items = document.querySelectorAll(".item");
-console.log("Все элементы с классом 'item':", items);
+// Выводим найденную коллекцию.
+console.log("Все элементы с классом '.item' (document.querySelectorAll('.item')):", items);
+// NodeList можно перебрать с помощью forEach.
+items.forEach((item, index) => {
+    // Выводим каждый найденный элемент и его индекс в коллекции.
+    console.log(`   Найденный элемент .item[${index}]:`, item);
+});
+
+// --- Поиск внутри другого элемента ---
+// Сначала найдем родительский элемент, например, &lt;main&gt;.
+const mainElement = document.querySelector("main");
+// Проверяем, найден ли элемент &lt;main&gt;.
+if (mainElement) {
+    // Если &lt;main&gt; найден, ищем ПЕРВЫЙ элемент &lt;p&gt; ТОЛЬКО ВНУТРИ &lt;main&gt;.
+    const firstParagraphInMain = mainElement.querySelector("p");
+    // Выводим результат поиска внутри &lt;main&gt;.
+    console.log("\nПервый параграф внутри <main> (mainElement.querySelector('p')):", firstParagraphInMain);
+} else {
+    // Сообщаем, если &lt;main&gt; не найден.
+    console.log("\nЭлемент <main> не найден на странице.");
+}
 </code></pre>
                 <button class="run-code" data-example="search-elements">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -78,47 +132,77 @@ console.log("Все элементы с классом 'item':", items);
             </div>
         </section>
 
-        <!-- Навигация по DOM -->
         <section id="навигация-по-dom" class="fade-in visible">
-            <h3>Навигация по DOM</h3>
-            <p>DOM представляет собой иерархическое дерево, где элементы связаны как родитель, дети, братья и сестры.
-                Вот основные свойства для навигации:</p>
+            <h3>2. Навигация по DOM</h3>
+            <p>После того как элемент найден, можно перемещаться от него к другим элементам по дереву DOM, используя
+                специальные свойства:</p>
             <ul>
-                <li><strong><code>element.parentElement</code></strong> — возвращает родительский элемент.</li>
-                <li><strong><code>element.children</code></strong> — возвращает коллекцию дочерних элементов (только
-                    элементы, без текстовых узлов).</li>
-                <li><strong><code>element.firstElementChild</code></strong> — возвращает первый дочерний элемент.</li>
-                <li><strong><code>element.lastElementChild</code></strong> — возвращает последний дочерний элемент.</li>
-                <li><strong><code>element.nextElementSibling</code></strong> — возвращает следующий соседний элемент.
+                <li><strong><code>element.parentElement</code></strong> — родительский <strong>элемент</strong>.</li>
+                <li><strong><code>element.children</code></strong> — коллекция (<code>HTMLCollection</code>) дочерних
+                    <strong>элементов</strong> (только теги, без текстовых узлов или комментариев).
                 </li>
-                <li><strong><code>element.previousElementSibling</code></strong> — возвращает предыдущий соседний
-                    элемент.</li>
+                <li><strong><code>element.firstElementChild</code></strong> — первый дочерний <strong>элемент</strong>.
+                </li>
+                <li><strong><code>element.lastElementChild</code></strong> — последний дочерний
+                    <strong>элемент</strong>.
+                </li>
+                <li><strong><code>element.nextElementSibling</code></strong> — следующий соседний
+                    <strong>элемент</strong> (на том же уровне).
+                </li>
+                <li><strong><code>element.previousElementSibling</code></strong> — предыдущий соседний
+                    <strong>элемент</strong>.
+                </li>
             </ul>
+            <p><strong>Примечание:</strong> Существуют также свойства без суффикса `Element` (например, `parentNode`,
+                `childNodes`, `firstChild`, `lastChild`, `nextSibling`, `previousSibling`), но они работают с
+                <strong>узлами</strong> (nodes), включая текстовые узлы и комментарии, что часто менее удобно. Свойства
+                с `Element` работают только с HTML-элементами.
+            </p>
             <p>Пример:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Навигация по DOM =====");
+                <pre><code class="language-javascript">// ===== Навигация по DOM =====
+// Выводим заголовок.
+console.log("===== 2. Навигация по DOM =====");
 
-// Создаём структуру
+// --- Создаём временную структуру для демонстрации ---
+// Эти элементы создаются в памяти и не видны на странице,
+// но позволяют показать связи между ними.
+// Создаем элемент &lt;ul&gt; (unordered list).
 const ul = document.createElement("ul");
+// Создаем первый элемент списка &lt;li&gt;.
 const li1 = document.createElement("li");
-li1.textContent = "Элемент 1";
+li1.textContent = "Элемент 1"; // Устанавливаем текст.
+li1.id = "item-1"; // Присваиваем ID.
+// Создаем второй элемент списка &lt;li&gt;.
 const li2 = document.createElement("li");
 li2.textContent = "Элемент 2";
+li2.id = "item-2";
+// Добавляем оба &lt;li&gt; внутрь &lt;ul&gt; с помощью append().
 ul.append(li1, li2);
+// Выводим HTML созданной структуры, чтобы видеть, с чем работаем.
+console.log("Создана временная структура:", ul.outerHTML);
 
-// Находим родителя первого <li>
-console.log("Родитель li1:", li1.parentElement); // <ul>
+// --- Навигация по созданной структуре ---
+// Получаем родительский ЭЛЕМЕНТ для li1.
+console.log("\nРодитель li1 (li1.parentElement):", li1.parentElement); // Должен быть наш &lt;ul&gt;.
 
-// Находим детей <ul>
-console.log("Дети ul:", ul.children); // [li1, li2]
+// Получаем коллекцию дочерних ЭЛЕМЕНТОВ для ul.
+// .children возвращает "живую" HTMLCollection (только элементы).
+console.log("Дети ul (ul.children):", ul.children); // Должна быть коллекция [li#item-1, li#item-2].
 
-// Находим первый и последний дочерний элемент
-console.log("Первый ребёнок ul:", ul.firstElementChild); // li1
-console.log("Последний ребёнок ul:", ul.lastElementChild); // li2
+// Получаем первый дочерний ЭЛЕМЕНТ ul.
+console.log("Первый дочерний элемент ul (ul.firstElementChild):", ul.firstElementChild); // Должен быть li#item-1.
+// Получаем последний дочерний ЭЛЕМЕНТ ul.
+console.log("Последний дочерний элемент ul (ul.lastElementChild):", ul.lastElementChild); // Должен быть li#item-2.
 
-// Находим соседей li1
-console.log("Следующий сосед li1:", li1.nextElementSibling); // li2
-console.log("Предыдущий сосед li2:", li2.previousElementSibling); // li1
+// Получаем следующий соседний ЭЛЕМЕНТ для li1.
+console.log("Следующий соседний элемент для li1 (li1.nextElementSibling):", li1.nextElementSibling); // Должен быть li#item-2.
+// Получаем предыдущий соседний ЭЛЕМЕНТ для li2.
+console.log("Предыдущий соседний элемент для li2 (li2.previousElementSibling):", li2.previousElementSibling); // Должен быть li#item-1.
+
+// Проверяем элементы, у которых нет соседей.
+console.log("Предыдущий соседний элемент для li1 (li1.previousElementSibling):", li1.previousElementSibling); // null, т.к. li1 первый.
+console.log("Следующий соседний элемент для li2 (li2.nextElementSibling):", li2.nextElementSibling); // null, т.к. li2 последний.
 </code></pre>
                 <button class="run-code" data-example="dom-navigation">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -127,59 +211,104 @@ console.log("Предыдущий сосед li2:", li2.previousElementSibling);
             </div>
         </section>
 
-        <!-- Свойства DOM-элемента -->
         <section id="свойства-dom-элемента" class="fade-in visible">
-            <h3>Свойства DOM-элемента</h3>
-            <p>Свойства для чтения и изменения содержимого, стилей и атрибутов:</p>
+            <h3>3. Свойства DOM-элемента</h3>
+            <p>После нахождения элемента можно читать или изменять его содержимое, стили и атрибуты:</p>
             <ul>
-                <li><strong><code>element.textContent</code></strong> — содержит только текст внутри элемента, игнорируя
-                    HTML-теги. Можно читать и изменять.</li>
-                <li><strong><code>element.innerHTML</code></strong> — содержит HTML-код внутри элемента (включая теги).
-                    Можно читать и изменять.</li>
-                <li><strong><code>element.style</code></strong> — объект, содержащий встроенные стили элемента (свойства
-                    в camelCase).</li>
-                <li><strong><code>element.hasAttribute(name)</code></strong> — проверяет, есть ли атрибут
-                    <code>name</code> у элемента.
+                <li><strong><code>element.textContent</code></strong>: Получает или устанавливает <strong>текстовое
+                        содержимое</strong> элемента и всех его потомков, игнорируя HTML-теги. При установке все теги
+                    будут обработаны как обычный текст. Безопаснее для вставки текста от пользователя.</li>
+                <li><strong><code>element.innerHTML</code></strong>: Получает или устанавливает
+                    <strong>HTML-содержимое</strong> элемента. Позволяет вставлять HTML-разметку, но может быть
+                    небезопасным при вставке данных из недоверенных источников (риск XSS-атак).
                 </li>
-                <li><strong><code>element.getAttribute(name)</code></strong> — возвращает значение атрибута
-                    <code>name</code>.
+                <li><strong><code>element.style</code></strong>: Объект для доступа и изменения <strong>встроенных
+                        (inline) стилей</strong> элемента. Свойства CSS пишутся в camelCase (например,
+                    <code>backgroundColor</code> вместо <code>background-color</code>).
                 </li>
-                <li><strong><code>element.setAttribute(name, value)</code></strong> — устанавливает атрибут
-                    <code>name</code> со значением <code>value</code>.
-                </li>
-                <li><strong><code>element.removeAttribute(name)</code></strong> — удаляет атрибут <code>name</code>.
-                </li>
-                <li><strong><code>element.dataset</code></strong> — объект для работы с data-атрибутами (например,
-                    <code>data-action</code> → <code>dataset.action</code>).
+                <li><strong><code>element.hasAttribute(name)</code></strong>: Возвращает `true`, если у элемента есть
+                    атрибут с именем `name`, иначе `false`.</li>
+                <li><strong><code>element.getAttribute(name)</code></strong>: Возвращает значение атрибута `name` (в
+                    виде строки) или `null`, если атрибута нет.</li>
+                <li><strong><code>element.setAttribute(name, value)</code></strong>: Устанавливает или изменяет атрибут
+                    `name`, присваивая ему значение `value` (значение будет преобразовано в строку).</li>
+                <li><strong><code>element.removeAttribute(name)</code></strong>: Удаляет атрибут `name` у элемента.</li>
+                <li><strong><code>element.dataset</code></strong>: Объект для удобного доступа к пользовательским
+                    <strong><code>data-*</code> атрибутам</strong>. Атрибут `data-user-id` будет доступен как
+                    `element.dataset.userId`.
                 </li>
             </ul>
             <p>Пример:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Свойства DOM-элемента =====");
+                <pre><code class="language-javascript">// ===== Свойства DOM-элемента =====
+console.log("===== 3. Свойства DOM-элемента =====");
 
-// Создаём элемент
+// --- Создаём элемент &lt;div&gt; в памяти ---
 const div = document.createElement("div");
-div.innerHTML = "<p>Привет</p>";
+// Устанавливаем начальное HTML-содержимое.
+div.innerHTML = "<p>Это <strong>важный</strong> текст.</p>";
+console.log("Создан div:", div.outerHTML); // Показываем HTML элемента и его содержимого.
 
-// Читаем textContent
-console.log("textContent:", div.textContent); // "Привет"
+// --- textContent ---
+console.log("\ntextContent:");
+// Читаем textContent: получаем весь текст внутри div, без тегов.
+console.log("   Чтение:", div.textContent); // Вывод: "Это важный текст."
+// Устанавливаем textContent: строка будет вставлена как обычный текст, теги не обработаются.
+div.textContent = "Новый &lt;span&gt;простой&lt;/span&gt; текст."; // Используем &lt; и &gt; для отображения тегов как текста
+// Проверяем innerHTML, чтобы увидеть, как сохранился текст.
+console.log("   После записи textContent (innerHTML):", div.innerHTML); // Теги &lt;span&gt; будут видны как текст
 
-// Читаем innerHTML
-console.log("innerHTML:", div.innerHTML); // "<p>Привет</p>"
+// --- innerHTML ---
+// Восстанавливаем исходное содержимое для следующего примера.
+div.innerHTML = "<p>Это <strong>важный</strong> текст.</p>";
+console.log("\ninnerHTML:");
+// Читаем innerHTML: получаем всю HTML-разметку внутри div как строку.
+console.log("   Чтение:", div.innerHTML); // Вывод: "<p>Это <strong>важный</strong> текст.</p>"
+// Устанавливаем innerHTML: строка будет обработана как HTML.
+div.innerHTML = "&lt;ul&gt;&lt;li&gt;Новый&lt;/li&gt;&lt;li&gt;список&lt;/li&gt;&lt;/ul&gt;"; // Используем &lt; и &gt; для отображения
+// Проверяем результат.
+console.log("   После записи innerHTML:", div.innerHTML); // Вывод: "&lt;ul&gt;&lt;li&gt;Новый&lt;/li&gt;&lt;li&gt;список&lt;/li&gt;&lt;/ul&gt;"
 
-// Меняем стиль
+// --- style ---
+// Доступ к inline-стилям элемента.
+console.log("\nstyle:");
+// Устанавливаем стиль фона. CSS 'background-color' -> JS 'backgroundColor'.
 div.style.backgroundColor = "lightblue";
-console.log("style.backgroundColor:", div.style.backgroundColor); // "lightblue"
+// Устанавливаем внутренний отступ.
+div.style.padding = "15px";
+// Читаем установленные inline-стили.
+console.log("   style.backgroundColor:", div.style.backgroundColor); // "lightblue"
+console.log("   style.padding:", div.style.padding); // "15px"
+// Важно: element.style позволяет читать только inline-стили (установленные в атрибуте style="..." или через JS).
+// Стили из CSS-файлов или тега &lt;style&gt; так не прочитать.
 
-// Работа с атрибутами
-div.setAttribute("data-type", "info");
-console.log("Есть ли атрибут data-type?", div.hasAttribute("data-type")); // true
-console.log("Значение data-type:", div.getAttribute("data-type")); // "info"
-console.log("dataset.type:", div.dataset.type); // "info"
-
-// Удаляем атрибут
-div.removeAttribute("data-type");
-console.log("Атрибут data-type удалён:", !div.hasAttribute("data-type")); // true
+// --- Атрибуты ---
+console.log("\nАтрибуты:");
+// Устанавливаем атрибут 'id'.
+div.setAttribute("id", "my-div");
+// Устанавливаем пользовательский data-атрибут 'data-status'.
+div.setAttribute("data-status", "active");
+// Смотрим, как теперь выглядит HTML элемента.
+console.log("   HTML после setAttribute:", div.outerHTML);
+// Проверяем наличие атрибута 'id'.
+console.log("   Есть ли атрибут 'id' (hasAttribute)?", div.hasAttribute("id")); // true
+// Получаем значение атрибута 'id'.
+console.log("   Значение 'id' (getAttribute):", div.getAttribute("id")); // "my-div"
+// Получаем значение data-атрибута стандартным способом.
+console.log("   Значение 'data-status' (getAttribute):", div.getAttribute("data-status")); // "active"
+// Получаем значение data-атрибута через свойство dataset (удобнее).
+// Атрибут 'data-status' доступен как 'dataset.status'.
+console.log("   Значение 'data-status' (dataset.status):", div.dataset.status); // "active"
+// Изменяем значение data-атрибута через dataset.
+div.dataset.status = "inactive";
+// Проверяем, что значение атрибута изменилось.
+console.log("   Значение 'data-status' после изменения через dataset:", div.getAttribute("data-status")); // "inactive"
+// Удаляем атрибут 'id'.
+div.removeAttribute("id");
+// Проверяем, что атрибут удален.
+console.log("   Атрибут 'id' удалён (hasAttribute)?", !div.hasAttribute("id")); // true
+// Смотрим на HTML после удаления атрибута.
+console.log("   HTML после removeAttribute:", div.outerHTML);
 </code></pre>
                 <button class="run-code" data-example="element-properties">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -188,49 +317,79 @@ console.log("Атрибут data-type удалён:", !div.hasAttribute("data-ty
             </div>
         </section>
 
-        <!-- CSS-классы -->
         <section id="css-классы" class="fade-in visible">
-            <h3>CSS-классы на DOM-элементах</h3>
-            <p>Методы для управления классами через <code>classList</code>:</p>
+            <h3>4. CSS-классы на DOM-элементах</h3>
+            <p>Управлять CSS-классами элемента удобнее всего через свойство <code>element.classList</code>. Оно
+                предоставляет методы:</p>
             <ul>
-                <li><strong><code>element.classList.contains(className)</code></strong> — проверяет, есть ли класс
-                    <code>className</code>.
-                </li>
-                <li><strong><code>element.classList.add(className)</code></strong> — добавляет класс
-                    <code>className</code>.
-                </li>
-                <li><strong><code>element.classList.remove(className)</code></strong> — удаляет класс
-                    <code>className</code>.
-                </li>
-                <li><strong><code>element.classList.toggle(className)</code></strong> — переключает класс
-                    <code>className</code>.
-                </li>
-                <li><strong><code>element.classList.replace(oldClassName, newClassName)</code></strong> — заменяет класс
-                    <code>oldClassName</code> на <code>newClassName</code>.
-                </li>
+                <li><strong><code>element.classList.contains(className)</code></strong>: Возвращает `true`, если у
+                    элемента есть класс `className`, иначе `false`.</li>
+                <li><strong><code>element.classList.add(className1, className2, ...)</code></strong>: Добавляет один или
+                    несколько классов элементу.</li>
+                <li><strong><code>element.classList.remove(className1, className2, ...)</code></strong>: Удаляет один
+                    или несколько классов у элемента.</li>
+                <li><strong><code>element.classList.toggle(className, [force])</code></strong>: Если класса `className`
+                    нет — добавляет его, если есть — удаляет. Если передан второй аргумент `force` (булево значение), то
+                    класс будет добавлен, если `force` равно `true`, и удален, если `false`.</li>
+                <li><strong><code>element.classList.replace(oldClassName, newClassName)</code></strong>: Заменяет
+                    существующий класс `oldClassName` на новый `newClassName`.</li>
             </ul>
             <p>Пример:</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Управление CSS-классами =====");
+                <pre><code class="language-javascript">// ===== Управление CSS-классами =====
+console.log("===== 4. Управление CSS-классами =====");
 
-// Создаём элемент
+// --- Создаём элемент &lt;div&gt; в памяти ---
 const box = document.createElement("div");
+// Добавляем ему начальный класс 'box'.
 box.classList.add("box");
+// Свойство .className возвращает строку со всеми классами элемента.
+console.log("Начальные классы (box.className):", box.className); // "box"
 
-// Проверяем класс
-console.log("Есть ли класс 'box'?", box.classList.contains("box")); // true
+// --- contains ---
+// Проверяем наличие классов.
+console.log("\ncontains:");
+console.log("   Есть ли класс 'box'?", box.classList.contains("box")); // true
+console.log("   Есть ли класс 'active'?", box.classList.contains("active")); // false
 
-// Добавляем класс
+// --- add ---
+// Добавляем класс 'active'.
+console.log("\nadd 'active':");
 box.classList.add("active");
-console.log("Классы после добавления:", box.classList); // ["box", "active"]
+console.log("   Классы после добавления 'active':", box.className); // "box active"
+// Можно добавить несколько классов за один вызов.
+box.classList.add("highlighted", "important");
+console.log("   Классы после добавления 'highlighted', 'important':", box.className); // "box active highlighted important"
 
-// Переключаем класс
-box.classList.toggle("active");
-console.log("Классы после toggle:", box.classList); // ["box"]
+// --- remove ---
+// Удаляем класс 'active'.
+console.log("\nremove 'active':");
+box.classList.remove("active");
+console.log("   Классы после удаления 'active':", box.className); // "box highlighted important"
 
-// Заменяем класс
+// --- toggle ---
+// Переключаем класс 'highlighted'. Он сейчас есть, поэтому будет удален.
+console.log("\ntoggle 'highlighted' (удаление):");
+box.classList.toggle("highlighted");
+console.log("   Классы после первого toggle:", box.className); // "box important"
+// Переключаем класс 'highlighted' еще раз. Его нет, поэтому он будет добавлен.
+console.log("toggle 'highlighted' (добавление):");
+box.classList.toggle("highlighted");
+console.log("   Классы после второго toggle:", box.className); // "box important highlighted"
+// toggle с вторым аргументом 'force = true': принудительно добавляет класс 'visible'.
+console.log("toggle 'visible' (force=true):");
+box.classList.toggle("visible", true);
+console.log("   Классы после toggle(true):", box.className); // "box important highlighted visible"
+// toggle с вторым аргументом 'force = false': принудительно удаляет класс 'visible'.
+console.log("toggle 'visible' (force=false):");
+box.classList.toggle("visible", false);
+console.log("   Классы после toggle(false):", box.className); // "box important highlighted"
+
+// --- replace ---
+// Заменяем существующий класс 'box' на новый класс 'new-box'.
+console.log("\nreplace 'box' with 'new-box':");
 box.classList.replace("box", "new-box");
-console.log("Классы после замены:", box.classList); // ["new-box"]
+console.log("   Классы после замены:", box.className); // "important highlighted new-box" (порядок может быть другим)
 </code></pre>
                 <button class="run-code" data-example="css-classes">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -239,49 +398,97 @@ console.log("Классы после замены:", box.classList); // ["new-bo
             </div>
         </section>
 
-        <!-- Создание и удаление DOM-элементов -->
         <section id="создание-и-удаление" class="fade-in visible">
-            <h3>Создание и удаление DOM-элементов</h3>
-            <p>Методы для создания, добавления и удаления элементов:</p>
+            <h3>5. Создание и удаление DOM-элементов</h3>
+            <p>Методы для динамического создания HTML-элементов, их добавления на страницу и удаления:</p>
             <ul>
-                <li><strong><code>document.createElement(tagName)</code></strong> — создаёт новый HTML-элемент с тегом
-                    <code>tagName</code>.
+                <li><strong><code>document.createElement(tagName)</code></strong>: Создаёт новый HTML-элемент с
+                    указанным именем тега <code>tagName</code> (например, 'div', 'p', 'button'). Элемент создается в
+                    памяти, но еще не виден на странице.</li>
+                <li><strong><code>element.append(nodeOrString1, nodeOrString2, ...)</code></strong>: Добавляет один или
+                    несколько узлов (элементов) или текстовых строк в <strong>конец</strong> списка дочерних элементов
+                    <code>element</code>.
                 </li>
-                <li><strong><code>element.append(el)</code></strong> — добавляет <code>el</code> в конец списка дочерних
-                    элементов <code>element</code>.</li>
-                <li><strong><code>element.prepend(el)</code></strong> — добавляет <code>el</code> в начало списка
-                    дочерних элементов <code>element</code>.</li>
-                <li><strong><code>element.remove()</code></strong> — удаляет элемент <code>element</code> из DOM-дерева.
+                <li><strong><code>element.prepend(nodeOrString1, nodeOrString2, ...)</code></strong>: Добавляет один или
+                    несколько узлов или строк в <strong>начало</strong> списка дочерних элементов <code>element</code>.
                 </li>
-                <li><strong><code>element.insertAdjacentHTML(position, string)</code></strong> — вставляет HTML-строку
-                    <code>string</code> в позицию <code>position</code>.
+                <li><strong><code>element.before(nodeOrString1, nodeOrString2, ...)</code></strong>: Вставляет узлы или
+                    строки <strong>перед</strong> элементом <code>element</code> (на том же уровне).</li>
+                <li><strong><code>element.after(nodeOrString1, nodeOrString2, ...)</code></strong>: Вставляет узлы или
+                    строки <strong>после</strong> элемента <code>element</code> (на том же уровне).</li>
+                <li><strong><code>element.remove()</code></strong>: Удаляет элемент <code>element</code> из DOM-дерева.
+                </li>
+                <li><strong><code>element.insertAdjacentHTML(position, htmlString)</code></strong>: Вставляет строку с
+                    HTML-разметкой <code>htmlString</code> относительно элемента <code>element</code> в указанную
+                    позицию <code>position</code>. Возможные позиции:
+                    <ul>
+                        <li><code>'beforebegin'</code>: Перед самим элементом.</li>
+                        <li><code>'afterbegin'</code>: Внутрь элемента, перед первым дочерним элементом.</li>
+                        <li><code>'beforeend'</code>: Внутрь элемента, после последнего дочернего элемента.</li>
+                        <li><code>'afterend'</code>: После самого элемента.</li>
+                    </ul>
                 </li>
             </ul>
             <p>Пример (элемент появится на странице и удалится через 3 секунды):</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Создание и удаление элементов =====");
+                <pre><code class="language-javascript">// ===== Создание и удаление элементов =====
+console.log("===== 5. Создание и удаление элементов =====");
 
-// Создаём элемент
+// --- 1. Создание элемента ---
+// Создаем новый элемент &lt;div&gt; с помощью document.createElement().
+// Элемент создается в памяти, но еще не добавлен на страницу.
 const newDiv = document.createElement("div");
-newDiv.textContent = "Новый элемент";
+console.log("Создан элемент (в памяти):", newDiv);
+
+// --- 2. Настройка элемента ---
+// Задаем ему текстовое содержимое.
+newDiv.textContent = "Это новый динамически созданный элемент.";
+// Задаем стили через свойство style.
 newDiv.style.padding = "10px";
-newDiv.style.backgroundColor = "#e0f7fa";
-newDiv.style.border = "1px solid #ccc";
+newDiv.style.backgroundColor = "#e0f7fa"; // Светло-голубой фон
+newDiv.style.border = "1px solid #00796b"; // Бирюзовая рамка
 newDiv.style.margin = "10px 0";
+newDiv.style.borderRadius = "5px";
+// Добавляем ID, чтобы потом можно было его найти и удалить.
+newDiv.id = "dynamic-div";
+console.log("Настроенный элемент:", newDiv);
 
-// Добавляем в начало body
+// --- 3. Добавление элемента на страницу ---
+// Метод prepend() добавляет элемент(ы) в НАЧАЛО указанного родителя.
+// Здесь мы добавляем newDiv в начало document.body.
+// Теперь элемент станет видимым на странице.
 document.body.prepend(newDiv);
-console.log("Добавлен элемент:", document.body.firstElementChild);
+console.log("Элемент добавлен в начало body.");
+// Проверяем, что он действительно первый дочерний элемент body.
+console.log("   Первый элемент body:", document.body.firstElementChild === newDiv);
 
-// Добавляем HTML через insertAdjacentHTML
-newDiv.insertAdjacentHTML("beforeend", "<p>Внутри div</p>");
-console.log("HTML внутри div:", newDiv.innerHTML);
+// --- 4. Вставка HTML с помощью insertAdjacentHTML ---
+// Добавляем HTML-строку в КОНЕЦ (beforeend) содержимого нашего newDiv.
+const htmlToInsert = "&lt;p style='margin-top: 5px; color: #00796b;'&gt;&lt;em&gt;Добавлено через insertAdjacentHTML&lt;/em&gt;&lt;/p&gt;";
+newDiv.insertAdjacentHTML("beforeend", htmlToInsert);
+console.log("HTML добавлен внутрь newDiv.");
+console.log("   HTML внутри newDiv:", newDiv.innerHTML);
 
-// Удаляем элемент через 3 секунды, чтобы пользователь увидел
+// --- 5. Удаление элемента ---
+// Используем setTimeout, чтобы отложить удаление на несколько секунд.
+const delaySeconds = 3; // Задержка в секундах.
+console.log(`Элемент будет удален со страницы через ${delaySeconds} секунды...`);
 setTimeout(() => {
-    newDiv.remove();
-    console.log("Элемент удалён:", document.body.firstElementChild);
-}, 3000);
+    // Перед удалением рекомендуется проверить, существует ли еще элемент
+    // (на случай, если он был удален другим скриптом).
+    // Ищем элемент по ID, который мы ему присвоили.
+    const elementToRemove = document.getElementById("dynamic-div");
+    if (elementToRemove) {
+        // Если элемент найден, вызываем у него метод remove().
+        elementToRemove.remove();
+        console.log("Элемент dynamic-div удалён со страницы.");
+        // Проверяем еще раз, что он удален.
+        console.log("   Элемент dynamic-div найден после удаления?", document.getElementById("dynamic-div")); // Должен быть null.
+    } else {
+        // Если элемент уже не найден.
+        console.log("Элемент dynamic-div уже был удален ранее или не найден.");
+    }
+}, delaySeconds * 1000); // Переводим секунды в миллисекунды.
 </code></pre>
                 <button class="run-code" data-example="create-remove">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -290,82 +497,152 @@ setTimeout(() => {
             </div>
         </section>
 
-        <!-- События -->
         <section id="события" class="fade-in visible">
-            <h3>События</h3>
-            <p>Методы и события для обработки действий пользователя:</p>
+            <h3>6. События</h3>
+            <p>События позволяют JavaScript реагировать на действия пользователя (клики, нажатия клавиш, отправка формы)
+                или на события браузера (загрузка страницы, изменение размера окна).</p>
             <ul>
-                <li><strong><code>element.addEventListener(event, handler)</code></strong> — добавляет обработчик
-                    <code>handler</code> для события <code>event</code>.
+                <li><strong><code>element.addEventListener(eventName, handler, [options])</code></strong>: Назначает
+                    функцию-обработчик <code>handler</code>, которая будет вызвана при наступлении события
+                    <code>eventName</code> на элементе <code>element</code>. <code>options</code> - необязательный
+                    объект с параметрами (например, <code>{ once: true }</code> для срабатывания только один раз).
                 </li>
-                <li><strong><code>element.removeEventListener(event, handler)</code></strong> — удаляет обработчик
-                    <code>handler</code> для события <code>event</code>.
+                <li><strong><code>element.removeEventListener(eventName, handler, [options])</code></strong>: Удаляет
+                    ранее назначенный обработчик <code>handler</code> для события <code>eventName</code>. Важно: для
+                    удаления нужно передать <strong>ту же самую функцию</strong>, которая была передана в
+                    <code>addEventListener</code>.
                 </li>
-                <li><strong><code>click</code></strong> — срабатывает при клике мышью.</li>
-                <li><strong><code>keydown</code></strong> — срабатывает при нажатии клавиши.</li>
-                <li><strong><code>keyup</code></strong> — срабатывает при отпускании клавиши.</li>
-                <li><strong><code>submit</code></strong> — срабатывает при отправке формы.</li>
-                <li><strong><code>change</code></strong> — срабатывает после изменения значения элемента формы.</li>
-                <li><strong><code>input</code></strong> — срабатывает при каждом изменении текстового поля.</li>
-                <li><strong><code>focus</code></strong> — срабатывает, когда элемент получает фокус.</li>
-                <li><strong><code>blur</code></strong> — срабатывает, когда элемент теряет фокус.</li>
+                <li><strong>Объект события (<code>event</code>):</strong> Передается первым аргументом в
+                    функцию-обработчик. Содержит информацию о событии (например, <code>event.target</code> - элемент, на
+                    котором произошло событие, <code>event.preventDefault()</code> - отменить действие браузера по
+                    умолчанию, <code>event.key</code> - нажатая клавиша).</li>
+            </ul>
+            <p>Основные типы событий:</p>
+            <ul>
+                <li>Мышь: <code>click</code>, <code>dblclick</code>, <code>mouseover</code>, <code>mouseout</code>,
+                    <code>mousedown</code>, <code>mouseup</code>, <code>mousemove</code>.
+                </li>
+                <li>Клавиатура: <code>keydown</code> (нажатие), <code>keyup</code> (отпускание).</li>
+                <li>Формы: <code>submit</code> (отправка формы), <code>change</code> (изменение значения
+                    <code>&lt;select&gt;</code>, <code>&lt;input type="checkbox/radio"&gt;</code> после потери фокуса),
+                    <code>input</code> (любое изменение значения в <code>&lt;input&gt;</code>,
+                    <code>&lt;textarea&gt;</code>), <code>focus</code> (получение фокуса), <code>blur</code> (потеря
+                    фокуса).
+                </li>
+                <li>Документ: <code>DOMContentLoaded</code> (HTML загружен и DOM построен, но ресурсы типа картинок
+                    могут еще грузиться), <code>load</code> (страница полностью загружена со всеми ресурсами).</li>
             </ul>
             <p>Пример (кнопка и поле ввода появятся на странице и удалятся через 5 секунд):</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Работа с событиями =====");
+                <pre><code class="language-javascript">// ===== Работа с событиями =====
+console.log("===== 6. Работа с событиями =====");
 
-// Создаём кнопку
+// --- Создаём элементы для демонстрации ---
+// Создаем кнопку.
 const btn = document.createElement("button");
-btn.textContent = "Нажми меня";
+btn.textContent = "Нажми меня (для click)";
+btn.id = "event-button"; // Даем ID
+btn.style.marginRight = "10px";
 
-// Создаём обработчик
-const handleClick = () => {
+// Создаем поле ввода.
+const input = document.createElement("input");
+input.type = "text";
+input.placeholder = "Введи текст (для input, focus, blur)";
+input.id = "event-input"; // Даем ID
+input.style.margin = "10px 0";
+input.style.display = "block";
+
+// --- Создаём функцию-обработчик для клика ---
+// Объявляем функцию отдельно, чтобы потом можно было ее удалить из слушателей.
+const handleClick = (event) => {
+    // 'event' - объект, содержащий детали события.
     console.log("Кнопка нажата!");
+    console.log("   Тип события:", event.type); // 'click'
+    // event.target - это элемент, на котором изначально произошло событие (в данном случае - кнопка).
+    console.log("   Цель события (event.target):", event.target);
 };
 
-// Добавляем слушатель
+// --- Добавляем слушатель события 'click' на кнопку ---
+// element.addEventListener('имяСобытия', функцияОбработчик);
 btn.addEventListener("click", handleClick);
+console.log("Добавлен слушатель 'click' на кнопку.");
 
-// Создаём поле ввода
-const input = document.createElement("input");
-input.placeholder = "Введи текст для тестирования событий";
-input.style.margin = "10px 0"; // Добавим небольшой отступ для красоты
-
-// Добавляем элементы в DOM, чтобы пользователь мог с ними взаимодействовать
-document.body.appendChild(btn);
-document.body.appendChild(input);
-
-// Пример события input
-input.addEventListener("input", event => {
-    console.log("Введено:", event.target.value);
+// --- Добавляем слушатели на поле ввода ---
+// Событие 'input': срабатывает при любом изменении содержимого поля.
+input.addEventListener("input", (event) => {
+    console.log("Событие 'input'. Введено:", event.target.value);
 });
 
-// Пример события focus
+// Событие 'focus': срабатывает, когда элемент получает фокус.
 input.addEventListener("focus", () => {
-    console.log("Поле в фокусе!");
+    console.log("Событие 'focus'. Поле получило фокус!");
+    input.style.borderColor = "blue"; // Подсвечиваем рамку.
 });
 
-// Пример события blur
+// Событие 'blur': срабатывает, когда элемент теряет фокус.
 input.addEventListener("blur", () => {
-    console.log("Поле потеряло фокус!");
+    console.log("Событие 'blur'. Поле потеряло фокус!");
+    input.style.borderColor = ""; // Убираем подсветку.
 });
 
-// Удаляем слушатель
-btn.removeEventListener("click", handleClick);
-console.log("Слушатель клика удалён");
+// --- Добавляем созданные элементы на страницу ---
+// Ищем секцию "События" по ID, чтобы вставить элементы после нее.
+const eventSection = document.getElementById("события");
+if (eventSection) {
+    // Метод after() вставляет узлы после указанного элемента.
+    eventSection.after(input); // Вставляем input после секции.
+    eventSection.after(btn);   // Вставляем button после секции (он окажется перед input).
+    console.log("Кнопка и поле ввода добавлены на страницу после секции 'События'.");
+} else {
+    // Если секция не найдена, добавляем в конец body.
+    document.body.append(btn, input);
+    console.log("Кнопка и поле ввода добавлены в конец body.");
+}
 
-// Пример события keydown
-document.addEventListener("keydown", event => {
-    console.log("Клавиша нажата:", event.key, "Код:", event.code);
-});
 
-// Удаляем элементы после выполнения примера (чтобы не накапливались)
+// --- Удаление слушателя события ---
+// Демонстрируем удаление слушателя через 2 секунды.
+const removeClickListenerTimeout = 2000;
+console.log(`Слушатель 'click' будет удален с кнопки через ${removeClickListenerTimeout / 1000} сек.`);
 setTimeout(() => {
-    btn.remove();
-    input.remove();
-}, 5000); // Удаляем через 5 секунд, чтобы пользователь успел прот��
+    // Передаем то же имя события и ту же функцию-обработчик.
+    btn.removeEventListener("click", handleClick);
+    console.log("Слушатель 'click' удалён с кнопки. Клик больше не будет выводить сообщение в консоль.");
+}, removeClickListenerTimeout);
 
-естировать
+// --- Пример события клавиатуры (на всем документе) ---
+// Объявляем обработчик нажатия клавиши.
+const handleKeyDown = (event) => {
+    console.log(`Событие 'keydown'. Нажата клавиша: Key='${event.key}', Code='${event.code}'`);
+    // Удаляем этот же обработчик после первого срабатывания.
+    document.removeEventListener("keydown", handleKeyDown);
+    console.log("(Слушатель 'keydown' удален после первого нажатия)");
+};
+// Добавляем слушатель на весь документ.
+document.addEventListener("keydown", handleKeyDown);
+console.log("Добавлен слушатель 'keydown' на документ (сработает один раз). Нажмите любую клавишу.");
+
+
+// --- Удаляем созданные для примера элементы через 5 секунд ---
+const removalTimeout = 5000;
+console.log(`Кнопка и поле ввода будут удалены со страницы через ${removalTimeout / 1000} секунд.`);
+setTimeout(() => {
+    // Ищем элементы по ID перед удалением (на случай, если они уже удалены).
+    const buttonToRemove = document.getElementById("event-button");
+    const inputToRemove = document.getElementById("event-input");
+
+    if (buttonToRemove) {
+        buttonToRemove.remove(); // Удаляем кнопку.
+        console.log("Кнопка удалена.");
+    }
+    if (inputToRemove) {
+        inputToRemove.remove(); // Удаляем поле ввода.
+        console.log("Поле ввода удалено.");
+    }
+    // На всякий случай удаляем слушатель keydown, если он не сработал.
+    document.removeEventListener("keydown", handleKeyDown);
+
+}, removalTimeout);
 </code></pre>
                 <button class="run-code" data-example="events">Запустить пример</button>
                 <button class="copy-code">Скопировать</button>
@@ -374,100 +651,138 @@ setTimeout(() => {
             </div>
         </section>
 
-        <!-- Интерактивный пример TODO-списка -->
         <section id="интерактивный-пример-todo" class="fade-in visible">
             <h3>Интерактивный пример: TODO-список</h3>
-            <p>Попробуй добавить задачи, отметить их как выполненные или удалить. Этот пример использует все изученные
-                методы и события.</p>
+            <p>Этот пример объединяет многие из рассмотренных концепций DOM: поиск элементов, создание элементов,
+                добавление/удаление классов и обработку событий (отправка формы, клики).</p>
+            <p><strong>Как использовать:</strong> Введите текст задачи в поле и нажмите "Добавить". Кликните на текст
+                задачи, чтобы отметить ее как выполненную (она будет зачеркнута). Нажмите кнопку "Удалить", чтобы убрать
+                задачу из списка.</p>
             <div class="todo-app">
+                <h4>Мой список дел</h4>
                 <form class="todo-form">
-                    <input type="text" class="todo-input" placeholder="Введите задачу">
+                    <input type="text" class="todo-input" placeholder="Введите новую задачу...">
                     <button type="submit" class="add-btn">Добавить</button>
                 </form>
-                <ul class="todo-list"></ul>
+                <ul class="todo-list">
+                </ul>
             </div>
-            <p>Код примера:</p>
+            <p>Код примера (этот код выполняется при загрузке страницы, чтобы сделать TODO-список рабочим):</p>
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Интерактивный TODO-список =====");
+                <pre><code class="language-javascript">// ===== Интерактивный TODO-список =====
+// Этот код инициализирует виджет TODO-списка, который находится выше на странице.
+// Он выполняется один раз при загрузке скрипта (благодаря defer - после парсинга HTML).
+// Кнопка "Запустить пример" для этого блока не выполняет этот код повторно,
+// так как он предназначен для инициализации, а не для демонстрации отдельного фрагмента.
+console.log("===== 7. Инициализация Интерактивного TODO-списка =====");
 
-// Находим элементы
-const form = document.querySelector(".todo-form");
-const input = document.querySelector(".todo-input");
-const list = document.querySelector(".todo-list");
+// --- Находим ключевые HTML-элементы виджета ---
+// Ищем форму добавления задачи по её CSS-классу.
+const todoForm = document.querySelector(".todo-form");
+// Ищем поле для ввода текста задачи.
+const todoInput = document.querySelector(".todo-input");
+// Ищем список &lt;ul&gt;, куда будут добавляться задачи.
+const todoList = document.querySelector(".todo-list");
 
-// Проверяем, найдены ли элементы
-if (!form || !input || !list) {
-    console.log("Элементы не найдены");
+// --- Проверка наличия элементов ---
+// Если какой-либо из необходимых элементов не найден на странице,
+// дальнейшая инициализация невозможна. Выводим ошибку.
+if (!todoForm || !todoInput || !todoList) {
+    console.error("Ошибка инициализации TODO: Не найдены элементы формы (.todo-form, .todo-input, .todo-list). Проверьте HTML-разметку.");
 } else {
-    // Слушаем отправку формы
-    form.addEventListener("submit", event => {
-        event.preventDefault(); // Отменяем перезагрузку
+    // Если все элементы найдены, выводим сообщение и продолжаем.
+    console.log("   Элементы TODO найдены. Добавляем основной обработчик на форму...");
 
-        const taskText = input.value.trim(); // Получаем текст задачи
+    // --- Обработчик отправки формы (добавление задачи) ---
+    // Назначаем функцию, которая будет выполняться при событии 'submit' на форме.
+    todoForm.addEventListener("submit", function(event) {
+        // 1. Предотвращаем стандартное действие формы (отправку данных и перезагрузку страницы).
+        event.preventDefault();
+        console.log("   [TODO Submit] Попытка добавить задачу.");
+
+        // 2. Получаем текст из поля ввода, удаляя пробелы по краям.
+        const taskText = todoInput.value.trim();
+
+        // 3. Если текст пустой, ничего не делаем (только выводим предупреждение и сообщение пользователю).
         if (taskText === "") {
-            console.log("Введите задачу!");
-            return;
+            console.warn("   [TODO Submit] Текст задачи пуст.");
+            alert("Пожалуйста, введите текст задачи!"); // Используем alert для простоты.
+            return; // Выходим из обработчика.
         }
 
-        // Создаём новый элемент списка
-        const li = document.createElement("li");
-        li.classList.add("todo-item");
+        // --- Создание HTML-элемента для новой задачи ---
+        // 4. Создаем элемент &lt;li&gt;.
+        const newTaskLi = document.createElement("li");
+        newTaskLi.classList.add("todo-item"); // Добавляем класс для стилей.
 
-        // Создаём span для текста задачи
+        // 5. Создаем &lt;span&gt; для текста.
         const taskSpan = document.createElement("span");
-        taskSpan.textContent = taskText;
+        taskSpan.textContent = taskText; // Помещаем текст задачи внутрь span.
+        taskSpan.classList.add("task-text"); // Добавляем класс.
 
-        // Создаём кнопку удаления
+        // 6. Создаем кнопку "Удалить".
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Удалить";
+        deleteBtn.classList.add("delete-btn"); // Добавляем класс.
 
-        // Добавляем элементы в <li>
-        li.append(taskSpan, deleteBtn);
+        // 7. Собираем элемент &lt;li&gt;: добавляем внутрь него &lt;span&gt; и &lt;button&gt;.
+        newTaskLi.append(taskSpan, deleteBtn);
 
-        // Слушаем клик для отметки задачи как выполненной
+        // --- Добавление обработчиков событий на НОВЫЙ элемент ---
+        // 8. Клик по тексту задачи (taskSpan) будет переключать класс 'completed' у всего &lt;li&gt;.
         taskSpan.addEventListener("click", () => {
-            li.classList.toggle("completed");
+            newTaskLi.classList.toggle("completed"); // Добавляет класс, если его нет, и удаляет, если есть.
+            console.log(`   [TODO Click Span] Статус задачи "${taskText}" изменен на: ${newTaskLi.classList.contains('completed') ? 'выполнена' : 'не выполнена'}.`);
         });
 
-        // Слушаем клик для удаления задачи
+        // 9. Клик по кнопке "Удалить" (deleteBtn) будет удалять весь элемент &lt;li&gt;.
         deleteBtn.addEventListener("click", () => {
-            li.remove();
+            console.log(`   [TODO Click Delete] Удаление задачи "${taskText}".`);
+            newTaskLi.remove(); // Удаляем элемент &lt;li&gt; со страницы.
         });
 
-        // Добавляем задачу в список
-        list.append(li);
+        // 10. Добавляем полностью собранный и настроенный элемент &lt;li&gt; в конец списка &lt;ul&gt;.
+        todoList.append(newTaskLi);
+        console.log(`   [TODO Submit] Задача "${taskText}" добавлена в список.`);
 
-        // Очищаем поле ввода и возвращаем фокус
-        input.value = "";
-        input.focus();
-    });
+        // 11. Очищаем поле ввода для удобства пользователя.
+        todoInput.value = "";
+        // 12. Можно вернуть фокус в поле ввода, но иногда это мешает.
+        // todoInput.focus();
 
-    // Слушаем ввод в реальном времени
-    input.addEventListener("input", event => {
-        if (event.currentTarget.value.length > 20) {
-            input.style.borderColor = "red";
+    }); // Конец обработчика 'submit'
+
+    // --- Дополнительные обработчики для поля ввода (необязательно) ---
+    console.log("   Добавляем доп. обработчики на поле ввода (input, focus, blur)...");
+    // Пример: подсвечивать рамку красным, если текст слишком длинный.
+    todoInput.addEventListener("input", (event) => {
+        const currentLength = event.currentTarget.value.length;
+        // Условие для подсветки (например, > 50 символов).
+        if (currentLength > 50) {
+            todoInput.style.outline = "2px solid red"; // Используем outline, чтобы не влиять на размер.
         } else {
-            input.style.borderColor = "";
+            todoInput.style.outline = ""; // Убираем подсветку.
         }
     });
 
-    // Подсвечиваем поле при фокусе
-    input.addEventListener("focus", () => {
-        input.style.borderColor = "blue";
+    // Пример: подсвечивать рамку синим при получении фокуса.
+    todoInput.addEventListener("focus", () => {
+        console.log("   [TODO Input Focus] Поле ввода получило фокус.");
+        todoInput.style.borderColor = "dodgerblue";
     });
 
-    // Проверяем при потере фокуса
-    input.addEventListener("blur", () => {
-        if (input.value.trim() === "") {
-            input.style.borderColor = "";
-        }
+    // Пример: убирать подсветку при потере фокуса.
+    todoInput.addEventListener("blur", () => {
+        console.log("   [TODO Input Blur] Поле ввода потеряло фокус.");
+        todoInput.style.borderColor = "";
     });
-}
+
+    console.log("   Инициализация TODO-списка завершена.");
+
+} // Конец блока 'else' (если все элементы найдены).
 </code></pre>
-                <button class="run-code" data-example="todo-app">Запустить пример</button>
-                <button class="copy-code">Скопировать</button>
+                <button class="copy-code">Скопировать код инициализации</button>
                 <button class="toggle-code">Скрыть код</button>
-                <div class="output"></div>
             </div>
         </section>
 
@@ -485,15 +800,12 @@ if (!form || !input || !list) {
 
     <button id="scroll-top" style="display: none;">↑</button>
 
-    <script src="../js/10_dom_summary.js" defer></script>
     <script src="../main.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            Prism.highlightAll();
-        });
-    </script>
+    <script src="../js/10_dom_summary.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
 </body>
 
 </html>

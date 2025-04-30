@@ -44,31 +44,71 @@
   <main class="container">
     <section class="fade-in visible">
       <h2>ООП и классы в JavaScript</h2>
-      <p>Этот урок охватывает ключевые концепции объектно-ориентированного программирования (ООП) в JavaScript:
-        классы, прототипы, контекст выполнения, наследование и многое другое.</p>
+      <p>Этот урок охватывает ключевые концепции <strong>объектно-ориентированного программирования (ООП)</strong> в
+        JavaScript, реализованные с помощью синтаксиса <strong>классов</strong> (введенного в ES6/2015). Классы — это,
+        по сути, "синтаксический сахар" над существующим в JavaScript прототипным наследованием, делающий код более
+        структурированным и привычным для разработчиков, знакомых с ООП в других языках.</p>
+      <p>Мы рассмотрим:</p>
+      <ul>
+        <li>Создание классов и их экземпляров (объектов).</li>
+        <li>Метод <code>constructor</code> для инициализации объектов.</li>
+        <li>Методы класса и их связь с прототипами.</li>
+        <li>Приватные свойства и методы для инкапсуляции.</li>
+        <li>Геттеры и сеттеры для контроля доступа к свойствам.</li>
+        <li>Статические свойства и методы, принадлежащие самому классу.</li>
+        <li>Наследование классов с помощью <code>extends</code> и <code>super</code>.</li>
+        <li>Повторение концепции контекста <code>this</code> и прототипов в контексте классов.</li>
+      </ul>
     </section>
 
-    <!-- Раздел 1: Введение в классы -->
-    <section class="fade-in visible">
-      <h3>Введение в классы</h3>
-      <p>Классы в JavaScript — это шаблоны для создания объектов. Они позволяют описать свойства и методы, которые
-        будут у объектов, созданных на их основе.</p>
+    <section id="введение-в-классы" class="fade-in visible">
+      <h3>1. Введение в классы</h3>
+      <p><strong>Класс</strong> — это как чертеж или шаблон для создания объектов. Он описывает, какие свойства (данные)
+        и методы (функции для работы с данными) будут у объектов, созданных по этому чертежу.</p>
+      <p>Объекты, созданные на основе класса, называются <strong>экземплярами</strong> этого класса.</p>
+      <p>Класс объявляется с помощью ключевого слова <code>class</code>, за которым следует имя класса (принято писать с
+        большой буквы).</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// ===== ООП И КЛАССЫ В JAVASCRIPT =====
+console.log("===== ООП И КЛАССЫ ====="); // Заголовок секции для консоли
+
+// === Введение в классы ===
+console.log("\n--- 1. Введение в классы ---");
+
+// Объявление класса с именем 'User'. Класс - это шаблон.
 class User {
-  constructor(name, age) {
-    this.name = name; // Сохраняем имя
-    this.age = age;   // Сохраняем возраст
-  }
+  // 'constructor' - это специальный метод внутри класса.
+  // Он вызывается АВТОМАТИЧЕСКИ при создании нового объекта с помощью 'new User(...)'.
+  // Его задача - инициализировать (задать начальные значения) свойствам нового объекта.
+  constructor(name, age) { // Принимает аргументы, переданные в 'new User()'.
+    // 'this' внутри конструктора (и методов класса) ссылается на создаваемый ЭКЗЕМПЛЯР объекта.
+    // Создаем свойства 'name' и 'age' у нового объекта и присваиваем им значения из аргументов.
+    this.name = name; // this.name - это свойство будущего объекта. name - это параметр конструктора.
+    this.age = age;   // this.age - свойство будущего объекта. age - параметр конструктора.
+    console.log(`   [Конструктор User] Создан пользователь: ${name}, ${age} лет`);
+  } // Конец конструктора.
 
+  // Метод класса. Это функция, которая будет доступна всем экземплярам класса User.
+  // Методы объявляются внутри класса без слова 'function'.
   sayHello() {
-    console.log(`Привет, я ${this.name}, мне ${this.age} лет!`);
-  }
-}
+    // 'this' внутри метода также ссылается на тот экземпляр объекта, у которого вызван метод.
+    console.log(`   Привет, я ${this.name}, мне ${this.age} лет!`);
+  } // Конец метода sayHello.
+} // Конец объявления класса User.
 
-const mango = new User("Mango", 25); // Создаем экземпляр
-mango.sayHello(); // Привет, я Mango, мне 25 лет!
-                </code></pre>
+// Создание ЭКЗЕМПЛЯРА (объекта) класса User с помощью оператора 'new'.
+// 'new User("Mango", 25)' вызывает конструктор класса User с аргументами "Mango" и 25.
+console.log("\nСоздание экземпляра:");
+const mango = new User("Mango", 25); // mango - это новый объект, созданный по шаблону User.
+
+// Вызов метода у экземпляра.
+console.log("\nВызов метода экземпляра:");
+mango.sayHello(); // Вызываем метод sayHello у объекта mango. 'this' внутри метода будет указывать на mango.
+
+// Можно создать другие экземпляры того же класса.
+const poly = new User("Poly", 30);
+poly.sayHello(); // Привет, я Poly, мне 30 лет!
+</code></pre>
         <button class="run-code" data-example="class-intro">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -76,24 +116,49 @@ mango.sayHello(); // Привет, я Mango, мне 25 лет!
       </div>
     </section>
 
-    <!-- Раздел 2: Конструктор и объект параметров -->
-    <section class="fade-in visible">
-      <h3>Конструктор и объект параметров</h3>
-      <p>Конструктор класса инициализирует свойства объекта. Паттерн "Объект параметров" позволяет передавать
-        данные в виде одного объекта, а не множества аргументов.</p>
+    <section id="конструктор-и-объект-параметров" class="fade-in visible">
+      <h3>2. Конструктор и объект параметров</h3>
+      <p>Метод <code>constructor</code> — это сердце инициализации объекта. Он вызывается оператором <code>new</code> и
+        отвечает за создание свойств экземпляра.</p>
+      <p>Если класс должен принимать много параметров для инициализации, передавать их по одному может быть неудобно и
+        легко запутаться в порядке. Хорошей практикой является использование паттерна <strong>"Объект
+          параметров"</strong>: конструктор принимает один аргумент — объект, свойства которого содержат все необходимые
+        данные. Это делает вызов конструктора более читаемым и гибким (порядок свойств в объекте не важен).</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
-class Car {
-  constructor(params) {
-    this.brand = params.brand; // Сохраняем марку
-    this.model = params.model; // Сохраняем модель
-    this.price = params.price; // Сохраняем цену
-  }
-}
+        <pre><code class="language-javascript">// === Конструктор и объект параметров ===
+console.log("\n--- 2. Конструктор и объект параметров ---");
 
+// Объявляем класс Car.
+class Car {
+  // Конструктор принимает ОДИН аргумент - объект 'params'.
+  constructor(params) {
+    console.log("   [Конструктор Car] Получен объект параметров:", params);
+    // Используем деструктуризацию или прямой доступ к свойствам объекта params
+    // для инициализации свойств ЭКЗЕМПЛЯРА ('this').
+    this.brand = params.brand; // Берем значение из params.brand и записываем в this.brand.
+    this.model = params.model; // Берем значение из params.model и записываем в this.model.
+    this.price = params.price; // Берем значение из params.price и записываем в this.price.
+  }
+  // Можно использовать деструктуризацию прямо в параметрах конструктора для краткости:
+  // constructor({ brand, model, price }) {
+  //   this.brand = brand;
+  //   this.model = model;
+  //   this.price = price;
+  // }
+} // Конец класса Car.
+
+// Создаем экземпляр, передавая в конструктор ОБЪЕКТ с параметрами.
+console.log("\nСоздание экземпляра с объектом параметров:");
 const car1 = new Car({ brand: "Audi", model: "Q3", price: 36000 });
-console.log(car1); // { brand: "Audi", model: "Q3", price: 36000 }
-                </code></pre>
+// Выводим созданный экземпляр.
+console.log("   Созданный объект car1:", car1); // { brand: "Audi", model: "Q3", price: 36000 }
+
+// Преимущества:
+// - Не нужно помнить порядок аргументов.
+// - Легко добавлять новые необязательные параметры.
+const car2 = new Car({ model: "Civic", price: 22000, brand: "Honda" }); // Порядок не важен
+console.log("   Созданный объект car2:", car2);
+</code></pre>
         <button class="run-code" data-example="constructor-params">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -101,33 +166,61 @@ console.log(car1); // { brand: "Audi", model: "Q3", price: 36000 }
       </div>
     </section>
 
-    <!-- Раздел 3: Методы класса и прототипы -->
-    <section class="fade-in visible">
-      <h3>Методы класса и прототипы</h3>
-      <p>Методы класса добавляются в прототип, чтобы экономить память. Они доступны всем экземплярам класса.</p>
+    <section id="методы-класса-и-прототипы" class="fade-in visible">
+      <h3>3. Методы класса и прототипы</h3>
+      <p>Методы, объявленные внутри класса (как <code>getPrice</code> и <code>changePrice</code> в примере),
+        автоматически добавляются не в каждый экземпляр объекта, а в специальный объект — <strong>прототип</strong>
+        этого класса (<code>Car.prototype</code>).</p>
+      <p>Когда вы вызываете метод у экземпляра (<code>car.getPrice()</code>), JavaScript сначала ищет этот метод в самом
+        объекте <code>car</code>. Не найдя его там, он переходит к прототипу объекта (<code>Car.prototype</code>) и
+        находит метод там. Это позволяет всем экземплярам класса использовать одни и те же функции методов, экономя
+        память.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === Методы класса и прототипы ===
+console.log("\n--- 3. Методы класса и прототипы ---");
+
 class Car {
+  // Конструктор создает свойства, уникальные для КАЖДОГО экземпляра.
   constructor(params) {
     this.brand = params.brand;
     this.model = params.model;
     this.price = params.price;
+    console.log(`   [Конструктор Car] Создан ${this.brand} ${this.model}`);
   }
 
+  // --- Методы класса ---
+  // Эти методы НЕ копируются в каждый экземпляр.
+  // Они записываются в свойство Car.prototype.
+
+  // Метод для получения цены.
   getPrice() {
-    return this.price; // Возвращаем цену
+    console.log(`   [Метод getPrice] Вызван для ${this.brand}. Текущая цена: ${this.price}`);
+    return this.price; // 'this' ссылается на экземпляр, у которого вызван метод.
   }
 
+  // Метод для изменения цены.
   changePrice(newPrice) {
-    this.price = newPrice; // Изменяем цену
+    console.log(`   [Метод changePrice] Попытка изменить цену ${this.brand} на ${newPrice}`);
+    this.price = newPrice; // Изменяем свойство 'price' ТЕКУЩЕГО экземпляра.
   }
-}
+} // Конец класса Car.
 
+// Создаем экземпляр.
+console.log("\nСоздание экземпляра:");
 const car = new Car({ brand: "BMW", model: "X5", price: 58900 });
-console.log(car.getPrice()); // 58900
-car.changePrice(60000);
-console.log(car.getPrice()); // 60000
-                </code></pre>
+
+// Проверяем, где находятся свойства и методы:
+console.log("\nПроверка расположения свойств/методов:");
+console.log("   car.hasOwnProperty('price'):", car.hasOwnProperty('price'));       // true (price - собственное свойство экземпляра)
+console.log("   car.hasOwnProperty('getPrice'):", car.hasOwnProperty('getPrice')); // false (getPrice - не собственное свойство экземпляра)
+console.log("   Car.prototype.hasOwnProperty('getPrice'):", Car.prototype.hasOwnProperty('getPrice')); // true (getPrice находится в прототипе)
+
+// Вызываем методы у экземпляра.
+console.log("\nВызов методов:");
+console.log("Результат car.getPrice():", car.getPrice()); // Вызывается метод из прототипа, this=car. Вывод: 58900
+car.changePrice(60000); // Вызывается метод из прототипа, this=car. Свойство car.price изменяется.
+console.log("Результат car.getPrice() после изменения:", car.getPrice()); // Вывод: 60000
+</code></pre>
         <button class="run-code" data-example="methods-prototypes">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -135,45 +228,88 @@ console.log(car.getPrice()); // 60000
       </div>
     </section>
 
-    <!-- Раздел 4: Приватные свойства и методы -->
-    <section class="fade-in visible">
-      <h3>Приватные свойства и методы</h3>
-      <p>Приватные свойства и методы (с #) доступны только внутри класса, что обеспечивает инкапсуляцию данных.
+    <section id="приватные-свойства-и-методы" class="fade-in visible">
+      <h3>4. Приватные свойства и методы</h3>
+      <p>Иногда нужно скрыть детали реализации класса от внешнего мира (<strong>инкапсуляция</strong>). Для этого в
+        современном JavaScript используются <strong>приватные свойства и методы</strong>.</p>
+      <p>Они объявляются с помощью префикса <code>#</code> перед именем (например, <code>#email</code>,
+        <code>#validateEmail</code>).
       </p>
+      <ul>
+        <li>Доступ к приватным полям возможен <strong>только внутри</strong> самого класса.</li>
+        <li>Попытка обратиться к приватному полю извне класса приведет к ошибке.</li>
+        <li>Приватные поля должны быть объявлены до их использования в конструкторе или методах (можно просто написать
+          <code>#имяПоля;</code> в начале класса).
+        </li>
+      </ul>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === Приватные свойства и методы ===
+console.log("\n--- 4. Приватные свойства и методы ---");
+
 class User {
+  // Объявление публичного свойства (можно и не объявлять, если оно создается в конструкторе).
   name;
+  // Объявление ПРИВАТНОГО свойства. Начинается с '#'.
+  // Его НУЖНО объявить здесь, перед использованием.
   #email;
 
+  // Конструктор.
   constructor(params) {
-    this.name = params.name;
-    this.#email = params.email;
+    console.log("   [Конструктор User с приватными полями]");
+    this.name = params.name; // Публичное свойство.
+    this.#email = params.email; // Присваиваем значение ПРИВАТНОМУ свойству. Доступ внутри класса разрешен.
   }
 
+  // Публичный метод для получения приватного email.
   getEmail() {
-    return this.#email; // Возвращаем приватное свойство
+    console.log("   [Метод getEmail] Доступ к приватному #email");
+    return this.#email; // Доступ к приватному свойству внутри класса разрешен.
   }
 
+  // Публичный метод для изменения приватного email с валидацией.
   changeEmail(newEmail) {
-    if (this.#validateEmail(newEmail)) { // Используем приватный метод
-      this.#email = newEmail;
-      console.log("Email изменен на: " + newEmail);
+    console.log(`   [Метод changeEmail] Попытка изменить email на ${newEmail}`);
+    // Вызываем ПРИВАТНЫЙ метод для валидации.
+    if (this.#validateEmail(newEmail)) { // Доступ к приватному методу внутри класса разрешен.
+      this.#email = newEmail; // Изменяем приватное свойство.
+      console.log("   Email успешно изменен на: " + newEmail);
     } else {
-      console.log("Неверный формат email!");
+      console.log("   Ошибка! Неверный формат email!");
     }
   }
 
+  // ПРИВАТНЫЙ метод. Начинается с '#'.
+  // Доступен только внутри класса User.
   #validateEmail(email) {
-    return email.includes('@'); // Проверяем наличие @
+    console.log(`   [Приватный метод #validateEmail] Проверка email: ${email}`);
+    // Простая проверка наличия символа '@'.
+    return typeof email === 'string' && email.includes('@');
   }
-}
+} // Конец класса User.
 
+// Создаем экземпляр.
+console.log("\nСоздание экземпляра:");
 const mango = new User({ name: "Mango", email: "mango@mail.com" });
-mango.changeEmail("new@mail.com"); // Email изменен на: new@mail.com
-mango.changeEmail("invalid-email"); // Неверный формат email!
-console.log(mango.getEmail()); // new@mail.com
-                </code></pre>
+
+// Работа с публичными методами, которые используют приватные поля.
+console.log("\nРабота через публичные методы:");
+mango.changeEmail("new@mail.com"); // Успешно.
+mango.changeEmail("invalid-email"); // Ошибка валидации.
+console.log("Результат mango.getEmail():", mango.getEmail()); // new@mail.com
+
+// Попытка прямого доступа к приватным полям извне класса приведет к ошибке.
+console.log("\nПопытка прямого доступа (вызовет ошибку):");
+try {
+  console.log(mango.#email); // Ошибка синтаксиса (SyntaxError) или приватное поле недоступно.
+} catch (error) {
+  console.error("   Ошибка доступа к mango.#email:", error.name, error.message);
+}
+try {
+  mango.#validateEmail("test@test.com"); // Ошибка синтаксиса или приватный метод недоступен.
+} catch (error) {
+  console.error("   Ошибка вызова mango.#validateEmail():", error.name, error.message);
+}
+</code></pre>
         <button class="run-code" data-example="private-props-methods">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -181,59 +317,98 @@ console.log(mango.getEmail()); // new@mail.com
       </div>
     </section>
 
-    <!-- Раздел 5: Геттеры и сеттеры -->
-    <section class="fade-in visible">
-      <h3>Геттеры и сеттеры</h3>
-      <p>Геттеры и сеттеры позволяют контролировать доступ к свойствам, добавляя логику при чтении или изменении
-        значений.</p>
+    <section id="геттеры-и-сеттеры-классы" class="fade-in visible">
+      <h3>5. Геттеры и сеттеры в классах</h3>
+      <p>Геттеры и сеттеры в классах работают так же, как и в литеральных объектах. Они позволяют определить методы,
+        которые вызываются при чтении (<code>get</code>) или записи (<code>set</code>) свойства, но выглядят при
+        использовании как обычные свойства.</p>
+      <p>Часто используются для:</p>
+      <ul>
+        <li>Контроля доступа к приватным свойствам.</li>
+        <li>Добавления логики валидации при записи значения.</li>
+        <li>Создания вычисляемых свойств, значение которых зависит от других свойств.</li>
+      </ul>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === Геттеры и сеттеры в классах ===
+console.log("\n--- 5. Геттеры и сеттеры в классах ---");
+
 class Car {
+  // Приватные свойства для хранения реальных данных.
   #brand;
   #model;
   #price;
 
+  // Конструктор.
   constructor(params) {
+    console.log("   [Конструктор Car с геттерами/сеттерами]");
+    // Используем сеттеры (если они есть) уже в конструкторе для начальной установки и валидации.
+    // Но здесь для простоты присваиваем напрямую приватным полям.
     this.#brand = params.brand;
     this.#model = params.model;
     this.#price = params.price;
   }
 
+  // --- Геттер для brand ---
+  // Позволяет читать приватное свойство #brand как обычное свойство 'brand'.
   get brand() {
+    console.log("   [Геттер brand] Чтение #brand");
     return this.#brand;
   }
 
+  // --- Сеттер для brand ---
+  // Позволяет записывать значение в приватное свойство #brand через 'car.brand = ...'.
   set brand(newBrand) {
+    console.log(`   [Сеттер brand] Установка #brand = ${newBrand}`);
+    // Можно добавить логику, например, проверку типа.
     this.#brand = newBrand;
   }
 
+  // --- Геттер для model ---
   get model() {
+    console.log("   [Геттер model] Чтение #model");
     return this.#model;
   }
 
+  // --- Сеттер для model ---
   set model(newModel) {
+    console.log(`   [Сеттер model] Установка #model = ${newModel}`);
     this.#model = newModel;
   }
 
+  // --- Геттер для price ---
   get price() {
+    console.log("   [Геттер price] Чтение #price");
     return this.#price;
   }
 
+  // --- Сеттер для price с валидацией ---
   set price(newPrice) {
-    if (newPrice <= 0) {
-      console.log("Ошибка! Цена должна быть больше 0!");
-      return;
+    console.log(`   [Сеттер price] Попытка установить #price = ${newPrice}`);
+    // Валидация: цена должна быть положительным числом.
+    if (typeof newPrice === 'number' && newPrice > 0) {
+      this.#price = newPrice; // Сохраняем валидное значение.
+      console.log(`   Цена успешно установлена: ${this.#price}`);
+    } else {
+      // Если валидация не пройдена, выводим ошибку и НЕ изменяем значение.
+      console.error("   Ошибка! Цена должна быть положительным числом!");
     }
-    this.#price = newPrice;
   }
-}
+} // Конец класса Car.
 
+// Создаем экземпляр.
+console.log("\nСоздание экземпляра:");
 const car = new Car({ brand: "Audi", model: "Q3", price: 36000 });
-console.log(car.price); // 36000
-car.price = -5000; // Ошибка! Цена должна быть больше 0!
-car.price = 40000;
-console.log(car.price); // 40000
-                </code></pre>
+
+// Используем геттеры и сеттеры как обычные свойства.
+console.log("\nИспользование геттеров/сеттеров:");
+console.log("Чтение car.price:", car.price); // Вызывается get price(). Вывод: 36000
+console.log("Попытка установить car.price = -5000");
+car.price = -5000; // Вызывается set price(). Выведет ошибку в консоль.
+console.log("Попытка установить car.price = 40000");
+car.price = 40000; // Вызывается set price(). Успешно.
+console.log("Чтение car.price после изменений:", car.price); // Вызывается get price(). Вывод: 40000
+console.log("Чтение car.brand:", car.brand); // Вызывается get brand().
+</code></pre>
         <button class="run-code" data-example="getters-setters">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -241,58 +416,103 @@ console.log(car.price); // 40000
       </div>
     </section>
 
-    <!-- Раздел 6: Статические свойства и методы -->
-    <section class="fade-in visible">
-      <h3>Статические свойства и методы</h3>
-      <p>Статические свойства и методы принадлежат классу, а не его экземплярам. Они полезны для общих данных или
-        утилитарных функций.</p>
+    <section id="статические-свойства-и-методы" class="fade-in visible">
+      <h3>6. Статические свойства и методы</h3>
+      <p><strong>Статические</strong> свойства и методы принадлежат <strong>самому классу</strong>, а не его
+        экземплярам. Они вызываются напрямую у класса (<code>ИмяКласса.свойство</code>, <code>ИмяКласса.метод()</code>),
+        а не у объектов, созданных с помощью <code>new</code>.</p>
+      <p>Используются для:</p>
+      <ul>
+        <li>Хранения констант или данных, общих для всех экземпляров класса (например, <code>Car.maxPrice</code>).</li>
+        <li>Создания утилитарных функций (хелперов), связанных с классом, но не требующих конкретного экземпляра для
+          работы (например, <code>Car.checkPrice()</code>).</li>
+        <li>Реализации паттерна "Фабричный метод" (метод, который создает и возвращает экземпляры класса).</li>
+      </ul>
+      <p>Объявляются с помощью ключевого слова <code>static</code>.</p>
+      <p><strong>Важно:</strong> Внутри статических методов <code>this</code> ссылается на сам класс (например, на
+        <code>Car</code>), а не на экземпляр.
+      </p>
       <div class="code-block">
-        <pre><code class="language-javascript">
-class Car {
-  static maxPrice = 50000; // Статическое свойство
+        <pre><code class="language-javascript">// === Статические свойства и методы ===
+console.log("\n--- 6. Статические свойства и методы ---");
 
-  static checkPrice(price) { // Статический метод
-    if (price > Car.maxPrice) {
-      return "Error! Price exceeds the maximum";
+class Car {
+  // --- Статическое свойство ---
+  // Принадлежит классу Car, а не экземплярам.
+  // Объявляется с помощью 'static'.
+  static maxPrice = 50000; // Максимально допустимая цена для всех машин.
+
+  // --- Статический метод ---
+  // Принадлежит классу Car. Вызывается как Car.checkPrice().
+  // Используется для проверки цены без создания экземпляра машины.
+  static checkPrice(price) {
+    console.log(`   [Статический метод checkPrice] Проверка цены: ${price}`);
+    // Внутри статического метода 'this' ссылается на сам класс (Car).
+    // Поэтому можно обращаться к другим статическим свойствам через Car.maxPrice или this.maxPrice.
+    if (price > Car.maxPrice) { // или if (price > this.maxPrice)
+      return "   Ошибка! Цена превышает максимальную.";
     }
-    return "Success! Price is within acceptable limits";
+    return "   Успех! Цена в допустимых пределах.";
   }
 
+  // Приватные поля экземпляра (как и раньше).
   #brand;
   #model;
   #price;
 
+  // Конструктор экземпляра.
   constructor(params) {
+    console.log("   [Конструктор Car] Создание экземпляра");
     this.#brand = params.brand;
     this.#model = params.model;
-    this.#price = params.price;
+    // Используем сеттер price для начальной установки и валидации.
+    this.price = params.price;
   }
 
+  // Геттер и сеттер экземпляра (как и раньше).
   get price() {
     return this.#price;
   }
 
   set price(newPrice) {
+    console.log(`   [Сеттер price экземпляра] Попытка установить цену ${newPrice}`);
+    // Сеттер экземпляра может использовать статическое свойство класса для проверки.
     if (newPrice > Car.maxPrice) {
-      console.log("Ошибка! Цена превышает максимальную!");
-      return;
+      console.error("   Ошибка! Цена превышает максимальную (проверка в сеттере)!");
+      return; // Не устанавливаем цену.
     }
-    if (newPrice <= 0) {
-      console.log("Ошибка! Цена должна быть больше 0!");
-      return;
+    if (typeof newPrice !== 'number' || newPrice <= 0) {
+      console.error("   Ошибка! Цена должна быть положительным числом!");
+      return; // Не устанавливаем цену.
     }
     this.#price = newPrice;
+    console.log(`   Цена экземпляра установлена: ${this.#price}`);
   }
-}
+} // Конец класса Car.
 
-console.log(Car.checkPrice(36000)); // Success! Price is within acceptable limits
-console.log(Car.checkPrice(60000)); // Error! Price exceeds the maximum
+// --- Использование статических членов ---
+// Обращаемся к ним через ИМЯ КЛАССА.
+console.log("\nИспользование статических членов:");
+console.log("Статическое свойство Car.maxPrice:", Car.maxPrice); // 50000
+console.log("Вызов статического метода Car.checkPrice(36000):", Car.checkPrice(36000));
+console.log("Вызов статического метода Car.checkPrice(60000):", Car.checkPrice(60000));
 
+// --- Использование экземпляра ---
+console.log("\nИспользование экземпляра:");
 const car = new Car({ brand: "Nissan", model: "Murano", price: 31700 });
-car.price = 45000; // Успешно
-console.log(car.price); // 45000
-car.price = 55000; // Ошибка! Цена превышает максимальную!
-                </code></pre>
+console.log("Начальная цена car.price:", car.price); // 31700
+
+// Попытка изменить цену через сеттер экземпляра, который использует статическое свойство.
+console.log("\nИзменение цены экземпляра:");
+car.price = 45000; // Успешно, т.к. 45000 <= Car.maxPrice (50000).
+console.log("Цена после установки 45000:", car.price); // 45000
+car.price = 55000; // Ошибка, т.к. 55000 > Car.maxPrice. Цена не изменится.
+console.log("Цена после попытки установки 55000:", car.price); // Останется 45000.
+
+// Статические члены НЕ доступны через экземпляр.
+// console.log(car.maxPrice); // undefined
+// car.checkPrice(10000); // Ошибка: car.checkPrice is not a function
+</code></pre>
         <button class="run-code" data-example="static-props-methods">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -300,66 +520,139 @@ car.price = 55000; // Ошибка! Цена превышает максимал
       </div>
     </section>
 
-    <!-- Раздел 7: Наследование классов -->
-    <section class="fade-in visible">
-      <h3>Наследование классов</h3>
-      <p>Наследование позволяет создавать дочерние классы, которые наследуют свойства и методы родительского
-        класса, используя <code>extends</code> и <code>super</code>.</p>
+    <section id="наследование-классов" class="fade-in visible">
+      <h3>7. Наследование классов</h3>
+      <p><strong>Наследование</strong> — это механизм ООП, который позволяет одному классу (<strong>дочернему</strong>
+        или подклассу) перенимать свойства и методы другого класса (<strong>родительского</strong> или суперкласса).</p>
+      <ul>
+        <li>Ключевое слово <code>extends</code> используется для указания родительского класса:
+          <code>class Child extends Parent { ... }</code>.
+        </li>
+        <li>Ключевое слово <code>super</code> используется в конструкторе дочернего класса для вызова конструктора
+          родительского класса: <code>super(аргументы_родителя);</code>. Это <strong>обязательно</strong> нужно сделать
+          <strong>до</strong> первого обращения к <code>this</code> в конструкторе дочернего класса.
+        </li>
+        <li><code>super</code> также можно использовать для вызова методов родительского класса из методов дочернего:
+          <code>super.имяМетодаРодителя()</code>.
+        </li>
+      </ul>
+      <p>Наследование позволяет создавать иерархии классов, переиспользовать код и расширять функциональность
+        существующих классов.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === Наследование классов ===
+console.log("\n--- 7. Наследование классов ---");
+
+// --- Родительский класс (Суперкласс) ---
 class User {
+  // Приватное свойство email.
   #email;
 
+  // Конструктор родителя.
   constructor(email) {
+    console.log(`   [Конструктор User] email: ${email}`);
     this.#email = email;
   }
 
+  // Геттер для email.
   get email() {
+    console.log("   [Геттер User email]");
     return this.#email;
   }
 
+  // Сеттер для email.
   set email(newEmail) {
+    console.log(`   [Сеттер User email] newEmail: ${newEmail}`);
+    // Можно добавить валидацию и здесь.
     this.#email = newEmail;
   }
-}
+} // Конец класса User.
 
+// --- Дочерний класс (Подкласс) ---
+// Класс Admin НАСЛЕДУЕТ от класса User с помощью 'extends'.
 class Admin extends User {
+  // Статическое свойство для ролей (принадлежит классу Admin).
   static role = {
     BASIC: "basic",
     SUPERUSER: "superuser"
   };
 
+  // Публичное свойство экземпляра Admin (у каждого админа свой список).
   blacklistedEmails = [];
+  // Приватное свойство доступа (пример)
+  #accessLevel;
 
-  constructor(params) {
-    super(params.email);
-    this.access = params.access;
+  // Конструктор ДОЧЕРНЕГО класса.
+  constructor(params) { // Принимает объект параметров.
+    console.log("   [Конструктор Admin] params:", params);
+    // 1. ВЫЗОВ КОНСТРУКТОРА РОДИТЕЛЯ с помощью 'super()'.
+    // Это ОБЯЗАТЕЛЬНО сделать ПЕРЕД первым использованием 'this' в дочернем конструкторе.
+    // Передаем email в конструктор родительского класса User.
+    super(params.email); // Вызовет constructor(email) из класса User.
+
+    // 2. Инициализация СОБСТВЕННЫХ свойств дочернего класса (Admin).
+    this.#accessLevel = params.access; // Используем приватное поле
+    // this.access = params.access; // Или публичное
+    console.log(`   [Конструктор Admin] Установлен доступ: ${this.#accessLevel}`);
   }
 
+  // Собственный метод дочернего класса Admin.
   blacklist(email) {
-    if (email.includes('@')) {
+    console.log(`   [Метод Admin blacklist] Попытка добавить ${email}`);
+    if (typeof email === 'string' && email.includes('@')) {
       this.blacklistedEmails.push(email);
-      console.log(`Добавлен в черный список: ${email}`);
+      console.log(`   Добавлен в черный список: ${email}`);
     } else {
-      console.log("Ошибка! Email должен содержать символ @");
+      console.error("   Ошибка! Email должен содержать символ @");
     }
   }
 
+  // Еще один собственный метод Admin.
   isBlacklisted(email) {
-    return this.blacklistedEmails.includes(email);
+    const result = this.blacklistedEmails.includes(email);
+    console.log(`   [Метод Admin isBlacklisted] Проверка ${email}: ${result}`);
+    return result;
   }
-}
 
+  // Геттер для приватного поля доступа
+  get access() {
+      console.log("   [Геттер Admin access]");
+      return this.#accessLevel;
+  }
+
+  // Пример переопределения метода родителя (хотя email - сеттер/геттер)
+  // set email(newEmail) {
+  //   console.log("   [Сеттер Admin email] Дополнительная логика админа...");
+  //   // Вызов сеттера родителя с помощью super
+  //   super.email = newEmail.toLowerCase(); // Приводим к нижнему регистру перед установкой
+  // }
+
+} // Конец класса Admin.
+
+// --- Использование дочернего класса ---
+console.log("\nСоздание и использование экземпляра Admin:");
+// Создаем экземпляр Admin, передавая параметры для конструкторов User и Admin.
 const mango = new Admin({
   email: "mango@mail.com",
-  access: Admin.role.SUPERUSER,
+  access: Admin.role.SUPERUSER, // Используем статическое свойство Admin.role.
 });
 
+// Вызываем собственные методы Admin.
 mango.blacklist("poly@mail.com");
-console.log(mango.isBlacklisted("poly@mail.com")); // true
-console.log(mango.isBlacklisted("mango@mail.com")); // false
-console.log(mango.email); // mango@mail.com
-                </code></pre>
+mango.blacklist("invalid-email"); // Вызовет ошибку
+
+// Проверяем работу методов.
+console.log("Результат mango.isBlacklisted('poly@mail.com'):", mango.isBlacklisted("poly@mail.com")); // true
+console.log("Результат mango.isBlacklisted('mango@mail.com'):", mango.isBlacklisted("mango@mail.com")); // false
+
+// Доступ к унаследованным членам (геттеру email из User).
+console.log("Чтение mango.email (унаследованный геттер):", mango.email); // mango@mail.com
+// Доступ к собственному геттеру Admin
+console.log("Чтение mango.access (собственный геттер):", mango.access); // superuser
+
+// Установка email через унаследованный сеттер
+mango.email = "MANGO@NEW.COM";
+console.log("Чтение mango.email после установки:", mango.email); // MANGO@NEW.COM
+</code></pre>
         <button class="run-code" data-example="inheritance">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -367,30 +660,79 @@ console.log(mango.email); // mango@mail.com
       </div>
     </section>
 
-    <!-- Раздел 8: Контекст this -->
-    <section class="fade-in visible">
-      <h3>Контекст <code>this</code></h3>
-      <p>Ключевое слово <code>this</code> ссылается на объект, в контексте которого выполняется функция. Его
-        значение зависит от способа вызова функции.</p>
+    <section id="контекст-this-повторение" class="fade-in visible">
+      <h3>8. Контекст <code>this</code> (Повторение)</h3>
+      <p>Понимание контекста <code>this</code> критически важно при работе с объектами и классами. Напомним:</p>
+      <ul>
+        <li>В методах объекта (включая методы класса, кроме статических и стрелочных функций), вызванных через объект
+          (<code>obj.method()</code>), <code>this</code> ссылается на этот объект (<code>obj</code>).</li>
+        <li>В стрелочных функциях нет своего <code>this</code>, они используют <code>this</code> из внешнего окружения.
+        </li>
+        <li>В статических методах класса <code>this</code> ссылается на сам класс.</li>
+        <li>При обычном вызове функции <code>this</code> зависит от режима ('strict' или нет).</li>
+        <li>Методы <code>call()</code>, <code>apply()</code>, <code>bind()</code> позволяют явно задать значение
+          <code>this</code> для вызова функции.
+        </li>
+      </ul>
+      <p>В примерах с классами выше мы видели, как <code>this</code> внутри конструктора и методов экземпляра ссылается
+        на конкретный экземпляр (<code>mango</code>, <code>car</code>).</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
-const pizzaPalace = {
-  pizzas: ["Supercheese", "Smoked", "Four meats"],
-  checkPizza(pizzaName) {
-    return this.pizzas.includes(pizzaName); // Используем this
-  },
-  order(pizzaName) {
-    const isPizzaAvailable = this.checkPizza(pizzaName); // Используем this
-    if (!isPizzaAvailable) {
-      return `Sorry, there is no pizza named «${pizzaName}»`;
-    }
-    return `Order accepted, preparing «${pizzaName}» pizza`;
-  },
-};
+        <pre><code class="language-javascript">// === Контекст this (Повторение на примере литерального объекта) ===
+console.log("\n--- 8. Контекст this (Повторение) ---");
 
-console.log(pizzaPalace.order("Smoked")); // Order accepted, preparing «Smoked» pizza
-console.log(pizzaPalace.order("Big Mike")); // Sorry, there is no pizza named «Big Mike»
-                </code></pre>
+// Пример с литеральным объектом.
+const pizzaPalace = {
+  pizzas: ["Supercheese", "Smoked", "Four meats"], // Свойство - массив строк.
+
+  // Метод объекта.
+  checkPizza(pizzaName) {
+    console.log(`   [Метод checkPizza] this === pizzaPalace? ${this === pizzaPalace}. Проверка: ${pizzaName}`);
+    // При вызове pizzaPalace.checkPizza(), 'this' будет равен pizzaPalace.
+    return this.pizzas.includes(pizzaName); // Обращаемся к свойству pizzas ЭТОГО объекта.
+  },
+
+  // Другой метод объекта.
+  order(pizzaName) {
+    console.log(`   [Метод order] this === pizzaPalace? ${this === pizzaPalace}. Заказ: ${pizzaName}`);
+    // Вызываем ДРУГОЙ метод ЭТОГО же объекта, используя 'this'.
+    const isPizzaAvailable = this.checkPizza(pizzaName);
+
+    if (!isPizzaAvailable) {
+      // 'this' здесь все еще pizzaPalace.
+      return `   Извините, пиццы «${pizzaName}» нет в наличии.`;
+    }
+    // 'this' здесь все еще pizzaPalace.
+    return `   Заказ принят, готовим пиццу «${pizzaName}».`;
+  },
+}; // Конец объекта pizzaPalace.
+
+// Вызываем методы через объект - 'this' будет равен pizzaPalace.
+console.log("\nВызов методов через объект:");
+console.log(pizzaPalace.order("Smoked"));
+console.log(pizzaPalace.order("Big Mike"));
+
+// --- Потеря контекста (пример) ---
+console.log("\nПотеря контекста:");
+// Сохраняем метод в переменную. Теряется связь с объектом pizzaPalace.
+const standaloneOrder = pizzaPalace.order;
+try {
+  // Вызываем функцию без контекста объекта.
+  // В 'use strict' режиме 'this' внутри standaloneOrder будет undefined.
+  // В нестрогом режиме - глобальный объект (window).
+  // В обоих случаях 'this.checkPizza' или 'this.pizzas' вызовет ошибку.
+  console.log(standaloneOrder("Smoked"));
+} catch(error) {
+  console.error("   Ошибка при вызове standaloneOrder:", error.message); // Ошибка: Cannot read properties of undefined (reading 'checkPizza') или подобная.
+}
+
+// --- Решение: bind ---
+console.log("\nРешение проблемы с помощью bind:");
+// Создаем НОВУЮ функцию, у которой 'this' НАВСЕГДА привязан к pizzaPalace.
+const boundOrder = pizzaPalace.order.bind(pizzaPalace);
+// Теперь вызываем привязанную функцию. 'this' внутри нее всегда будет pizzaPalace.
+console.log(boundOrder("Smoked")); // Работает!
+console.log(boundOrder("Big Mike")); // Работает!
+</code></pre>
         <button class="run-code" data-example="context-this">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -398,35 +740,70 @@ console.log(pizzaPalace.order("Big Mike")); // Sorry, there is no pizza named «
       </div>
     </section>
 
-    <!-- Раздел 9: Прототипы -->
-    <section class="fade-in visible">
-      <h3>Прототипы</h3>
-      <p>Прототипы позволяют объектам наследовать свойства и методы через цепочку прототипов, используя
-        <code>Object.create</code>.
+    <section id="прототипы-повторение" class="fade-in visible">
+      <h3>9. Прототипы (Повторение)</h3>
+      <p>Классы в JavaScript — это синтаксис, построенный поверх <strong>прототипного наследования</strong>. Каждый
+        объект имеет скрытое свойство <code>[[Prototype]]</code> (доступное через
+        <code>Object.getPrototypeOf(obj)</code> или устаревшее <code>obj.__proto__</code>), которое ссылается на его
+        прототип.
       </p>
+      <p>Когда вы обращаетесь к свойству или методу объекта, поиск идет сначала в самом объекте, а затем вверх по
+        цепочке прототипов.</p>
+      <p>Методы экземпляра класса (не статические) помещаются в <code>ИмяКласса.prototype</code>. Все экземпляры этого
+        класса имеют <code>ИмяКласса.prototype</code> в качестве своего прототипа.</p>
+      <p><code>Object.create(proto)</code> позволяет явно создать объект с указанным прототипом.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === Прототипы (Повторение на примере Object.create) ===
+console.log("\n--- 9. Прототипы (Повторение) ---");
+
+// Объект-прототип (предок).
 const ancestor = {
   name: "Paul",
   age: 83,
   surname: "Dawson",
   heritage: "Irish",
 };
+console.log("Объект ancestor (прототип для parent):", ancestor);
 
+// Создаем объект parent, прототипом которого является ancestor.
 const parent = Object.create(ancestor);
-parent.name = "Stacey";
-parent.surname = "Moore";
-parent.age = 54;
+// Добавляем собственные свойства объекту parent.
+parent.name = "Stacey"; // Переопределяет name из ancestor.
+parent.surname = "Moore"; // Переопределяет surname из ancestor.
+parent.age = 54;      // Переопределяет age из ancestor.
+console.log("Объект parent (прототип для child):", parent);
 
+// Создаем объект child, прототипом которого является parent.
 const child = Object.create(parent);
-child.name = "Jason";
-child.age = 27;
+// Добавляем собственные свойства объекту child.
+child.name = "Jason"; // Переопределяет name из parent.
+child.age = 27;      // Переопределяет age из parent.
+console.log("Объект child:", child);
 
-console.log(child.name); // Jason
-console.log(child.surname); // Moore (из parent)
-console.log(child.heritage); // Irish (из ancestor)
-console.log(parent.isPrototypeOf(child)); // true
-                </code></pre>
+// --- Поиск свойств по цепочке прототипов ---
+console.log("\nПоиск свойств для child:");
+// 1. Ищем 'name' в 'child'. Найдено.
+console.log("   child.name:", child.name); // Jason
+
+// 2. Ищем 'surname' в 'child'. Не найдено.
+// 3. Ищем 'surname' в прототипе 'child' (т.е. в 'parent'). Найдено.
+console.log("   child.surname (из parent):", child.surname); // Moore
+
+// 4. Ищем 'heritage' в 'child'. Не найдено.
+// 5. Ищем 'heritage' в прототипе 'child' (т.е. в 'parent'). Не найдено.
+// 6. Ищем 'heritage' в прототипе 'parent' (т.е. в 'ancestor'). Найдено.
+console.log("   child.heritage (из ancestor):", child.heritage); // Irish
+
+// --- Проверка прототипа ---
+console.log("\nПроверка прототипов:");
+console.log("   Object.getPrototypeOf(child) === parent:", Object.getPrototypeOf(child) === parent); // true
+console.log("   Object.getPrototypeOf(parent) === ancestor:", Object.getPrototypeOf(parent) === ancestor); // true
+
+// Метод isPrototypeOf проверяет, находится ли объект в цепочке прототипов другого объекта.
+console.log("   parent.isPrototypeOf(child):", parent.isPrototypeOf(child)); // true (parent - прямой прототип child)
+console.log("   ancestor.isPrototypeOf(child):", ancestor.isPrototypeOf(child)); // true (ancestor - в цепочке прототипов child)
+console.log("   child.isPrototypeOf(parent):", child.isPrototypeOf(parent)); // false
+</code></pre>
         <button class="run-code" data-example="prototypes">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -434,42 +811,90 @@ console.log(parent.isPrototypeOf(child)); // true
       </div>
     </section>
 
-    <!-- Раздел 10: ООП: Основы -->
-    <section class="fade-in visible">
-      <h3>ООП: Основы</h3>
-      <p>Объектно-ориентированное программирование (ООП) организует код в виде объектов, которые объединяют данные
-        и методы.</p>
+    <section id="ооп-основы-пример" class="fade-in visible">
+      <h3>10. ООП: Основы (Практический пример)</h3>
+      <p>Давайте соберем некоторые концепции вместе на примере класса <code>Car</code>, который моделирует автомобиль с
+        базовыми действиями.</p>
+      <p>Этот пример демонстрирует:</p>
+      <ul>
+        <li>Класс с конструктором для инициализации свойств (<code>color</code>, <code>speed</code>, <code>fuel</code>).
+        </li>
+        <li>Методы экземпляра (<code>accelerate</code>, <code>brake</code>, <code>refuel</code>), которые изменяют
+          состояние объекта.</li>
+        <li>Использование <code>this</code> для доступа к свойствам экземпляра внутри методов.</li>
+        <li>Инкапсуляцию данных (состояние машины) и поведения (методы) внутри одного объекта.</li>
+      </ul>
       <div class="code-block">
-        <pre><code class="language-javascript">
+        <pre><code class="language-javascript">// === ООП: Основы (Пример) ===
+console.log("\n--- 10. ООП: Основы (Пример) ---");
+
+// Класс, моделирующий автомобиль.
 class Car {
+  // Конструктор для инициализации новой машины.
   constructor(color) {
-    this.color = color;
-    this.speed = 0;
-    this.fuel = 100;
+    console.log(`   [Конструктор Car] Создание машины цвета: ${color}`);
+    // Свойства экземпляра. У каждой машины будут свои.
+    this.color = color; // Цвет машины.
+    this.speed = 0;     // Текущая скорость, начальная 0.
+    this.fuel = 100;    // Уровень топлива, начальный 100%.
   }
 
+  // Метод для ускорения.
   accelerate() {
+    console.log("   [Метод accelerate]");
+    // Проверяем, есть ли топливо.
+    if (this.fuel <= 0) {
+        console.log("   Нет топлива для ускорения!");
+        return;
+    }
+    // Увеличиваем скорость.
     this.speed += 10;
+    // Уменьшаем топливо (расход).
     this.fuel -= 5;
-    console.log(`Скорость: ${this.speed} км/ч, топливо: ${this.fuel}%`);
+    // Убедимся, что топливо не ушло в минус (хотя лучше проверять до вычитания).
+    this.fuel = Math.max(0, this.fuel);
+    console.log(`   Скорость: ${this.speed} км/ч, топливо: ${this.fuel}%`);
   }
 
+  // Метод для торможения.
   brake() {
+    console.log("   [Метод brake]");
+    // Уменьшаем скорость, но не ниже 0.
     this.speed = Math.max(0, this.speed - 10);
-    console.log(`Скорость: ${this.speed} км/ч`);
+    console.log(`   Скорость: ${this.speed} км/ч`);
   }
 
+  // Метод для заправки.
   refuel(amount) {
+    console.log(`   [Метод refuel] Попытка заправить ${amount}%`);
+    if (amount <= 0) {
+        console.log("   Количество топлива для заправки должно быть положительным.");
+        return;
+    }
+    // Увеличиваем топливо, но не выше 100%.
     this.fuel = Math.min(100, this.fuel + amount);
-    console.log(`Топливо: ${this.fuel}%`);
+    console.log(`   Топливо: ${this.fuel}%`);
   }
-}
+} // Конец класса Car.
 
-const car = new Car("green");
-car.accelerate(); // Скорость: 10 км/ч, топливо: 95%
-car.brake(); // Скорость: 0 км/ч
-car.refuel(10); // Топливо: 100%
-                </code></pre>
+// --- Использование класса Car ---
+console.log("\nИспользование экземпляра Car:");
+// Создаем зеленую машину.
+const myCar = new Car("зеленый");
+
+// Выполняем действия с машиной.
+myCar.accelerate(); // Ускоряемся.
+myCar.accelerate(); // Еще раз ускоряемся.
+myCar.brake();      // Тормозим.
+myCar.refuel(10);   // Заправляемся.
+myCar.refuel(-5);   // Пытаемся заправить отрицательным значением.
+myCar.brake();      // Еще тормозим.
+myCar.brake();      // Скорость уже 0.
+
+// Пример с другой машиной.
+const redCar = new Car("красный");
+redCar.accelerate();
+</code></pre>
         <button class="run-code" data-example="oop-basics">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -493,13 +918,16 @@ car.refuel(10); // Топливо: 100%
 
   <script src="../main.js" defer></script>
   <script src="../js/06_oop_classes.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      Prism.highlightAll();
-    });
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
 </body>
 
 </html>
+```
+
+Я добавил подробные комментарии ко всем примерам кода в файле `oop-classes.html`, объясняя концепции классов,
+конструкторов, методов, приватных полей, статических членов, наследования и `this`. Код для запуска примеров в файле
+`06_oop_classes.js` также остается рабочим (с использованием исправлений из предыдущего шага).
+
+Пожалуйста, проверьте результат. Теперь страница должна содержать весь необходимый код с пояснениями.

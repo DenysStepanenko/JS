@@ -780,5 +780,105 @@ document.querySelectorAll('.toggle-code').forEach(button => {
     }
   });
 });
+// ===== Файл: js/10_dom_summary.js =====
+// Этот файл содержит логику для кнопок "Запустить пример" на странице dom_summary.html.
+// Он НЕ содержит сам код примеров DOM API (он находится в HTML),
+// Reported,
+// а только вызывает нужный код из объекта 'examples' при нажатии соответствующей кнопки.
+// Также здесь реализован перехват console.log для вывода в блок .output.
+// --- Объект с кодом примеров ---
+// Ключи объекта соответствуют значениям атрибута 'data-example' у кнопок.
+// Значения - это функции, содержащие код соответствующего примера DOM API.
+// Этот код будет выполняться при нажатии кнопки "Запустить пример".
+const examples = {
+  // --- Код для примера "Поиск элементов" ---
+  "search-elements": () => {
+    console.log("===== 1. Поиск DOM-элементов =====");
+    const heading = document.querySelector("h1");
+    console.log("Первый заголовок (document.querySelector('h1')):", heading);
+    const items = document.querySelectorAll(".item");
+    console.log("Все элементы с классом '.item' (document.querySelectorAll('.item')):", items);
+    items.forEach((item, index) => {
+      console.log(` Найденный элемент .item[${index}]:`, item);
+    });
+    const mainElement = document.querySelector("main");
+    if (mainElement) {
+      const firstParagraphInMain = mainElement.querySelector("p");
+      console.log("\nПервый параграф внутри <main> (mainElement.querySelector('p')):", firstParagraphInMain);
+    } else {
+      console.log("\nЭлемент <main> не найден.");
+    }
+  },
+  // --- Код для примера "Навигация по DOM" ---
+  "dom-navigation": () => {
+    console.log("===== 2. Навигация по DOM =====");
+    const ul = document.createElement("ul");
+    const li1 = document.createElement("li");
+    li1.textContent = "Элемент 1";
+    li1.id = "item-1";
+    const li2 = document.createElement("li");
+    li2.textContent = "Элемент 2";
+    li2.id = "item-2";
+    ul.append(li1, li2);
+    console.log("Создана временная структура:", ul.outerHTML);
+    console.log("\nРодитель li1 (li1.parentElement):", li1.parentElement);
+    console.log("Дети ul (ul.children):", ul.children);
+    console.log("Первый дочерний элемент ul (ul.firstElementChild):", ul.firstElementChild);
+    console.log("Последний дочерний элемент ul (ul.lastElementChild):", ul.lastElementChild);
+    console.log("Следующий соседний элемент для li1 (li1.nextElementSibling):", li1.nextElementSibling);
+    console.log("Предыдущий соседний элемент для li2 (li2.previousElementSibling):", li2.previousElementSibling);
+    console.log("Предыдущий соседний элемент для li1 (li1.previousElementSibling):", li1.previousElementSibling);
+    console.log("Следующий соседний элемент для li2 (li2.nextElementSibling):", li2.nextElementSibling);
+  },
+  // --- Код для примера "Свойства элемента" ---
+  "element-properties": () => {
+    console.log("===== 3. Свойства DOM-элемента =====");
+    const div = document.createElement("div");
+    div.innerHTML = "<p>Это <strong>важный</strong> текст.</p>";
+    console.log("Создан div:", div.outerHTML);
+    console.log("\ntextContent:");
+    console.log(" Чтение:", div.textContent);
+    div.textContent = "Новый <span>простой</span> текст.";
+    console.log(" После записи textContent (innerHTML):", div.innerHTML);
+    div.innerHTML = "<p>Это <strong>важный</strong> текст.</p>";
+    console.log("\ninnerHTML:");
+    console.log(" Чтение:", div.innerHTML);
+    div.innerHTML = "<ul><li>Новый</li><li>список</li></ul>";
+    console.log(" После записи innerHTML:", div.innerHTML);
+    console.log("\nstyle:");
+    div.style.backgroundColor = "lightblue";
+    div.style.padding = "15px";
+    console.log(" style.backgroundColor:", div.style.backgroundColor);
+    console.log(" style.padding:", div.style.padding);
+    console.log("\nАтрибуты:");
+    div.setAttribute("id", "my-div");
+    div.setAttribute("data-status", "active");
+    console.log(" HTML после setAttribute:", div.outerHTML);
+    console.log(" Есть ли атрибут 'id' (hasAttribute)?", div.hasAttribute("id"));
+    console.log(" Значение 'id' (getAttribute):", div.getAttribute("id"));
+    console.log(" Значение 'data-status' (getAttribute):", div.getAttribute("data-status"));
+    console.log(" Значение 'data-status' (dataset.status):", div.dataset.status);
+    div.dataset.status = "inactive";
+    console.log(" Значение 'data-status' после изменения через dataset:", div.getAttribute("data-status"));
+    div.removeAttribute("id");
+    console.log(" Атрибут 'id' удалён (hasAttribute)?", !div.hasAttribute("id"));
+    console.log(" HTML после removeAttribute:", div.outerHTML);
+  },
+  // --- Код для примера "CSS-классы" ---
+  "css-classes": () => {
+    console.log("===== 4. Управление CSS-классами =====");
+    const box = document.createElement("div");
+    box.classList.add("box");
+    console.log("Начальные классы (box.className):", box.className);
+    console.log("\ncontains:");
+    console.log(" Есть ли класс 'box'?", box.classList.contains("box"));
+    console.log(" Есть ли класс 'active'?", box.classList.contains("active"));
+    console.log("\nadd 'active':");
+    box.classList.add("active");
+    console.log(" Классы после добавления 'active':", box.className);
+    box.classList.add("highlighted", "important");
+    console.log(" Классы после добавления 'highlighted', 'important':", box.className);
+  }
+};
 
 // --- Конец файла basics_combined.js ---
