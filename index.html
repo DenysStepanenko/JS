@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>JavaScript: Полное руководство для изучения</title>
 </head>
 
@@ -27,7 +27,14 @@
                 <ul>
                     <li><a href="index.html" class="active">Главная</a></li>
                     <li><a href="partials/learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="partials/basics.html">Основы</a></li>
+                    <li>
+                        <a href="partials/basics.html">Основы</a>
+                        <ul class="submenu">
+                            <li><a href="partials/basics.html#деструктуризация-объектов">Деструктуризация</a></li>
+                            <li><a href="partials/basics.html#переменные">Переменные</a></li>
+                            <li><a href="partials/basics.html#операторы">Операторы</a></li>
+                        </ul>
+                    </li>
                     <li><a href="partials/arrays.html">Массивы</a></li>
                     <li><a href="partials/functions.html">Функции</a></li>
                     <li><a href="partials/loops.html">Циклы</a></li>
@@ -55,7 +62,7 @@
             <li>Ресурсы для дальнейшего обучения.</li>
         </ul>
 
-        <section id="для-кого-это-руководство" class="fade-in">
+        <section id="для-кого-это-руководство" class="fade-in visible">
             <h3>Для кого это руководство?</h3>
             <p>Это руководство подойдет:</p>
             <ul>
@@ -65,7 +72,7 @@
             </ul>
         </section>
 
-        <section id="как-использовать-руководство" class="fade-in">
+        <section id="как-использовать-руководство" class="fade-in visible">
             <h3>Как использовать это руководство?</h3>
             <p>Следуйте этим шагам для эффективного обучения:</p>
             <ol>
@@ -82,7 +89,7 @@
             </ol>
         </section>
 
-        <section id="чему-вы-научитесь" class="fade-in">
+        <section id="чему-вы-научитесь" class="fade-in visible">
             <h3>Чему вы научитесь?</h3>
             <p>В рамках этого руководства вы освоите:</p>
             <ul>
@@ -95,7 +102,7 @@
             </ul>
         </section>
 
-        <section id="интерактивный-пример" class="fade-in">
+        <section id="интерактивный-пример" class="fade-in visible">
             <h3>Интерактивный пример: Случайный выбор ресурса</h3>
             <p>Ниже приведен пример кода, который выбирает случайный ресурс из списка выше, чтобы вы могли попробовать
                 его прямо сейчас.</p>
@@ -148,8 +155,8 @@ getRandomResource();</code></pre>
 
     <button id="scroll-top" style="display: none;">↑</button>
 
-    <script src="js/index.js" defer></script>
-    <script src="main.js" defer></script>
+    <script src="/js/index.js" defer></script>
+    <script src="/main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>

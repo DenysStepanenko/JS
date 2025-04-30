@@ -173,7 +173,6 @@ h2 {
 h3 {
     font-size: 1.4em;
     /* Убрали границу у h3 для стиля как на картинке */
-    /* border-bottom: 1px solid #30363d; */
     padding-bottom: 6px;
     margin-top: 1.8em;
     margin-bottom: 0.8em;
@@ -248,9 +247,9 @@ body.light-theme .code-block pre code {
 }
 
 body.light-theme .code-block button {
-     background: #f6f8fa; /* Светлый фон */
-     color: #24292f; /* Темный текст */
-     border: 1px solid #d0d7de; /* Светлая граница */
+      background: #f6f8fa; /* Светлый фон */
+      color: #24292f; /* Темный текст */
+      border: 1px solid #d0d7de; /* Светлая граница */
 }
 body.light-theme .code-block button:hover {
     background: #e9eef2; /* Светлее при наведении */
@@ -386,9 +385,9 @@ body.light-theme .array-container {
 }
 
 body.light-theme #scroll-top {
-     background: #f6f8fa; /* Светлый фон */
-     color: #24292f; /* Темная стрелка */
-     border: 1px solid #d0d7de;
+      background: #f6f8fa; /* Светлый фон */
+      color: #24292f; /* Темная стрелка */
+      border: 1px solid #d0d7de;
 }
 body.light-theme #scroll-top:hover {
     background: #e9eef2;
@@ -472,11 +471,11 @@ pre code.diagram {
 
 /* --- Стили для интерактивных демо --- */
 .demo-container {
-     margin-bottom: 30px;
-     padding: 20px;
-     border: 1px solid #30363d;
-     border-radius: 8px;
-     background-color: #10151d;
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      background-color: #10151d;
 }
 body.light-theme .demo-container {
     border: 1px solid #d0d7de;
@@ -484,9 +483,9 @@ body.light-theme .demo-container {
 }
 
 .controls {
-     margin-bottom: 15px;
-     padding-bottom: 15px;
-     border-bottom: 1px solid #30363d;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #30363d;
 }
 body.light-theme .controls {
     border-bottom: 1px solid #d0d7de;
@@ -504,17 +503,17 @@ body.light-theme .demo-container h6 {
 }
 
 .demo-container button {
-     margin-right: 8px;
-     margin-bottom: 8px;
-     font-size: 0.9em;
-     padding: 6px 12px;
-     /* Используем стили кнопок кода */
-     background: #21262d;
-     color: #c9d1d9;
-     border: 1px solid #30363d;
-     border-radius: 6px;
-     cursor: pointer;
-     transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-size: 0.9em;
+      padding: 6px 12px;
+      /* Используем стили кнопок кода */
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 .demo-container button:hover {
     background: #30363d;
@@ -525,9 +524,9 @@ body.light-theme .demo-container h6 {
 }
 
 body.light-theme .demo-container button {
-     background: #f6f8fa;
-     color: #24292f;
-     border: 1px solid #d0d7de;
+      background: #f6f8fa;
+      color: #24292f;
+      border: 1px solid #d0d7de;
 }
 body.light-theme .demo-container button:hover {
     background: #e9eef2;
@@ -535,14 +534,14 @@ body.light-theme .demo-container button:hover {
 }
 
 .code { /* Стиль для отображения примера кода внутри демо */
-     background-color: #0d1117;
-     padding: 10px;
-     border: 1px solid #30363d;
-     border-radius: 6px;
-     font-family: monospace;
-     margin-bottom: 10px;
-     white-space: pre-wrap;
-     font-size: 0.9em;
+      background-color: #0d1117;
+      padding: 10px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      font-family: monospace;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+      font-size: 0.9em;
 }
 body.light-theme .code {
     background-color: #f0f0f0;
@@ -610,7 +609,7 @@ body.light-theme .code {
     }
 }
 
-/* Стили для TODO-списка */
+/* Стили для TODO-списка - УДАЛИТЬ, ЕСЛИ НЕ НУЖНЫ */
 .todo-app {
     max-width: 500px;
     margin: 0 auto;
@@ -671,6 +670,8 @@ body.light-theme .code {
 .todo-item button:hover {
     background-color: #d32f2f;
 }
+/* Конец стилей для TODO-списка */
+
 /* Дополнительные стили для подсветки Prism.js (могут быть переопределены темой) */
 /* Пример: изменение цвета комментариев */
 /*
@@ -678,6 +679,6 @@ body.light-theme .code {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: #6a9955;
+  color: #6a9955;
 }
 */

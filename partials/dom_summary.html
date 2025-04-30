@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Памятка по DOM - Руководство по JavaScript</title>
 </head>
 
@@ -25,7 +25,7 @@
             <h1>JavaScript: Полное руководство для изучения</h1>
             <nav>
                 <ul>
-                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="/index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
@@ -48,7 +48,7 @@
             сопровождается кратким описанием и примером.</p>
 
         <!-- Поиск DOM-элементов -->
-        <section id="поиск-dom-элементов" class="fade-in">
+        <section id="поиск-dom-элементов" class="fade-in visible">
             <h3>Поиск DOM-элементов</h3>
             <p>Методы для поиска элементов на странице:</p>
             <ul>
@@ -79,7 +79,7 @@ console.log("Все элементы с классом 'item':", items);
         </section>
 
         <!-- Навигация по DOM -->
-        <section id="навигация-по-dom" class="fade-in">
+        <section id="навигация-по-dom" class="fade-in visible">
             <h3>Навигация по DOM</h3>
             <p>DOM представляет собой иерархическое дерево, где элементы связаны как родитель, дети, братья и сестры.
                 Вот основные свойства для навигации:</p>
@@ -128,7 +128,7 @@ console.log("Предыдущий сосед li2:", li2.previousElementSibling);
         </section>
 
         <!-- Свойства DOM-элемента -->
-        <section id="свойства-dom-элемента" class="fade-in">
+        <section id="свойства-dom-элемента" class="fade-in visible">
             <h3>Свойства DOM-элемента</h3>
             <p>Свойства для чтения и изменения содержимого, стилей и атрибутов:</p>
             <ul>
@@ -189,7 +189,7 @@ console.log("Атрибут data-type удалён:", !div.hasAttribute("data-ty
         </section>
 
         <!-- CSS-классы -->
-        <section id="css-классы" class="fade-in">
+        <section id="css-классы" class="fade-in visible">
             <h3>CSS-классы на DOM-элементах</h3>
             <p>Методы для управления классами через <code>classList</code>:</p>
             <ul>
@@ -240,7 +240,7 @@ console.log("Классы после замены:", box.classList); // ["new-bo
         </section>
 
         <!-- Создание и удаление DOM-элементов -->
-        <section id="создание-и-удаление" class="fade-in">
+        <section id="создание-и-удаление" class="fade-in visible">
             <h3>Создание и удаление DOM-элементов</h3>
             <p>Методы для создания, добавления и удаления элементов:</p>
             <ul>
@@ -291,7 +291,7 @@ setTimeout(() => {
         </section>
 
         <!-- События -->
-        <section id="события" class="fade-in">
+        <section id="события" class="fade-in visible">
             <h3>События</h3>
             <p>Методы и события для обработки действий пользователя:</p>
             <ul>
@@ -375,7 +375,7 @@ setTimeout(() => {
         </section>
 
         <!-- Интерактивный пример TODO-списка -->
-        <section id="интерактивный-пример-todo" class="fade-in">
+        <section id="интерактивный-пример-todo" class="fade-in visible">
             <h3>Интерактивный пример: TODO-список</h3>
             <p>Попробуй добавить задачи, отметить их как выполненные или удалить. Этот пример использует все изученные
                 методы и события.</p>

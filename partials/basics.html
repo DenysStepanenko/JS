@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <title>Основы - Руководство по JavaScript</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Основы JavaScript и Деструктуризация</title>
 </head>
 
 <body>
@@ -24,9 +24,9 @@
       <h1>JavaScript: Полное руководство для изучения</h1>
       <nav>
         <ul>
-          <li><a href="../index.html">Главная</a></li>
+          <li><a href="/index.html">Главная</a></li>
           <li><a href="learning_guide.html">Гайд по обучению</a></li>
-          <li><a href="basics.html" class="active">Основы</a></li>
+          <li><a href="basics_combined.html" class="active">Основы и Деструктуризация</a></li>
           <li><a href="arrays.html">Массивы</a></li>
           <li><a href="functions.html">Функции</a></li>
           <li><a href="loops.html">Циклы</a></li>
@@ -46,37 +46,55 @@
     <p>Основы JavaScript включают переменные, типы данных, операторы, строки и условные конструкции. Эти концепции
       являются фундаментом для дальнейшего изучения языка.</p>
 
-    <section id="переменные-и-типы-данных" class="fade-in">
+    <section id="переменные-и-типы-данных" class="fade-in visible">
       <h3>Переменные и типы данных</h3>
-      <p>В JavaScript существует три способа объявления переменных:</p>
+      <p>В JavaScript существует три способа объявления переменных: <code>let</code>, <code>const</code> и устаревший
+        <code>var</code>.
+      </p>
       <div class="code-block">
-        <pre><code class="language-javascript">console.log("--- Типы данных ---");
+        <pre><code class="language-javascript">// Этот код демонстрирует объявление переменных и основные типы данных в JavaScript.
 
-// Объявление Переменные
-let message = "Привет"; // переменные, значение может меняться
-const PI = 3.14;        // константа, значение не может быть изменено
-var oldWay = "Устаревший способ"; // устаревший способ объявления переменных
+// Выводим заголовок в консоль для лучшей читаемости
+console.log("--- Типы данных ---");
 
-// Основные типы данных
-let string = "Это строка";              // Строка (String)
-let number = 42;                        // Число (Number)
-let bigInt = 9007199254740991n;         // BigInt для очень больших чисел
-let boolean = true;                     // Логический тип (Boolean): true или false
-let nullValue = null;                   // Null - специальное значение "ничего"
-let undefinedValue;                     // Undefined - значение не присвоено
-let object = { name: "John", age: 30 }; // Объект (Object)
-let array = [1, 2, 3];                  // Массив (Array) - особый тип объекта
-let func = function () { return "Hi"; }; // Функция - тоже объект
+// Объявление Переменных
+// let: Используется для переменных, значение которых может меняться.
+let message = "Привет";
+// const: Используется для констант, значение которых не может быть изменено после присвоения.
+const PI = 3.14;
+// var: Устаревший способ объявления переменных. В современном коде рекомендуется использовать let и const.
+var oldWay = "Устаревший способ";
 
-// Проверка типа (вывод в консоль)
-console.log(typeof string);      // "string"
-console.log(typeof number);      // "number"
-console.log(typeof boolean);     // "boolean"
-console.log(typeof nullValue);   // "object" (историческая ошибка в JavaScript)
-console.log(typeof undefinedValue); // "undefined"
-console.log(typeof object);      // "object"
-console.log(typeof array);       // "object" (массивы - это объекты)
-console.log(typeof func);        // "function"</code></pre>
+// Основные типы данных в JavaScript:
+
+// String (Строка): Последовательность символов.
+let string = "Это строка";
+// Number (Число): Целые числа и числа с плавающей точкой.
+let number = 42;
+// BigInt: Для очень больших целых чисел, которые не помещаются в стандартный Number.
+let bigInt = 9007199254740991n;
+// Boolean (Логический тип): Может принимать только два значения - true (истина) или false (ложь).
+let boolean = true;
+// Null: Специальное значение, означающее "ничего", "пусто" или "значение неизвестно".
+let nullValue = null;
+// Undefined: Значение, которое переменная получает по умолчанию, если ей ничего не присвоено.
+let undefinedValue;
+// Object (Объект): Коллекция свойств в формате ключ: значение.
+let object = { name: "John", age: 30 };
+// Array (Массив): Особый тип объекта, предназначенный для хранения упорядоченных коллекций данных.
+let array = [1, 2, 3];
+// Function (Функция): Блок кода, который можно вызвать для выполнения определенной задачи. Функции в JS также являются объектами.
+let func = function () { return "Hi"; };
+
+// Проверка типа данных с помощью оператора typeof (вывод в консоль)
+console.log(typeof string);      // Выведет "string"
+console.log(typeof number);      // Выведет "number"
+console.log(typeof boolean);     // Выведет "boolean"
+console.log(typeof nullValue);   // Выведет "object" (Это известная историческая ошибка в JavaScript, typeof null возвращает "object")
+console.log(typeof undefinedValue); // Выведет "undefined"
+console.log(typeof object);      // Выведет "object"
+console.log(typeof array);       // Выведет "object" (массивы в JS считаются объектами)
+console.log(typeof func);        // Выведет "function"</code></pre>
         <button class="run-code" data-example="variables-types">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -84,46 +102,52 @@ console.log(typeof func);        // "function"</code></pre>
       </div>
     </section>
 
-    <section id="операторы" class="fade-in">
+    <section id="операторы" class="fade-in visible">
       <h3>Операторы</h3>
-      <p>JavaScript поддерживает различные типы операторов:</p>
+      <p>JavaScript поддерживает различные типы операторов для выполнения операций над данными.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">console.log("\n--- Операторы ---");
+        <pre><code class="language-javascript">// Этот код демонстрирует различные типы операторов в JavaScript.
 
-// Арифметические операторы
-let sum = 5 + 3;        // 8 (сложение)
-let difference = 5 - 3;  // 2 (вычитание)
-let product = 5 * 3;     // 15 (умножение)
-let quotient = 10 / 2;   // 5 (деление)
-let remainder = 10 % 3;  // 1 (остаток от деления)
-let power = 2 ** 3;      // 8 (возведение в степень)
+// Выводим заголовок в консоль
+console.log("\n--- Операторы ---");
+
+// Арифметические операторы: Используются для математических вычислений.
+let sum = 5 + 3;        // Сложение: 5 + 3 = 8
+let difference = 5 - 3;  // Вычитание: 5 - 3 = 2
+let product = 5 * 3;     // Умножение: 5 * 3 = 15
+let quotient = 10 / 2;   // Деление: 10 / 2 = 5
+let remainder = 10 % 3;  // Остаток от деления: 10 / 3 = 3 с остатком 1
+let power = 2 ** 3;      // Возведение в степень: 2 в степени 3 = 8
+// Выводим результаты арифметических операций
 console.log("Арифметика:", sum, difference, product, quotient, remainder, power);
 
-// Операторы сравнения
+// Операторы сравнения: Используются для сравнения значений. Возвращают true или false.
 console.log("Сравнение:");
-console.log("5 > 3:", 5 > 3);      // true (больше)
-console.log("5 < 3:", 5 < 3);      // false (меньше)
-console.log("5 >= 5:", 5 >= 5);     // true (больше или равно)
-console.log("5 <= 3:", 5 <= 3);     // false (меньше или равно)
-console.log('5 == "5":', 5 == "5");   // true (равно с приведением типов)
-console.log('5 === "5":', 5 === "5");  // false (строго равно, без приведения типов)
-console.log('5 != "5":', 5 != "5");   // false (не равно с приведением типов)
-console.log('5 !== "5":', 5 !== "5");  // true (строго не равно)
+console.log("5 > 3:", 5 > 3);      // Больше: true (5 больше 3)
+console.log("5 < 3:", 5 < 3);      // Меньше: false (5 не меньше 3)
+console.log("5 >= 5:", 5 >= 5);     // Больше или равно: true (5 больше или равно 5)
+console.log("5 <= 3:", 5 <= 3);     // Меньше или равно: false (5 не меньше или равно 3)
+console.log('5 == "5":', 5 == "5");   // Равно (с приведением типов): true (строка "5" приводится к числу 5, и 5 равно 5)
+console.log('5 === "5":', 5 === "5");  // Строго равно (без приведения типов): false (число 5 и строка "5" - разные типы)
+console.log('5 != "5":', 5 != "5");   // Не равно (с приведением типов): false (после приведения типов 5 равно 5)
+console.log('5 !== "5":', 5 !== "5");  // Строго не равно (без приведения типов): true (число 5 и строка "5" - разные типы)
 
-// Логические операторы
+// Логические операторы: Используются для работы с логическими значениями (true/false).
 console.log("Логика:");
-console.log("true && false:", true && false); // false (логическое И)
-console.log("true || false:", true || false); // true (логическое ИЛИ)
-console.log("!true:", !true);         // false (логическое НЕ)
+console.log("true && false:", true && false); // Логическое И (AND): true только если оба операнда true. Здесь false.
+console.log("true || false:", true || false); // Логическое ИЛИ (OR): true если хотя бы один операнд true. Здесь true.
+console.log("!true:", !true);         // Логическое НЕ (NOT): Инвертирует логическое значение. !true равно false.
 
-// Инкремент и декремент
+// Инкремент (++) и декремент (--) операторы: Используются для увеличения или уменьшения значения переменной на 1.
 console.log("Инкремент/Декремент:");
 let i = 5;
-console.log("i++:", i++);  // 5 (постфиксный инкремент: возвращает, потом увеличивает)
-console.log("i после i++:", i);    // 6
+// Постфиксный инкремент (i++): Сначала возвращает текущее значение i, затем увеличивает i на 1.
+console.log("i++:", i++);  // Выведет 5
+console.log("i после i++:", i);    // Теперь i равно 6
 let j = 5;
-console.log("++j:", ++j);  // 6 (префиксный инкремент: увеличивает, потом возвращает)
-console.log("j после ++j:", j);    // 6</code></pre>
+// Префиксный инкремент (++j): Сначала увеличивает j на 1, затем возвращает новое значение j.
+console.log("++j:", ++j);  // Выведет 6
+console.log("j после ++j:", j);    // Теперь j равно 6</code></pre>
         <button class="run-code" data-example="operators">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -131,29 +155,33 @@ console.log("j после ++j:", j);    // 6</code></pre>
       </div>
     </section>
 
-    <section id="строки-и-шаблонные-строки" class="fade-in">
+    <section id="строки-и-шаблонные-строки" class="fade-in visible">
       <h3>Строки и шаблонные строки</h3>
       <p>Строки в JavaScript можно создавать с помощью одинарных, двойных кавычек или обратных кавычек (для шаблонных
-        строк):</p>
+        строк).</p>
       <div class="code-block">
-        <pre><code class="language-javascript">console.log("\n--- Строки ---");
+        <pre><code class="language-javascript">// Этот код демонстрирует работу со строками и шаблонными строками в JavaScript.
 
-// Конкатенация строк
+// Выводим заголовок в консоль
+console.log("\n--- Строки ---");
+
+// Конкатенация строк: Соединение строк с помощью оператора +.
 let firstName = "John";
 let lastName = "Doe";
-let fullName = firstName + " " + lastName; // "John Doe"
-console.log("Полное имя:", fullName);
+let fullName = firstName + " " + lastName; // Соединяем "John", пробел и "Doe"
+console.log("Полное имя:", fullName); // Выведет "Полное имя: John Doe"
 
-// Шаблонные строки (template literals)
-let greeting = `Привет, ${firstName} ${lastName}!`; // "Привет, John Doe!"
-let calculation = `2 + 2 = ${2 + 2}`; // "2 + 2 = 4"
-console.log("Шаблонная строка:", greeting);
-console.log("Вычисление в строке:", calculation);
+// Шаблонные строки (template literals): Используют обратные кавычки (`) и позволяют вставлять переменные или выражения прямо в строку с помощью ${...}.
+let greeting = `Привет, ${firstName} ${lastName}!`; // Вставляем значения переменных firstName и lastName
+let calculation = `2 + 2 = ${2 + 2}`; // Вставляем результат вычисления выражения 2 + 2
+console.log("Шаблонная строка:", greeting); // Выведет "Шаблонная строка: Привет, John Doe!"
+console.log("Вычисление в строке:", calculation); // Выведет "Вычисление в строке: 2 + 2 = 4"
 
-// Многострочные шаблонные строки
+// Многострочные шаблонные строки: Шаблонные строки могут содержать переводы строк, сохраняя форматирование.
 let multiline = `Это первая строка.
 Это вторая строка.
 А это третья строка.`;
+// Выводим многострочную строку. \n в console.log добавлено для переноса строки перед выводом.
 console.log("Многострочная строка:\n", multiline);</code></pre>
         <button class="run-code" data-example="strings-template">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
@@ -162,40 +190,43 @@ console.log("Многострочная строка:\n", multiline);</code></pr
       </div>
     </section>
 
-    <section id="методы-строк" class="fade-in">
+    <section id="методы-строк" class="fade-in visible">
       <h3>Методы строк</h3>
-      <p>JavaScript предоставляет множество встроенных методов для работы со строками:</p>
+      <p>JavaScript предоставляет множество встроенных методов для работы со строками, позволяющих выполнять различные
+        операции, такие как поиск, замена, изменение регистра и т.д.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">let text = "Привет, мир!";
+        <pre><code class="language-javascript">// Этот код демонстрирует использование различных встроенных методов строк в JavaScript.
 
-// Получение длины строки
-console.log("Длина строки:", text.length);            // 12
+let text = "Привет, мир!"; // Исходная строка для примеров.
 
-// Получение символа по индексу
-console.log(text[0]); // "П"
-console.log(text.charAt(0)); // "П"
+// Получение длины строки: Свойство length возвращает количество символов в строке.
+console.log("Длина строки:", text.length);            // Выведет 12
 
-// Поиск подстроки
-console.log("Поиск 'мир':", text.indexOf("мир"));    // 8
-console.log("Содержит 'Привет':", text.includes("Привет"));   // true
+// Получение символа по индексу: Доступ к символу по его позиции (индексу). Индексация начинается с 0.
+console.log(text[0]); // Выведет "П" (первый символ)
+console.log(text.charAt(0)); // То же самое, но с использованием метода charAt(). Выведет "П".
 
-// Извлечение подстроки
-console.log(text.substring(0, 6)); // "Привет"
-console.log("Извлечение 'мир':", text.slice(8, 11));      // "мир"
+// Поиск подстроки:
+console.log("Поиск 'мир':", text.indexOf("мир"));    // Метод indexOf() возвращает индекс первого вхождения подстроки. Если не найдено, возвращает -1. Выведет 8.
+console.log("Содержит 'Привет':", text.includes("Привет"));   // Метод includes() проверяет, содержит ли строка указанную подстроку. Возвращает true или false. Выведет true.
 
-// Замена подстроки
-console.log("Замена 'мир':", text.replace("мир", "JavaScript")); // "Привет, JavaScript!"
+// Извлечение подстроки:
+console.log(text.substring(0, 6)); // Метод substring(startIndex, endIndex) извлекает часть строки от startIndex до endIndex (не включая endIndex). Выведет "Привет".
+console.log("Извлечение 'мир':", text.slice(8, 11));      // Метод slice(startIndex, endIndex) работает похоже на substring, но может принимать отрицательные индексы. Выведет "мир".
 
-// Преобразование регистра
-console.log("Верхний регистр:", text.toUpperCase()); // "ПРИВЕТ, МИР!"
-console.log("Нижний регистр:", text.toLowerCase()); // "привет, мир!"
+// Замена подстроки: Метод replace(searchValue, newValue) заменяет первое вхождение searchValue на newValue.
+console.log("Замена 'мир':", text.replace("мир", "JavaScript")); // Выведет "Привет, JavaScript!"
 
-// Удаление пробелов в начале и конце
+// Преобразование регистра:
+console.log("Верхний регистр:", text.toUpperCase()); // Метод toUpperCase() преобразует все символы строки в верхний регистр. Выведет "ПРИВЕТ, МИР!".
+console.log("Нижний регистр:", text.toLowerCase()); // Метод toLowerCase() преобразует все символы строки в нижний регистр. Выведет "привет, мир!".
+
+// Удаление пробелов в начале и конце: Метод trim() удаляет пробельные символы с обоих концов строки.
 let paddedText = "   Текст с пробелами   ";
-console.log("Удаление пробелов:", paddedText.trim()); // "Текст с пробелами"
+console.log("Удаление пробелов:", paddedText.trim()); // Выведет "Текст с пробелами"
 
-// Разделение строки на массив
-console.log("Разбиение по ', ':", "яблоко,банан,киви".split(",")); // ["яблоко", "банан", "киви"]</code></pre>
+// Разделение строки на массив: Метод split(separator) разбивает строку на массив подстрок, используя указанный разделитель.
+console.log("Разбиение по ', ':", "яблоко,банан,киви".split(",")); // Выведет ["яблоко", "банан", "киви"]</code></pre>
         <button class="run-code" data-example="string-methods">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -203,50 +234,77 @@ console.log("Разбиение по ', ':", "яблоко,банан,киви".
       </div>
     </section>
 
-    <section id="условные-конструкции" class="fade-in">
+    <section id="условные-конструкции" class="fade-in visible">
       <h3>Условные конструкции</h3>
-      <p>Условные конструкции позволяют выполнять различный код в зависимости от условий:</p>
+      <p>Условные конструкции позволяют выполнять различный код в зависимости от выполнения определенных условий.
+        Основные конструкции: <code>if</code>, <code>else if</code>, <code>else</code>, тернарный оператор и
+        <code>switch</code>.
+      </p>
       <div class="code-block">
-        <pre><code class="language-javascript">console.log("\n--- Условия ---");
+        <pre><code class="language-javascript">// Этот код демонстрирует использование условных конструкций в JavaScript.
 
-// if-else
+// Выводим заголовок в консоль
+console.log("\n--- Условия ---");
+
+// if-else: Выполняет один блок кода, если условие истинно (true), и другой блок (в else), если условие ложно (false).
 let age = 20;
 if (age >= 18) {
+  // Этот код выполнится, если age больше или равно 18
   console.log("Вы совершеннолетний");
 } else {
+  // Этот код выполнится, если age меньше 18
   console.log("Вы несовершеннолетний");
 }
 
-// if-else if-else
+// if-else if-else: Позволяет проверять несколько условий последовательно.
 let score = 85;
 if (score >= 90) {
+  // Проверяем первое условие
   console.log("Оценка: Отлично");
 } else if (score >= 70) {
+  // Если первое условие ложно, проверяем второе
   console.log("Оценка: Хорошо");
 } else if (score >= 50) {
-  console sperm.log("Оценка: Удовлетворительно");
+  // Если второе условие ложно, проверяем третье
+  console.log("Оценка: Удовлетворительно");
 } else {
+  // Если ни одно из предыдущих условий не истинно, выполняется блок else
   console.log("Оценка: Неудовлетворительно");
 }
 
-// Тернарный оператор
+// Тернарный оператор (? :): Сокращенная форма if-else для простых условий. Синтаксис: условие ? значение_если_true : значение_если_false.
 let status = age >= 18 ? "Взрослый" : "Ребенок";
-console.log("Статус:", status); // "Взрослый"
+console.log("Статус:", status); // Выведет "Статус: Взрослый", так как age >= 18 истинно.
 
-// switch
+// switch: Используется для выбора одного блока кода для выполнения из множества вариантов. Часто используется как альтернатива длинной цепочке if-else if.
 let day = 3;
 let dayName;
 switch (day) {
-  case 1: dayName = "Понедельник"; break;
-  case 2: dayName = "Вторник"; break;
-  case 3: dayName = "Среда"; break;
-  case 4: dayName = "Четверг"; break;
-  case 5: dayName = "Пятница"; break;
-  case 6: dayName = "Суббота"; break;
-  case 7: dayName = "Воскресенье"; break;
-  default: dayName = "Неизвестный день";
+  case 1: // Если day равно 1
+    dayName = "Понедельник";
+    break; // break обязателен для выхода из switch после выполнения соответствующего case
+  case 2: // Если day равно 2
+    dayName = "Вторник";
+    break;
+  case 3: // Если day равно 3
+    dayName = "Среда";
+    break;
+  case 4: // Если day равно 4
+    dayName = "Четверг";
+    break;
+  case 5: // Если day равно 5
+    dayName = "Пятница";
+    break;
+  case 6: // Если day равно 6
+    dayName = "Суббота";
+    break;
+  case 7: // Если day равно 7
+    dayName = "Воскресенье";
+    break;
+  default: // Если значение day не совпадает ни с одним из case
+    dayName = "Неизвестный день";
 }
-console.log("День недели:", dayName); // Среда</code></pre>
+console.log("День недели:", dayName); // Выведет "День недели: Среда"</code></pre>
         <button class="run-code" data-example="conditionals">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -254,47 +312,53 @@ console.log("День недели:", dayName); // Среда</code></pre>
       </div>
     </section>
 
-    <section id="преобразование-типов" class="fade-in">
+    <section id="преобразование-типов" class="fade-in visible">
       <h3>Преобразование типов</h3>
-      <p>JavaScript автоматически преобразует типы в некоторых операциях, но можно сделать это явно:</p>
+      <p>JavaScript может автоматически преобразовывать типы данных (неявное преобразование), но часто требуется явное
+        преобразование для контроля над результатом.</p>
       <div class="code-block">
-        <pre><code class="language-javascript">console.log("\n--- Преобразование типов ---");
+        <pre><code class="language-javascript">// Этот код демонстрирует явное и неявное преобразование типов в JavaScript.
 
-// Строковое преобразование
+// Выводим заголовок в консоль
+console.log("\n--- Преобразование типов ---");
+
+// Строковое преобразование: Преобразование значения к строке.
 let num = 42;
-let strFromNum = String(num); // "42"
-let strFromBool = String(true); // "true"
-console.log("Число в строку:", strFromNum, typeof strFromNum);
-console.log("Булево в строку:", strFromBool, typeof strFromBool);
+let strFromNum = String(num); // Явное преобразование числа 42 в строку "42"
+let strFromBool = String(true); // Явное преобразование булева true в строку "true"
+console.log("Число в строку:", strFromNum, typeof strFromNum); // Выведет "Число в строку: 42 string"
+console.log("Булево в строку:", strFromBool, typeof strFromBool); // Выведет "Булево в строку: true string"
 
-// Числовое преобразование
+// Числовое преобразование: Преобразование значения к числу.
 let str = "42";
 let strFloat = "42.5";
 let strInvalid = "Привет";
-let numFromStr = Number(str);   // 42
-let numFromFloat = Number(strFloat); // 42.5
-let numFromInvalid = Number(strInvalid); // NaN (Not a Number)
-let numFromBoolTrue = Number(true); // 1
-let numFromBoolFalse = Number(false); // 0
-console.log('Строка "42" в число:', numFromStr, typeof numFromStr);
-console.log('Строка "42.5" в число:', numFromFloat, typeof numFromFloat);
-console.log('Строка "Привет" в число:', numFromInvalid, typeof numFromInvalid);
-console.log("true в число:", numFromBoolTrue);
-console.log("false в число:", numFromBoolFalse);
-console.log("parseInt('42px'):", parseInt("42px")); // 42
-console.log("parseFloat('42.5em'):", parseFloat("42.5em")); // 42.5
+let numFromStr = Number(str);   // Явное преобразование строки "42" в число 42
+let numFromFloat = Number(strFloat); // Явное преобразование строки "42.5" в число 42.5
+let numFromInvalid = Number(strInvalid); // Явное преобразование строки "Привет" в число. Результат NaN (Not a Number), так как строка не является корректным числом.
+let numFromBoolTrue = Number(true); // Явное преобразование булева true в число 1
+let numFromBoolFalse = Number(false); // Явное преобразование булева false в число 0
+console.log('Строка "42" в число:', numFromStr, typeof numFromStr); // Выведет 'Строка "42" в число: 42 number'
+console.log('Строка "42.5" в число:', numFromFloat, typeof numFromFloat); // Выведет 'Строка "42.5" в число: 42.5 number'
+console.log('Строка "Привет" в число:', numFromInvalid, typeof numFromInvalid); // Выведет 'Строка "Привет" в число: NaN number'
+console.log("true в число:", numFromBoolTrue); // Выведет "true в число: 1"
+console.log("false в число:", numFromBoolFalse); // Выведет "false в число: 0"
 
-// Логическое преобразование
+// Также существуют функции parseInt() и parseFloat() для извлечения чисел из строк, которые могут содержать нечисловые символы в конце.
+console.log("parseInt('42px'):", parseInt("42px")); // parseInt() парсит строку до первого нечислового символа. Выведет 42.
+console.log("parseFloat('42.5em'):", parseFloat("42.5em")); // parseFloat() парсит строку до первого нечислового символа, учитывая десятичную точку. Выведет 42.5.
+
+// Логическое преобразование: Преобразование значения к булеву типу (true или false).
 console.log("Логическое преобразование:");
-console.log("Boolean(1):", Boolean(1));     // true
-console.log("Boolean(0):", Boolean(0));     // false
-console.log('Boolean(""):', Boolean(""));    // false (пустая строка)
-console.log('Boolean("text"):', Boolean("text")); // true (непустая строка)
-console.log("Boolean(null):", Boolean(null));  // false
-console.log("Boolean(undefined):", Boolean(undefined)); // false
-console.log("Boolean(NaN):", Boolean(NaN)); // false
-console.log("Boolean({}):", Boolean({})); // true (любой объект)
-console.log("Boolean([]):", Boolean([])); // true (любой массив)</code></pre>
+console.log("Boolean(1):", Boolean(1));     // Явное преобразование числа 1 в булево. Любое ненулевое число преобразуется в true.
+console.log("Boolean(0):", Boolean(0));     // Явное преобразование числа 0 в булево. 0 преобразуется в false.
+console.log('Boolean(""):', Boolean(""));    // Явное преобразование пустой строки в булево. Пустая строка преобразуется в false.
+console.log('Boolean("text"):', Boolean("text")); // Явное преобразование непустой строки в булево. Непустая строка преобразуется в true.
+console.log("Boolean(null):", Boolean(null));  // null преобразуется в false.
+console.log("Boolean(undefined):", Boolean(undefined)); // undefined преобразуется в false.
+console.log("Boolean(NaN):", Boolean(NaN)); // NaN преобразуется в false.
+console.log("Boolean({}):", Boolean({})); // Любой объект (даже пустой) преобразуется в true.
+console.log("Boolean([]):", Boolean([])); // Любой массив (даже пустой) преобразуется в true.</code></pre>
         <button class="run-code" data-example="type-conversion">Запустить пример</button>
         <button class="copy-code">Скопировать</button>
         <button class="toggle-code">Скрыть код</button>
@@ -302,8 +366,407 @@ console.log("Boolean([]):", Boolean([])); // true (любой массив)</cod
       </div>
     </section>
 
+    <h1 id="деструктуризация-в-javascript">Деструктуризация в JavaScript</h1>
+    <p>Деструктуризация - это удобный способ "распаковывать" значения из массивов или свойства из объектов в отдельные
+      переменные. Это делает код более читаемым и лаконичным.</p>
+
+    <section id="деструктуризация-объектов" class="fade-in visible">
+      <h2>Деструктуризация объектов</h2>
+      <p>Деструктуризация позволяет легко извлекать свойства объекта и присваивать их новым переменным с тем же именем
+        или другим именем.</p>
+
+      <h3>Простой пример</h3>
+      <p>Без деструктуризации вам пришлось бы обращаться к свойствам объекта через точку:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как получить доступ к свойствам объекта без деструктуризации.
+
+const user = {
+    name: "Jacob", // Свойство name со значением "Jacob"
+    age: 32        // Свойство age со значением 32
+};
+
+// Для доступа к значению свойства используем синтаксис "объект.имя_свойства"
+console.log(user.name); // Выведет значение свойства name, то есть "Jacob"
+console.log(user.age);  // Выведет значение свойства age, то есть 32</code></pre>
+        <button class="run-code" data-example="object-destructuring-1">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <p>С деструктуризацией вы можете извлечь свойства в переменные за одну операцию:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как использовать деструктуризацию объектов.
+
+const user = {
+    name: "Jacob", // Объект с свойствами name и age
+    age: 32
+};
+
+// Деструктуризация объекта:
+// Мы создаем переменные name и age и присваиваем им значения одноименных свойств объекта user.
+// Синтаксис: const { имя_свойства1, имя_свойства2, ... } = объект;
+const { name, age } = user;
+
+// Теперь мы можем использовать переменные name и age напрямую
+console.log(name); // Выведет "Jacob"
+console.log(age);  // Выведет 32</code></pre>
+        <button class="run-code" data-example="object-destructuring-2">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Значения по умолчанию и переименование</h3>
+      <p>При деструктуризации можно задать значения по умолчанию для свойств, которых может не быть в объекте, а также
+        переименовать извлекаемые переменные.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код демонстрирует установку значений по умолчанию и переименование при деструктуризации объектов.
+
+const book = {
+    title: "The Last Kingdom", // Объект book с свойствами title и author
+    author: "Bernard Cornwell"
+};
+
+// Деструктуризация с переименованием и значением по умолчанию:
+// { title } - извлекаем свойство title в переменную с тем же именем.
+// { author: bookAuthor } - извлекаем свойство author и переименовываем его в bookAuthor.
+// { coverImage = "..." } - пытаемся извлечь свойство coverImage. Если его нет в объекте book, переменной coverImage будет присвоено значение по умолчанию (URL картинки).
+const { title, author: bookAuthor, coverImage = "https://via.placeholder.com/640/480" } = book;
+
+// Выводим значения извлеченных переменных
+console.log(title);     // Выведет "The Last Kingdom"
+console.log(bookAuthor); // Выведет "Bernard Cornwell" (используем новое имя переменной)
+console.log(coverImage); // Выведет значение по умолчанию, так как свойства coverImage нет в объекте book. Выведет "https://via.placeholder.com/640/480".</code></pre>
+        <button class="run-code" data-example="object-destructuring-3">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Деструктуризация в циклах</h3>
+      <p>Деструктуризация очень удобна при переборе массивов, содержащих объекты, например, в цикле
+        <code>for...of</code>.
+      </p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как использовать деструктуризацию объектов прямо в цикле for...of.
+
+// Массив объектов, где каждый объект представляет книгу.
+const books = [
+    { title: "The Last Kingdom", author: "Bernard Cornwell", rating: 8.38 },
+    { title: "Beside Still Waters", author: "Robert Sheckley", rating: 8.51 }
+];
+
+// Перебираем массив books с помощью цикла for...of.
+// В каждой итерации цикла, вместо того чтобы получать весь объект книги (например, 'book'),
+// мы сразу деструктурируем его, извлекая свойства title, author и rating в отдельные переменные.
+for (const { title, author, rating } of books) {
+    // Используем извлеченные переменные для вывода информации о каждой книге.
+    console.log(`Книга: ${title}, Автор: ${author}, Рейтинг: ${rating}`);
+}
+// Результат будет:
+// Книга: The Last Kingdom, Автор: Bernard Cornwell, Рейтинг: 8.38
+// Книга: Beside Still Waters, Автор: Robert Sheckley, Рейтинг: 8.51</code></pre>
+        <button class="run-code" data-example="object-destructuring-4">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Деструктуризация параметров функции</h3>
+      <p>Деструктуризация позволяет извлекать свойства объекта, переданного в качестве аргумента функции, прямо в списке
+        параметров функции.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как использовать деструктуризацию объектов в параметрах функции.
+
+// Объявляем функцию printUserInfo.
+// В параметрах функции мы ожидаем объект. Вместо того чтобы объявлять один параметр (например, 'user')
+// и затем внутри функции деструктурировать его, мы делаем это прямо в сигнатуре функции:
+// { name, age, hobby } - это деструктуризация входящего объекта.
+// Это означает, что функция ожидает объект, который имеет свойства name, age и hobby,
+// и эти свойства будут автоматически извлечены в локальные переменные name, age и hobby внутри функции.
+function printUserInfo({ name, age, hobby }) {
+    // Используем извлеченные переменные name, age и hobby внутри функции.
+    console.log(`Name: ${name}, Age: ${age}, Hobby: ${hobby}`);
+}
+
+// Вызываем функцию printUserInfo, передавая ей объект.
+// Свойства этого объекта (name, age, hobby) будут деструктурированы в параметры функции.
+printUserInfo({
+    name: "Alice",
+    age: 25,
+    hobby: "dancing"
+});
+// Выведет: Name: Alice, Age: 25, Hobby: dancing</code></pre>
+        <button class="run-code" data-example="object-destructuring-5">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Глубокая деструктуризация</h3>
+      <p>Если объект содержит вложенные объекты, можно деструктурировать их свойства на любом уровне вложенности.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код демонстрирует глубокую деструктуризацию объектов.
+
+// Объект user с вложенным объектом stats.
+const user = {
+    name: "Jacques Gluke",
+    tag: "jgluke",
+    stats: { // Вложенный объект stats
+        followers: 5603,
+        views: 4827,
+        likes: 1308,
+    },
+};
+
+// Глубокая деструктуризация:
+// { name, tag } - извлекаем свойства name и tag из верхнего уровня объекта user.
+// { stats: { followers, views, likes } } - это деструктуризация вложенного объекта.
+// stats: - указывает, что мы хотим работать со свойством stats объекта user.
+// { followers, views, likes } - внутри фигурных скобок мы указываем свойства, которые хотим извлечь из объекта stats.
+// В результате будут созданы переменные name, tag, followers, views, likes.
+const { name, tag, stats: { followers, views, likes } } = user;
+
+// Выводим значения извлеченных переменных.
+console.log(name);     // Выведет "Jacques Gluke"
+console.log(tag);      // Выведет "jgluke"
+console.log(followers); // Выведет 5603 (извлечено из user.stats.followers)
+console.log(views);     // Выведет 4827 (извлечено из user.stats.views)
+console.log(likes);     // Выведет 1308 (извлечено из user.stats.likes)
+
+// Обратите внимание: переменная stats НЕ будет создана при такой деструктуризации.
+// Если вам нужна сама переменная stats, нужно деструктурировать ее отдельно:
+// const { name, tag, stats } = user; // Теперь stats - это объект { followers: 5603, views: 4827, likes: 1308 }
+// const { followers, views, likes } = stats; // И затем деструктурировать stats</code></pre>
+        <button class="run-code" data-example="object-destructuring-6">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
+
+    <section id="деструктуризация-массивов" class="fade-in visible">
+      <h2>Деструктуризация массивов</h2>
+      <p>Деструктуризация массивов позволяет извлекать элементы массива и присваивать их переменным по их позиции
+        (индексу). Используются квадратные скобки <code>[]</code>.</p>
+
+      <h3>Простой пример</h3>
+      <p>Без деструктуризации вам пришлось бы обращаться к элементам массива по их индексу:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как получить доступ к элементам массива без деструктуризации.
+
+const color = [200, 255, 100]; // Массив с тремя элементами (значения RGB)
+
+// Для доступа к элементу массива используем синтаксис "массив[индекс]". Индексы начинаются с 0.
+const red = color[0];   // Получаем первый элемент (индекс 0)
+const green = color[1]; // Получаем второй элемент (индекс 1)
+const blue = color[2];  // Получаем третий элемент (индекс 2)
+
+// Используем полученные значения
+console.log(`rgb(${red}, ${green}, ${blue})`); // Выведет "rgb(200, 255, 100)"</code></pre>
+        <button class="run-code" data-example="array-destructuring-basic">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <p>С деструктуризацией вы можете извлечь элементы в переменные за одну операцию:</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как использовать деструктуризацию массивов.
+
+const color = [200, 255, 100]; // Массив с элементами
+
+// Деструктуризация массива:
+// Мы создаем переменные red, green, blue и присваиваем им значения элементов массива color
+// по их позиции. red получит значение первого элемента, green - второго, blue - третьего.
+// Синтаксис: const [ переменная1, переменная2, ... ] = массив;
+const [red, green, blue] = color;
+
+// Теперь мы можем использовать переменные red, green, blue напрямую
+console.log(`rgb(${red}, ${green}, ${blue})`); // Выведет "rgb(200, 255, 100)"</code></pre>
+        <button class="run-code" data-example="array-destructuring-1">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Значения по умолчанию</h3>
+      <p>Если при деструктуризации массива переменных больше, чем элементов в массиве, переменным, для которых нет
+        соответствующего элемента, будет присвоено значение <code>undefined</code>. Вы можете задать значения по
+        умолчанию.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код демонстрирует установку значений по умолчанию при деструктуризации массивов.
+
+const color = [200, 100, 255]; // Массив с тремя элементами
+
+// Деструктуризация массива со значением по умолчанию:
+// Мы извлекаем red, green, blue как раньше.
+// Для переменной alfa мы указываем значение по умолчанию = 0.3.
+// Так как в массиве color нет четвертого элемента, переменной alfa будет присвоено значение 0.3.
+const [red, green, blue, alfa = 0.3] = color;
+
+// Используем извлеченные значения
+console.log(`rgba(${red}, ${green}, ${blue}, ${alfa})`); // Выведет "rgba(200, 100, 255, 0.3)"</code></pre>
+        <button class="run-code" data-example="array-destructuring-2">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Оператор rest</h3>
+      <p>Оператор rest (<code>...</code>) при деструктуризации массива позволяет собрать оставшиеся элементы массива в
+        новый массив.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код демонстрирует использование оператора rest (...) при деструктуризации массивов.
+
+const color = [200, 255, 100, 50, 150]; // Массив с несколькими элементами
+
+// Деструктуризация с оператором rest:
+// [red, ...otherColors] - извлекаем первый элемент в переменную red.
+// ...otherColors - оператор rest собирает ВСЕ ОСТАВШИЕСЯ элементы массива color
+// после первого элемента в новый массив под названием otherColors.
+const [red, ...otherColors] = color;
+
+// Выводим извлеченные значения
+console.log(red);        // Выведет 200 (первый элемент)
+console.log(otherColors); // Выведет [255, 100, 50, 150] (новый массив с оставшимися элементами)</code></pre>
+        <button class="run-code" data-example="array-destructuring-3">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Пропуск значений</h3>
+      <p>Чтобы пропустить элементы массива при деструктуризации, просто оставляйте пустые места между запятыми.</p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как пропустить элементы при деструктуризации массива.
+
+const rgb = [200, 100, 255]; // Массив RGB значений
+
+// Деструктуризация с пропуском значений:
+// [ , , blue ] - мы используем запятые, чтобы пропустить первые два элемента массива.
+// Переменная blue получит значение третьего элемента массива (индекс 2).
+const [, , blue] = rgb;
+
+// Выводим извлеченное значение
+console.log(`Blue: ${blue}`); // Выведет "Blue: 255"</code></pre>
+        <button class="run-code" data-example="array-destructuring-4">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+
+      <h3>Деструктуризация параметров функции</h3>
+      <p>Как и с объектами, можно деструктурировать массив, переданный в качестве аргумента, прямо в параметрах функции.
+      </p>
+      <div class="code-block">
+        <pre><code class="language-javascript">// Этот код показывает, как использовать деструктуризацию массивов в параметрах функции.
+
+// Объявляем функцию printFruits.
+// В параметрах функции мы ожидаем массив. Мы деструктурируем его прямо в сигнатуре функции:
+// [firstFruit, secondFruit, thirdFruit] - это деструктуризация входящего массива.
+// Функция ожидает массив, и его первый, второй и третий элементы будут автоматически извлечены
+// в локальные переменные firstFruit, secondFruit и thirdFruit соответственно.
+function printFruits([firstFruit, secondFruit, thirdFruit]) {
+    // Используем извлеченные переменные внутри функции.
+    console.log(firstFruit, secondFruit, thirdFruit);
+}
+
+// Вызываем функцию printFruits, передавая ей массив.
+// Элементы этого массива будут деструктурированы в параметры функции.
+printFruits(["apple", "banana", "orange"]); // Выведет: apple banana orange
+
+// Если передать массив с меньшим количеством элементов, переменные, для которых нет соответствия, будут undefined.
+// printFruits(["grape", "kiwi"]); // Выведет: grape kiwi undefined</code></pre>
+        <button class="run-code" data-example="array-destructuring-5">Запустить пример</button>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
+
+    <section id="визуальные-материалы" class="fade-in visible">
+      <h2>Визуальные материалы</h2>
+      <p>Схемы помогают лучше понять синтаксис деструктуризации.</p>
+
+      <h3>Синтаксис деструктуризации</h3>
+      <div class="code-block">
+        <pre><code class="diagram">
+Деструктуризация
+│
+├── Объекты
+│   ├── Базовый синтаксис: const { имя_свойства } = объект
+│   ├── Переименование: const { имя_свойства: новое_имя } = объект
+│   ├── Значение по умолчанию: const { имя_свойства = значение } = объект
+│   ├── Глубокая деструктуризация: const { свойство: { вложенное } } = объект
+│   └── Rest: const { свойство, ...остальное } = объект
+│
+└── Массивы
+    ├── Базовый синтаксис: const [переменная1, переменная2] = массив
+    ├── Пропуск: const [, , переменная3] = массив
+    ├── Значение по умолчанию: const [переменная1 = значение] = массив
+    └── Rest: const [первая, ...остальные] = массив
+                </code></pre>
+        <button class="copy-code">Скопировать</button>
+        <button class="toggle-code">Скрыть код</button>
+        <div class="output"></div>
+      </div>
+    </section>
+
+    <section id="интерактивное-упражнение" class="fade-in visible">
+      <h2>Интерактивное упражнение</h2>
+      <p>Попробуйте написать код с использованием деструктуризации, чтобы извлечь данные из объекта или массива.
+        Измените код в блоке и нажмите "Запустить код".</p>
+      <div class="exercise">
+        <h3>Задание 1: Деструктуризация объекта</h3>
+        <p>Дан объект пользователя. Используйте деструктуризацию, чтобы извлечь имя, возраст и хобби.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Задание: Используйте деструктуризацию, чтобы извлечь name, age и hobby из объекта user.
+
+const user = { name: "Alice", age: 25, hobby: "dancing" };
+
+// Напишите ваш код с деструктуризацией здесь:
+// Пример: const { свойство1, свойство2 } = объект;
+const { name, age, hobby } = user; // <-- Ваш код здесь
+
+// Этот код выведет результат вашей деструктуризации
+console.log(`Name: ${name}, Age: ${age}, Hobby: ${hobby}`);
+                    </code></pre>
+          <button class="run-code" data-example="interactive-destructuring-1">Запустить код</button>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+          <div class="output"></div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <h3>Задание 2: Деструктуризация массива</h3>
+        <p>Дан массив цветов в формате RGBA. Извлеките значение красного цвета (первый элемент) и соберите оставшиеся
+          элементы с помощью оператора rest.</p>
+        <div class="code-block">
+          <pre><code class="language-javascript">// Задание: Используйте деструктуризацию массива и оператор rest, чтобы извлечь первый элемент в переменную red
+// и собрать остальные элементы в новый массив restColors.
+
+const color = [200, 255, 100, 0.5]; // Массив RGBA
+
+// Напишите ваш код с деструктуризацией и rest здесь:
+// Пример: const [первый_элемент, ...остальные_элементы] = массив;
+const [red, ...restColors] = color; // <-- Ваш код здесь
+
+// Этот код выведет результат вашей деструктуризации
+console.log(`Red: ${red}`);
+console.log(`Остальные цвета: ${restColors}`); // restColors будет массивом</code></pre>
+          <button class="run-code" data-example="interactive-destructuring-2">Запустить код</button>
+          <button class="copy-code">Скопировать</button>
+          <button class="toggle-code">Скрыть код</button>
+          <div class="output"></div>
+        </div>
+      </div>
+    </section>
+
     <div class="navigation-buttons">
-      <a href="../index.html" class="button">← На главную</a>
+      <a href="learning_guide.html" class="button">← Гайд по обучению</a>
       <a href="arrays.html" class="button">Массивы →</a>
     </div>
   </main>
@@ -316,11 +779,12 @@ console.log("Boolean([]):", Boolean([])); // true (любой массив)</cod
 
   <button id="scroll-top" style="display: none;">↑</button>
 
-  <script src="../js/01_basics.js" defer></script>
-  <script src="../main.js" defer></script>
+  <script src="/js/01_basics.js" defer></script>
+  <script src="/main.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   <script>
+    // Активация подсветки синтаксиса после загрузки DOM
     document.addEventListener('DOMContentLoaded', (event) => {
       Prism.highlightAll();
     });
