@@ -187,7 +187,7 @@
             <h3>Пример: Упражнения по основам JavaScript</h3>
             <div class="code-block">
                 <pre><code class="language-javascript">// ===== Упражнения по основам JavaScript =====
-// Выводим заголовок секции.
+// Выводим заголовок секции в консоль.
 console.log("===== Упражнения по основам JavaScript =====");
 
 // --- Упражнение 1: Работа с переменными и типами данных ---
@@ -303,7 +303,7 @@ console.log("Исходный массив студентов:", students);
 // Чтобы не менять исходный, создаем копию с помощью spread (...) перед сортировкой.
 // Функция сравнения (a, b) => b.grade - a.grade:
 //   - если результат > 0, 'a' идет после 'b' (сортировка по убыванию).
-//   - если результат < 0, 'a' идет перед 'b'.
+//   - если результат &lt; 0, 'a' идет перед 'b'.
 //   - если результат = 0, порядок не меняется.
 const sortedByGrade = [...students].sort((a, b) => b.grade - a.grade);
 console.log("1. Отсортированные по оценке (убывание):", sortedByGrade);
@@ -340,6 +340,861 @@ console.log("5. Средняя оценка (reduce):", averageGrade.toFixed(2))
             </div>
         </section>
 
+        <section id="упражнения-по-функциям-гайд" class="fade-in visible">
+            <h3>Пример: Упражнения по функциям</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по функциям =====
+console.log("\n===== Упражнения по функциям =====");
+
+// --- Упражнение 1: Типы функций ---
+// Задание: Создайте функции разных типов и сравните их поведение.
+
+// 1. Function Declaration (Объявление Функции)
+// Можно вызывать до объявления (hoisting).
+function add(a, b) {
+  return a + b;
+}
+console.log("1. Function Declaration (add(5, 3)):", add(5, 3)); // 8
+
+// 2. Function Expression (Функциональное Выражение)
+// Нельзя вызывать до присваивания переменной.
+const subtract = function(a, b) {
+  return a - b;
+};
+console.log("2. Function Expression (subtract(5, 3)):", subtract(5, 3)); // 2
+
+// 3. Arrow Function (Стрелочная Функция)
+// Краткий синтаксис, также нельзя вызывать до присваивания.
+const multiply = (a, b) => a * b;
+console.log("3. Arrow Function (multiply(5, 3)):", multiply(5, 3)); // 15
+
+// 4. Сравнение hoisting
+// Вызов Function Declaration до ее определения в коде - работает.
+console.log("4. Вызов addBefore до объявления:", addBefore(10, 5)); // 15
+function addBefore(a, b) {
+  return a + b;
+}
+// Попытка вызова Function Expression до присваивания - ошибка.
+try {
+  console.log("   Попытка вызова subtractBefore до присваивания:", subtractBefore(10, 5));
+} catch (e) {
+  console.error("   Ошибка вызова subtractBefore:", e.message); // ReferenceError
+}
+const subtractBefore = function(a, b) {
+  return a - b;
+};
+
+// 5. Сравнение 'this' в методах объекта
+const calculator = {
+    value: 10,
+    // Метод, объявленный через Function Declaration/Expression
+    addValue: function(x) {
+        // 'this' ссылается на объект 'calculator'
+        this.value += x;
+        console.log("   addValue (this.value):", this.value);
+        return this.value;
+    },
+    // Метод, объявленный через Arrow Function
+    multiplyValue: (x) => {
+        // Стрелочная функция не имеет своего 'this', она берет 'this'
+        // из внешнего окружения (где был создан объект calculator).
+        // В данном случае this не будет ссылаться на calculator.value.
+        console.warn("   multiplyValue (стрелочная): 'this' НЕ равен calculator:", this);
+        // return this.value * x; // Это приведет к ошибке или NaN
+        return undefined;
+    }
+};
+console.log("5. Поведение 'this':");
+calculator.addValue(5); // 'this' работает, value станет 15
+calculator.multiplyValue(2); // 'this' не работает как ожидается
+
+// --- Упражнение 2: Замыкания ---
+// Задание: Создайте функцию, использующую замыкание.
+
+// 1. Функция createCounter возвращает другую функцию.
+function createCounter() {
+    // 'count' - локальная переменная внешней функции.
+    let count = 0;
+    console.log("   [createCounter] Счетчик создан, начальное значение count = 0");
+    // Возвращаем внутреннюю функцию.
+    return function() {
+        // Внутренняя функция имеет доступ к 'count' из своего лексического окружения (замыкание).
+        count++; // Увеличиваем 'count'.
+        console.log("   [Внутренняя функция] Счетчик увеличен.");
+        return count; // Возвращаем увеличенное значение.
+    };
+}
+
+console.log("\n--- Упражнение 2 ---");
+// 2. Создаем два независимых счетчика.
+console.log("Создаем counterA:");
+const counterA = createCounter();
+console.log("Создаем counterB:");
+const counterB = createCounter();
+
+// 3. Проверяем их независимость.
+console.log("Вызов counterA #1:", counterA()); // 1
+console.log("Вызов counterA #2:", counterA()); // 2
+console.log("Вызов counterB #1:", counterB()); // 1 (независимый счетчик)
+console.log("Вызов counterA #3:", counterA()); // 3
+</code></pre>
+                <button class="run-code" data-example="guide-functions">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="упражнения-по-циклам-и-управлению-потоком-гайд" class="fade-in visible">
+            <h3>Пример: Упражнения по циклам и управлению потоком</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по циклам и управлению потоком =====
+console.log("\n===== Упражнения по циклам и управлению потоком =====");
+
+// --- Упражнение 1: Различные типы циклов ---
+// Задача: Вывести числа от 1 до 5 в консоль разными способами.
+
+// 1. Цикл for
+console.log("\n1. Цикл for (1 до 5):");
+for (let i = 1; i &lt;= 5; i++) { // Инициализация; Условие; Шаг
+    console.log("   " + i);
+}
+
+// 2. Цикл while
+console.log("\n2. Цикл while (1 до 5):");
+let j = 1; // Инициализация счетчика снаружи
+while (j &lt;= 5) { // Условие проверяется перед итерацией
+    console.log("   " + j);
+    j++; // Шаг внутри цикла
+}
+
+// 3. Цикл do...while
+console.log("\n3. Цикл do...while (1 до 5):");
+let k = 1; // Инициализация счетчика снаружи
+do {
+    console.log("   " + k);
+    k++; // Шаг внутри цикла
+} while (k &lt;= 5); // Условие проверяется ПОСЛЕ итерации
+
+// 4. Метод forEach для массива
+console.log("\n4. Метод forEach:");
+const numbersForEach = [1, 2, 3, 4, 5];
+numbersForEach.forEach(num => console.log("   " + num)); // Выполняет функцию для каждого элемента
+
+// --- Упражнение 2: Обработка ошибок ---
+// Задание: Реализуйте функцию деления с обработкой ошибки деления на ноль.
+
+// 1. Создаем функцию divide.
+function divide(a, b) {
+    console.log(`\nПопытка деления ${a} на ${b}:`);
+    // 2. Используем try...catch для перехвата возможных ошибок.
+    try {
+        // Проверяем, равен ли делитель нулю.
+        if (b === 0) {
+            // 3. Если да, выбрасываем (throw) новый объект ошибки с сообщением.
+            // Выполнение блока try на этом прекращается.
+            throw new Error("Деление на ноль невозможно!");
+        }
+        // Если ошибки не было, выполняем деление и возвращаем результат.
+        const result = a / b;
+        console.log("   Успешно. Результат:", result);
+        return result;
+    } catch (error) {
+        // 4. Блок catch выполняется, если в блоке try произошла ошибка.
+        // 'error' - это объект ошибки, который мы выбросили.
+        console.error("   Поймана ошибка:", error.message); // Выводим сообщение об ошибке.
+        return null; // Возвращаем null или другое значение, сигнализирующее об ошибке.
+    } finally {
+        // Блок finally выполняется всегда, была ошибка или нет.
+        console.log("   Блок finally выполнен.");
+    }
+}
+
+// Демонстрация работы функции divide.
+divide(10, 2); // Успешное деление
+divide(10, 0); // Деление на ноль, вызовет catch
+divide(12, 4); // Успешное деление
+</code></pre>
+                <button class="run-code" data-example="guide-loops">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="упражнения-по-объектам-гайд" class="fade-in visible">
+            <h3>Пример: Упражнения по объектам</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по объектам =====
+console.log("\n===== Упражнения по объектам =====");
+
+// --- Упражнение 1: Работа с объектами ---
+// Задание: Создайте и модифицируйте объекты.
+
+// 1. Создаем объект 'book1' с помощью литерала объекта.
+const book1 = {
+    title: "Война и мир",       // Свойство: название
+    author: "Лев Толстой",     // Свойство: автор
+    year: 1865,               // Свойство: год
+    isRead: false,            // Свойство: прочитана ли книга
+
+    // 2. Метод для изменения статуса чтения.
+    toggleReadStatus: function() {
+        // 'this' ссылается на объект book1.
+        this.isRead = !this.isRead; // Инвертируем значение isRead.
+        console.log(`   [toggleReadStatus] "${this.title}" теперь ${this.isRead ? 'прочитана' : 'не прочитана'}.`);
+    },
+
+    // 3. Метод для получения информации о книге.
+    getInfo: function() {
+        // Возвращаем строку, используя свойства объекта через 'this'.
+        return `${this.title} (${this.author}, ${this.year})`;
+    }
+};
+
+console.log("\n--- Упражнение 1 ---");
+// Вызываем метод для изменения статуса.
+book1.toggleReadStatus(); // Станет прочитана
+// Вызываем метод для получения информации и выводим результат.
+console.log("   Информация о книге 1:", book1.getInfo());
+// Проверяем статус.
+console.log("   Прочитана?", book1.isRead); // true
+
+// 4. Создаем массив 'library', содержащий несколько объектов книг.
+const library = [
+    book1, // Добавляем уже созданную книгу.
+    // Создаем другие книги прямо в массиве.
+    { title: "Преступление и наказание", author: "Федор Достоевский", year: 1866, isRead: true, getInfo: function() { return `${this.title} (${this.author}, ${this.year})` } },
+    { title: "Гарри Поттер и философский камень", author: "Дж. К. Роулинг", year: 1997, isRead: false, getInfo: function() { return `${this.title} (${this.author}, ${this.year})` } }
+];
+console.log("\nБиблиотека (массив книг):", library);
+// Вызываем метод у второй книги в массиве.
+console.log("   Информация о книге 2:", library[1].getInfo());
+
+// --- Упражнение 2: Прототипное наследование ---
+// Задание: Реализуйте иерархию объектов с помощью Object.create().
+
+// 1. Создаем объект-прототип 'Person'.
+const Person = {
+    name: "Неизвестный", // Свойство по умолчанию.
+    // Метод, который будет наследоваться.
+    introduce: function() {
+        console.log(`   Привет, я ${this.name}.`);
+    }
+};
+console.log("\n--- Упражнение 2 ---");
+console.log("Прототип Person:", Person);
+
+// 2. Создаем объект 'Student', прототипом которого является 'Person'.
+const Student = Object.create(Person);
+console.log("Создан Student (прототип - Person):", Student); // Изначально пустой, но наследует от Person.
+
+// 3. Добавляем СОБСТВЕННЫЕ свойства и методы объекту 'Student'.
+Student.name = "Иван"; // Переопределяем унаследованное свойство 'name'.
+Student.course = 2;    // Новое свойство.
+Student.study = function() { // Новый метод.
+    console.log(`   ${this.name} учится на ${this.course} курсе.`);
+};
+console.log("Student после добавления свойств/методов:", Student);
+
+// 4. Демонстрация наследования.
+console.log("\nДемонстрация наследования:");
+// Вызываем метод introduce(). Он не найден в Student, но найден в его прототипе Person.
+// 'this' внутри introduce будет указывать на Student.
+Student.introduce(); // Вывод: Привет, я Иван.
+// Вызываем собственный метод Student.
+Student.study();     // Вывод: Иван учится на 2 курсе.
+// Доступ к свойству прототипа, которое не было переопределено (если бы оно было).
+// console.log(Student.некое_свойство_Person);
+</code></pre>
+                <button class="run-code" data-example="guide-objects">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <h2 id="визуальные-материалы">Визуальные материалы</h2>
+        <p>Визуальные материалы помогают лучше понять и запомнить концепции JavaScript.</p>
+
+        <section id="схемы-и-диаграммы" class="fade-in visible">
+            <h3>Схемы и диаграммы</h3>
+            <ol>
+                <li>
+                    <p><strong>Типы данных в JavaScript</strong></p>
+                    <div class="code-block">
+                        <pre><code class="diagram">
+JavaScript Типы Данных
+│
+├── Примитивные типы (значения копируются)
+│   ├── String      ("текст")
+│   ├── Number      (123, 1.5, NaN, Infinity)
+│   ├── Boolean     (true, false)
+│   ├── Null        (null - намеренное отсутствие значения)
+│   ├── Undefined   (undefined - значение не присвоено)
+│   ├── Symbol      (Symbol("id") - уникальный идентификатор)
+│   └── BigInt      (123n - для очень больших целых чисел)
+│
+└── Ссылочные типы (ссылки/указатели копируются)
+    └── Object      (объект)
+        ├── Array     (массив [])
+        ├── Function  (функция function(){})
+        ├── Date      (дата new Date())
+        ├── RegExp    (регулярное выражение /abc/)
+        └── ... (Map, Set, WeakMap, WeakSet и др.)
+                         </code></pre>
+                    </div>
+                </li>
+                <li>
+                    <p><strong>Область видимости переменных</strong></p>
+                    <div class="code-block">
+                        <pre><code class="diagram">
+Область видимости (Scope)
+│
+├── Глобальная область (Global Scope)
+│   │ - Переменные доступны из любого места кода.
+│   │ - Объявлены вне любых функций или блоков.
+│   └─&gt; Пример: let globalVar = 10;
+│
+├── Функциональная область (Function Scope)
+│   │ - Переменные доступны только внутри функции, где они объявлены.
+│   │ - var имеет функциональную область видимости.
+│   └─&gt; Пример: function fn() { var funcVar = 20; }
+│
+├── Блочная область (Block Scope) - ES6+
+│   │ - Переменные доступны только внутри блока {...} (if, for, while, или просто блок).
+│   │ - let и const имеют блочную область видимости.
+│   └─&gt; Пример: if (true) { let blockVar = 30; }
+│
+└── Лексическая область (Lexical Scope)
+    │ - Область определяется тем, где функция была ОБЪЯВЛЕНА в коде, а не где вызвана.
+    └─&gt; Основа для замыканий (closures).
+                         </code></pre>
+                    </div>
+                </li>
+                <li>
+                    <p><strong>Жизненный цикл переменных (Hoisting & TDZ)</strong></p>
+                    <div class="code-block">
+                        <pre><code class="diagram">
+Жизненный цикл переменных
+│
+├── var
+│   │ 1. Объявление (Declaration) - "Поднимается" (hoisted) в начало своей области видимости (функции или глобальной).
+│   │ 2. Инициализация (Initialization) - Происходит при поднятии, значением undefined.
+│   │ 3. Присваивание (Assignment) - Происходит там, где написано в коде.
+│   └─&gt; console.log(myVar); // undefined (поднято и инициализировано undefined)
+│       var myVar = 5;
+│       console.log(myVar); // 5
+│
+└── let / const
+    │ 1. Объявление (Declaration) - "Поднимается" (hoisted) в начало своей области видимости (блока).
+    │ 2. Временная Мертвая Зона (Temporal Dead Zone - TDZ) - От начала блока до строки объявления переменная существует, но недоступна (ReferenceError).
+    │ 3. Инициализация (Initialization) - Происходит ТОЛЬКО в строке объявления.
+    │ 4. Присваивание (Assignment) - Происходит в строке объявления (для const обязательно, для let опционально).
+    └─&gt; // console.log(myLet); // ReferenceError: Cannot access 'myLet' before initialization (TDZ!)
+        let myLet = 10;
+        console.log(myLet); // 10
+        // const myConst; // SyntaxError: Missing initializer in const declaration
+        const myConst = 20;
+        // myConst = 30; // TypeError: Assignment to constant variable.
+                         </code></pre>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="таблицы-сравнения" class="fade-in visible">
+            <h3>Таблицы сравнения</h3>
+            <ol>
+                <li>
+                    <p><strong>Сравнение операторов</strong></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Название</th>
+                                <th>Пример</th>
+                                <th>Результат</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>==</td>
+                                <td>Нестрогое равенство</td>
+                                <td>"5" == 5</td>
+                                <td>true</td>
+                                <td>Сравнивает значения, выполняя приведение типов.</td>
+                            </tr>
+                            <tr>
+                                <td>===</td>
+                                <td>Строгое равенство</td>
+                                <td>"5" === 5</td>
+                                <td>false</td>
+                                <td>Сравнивает значения и типы без приведения. (Рекомендуется)</td>
+                            </tr>
+                            <tr>
+                                <td>!=</td>
+                                <td>Нестрогое неравенство</td>
+                                <td>"5" != 5</td>
+                                <td>false</td>
+                                <td>Проверяет неравенство, выполняя приведение типов.</td>
+                            </tr>
+                            <tr>
+                                <td>!==</td>
+                                <td>Строгое неравенство</td>
+                                <td>"5" !== 5</td>
+                                <td>true</td>
+                                <td>Проверяет неравенство значений или типов. (Рекомендуется)</td>
+                            </tr>
+                            <tr>
+                                <td>&gt;</td>
+                                <td>Больше</td>
+                                <td>5 &gt; 3</td>
+                                <td>true</td>
+                                <td>Проверяет, больше ли левый операнд правого.</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;</td>
+                                <td>Меньше</td>
+                                <td>5 &lt; 3</td>
+                                <td>false</td>
+                                <td>Проверяет, меньше ли левый операнд правого.</td>
+                            </tr>
+                            <tr>
+                                <td>&gt;=</td>
+                                <td>Больше или равно</td>
+                                <td>5 &gt;= 5</td>
+                                <td>true</td>
+                                <td>Проверяет, больше или равен левый операнд правому.</td>
+                            </tr>
+                            <tr>
+                                <td>&lt;=</td>
+                                <td>Меньше или равно</td>
+                                <td>5 &lt;= 3</td>
+                                <td>false</td>
+                                <td>Проверяет, меньше или равен левый операнд правому.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p><strong>Сравнение циклов</strong></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип цикла</th>
+                                <th>Синтаксис</th>
+                                <th>Когда использовать</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>for</td>
+                                <td><code>for (иниц.; условие; шаг) { ... }</code></td>
+                                <td>Когда известно или легко вычислить количество итераций. Удобен для работы с
+                                    индексами.</td>
+                            </tr>
+                            <tr>
+                                <td>while</td>
+                                <td><code>while (условие) { ... }</code></td>
+                                <td>Когда количество итераций заранее неизвестно, и условие нужно проверить *перед*
+                                    выполнением тела цикла.</td>
+                            </tr>
+                            <tr>
+                                <td>do...while</td>
+                                <td><code>do { ... } while (условие);</code></td>
+                                <td>Когда нужно выполнить тело цикла *хотя бы один раз*, а затем проверять условие для
+                                    повторения.</td>
+                            </tr>
+                            <tr>
+                                <td>for...of</td>
+                                <td><code>for (const item of iterable) { ... }</code></td>
+                                <td>Для простого перебора *значений* итерируемых объектов (массивы, строки, Map, Set).
+                                    Не дает индекс напрямую.</td>
+                            </tr>
+                            <tr>
+                                <td>for...in</td>
+                                <td><code>for (const key in object) { ... }</code></td>
+                                <td>Для перебора *ключей* (свойств) объекта. **Не использовать для массивов!**
+                                    Перебирает и унаследованные свойства (нужна проверка `hasOwnProperty`).</td>
+                            </tr>
+                            <tr>
+                                <td>forEach (метод массива)</td>
+                                <td><code>array.forEach(callback)</code></td>
+                                <td>Для выполнения функции для каждого элемента массива. Нельзя прервать
+                                    (break/continue).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p><strong>Сравнение методов массивов (основные)</strong></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Метод</th>
+                                <th>Назначение</th>
+                                <th>Возвращает</th>
+                                <th>Изменяет исходный массив?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>push()</td>
+                                <td>Добавляет элемент(ы) в конец</td>
+                                <td>Новая длина</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>pop()</td>
+                                <td>Удаляет последний элемент</td>
+                                <td>Удаленный элемент</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>unshift()</td>
+                                <td>Добавляет элемент(ы) в начало</td>
+                                <td>Новая длина</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>shift()</td>
+                                <td>Удаляет первый элемент</td>
+                                <td>Удаленный элемент</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>concat()</td>
+                                <td>Объединяет массивы</td>
+                                <td>Новый массив</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>slice(start, end)</td>
+                                <td>Возвращает часть массива (копию)</td>
+                                <td>Новый массив</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>splice(start, count, ...items)</td>
+                                <td>Удаляет/заменяет/добавляет элементы</td>
+                                <td>Массив удаленных элементов</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>map(callback)</td>
+                                <td>Создает новый массив, применив callback к каждому элементу</td>
+                                <td>Новый массив</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>filter(callback)</td>
+                                <td>Создает новый массив с элементами, для которых callback вернул true</td>
+                                <td>Новый массив</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>reduce(callback, initial)</td>
+                                <td>Сводит массив к одному значению</td>
+                                <td>Результат вычислений</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>forEach(callback)</td>
+                                <td>Выполняет callback для каждого элемента</td>
+                                <td>undefined</td>
+                                <td>Нет (но callback может изменить)</td>
+                            </tr>
+                            <tr>
+                                <td>find(callback)</td>
+                                <td>Возвращает первый элемент, для которого callback вернул true</td>
+                                <td>Найденный элемент или undefined</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>findIndex(callback)</td>
+                                <td>Возвращает индекс первого элемента, для которого callback вернул true</td>
+                                <td>Индекс или -1</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>includes(value)</td>
+                                <td>Проверяет наличие элемента</td>
+                                <td>true или false</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td>sort(compareFn)</td>
+                                <td>Сортирует массив</td>
+                                <td>Ссылка на исходный (отсортированный) массив</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>reverse()</td>
+                                <td>Переворачивает массив</td>
+                                <td>Ссылка на исходный (перевернутый) массив</td>
+                                <td>Да</td>
+                            </tr>
+                            <tr>
+                                <td>join(separator)</td>
+                                <td>Объединяет элементы в строку</td>
+                                <td>Строка</td>
+                                <td>Нет</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+        </section>
+
+        <h2 id="интерактивные-элементы">Интерактивные элементы</h2>
+        <p>Для более эффективного обучения рекомендуется использовать интерактивные элементы.</p>
+
+        <section id="интерактивные-упражнения" class="fade-in visible">
+            <h3>Интерактивные упражнения</h3>
+            <p>Примеры интерактивных упражнений с возможностью запуска кода прямо на странице:</p>
+            <div class="exercise">
+                <h4>Пример: Интерактивное упражнение по массивам</h4>
+                <div class="task">
+                    <p>Задание: Используйте методы массивов для решения следующих задач:</p>
+                    <ol>
+                        <li>Создайте новый массив, содержащий только четные числа из исходного массива</li>
+                        <li>Создайте новый массив, где каждое число умножено на 2</li>
+                        <li>Найдите сумму всех чисел в массиве</li>
+                    </ol>
+                    <p>Исходный массив: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
+                </div>
+                <div class="code-block">
+                    <pre><code class="language-javascript">// ===== Интерактивное упражнение по массивам =====
+console.log("===== Интерактивное упражнение по массивам =====");
+
+// Исходный массив чисел.
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+console.log("Исходный массив:", numbers);
+
+// 1. Фильтрация четных чисел (используем filter).
+// Функция-колбэк возвращает true для четных чисел.
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log("1. Четные числа:", evenNumbers);
+
+// 2. Умножение каждого числа на 2 (используем map).
+// Функция-колбэк возвращает результат умножения.
+const doubledNumbers = numbers.map(num => num * 2);
+console.log("2. Числа, умноженные на 2:", doubledNumbers);
+
+// 3. Сумма всех чисел (используем reduce).
+// Функция-колбэк добавляет текущее число к аккумулятору. Начальное значение аккумулятора - 0.
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log("3. Сумма всех чисел:", sum);</code></pre>
+                    <button class="run-code" data-example="interactive-arrays">Запустить код</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h4>Пример: Работа с объектами в массиве</h4>
+                <div class="task">
+                    <p>Задание: Используйте методы массивов для работы с массивом объектов:</p>
+                    <ol>
+                        <li>Отсортируйте студентов по оценке (от высшей к низшей)</li>
+                        <li>Найдите средний балл всех студентов</li>
+                        <li>Создайте массив, содержащий только имена студентов</li>
+                    </ol>
+                </div>
+                <div class="code-block">
+                    <pre><code class="language-javascript">// ===== Работа с объектами в массиве =====
+console.log("===== Работа с объектами в массиве =====");
+
+// Исходный массив объектов студентов.
+const students = [
+  { name: "Анна", grade: 85 },
+  { name: "Иван", grade: 92 },
+  { name: "Мария", grade: 78 },
+  { name: "Петр", grade: 90 },
+  { name: "Елена", grade: 88 }
+];
+console.log("Исходный массив студентов:", students);
+
+// 1. Сортировка по оценке (от высшей к низшей).
+// Создаем копию массива перед сортировкой, чтобы не изменять исходный.
+// Функция сравнения сортирует по убыванию оценки (b.grade - a.grade).
+const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
+console.log("1. Отсортированные студенты:", sortedStudents);
+
+// 2. Средний балл.
+// Сначала суммируем все оценки с помощью reduce.
+const totalGrade = students.reduce((sum, student) => sum + student.grade, 0);
+// Затем делим на количество студентов (с проверкой на пустой массив).
+const averageGrade = students.length > 0 ? totalGrade / students.length : 0;
+console.log("2. Средний балл:", averageGrade.toFixed(2)); // Округляем
+
+// 3. Массив имен (используем map).
+// Преобразуем каждый объект студента в его имя.
+const names = students.map(student => student.name);
+console.log("3. Имена студентов:", names);</code></pre>
+                    <button class="run-code" data-example="interactive-objects">Запустить код</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="интерактивные-демонстрации" class="fade-in visible">
+            <h3>Интерактивные демонстрации</h3>
+            <p>Пример интерактивной демонстрации для визуализации концепций JavaScript (методы массивов):</p>
+            <div class="demo-container">
+                <h4>Демонстрация методов массивов</h4>
+                <h5>Исходный массив</h5>
+                <div class="array-container" id="original-array"></div>
+
+                <div class="controls">
+                    <button onclick="resetArray()">Сбросить массив</button>
+                    <button onclick="addElement()">Добавить случайный элемент</button>
+                    <button onclick="removeElement()">Удалить последний элемент</button>
+                </div>
+
+                <h5>Методы массивов</h5>
+
+                <h6>push() - добавляет элементы в конец массива</h6>
+                <div class="code">array.push(element) → возвращает новую длину массива</div>
+                <div class="controls">
+                    <button onclick="demonstratePush()">Выполнить push(99)</button>
+                </div>
+                <div class="result" id="push-result"></div>
+
+                <h6>pop() - удаляет последний элемент массива</h6>
+                <div class="code">array.pop() → возвращает удаленный элемент</div>
+                <div class="controls">
+                    <button onclick="demonstratePop()">Выполнить pop()</button>
+                </div>
+                <div class="result" id="pop-result"></div>
+
+                <h6>map() - создает новый массив с результатами вызова функции</h6>
+                <div class="code">array.map(callback) → возвращает новый массив</div>
+                <div class="controls">
+                    <button onclick="demonstrateMap()">Выполнить map(x => x * 2)</button>
+                </div>
+                <p>Результат (новый массив):</p>
+                <div class="array-container" id="map-result-array"></div>
+                <div class="result" id="map-result-text"></div>
+
+                <h6>filter() - создает новый массив с элементами, прошедшими проверку</h6>
+                <div class="code">array.filter(callback) → возвращает новый массив</div>
+                <div class="controls">
+                    <button onclick="demonstrateFilter()">Выполнить filter(x => x % 2 === 0)</button>
+                </div>
+                <p>Результат (новый массив):</p>
+                <div class="array-container" id="filter-result-array"></div>
+                <div class="result" id="filter-result-text"></div>
+
+                <h6>reduce() - сводит массив к одному значению</h6>
+                <div class="code">array.reduce(callback, initialValue) → возвращает результат</div>
+                <div class="controls">
+                    <button onclick="demonstrateReduce()">Выполнить reduce((sum, x) => sum + x, 0)</button>
+                </div>
+                <div class="result" id="reduce-result"></div>
+            </div>
+        </section>
+
+        <h2 id="проекты-для-закрепления-гайд">Проекты для закрепления</h2>
+        <p>Для закрепления изученного материала рекомендуется выполнить несколько практических проектов. Подробные
+            описания и примеры логики можно найти в разделе <a href="projects.html">Проекты</a>.</p>
+
+        <section id="мини-проекты-гайд" class="fade-in visible">
+            <h3>Мини-проекты</h3>
+            <ol>
+                <li><strong>Калькулятор:</strong> Базовые операции, работа с DOM, события.</li>
+                <li><strong>Список задач (Todo List):</strong> Добавление, удаление, отметка выполнения, работа с
+                    массивами и DOM.</li>
+                <li><strong>Викторина (Quiz):</strong> Отображение вопросов, проверка ответов, подсчет очков.</li>
+            </ol>
+        </section>
+
+        <section id="проект-среднего-уровня-гайд" class="fade-in visible">
+            <h3>Проект среднего уровня</h3>
+            <p><strong>Приложение для управления финансами:</strong> Отслеживание доходов/расходов, категории,
+                фильтрация, (опционально) визуализация и сохранение данных.</p>
+        </section>
+
+        <h2 id="ресурсы-для-дальнейшего-изучения-гайд">Ресурсы для дальнейшего изучения</h2>
+        <p>Используйте эти ресурсы для углубления знаний и решения возникающих вопросов.</p>
+
+        <section id="книги-гайд" class="fade-in visible">
+            <h3>Книги</h3>
+            <ul>
+                <li>"JavaScript: The Good Parts" - Douglas Crockford (Классика, хоть и немного устаревшая)</li>
+                <li>"Eloquent JavaScript" - Marijn Haverbeke (Отличная книга с интерактивными примерами онлайн)</li>
+                <li>Серия "You Don't Know JS" - Kyle Simpson (Глубокое погружение в механизмы JS)</li>
+                <li>"JavaScript: The Definitive Guide" - David Flanagan (Объемный справочник)</li>
+            </ul>
+        </section>
+
+        <section id="онлайн-курсы-гайд" class="fade-in visible">
+            <h3>Онлайн-ресурсы и документация</h3>
+            <ul>
+                <li><a href="https://javascript.info/" target="_blank" rel="noopener noreferrer">JavaScript.info</a> -
+                    Современный учебник по JavaScript (есть русская версия).</li>
+                <li><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript" target="_blank"
+                        rel="noopener noreferrer">MDN Web Docs (JavaScript)</a> - Лучшая документация по
+                    веб-технологиям.</li>
+                <li><a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">freeCodeCamp</a> -
+                    Интерактивные уроки и проекты по веб-разработке.</li>
+                <li><a href="https://www.codecademy.com/learn/introduction-to-javascript" target="_blank"
+                        rel="noopener noreferrer">Codecademy (JavaScript)</a> - Интерактивные курсы (часть бесплатно).
+                </li>
+            </ul>
+        </section>
+
+        <section id="youtube-каналы-гайд" class="fade-in visible">
+            <h3>YouTube-каналы (Англ.)</h3>
+            <ul>
+                <li><a href="https://www.youtube.com/@TraversyMedia" target="_blank" rel="noopener noreferrer">Traversy
+                        Media</a></li>
+                <li><a href="https://www.youtube.com/@NetNinja" target="_blank" rel="noopener noreferrer">The Net
+                        Ninja</a></li>
+                <li><a href="https://www.youtube.com/@funfunfunction" target="_blank" rel="noopener noreferrer">Fun Fun
+                        Function</a> (Более концептуальный)</li>
+                <li><a href="https://www.youtube.com/@Academind" target="_blank" rel="noopener noreferrer">Academind</a>
+                </li>
+                <li><a href="https://www.youtube.com/@Fireship" target="_blank" rel="noopener noreferrer">Fireship</a>
+                    (Короткие и емкие видео)</li>
+            </ul>
+        </section>
+
+        <section id="инструменты-для-практики-гайд" class="fade-in visible">
+            <h3>Инструменты для практики</h3>
+            <ul>
+                <li><a href="https://codepen.io/" target="_blank" rel="noopener noreferrer">CodePen</a> -
+                    Онлайн-"песочница" для HTML, CSS, JS. Отлично для небольших демо.</li>
+                <li><a href="https://jsfiddle.net/" target="_blank" rel="noopener noreferrer">JSFiddle</a> - Еще одна
+                    популярная "песочница".</li>
+                <li><a href="https://codesandbox.io/" target="_blank" rel="noopener noreferrer">CodeSandbox</a> -
+                    Онлайн-редактор для создания полноценных веб-приложений.</li>
+                <li><a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer">LeetCode</a> / <a
+                        href="https://www.codewars.com/" target="_blank" rel="noopener noreferrer">Codewars</a> -
+                    Платформы для решения алгоритмических задач на разных языках, включая JS.</li>
+            </ul>
+        </section>
+
+        <section id="сообщества" class="fade-in visible">
+            <h3>Сообщества</h3>
+            <ul>
+                <li><a href="https://stackoverflow.com/questions/tagged/javascript" target="_blank"
+                        rel="noopener noreferrer">Stack Overflow (JavaScript tag)</a> - Задавайте вопросы и ищите
+                    ответы.</li>
+                <li><a href="https://www.reddit.com/r/javascript/" target="_blank" rel="noopener noreferrer">Reddit
+                        r/javascript</a> - Обсуждения, новости, вопросы.</li>
+                <li><a href="https://dev.to/t/javascript" target="_blank" rel="noopener noreferrer">Dev.to (JavaScript
+                        tag)</a> - Статьи, туториалы, обсуждения от разработчиков.</li>
+                <li><a href="https://javascriptweekly.com/" target="_blank" rel="noopener noreferrer">JavaScript
+                        Weekly</a> - Еженедельная email-рассылка с новостями и статьями.</li>
+            </ul>
+        </section>
+
         <div class="navigation-buttons">
             <a href="../index.html" class="button">← На главную</a>
             <a href="basics.html" class="button">Основы →</a>
@@ -360,129 +1215,160 @@ console.log("5. Средняя оценка (reduce):", averageGrade.toFixed(2))
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script>
+        // Глобальная переменная для хранения текущего состояния массива в демо
         let currentArray = [1, 2, 3, 4, 5];
 
+        // Функция для отрисовки массива в указанном контейнере
         function renderArray(containerId, array) {
             const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = "";
+            if (!container) return; // Выходим, если контейнер не найден
+            container.innerHTML = ""; // Очищаем контейнер
+            // Создаем div для каждого элемента массива
             array.forEach(item => {
                 const element = document.createElement("div");
-                element.className = "array-element";
-                element.textContent = item;
-                container.appendChild(element);
+                element.className = "array-element"; // Присваиваем класс для стилизации
+                element.textContent = item; // Устанавливаем текст элемента
+                container.appendChild(element); // Добавляем элемент в контейнер
             });
         }
 
+        // Функция для сброса массива к начальному состоянию
         function resetArray() {
-            currentArray = [1, 2, 3, 4, 5];
-            renderArray("original-array", currentArray);
-            clearDemoResults();
+            currentArray = [1, 2, 3, 4, 5]; // Восстанавливаем исходные значения
+            renderArray("original-array", currentArray); // Перерисовываем исходный массив
+            clearDemoResults(); // Очищаем все поля с результатами методов
         }
 
+        // Функция для добавления случайного элемента в массив
         function addElement() {
-            const newValue = Math.floor(Math.random() * 100);
-            currentArray.push(newValue);
-            renderArray("original-array", currentArray);
-            clearDemoResults();
+            const newValue = Math.floor(Math.random() * 100); // Случайное число от 0 до 99
+            currentArray.push(newValue); // Добавляем в конец
+            renderArray("original-array", currentArray); // Перерисовываем
+            clearDemoResults(); // Очищаем результаты
         }
 
+        // Функция для удаления последнего элемента
         function removeElement() {
-            if (currentArray.length > 0) {
-                currentArray.pop();
-                renderArray("original-array", currentArray);
-                clearDemoResults();
+            if (currentArray.length > 0) { // Проверяем, есть ли что удалять
+                currentArray.pop(); // Удаляем последний
+                renderArray("original-array", currentArray); // Перерисовываем
+                clearDemoResults(); // Очищаем результаты
+            } else {
+                alert("Массив уже пуст!"); // Сообщаем, если массив пуст
             }
         }
 
+        // Функция для очистки всех полей с результатами демонстрации методов
         function clearDemoResults() {
-            const resultIds = ["push-result", "pop-result", "map-result-array", "map-result-text", "filter-result-array", "filter-result-text", "reduce-result"];
+            const resultIds = [
+                "push-result",
+                "pop-result",
+                "map-result-array", "map-result-text",
+                "filter-result-array", "filter-result-text",
+                "reduce-result"
+            ];
             resultIds.forEach(id => {
                 const el = document.getElementById(id);
-                if (el) el.innerHTML = "";
+                if (el) el.innerHTML = ""; // Очищаем содержимое элемента
             });
         }
 
+        // Функция для демонстрации метода push()
         function demonstratePush() {
-            clearDemoResults();
-            const arrayCopy = [...currentArray];
-            const result = arrayCopy.push(99);
-            renderArray("original-array", arrayCopy); // Обновляем отображение исходного массива
+            clearDemoResults(); // Очищаем предыдущие результаты
+            const arrayCopy = [...currentArray]; // Создаем копию, чтобы показать изменение
+            const newLength = arrayCopy.push(99); // Выполняем push, получаем новую длину
+            renderArray("original-array", arrayCopy); // Обновляем отображение основного массива
             const resultEl = document.getElementById("push-result");
             if (resultEl) {
+                // Выводим информацию о результате
                 resultEl.innerHTML = `
-                <p>Результат вызова <code>push(99)</code>: ${result} (новая длина массива)</p>
-                <p>Исходный массив изменен.</p>
+                <p>Результат вызова <code>push(99)</code>: ${newLength} (новая длина массива)</p>
+                <p>Исходный массив <strong>изменен</strong>.</p>
                `;
             }
-            currentArray = arrayCopy; // Сохраняем измененный массив
+            currentArray = arrayCopy; // Сохраняем измененный массив для следующих демонстраций
         }
 
+        // Функция для демонстрации метода pop()
         function demonstratePop() {
             clearDemoResults();
             const resultEl = document.getElementById("pop-result");
             if (!resultEl) return;
 
-            if (currentArray.length === 0) {
-                resultEl.innerHTML = `<p>Массив пуст, нечего удалять</p>`;
+            if (currentArray.length === 0) { // Проверка на пустой массив
+                resultEl.innerHTML = `<p>Массив пуст, метод pop() не применен.</p>`;
                 return;
             }
 
-            const arrayCopy = [...currentArray];
-            const result = arrayCopy.pop();
-            renderArray("original-array", arrayCopy); // Обновляем отображение исходного массива
+            const arrayCopy = [...currentArray]; // Копия для демонстрации
+            const removedElement = arrayCopy.pop(); // Выполняем pop, получаем удаленный элемент
+            renderArray("original-array", arrayCopy); // Обновляем основной массив
             resultEl.innerHTML = `
-              <p>Результат вызова <code>pop()</code>: ${result} (удаленный элемент)</p>
-              <p>Исходный массив изменен.</p>
+              <p>Результат вызова <code>pop()</code>: ${removedElement} (удаленный элемент)</p>
+              <p>Исходный массив <strong>изменен</strong>.</p>
             `;
             currentArray = arrayCopy; // Сохраняем измененный массив
         }
 
+        // Функция для демонстрации метода map()
         function demonstrateMap() {
             clearDemoResults();
+            // map() создает НОВЫЙ массив, не изменяя исходный
             const resultArray = currentArray.map(x => x * 2);
+            // Отображаем результат в отдельном контейнере
             renderArray("map-result-array", resultArray);
             const resultTextEl = document.getElementById("map-result-text");
             if (resultTextEl) {
                 resultTextEl.innerHTML = `
-                <p>Результат вызова <code>map(x => x * 2)</code></p>
-                <p>Исходный массив не изменен.</p>
+                <p>Результат вызова <code>map(x => x * 2)</code> (новый массив)</p>
+                <p>Исходный массив <strong>не изменен</strong>.</p>
                `;
             }
         }
 
+        // Функция для демонстрации метода filter()
         function demonstrateFilter() {
             clearDemoResults();
-            const resultArray = currentArray.filter(x => x % 2 === 0);
+            // filter() создает НОВЫЙ массив, не изменяя исходный
+            const resultArray = currentArray.filter(x => x % 2 === 0); // Оставляем только четные
+            // Отображаем результат в отдельном контейнере
             renderArray("filter-result-array", resultArray);
             const resultTextEl = document.getElementById("filter-result-text");
             if (resultTextEl) {
                 resultTextEl.innerHTML = `
-                    <p>Результат вызова <code>filter(x => x % 2 === 0)</code></p>
-                    <p>Исходный массив не изменен.</p>
+                    <p>Результат вызова <code>filter(x => x % 2 === 0)</code> (новый массив)</p>
+                    <p>Исходный массив <strong>не изменен</strong>.</p>
                 `;
             }
         }
 
+        // Функция для демонстрации метода reduce()
         function demonstrateReduce() {
             clearDemoResults();
-            const result = currentArray.reduce((sum, x) => sum + x, 0);
+            // reduce() сводит массив к одному значению, не изменяя исходный
+            const result = currentArray.reduce((sum, x) => sum + x, 0); // Считаем сумму
             const resultEl = document.getElementById("reduce-result");
             if (resultEl) {
                 resultEl.innerHTML = `
                     <p>Результат вызова <code>reduce((sum, x) => sum + x, 0)</code>: ${result}</p>
-                    <p>Исходный массив не изменен.</p>
+                    <p>Исходный массив <strong>не изменен</strong>.</p>
                 `;
             }
         }
 
-        // Инициализация демонстрации массивов при загрузке
+        // --- Инициализация при загрузке страницы ---
+        // Используем 'load', чтобы убедиться, что все ресурсы (включая стили) загружены
+        // и размеры контейнеров определены корректно, если это важно для рендеринга.
+        // Хотя для простого текста 'DOMContentLoaded' тоже подошел бы.
         window.addEventListener('load', () => {
+            // Первичная отрисовка исходного массива при загрузке страницы
             renderArray("original-array", currentArray);
         });
 
-        // Инициализация Prism после загрузки DOM
+        // Инициализация Prism для подсветки синтаксиса после загрузки DOM
         document.addEventListener('DOMContentLoaded', (event) => {
+            // Prism.highlightAll() найдет все теги code с классом language-* и подсветит их
             Prism.highlightAll();
         });
     </script>
@@ -491,154 +1377,4 @@ console.log("5. Средняя оценка (reduce):", averageGrade.toFixed(2))
 </html>
 ```
 
-И вот **обновленный JavaScript-код файла `learning_guide.js`** с комментариями, объясняющими логику запуска примеров
-упражнений:
-
-
-```javascript
-// ===== Файл: js/learning_guide.js =====
-// Этот файл содержит логику для кнопок "Запустить пример" на странице learning_guide.html.
-// Он позволяет выполнять код упражнений, представленный в HTML, и выводить результат.
-
-// --- Логика для выполнения примеров на странице learning_guide.html ---
-// Оборачиваем весь код в DOMContentLoaded, чтобы гарантировать,
-// что HTML-структура страницы полностью загружена перед тем, как мы начнем искать кнопки.
-document.addEventListener('DOMContentLoaded', () => {
-// Находим ВСЕ кнопки на странице, у которых есть CSS-класс 'run-code'.
-document.querySelectorAll('.run-code').forEach(button => {
-// Для каждой найденной кнопки добавляем обработчик события 'click'.
-button.addEventListener('click', () => {
-// --- Поиск связанных элементов ---
-// Находим ближайший родительский элемент с классом 'code-block'.
-// Это контейнер для блока кода, кнопок и вывода.
-const codeBlock = button.closest('.code-block');
-if (!codeBlock) {
-// Если не нашли родительский блок, выводим предупреждение в консоль и выходим.
-console.warn("Не найден родительский '.code-block' для кнопки.");
-return;
-}
-// Внутри родительского блока ищем элемент
-<pre><code>, содержащий код примера.
-            const codeElement = codeBlock.querySelector('pre code');
-            // Внутри родительского блока ищем элемент <div class="output"> для вывода результата.
-            const outputDiv = codeBlock.querySelector('.output');
-
-            // Проверяем, найдены ли оба элемента.
-            if (!codeElement || !outputDiv) {
-                console.warn("Не найдены элементы 'pre code' или 'div.output' внутри '.code-block'.");
-                return; // Выходим, если что-то не найдено.
-            }
-
-            // Получаем ID примера из атрибута 'data-example' кнопки (может пригодиться для специфической логики).
-            const exampleId = button.getAttribute('data-example');
-            // Очищаем содержимое блока вывода от результатов предыдущего запуска.
-            outputDiv.innerHTML = '';
-            // Убираем класс 'error', если он был добавлен при предыдущей ошибке.
-            outputDiv.classList.remove('error');
-
-            // --- Перехват методов console ---
-            // Сохраняем оригинальные функции console, чтобы можно было их вернуть позже.
-            const originalConsoleLog = console.log;
-            const originalConsoleError = console.error;
-            const originalConsoleWarn = console.warn;
-            // Создаем массив для сбора всех сообщений, перехваченных из console.
-            const logs = [];
-
-            // Универсальная функция-обработчик для перехвата вызовов console.
-            const logHandler = (type) => (...args) => { // Принимает тип ('log', 'error', 'warn')
-                // Форматируем все аргументы, переданные в console, для удобного отображения.
-                const formattedArgs = args.map(arg => {
-                    if (arg instanceof Error) { // Специальная обработка объектов Error.
-                        // Выводим сообщение и первые строки стека вызовов.
-                        return `Error: ${arg.message}\n${arg.stack ? arg.stack.split('\n').slice(0, 2).join('\n') : ''}`;
-                    }
-                    if (typeof arg === 'object' && arg !== null) { // Обработка других объектов.
-                        try {
-                            // Пытаемся преобразовать в красивую JSON-строку.
-                            return JSON.stringify(arg, null, 2);
-                        } catch (e) {
-                            // Если не получилось (например, циклические ссылки), возвращаем заглушку.
-                            return '[Circular Object]';
-                        }
-                    }
-                    // Все остальное просто преобразуем в строку.
-                    return String(arg);
-                });
-                // Добавляем отформатированное сообщение и его тип в наш массив логов.
-                logs.push({ type: type, message: formattedArgs.join(' ') });
-                // Вызываем ОРИГИНАЛЬНЫЙ метод console, чтобы сообщения также появлялись в консоли браузера.
-                if (type === 'error') originalConsoleError.apply(console, args);
-                else if (type === 'warn') originalConsoleWarn.apply(console, args);
-                else originalConsoleLog.apply(console, args);
-            };
-
-            // Переназначаем стандартные методы console на нашу функцию-обработчик.
-            console.log = logHandler('log');
-            console.error = logHandler('error');
-            console.warn = logHandler('warn');
-            // --- Конец перехвата console ---
-
-            // --- Выполнение кода примера ---
-            try {
-                // Получаем текстовое содержимое элемента <code> (это и есть код упражнения).
-                const codeText = codeElement.textContent;
-                // Создаем новую функцию "на лету" из строки с кодом.
-                // Это позволяет выполнить код, написанный как текст в HTML.
-                const userCode = new Function(codeText);
-                // Выполняем созданную функцию (код упражнения).
-                userCode();
-                // --- Конец выполнения кода ---
-
-                // --- Вывод результата в <div class="output"> ---
-                // Проверяем, были ли сообщения в перехваченной консоли.
-                if (logs.length > 0) {
-                    // Если были, перебираем массив логов.
-                    logs.forEach(log => {
-                        // Для каждого сообщения создаем новый элемент <p>.
-                        const p = document.createElement('p');
-                        // Используем innerHTML для корректного отображения переносов строк (\n -> <br>).
-                        p.innerHTML = log.message.replace(/\n/g, '<br>');
-                        // Добавляем CSS-класс в зависимости от типа сообщения (log-info, log-warn, log-error).
-                        p.classList.add(`log-${log.type}`);
-                        // Если это была ошибка, добавляем класс 'error' ко всему блоку вывода.
-                        if (log.type === 'error') outputDiv.classList.add('error');
-                        // Добавляем созданный параграф в блок вывода.
-                        outputDiv.appendChild(p);
-                    });
-                } else {
-                    // Если в ходе выполнения кода не было вызовов console.
-                    const p = document.createElement('p');
-                    p.textContent = "Код выполнен без вывода в console.";
-                    p.classList.add('log-info', 'italic'); // Добавляем стилизующие классы.
-                    outputDiv.appendChild(p);
-                }
-                 // --- Конец вывода результата ---
-
-            } catch (error) {
-                // --- Обработка ошибок, возникших при ВЫПОЛНЕНИИ кода упражнения ---
-                // Выводим ошибку в консоль (сработает наш перехватчик и добавит в logs).
-                console.error("Ошибка выполнения кода примера:", error);
-                 // Дополнительно выводим сообщение об ошибке в outputDiv,
-                 // если она не попала в logs (маловероятно, но для надежности).
-                 if (!logs.some(log => log.type === 'error')) {
-                     const p = document.createElement('p');
-                     p.innerHTML = `Ошибка выполнения: ${error.name}: ${error.message.replace(/\n/g, '<br>')}`;
-                     p.classList.add('log-error');
-                     outputDiv.appendChild(p);
-                     outputDiv.classList.add('error'); // Помечаем весь блок как ошибочный.
-                 }
-                 // --- Конец обработки ошибок ---
-            } finally {
-                // --- Восстановление оригинальных методов console ---
-                // Блок finally выполняется всегда, после try или catch.
-                // Возвращаем стандартные функции console на место, чтобы не мешать другим скриптам.
-                console.log = originalConsoleLog;
-                console.error = originalConsoleError;
-                console.warn = originalConsoleWarn;
-                 // --- Конец восстановления console ---
-            }
-        }); // Конец обработчика 'click'
-    }); // Конец forEach для кнопок
-}); // Конец обработчика 'DOMContentLoaded'
-
-// --- Конец файла learning_guide.js ---
+Пожалуйста, замени код в своем файле `learning_guide.html` на этот. Надеюсь, теперь все будет отображаться коррект
