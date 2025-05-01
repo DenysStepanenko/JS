@@ -162,56 +162,16 @@
 const images = [
   {
     // preview: ссылка на маленькое изображение (для отображения в сетке галереи)
-    preview: 'https://placehold.co/600x400/000020/00ffff?text=Neon+Cityscape+Prev',
+    preview: '../img/image1-preview.jpg', // &lt;-- ЗАМЕНИ НА СВОЙ ФАЙЛ
     // original: ссылка на большое изображение (для модального окна)
-    original: 'https://placehold.co/1280x720/000020/00ffff?text=Neon+Cityscape',
+    original: '../img/image1-original.jpg', // &lt;-- ЗАМЕНИ НА СВОЙ ФАЙЛ
     // description: текстовое описание изображения
-    description: 'Неоновый городской пейзаж под дождем',
+    description: 'Киберпанк-детектив', // &lt;-- ЗАМЕНИ НА СВОЕ ОПИСАНИЕ
   },
-  {
-    preview: 'https://placehold.co/600x400/1a001a/ff00ff?text=Cyborg+Alley+Prev',
-    original: 'https://placehold.co/1280x720/1a001a/ff00ff?text=Cyborg+Alley',
-    description: 'Киборг в темном переулке',
-  },
-  {
-    preview: 'https://placehold.co/600x400/202020/00ff00?text=Data+Stream+Prev',
-    original: 'https://placehold.co/1280x720/202020/00ff00?text=Data+Stream',
-    description: 'Поток цифровых данных',
-  },
-  {
-    preview: 'https://placehold.co/600x400/0d0d0d/ff4500?text=Rainy+Streets+Prev',
-    original: 'https://placehold.co/1280x720/0d0d0d/ff4500?text=Rainy+Streets',
-    description: 'Дождливые улицы мегаполиса ночью',
-  },
-  {
-    preview: 'https://placehold.co/600x400/001f3f/7fdbff?text=Hologram+Ad+Prev',
-    original: 'https://placehold.co/1280x720/001f3f/7fdbff?text=Hologram+Ad',
-    description: 'Голографическая реклама в городе будущего',
-  },
-  {
-    preview: 'https://placehold.co/600x400/301934/f0e68c?text=Tech+Noir+Prev',
-    original: 'https://placehold.co/1280x720/301934/f0e68c?text=Tech+Noir',
-    description: 'Атмосфера тек-нуара',
-  },
-  {
-    preview: 'https://placehold.co/600x400/4b0082/ee82ee?text=Cyberpunk+Rider+Prev',
-    original: 'https://placehold.co/1280x720/4b0082/ee82ee?text=Cyberpunk+Rider',
-    description: 'Гонщик на футуристическом байке',
-  },
-  {
-    preview: 'https://placehold.co/600x400/111111/ffcc00?text=Glitch+Art+Prev',
-    original: 'https://placehold.co/1280x720/111111/ffcc00?text=Glitch+Art',
-    description: 'Абстрактный глитч-арт',
-  },
-  {
-    preview: 'https://placehold.co/600x400/003366/ccffff?text=Android+Dream+Prev',
-    original: 'https://placehold.co/1280x720/003366/ccffff?text=Android+Dream',
-    description: 'Задумчивый андроид',
-  },
+  // ... (остальные объекты с твоими путями и описаниями) ...
 ];
-// Выведем массив в консоль, чтобы убедиться, что он создан.
 // (Этот console.log будет в gallery.js, здесь он для примера)
-// console.log("Массив данных images (Киберпанк):", images);
+// console.log("Массив данных images:", images);
 </code></pre>
                 <button class="copy-code">Скопировать данные</button>
                 <button class="toggle-code">Скрыть код</button>
@@ -222,38 +182,21 @@ const images = [
             <h3>3. Создание разметки элементов галереи</h3>
             <p>Теперь, имея данные и контейнер, мы можем динамически создать HTML-разметку для каждого элемента галереи
                 и вставить ее на страницу.</p>
-            <p>Мы будем использовать:</p>
-            <ul>
-                <li>Метод массива <code>map()</code> для преобразования каждого объекта из массива <code>images</code> в
-                    HTML-строку элемента <code>&lt;li&gt;</code>.</li>
-                <li>Шаблонные строки (обратные кавычки `` ` ``) для удобного создания HTML-строк с переменными.</li>
-                <li>Деструктуризацию объектов (<code>{ preview, original, description }</code>) для легкого доступа к
-                    свойствам объекта внутри <code>map()</code>.</li>
-                <li>Метод массива <code>join('')</code> для объединения массива HTML-строк в одну большую строку.</li>
-                <li>Свойство <code>innerHTML</code> или метод <code>insertAdjacentHTML</code> для вставки
-                    сгенерированной разметки в наш <code>&lt;ul class="gallery"&gt;</code>.</li>
-            </ul>
             <p>Пример кода (этот код также нужно добавить в ваш файл <code>gallery.js</code>, после массива
                 <code>images</code>):
             </p>
             <div class="code-block">
                 <pre><code class="language-javascript">// ===== Создание и добавление разметки галереи =====
 // (Этот код должен быть в gallery.js)
-// console.log("===== 3. Создание разметки элементов галереи =====");
 
 // Находим наш контейнер галереи &lt;ul class="gallery"&gt; в документе.
 const galleryContainer = document.querySelector('.gallery');
 
-// Проверяем, найден ли контейнер (на случай ошибки в HTML).
+// Проверяем, найден ли контейнер.
 if (galleryContainer) {
-    // console.log("   Контейнер .gallery найден.");
-
     // Создаем HTML-разметку для всех элементов галереи.
-    // 1. Используем map() для перебора массива images.
-    //    Для каждого объекта { preview, original, description } в массиве...
     const galleryMarkup = images.map(({ preview, original, description }) => {
-        // ...возвращаем строку HTML для элемента &lt;li&gt;, используя шаблонную строку.
-        // Внутри строки подставляем нужные значения в атрибуты.
+        // Возвращаем строку HTML для элемента &lt;li&gt;.
         return `
         &lt;li class="gallery-item"&gt;
           &lt;a class="gallery-link" href="${original}"&gt;
@@ -265,18 +208,13 @@ if (galleryContainer) {
             /&gt;
           &lt;/a&gt;
         &lt;/li&gt;
-        `; // Важно: data-source хранит ссылку на БОЛЬШОЕ изображение.
-    })
-    // 2. Используем join('') для объединения всех созданных строк &lt;li&gt; в одну большую строку HTML.
-    .join('');
+        `;
+    }).join('');
 
-    // 3. Вставляем всю созданную HTML-разметку внутрь контейнера .gallery.
-    // Используем insertAdjacentHTML('beforeend', ...) - это немного эффективнее, чем innerHTML += ...
+    // Вставляем всю созданную HTML-разметку внутрь контейнера .gallery.
     galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
-    // console.log("   Разметка галереи успешно создана и добавлена в DOM.");
 
 } else {
-    // Если контейнер .gallery не найден на странице.
     console.error("Ошибка: Контейнер .gallery не найден на странице!");
 }
 </code></pre>
@@ -284,83 +222,74 @@ if (galleryContainer) {
                 <button class="toggle-code">Скрыть код</button>
             </div>
             <p>После выполнения этого кода в вашем списке <code>&lt;ul class="gallery"&gt;</code> появятся элементы
-                <code>&lt;li&gt;</code> с новыми изображениями.
+                <code>&lt;li&gt;</code> с изображениями.
             </p>
         </section>
 
         <section id="gallery-styling" class="fade-in visible">
             <h3>4. Стилизация галереи</h3>
-            <p>Чтобы галерея выглядела аккуратно, добавим CSS-стили. Мы можем разместить их в теге
-                <code>&lt;style&gt;</code> внутри <code>&lt;head&gt;</code> нашего HTML или, что предпочтительнее для
-                больших проектов, в отдельном CSS-файле (например, <code>../css/style.css</code>), который мы уже
-                подключили.
+            <p>Добавим CSS-стили для отображения галереи в виде сетки. Эти стили можно добавить в
+                <code>&lt;style&gt;</code> или в файл <code>../css/style.css</code>.
             </p>
-            <p>Основные идеи стилизации:</p>
-            <ul>
-                <li>Использовать <code>display: flex</code> и <code>flex-wrap: wrap</code> для контейнера
-                    <code>.gallery</code>, чтобы элементы располагались в ряд и переносились на новую строку.
-                </li>
-                <li>Задать базовую ширину для <code>.gallery-item</code> с помощью <code>flex-basis</code> (например,
-                    для 3 колонок с отступом <code>gap: 16px</code>: <code>calc((100% - 32px) / 3)</code>).</li>
-                <li>Использовать <code>object-fit: cover;</code> для <code>.gallery-image</code>, чтобы изображение
-                    заполняло контейнер, сохраняя пропорции и обрезая лишнее.</li>
-                <li>Добавить медиа-запросы (<code>@media</code>) для адаптивности (например, 2 колонки на планшетах, 1
-                    на мобильных).</li>
-                <li>Добавить эффект при наведении (<code>:hover</code>) для интерактивности.</li>
-            </ul>
-            <p>Пример CSS (этот код уже добавлен в <code>&lt;style&gt;</code> в шапке этого HTML-файла, но лучше
-                перенести его в <code>../css/style.css</code>):</p>
             <div class="code-block">
                 <pre><code class="language-css">/* Базовые стили для галереи */
 .gallery {
-  display: flex; /* Используем Flexbox для расположения элементов */
-  flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
-  gap: 16px; /* Промежуток между элементами */
-  list-style: none; /* Убираем маркеры списка */
-  padding: 24px; /* Внутренний отступ контейнера */
-  margin: 0 auto; /* Центрируем галерею, если есть max-width */
-  max-width: 1128px; /* Ограничиваем максимальную ширину */
-  justify-content: center; /* Центрируем элементы по горизонтали */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 1128px;
+  justify-content: center;
 }
 
 .gallery-item {
-  /* Расчет ширины для 3 элементов в ряду с учетом промежутка */
   flex-basis: calc((100% - 32px) / 3);
-  transition: transform 0.3s ease; /* Плавный переход для ховера */
-  border-radius: 4px; /* Небольшое скругление */
-  overflow: hidden; /* Скрываем части изображения, выходящие за рамки */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень */
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Тень для темной темы */
 }
+body.light-theme .gallery-item {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень для светлой темы */
+}
+
 .gallery-item:hover {
-    transform: scale(1.03); /* Немного увеличиваем при наведении */
+    transform: scale(1.03);
 }
 
 .gallery-link {
-  display: block; /* Ссылка занимает всю область элемента */
-  text-decoration: none; /* Убираем подчеркивание */
-  height: 100%; /* Ссылка растягивается на всю высоту */
+  display: block;
+  text-decoration: none;
+  height: 100%;
 }
 
 .gallery-image {
-  display: block; /* Убираем лишний отступ под изображением */
-  width: 100%; /* Изображение занимает всю ширину */
-  height: 200px; /* Фиксированная высота для превью */
-  object-fit: cover; /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-/* Адаптивность (пример для 2 колонок на средних экранах) */
+/* Адаптивность */
 @media (max-width: 768px) {
     .gallery-item { flex-basis: calc((100% - 16px) / 2); }
 }
-/* Адаптивность (пример для 1 колонки на маленьких экранах) */
 @media (max-width: 480px) {
     .gallery-item { flex-basis: 100%; }
     .gallery { padding: 16px; gap: 16px; }
 }
-/* Стили для модального окна basicLightbox (если нужны кастомные) */
+
+/* Стили для модального окна basicLightbox */
+.basicLightbox {
+    background: rgba(0, 0, 0, 0.85);
+}
 .basicLightbox__placeholder img {
-    max-width: 90vw; /* Ограничиваем ширину изображения в модалке */
-    max-height: 90vh; /* Ограничиваем высоту изображения в модалке */
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 4px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень */
 }
 </code></pre>
                 <button class="copy-code">Скопировать CSS</button>
@@ -370,31 +299,11 @@ if (galleryContainer) {
 
         <section id="gallery-event-delegation" class="fade-in visible">
             <h3>5. Делегирование событий для кликов</h3>
-            <p>Чтобы отслеживать клики на изображениях галереи, мы не будем добавлять слушатель событий на каждый
-                элемент <code>&lt;li&gt;</code> или <code>&lt;img&gt;</code> (это неэффективно, особенно для больших
-                галерей). Вместо этого используем <strong>делегирование событий</strong>.</p>
-            <p>Идея делегирования:</p>
-            <ol>
-                <li>Добавляем <strong>один</strong> слушатель событий (например, <code>'click'</code>) на общего предка
-                    всех элементов галереи — наш контейнер <code>&lt;ul class="gallery"&gt;</code>.</li>
-                <li>Когда происходит клик внутри контейнера, событие "всплывает" вверх по DOM-дереву и достигает нашего
-                    контейнера <code>&lt;ul&gt;</code>, где срабатывает слушатель.</li>
-                <li>Внутри обработчика события мы проверяем <strong>цель события</strong> (<code>event.target</code>) —
-                    элемент, на котором изначально произошел клик.</li>
-                <li>Мы проверяем, был ли клик именно на элементе изображения
-                    (<code>&lt;img class="gallery-image"&gt;</code>). Используем метод
-                    <code>event.target.closest('.gallery-image')</code> для надежности.
-                </li>
-                <li>Если клик был на нужном элементе, мы извлекаем необходимую информацию (например, URL большого
-                    изображения из атрибута <code>data-source</code>).</li>
-                <li>Также важно отменить стандартное действие браузера для ссылки (переход по <code>href</code>) с
-                    помощью <code>event.preventDefault()</code>.</li>
-            </ol>
-            <p>Пример кода (добавить в <code>gallery.js</code>, после кода создания разметки):</p>
+            <p>Используем делегирование событий на контейнере <code>.gallery</code> для отслеживания кликов по
+                изображениям.</p>
             <div class="code-block">
                 <pre><code class="language-javascript">// ===== Делегирование событий на галерее =====
 // (Этот код должен быть в gallery.js)
-// console.log("===== 5. Делегирование событий =====");
 
 // Находим контейнер галереи (если он не был сохранен ранее).
 const galleryDelegateContainer = document.querySelector('.gallery');
@@ -403,37 +312,29 @@ const galleryDelegateContainer = document.querySelector('.gallery');
 if (galleryDelegateContainer) {
     // Добавляем ОДИН слушатель события 'click' на весь контейнер &lt;ul&gt;.
     galleryDelegateContainer.addEventListener('click', (event) => {
-        // event - объект события.
-
-        // 1. Отменяем действие по умолчанию для клика по ссылке (переход по href).
+        // Отменяем действие по умолчанию для ссылки.
         event.preventDefault();
 
-        // 2. Определяем элемент, на который кликнули (event.target).
-        // Используем closest('.gallery-image'), чтобы найти само изображение,
-        // даже если клик пришелся на ссылку (&lt;a&gt;) вокруг него.
+        // Ищем ближайший элемент .gallery-image, по которому кликнули.
         const targetImage = event.target.closest('.gallery-image');
 
         // Если клик был не по изображению, выходим.
-        if (!targetImage) {
-            // console.log("   Клик был не по изображению (.gallery-image). Игнорируем.");
-            return;
-        }
+        if (!targetImage) return;
 
-        // 4. Получаем URL большого изображения из data-атрибута 'source'.
+        // Получаем URL большого изображения.
         const largeImageURL = targetImage.dataset.source;
 
-        // 5. Если URL получен, выводим его в консоль (пока что).
+        // Если URL есть, выводим его (позже здесь будет открытие модалки).
         if (largeImageURL) {
-            console.log(`   Клик по изображению! URL большого изображения: ${largeImageURL}`);
-            // На следующем этапе здесь будет код для открытия модального окна.
+            console.log(`Клик по изображению! URL: ${largeImageURL}`);
+            // Код для basicLightbox будет добавлен на следующем шаге.
         } else {
-            console.warn("   Не найден атрибут data-source у изображения.");
+            console.warn("Не найден атрибут data-source.");
         }
     });
-    // console.log("   Слушатель кликов (делегирование) добавлен на .gallery.");
 
 } else {
-    console.error("Ошибка: Контейнер .gallery не найден для добавления слушателя событий!");
+    console.error("Ошибка: Контейнер .gallery не найден!");
 }
 </code></pre>
                 <button class="run-code" data-example="guide-delegation">Запустить пример</button>
@@ -441,46 +342,23 @@ if (galleryDelegateContainer) {
                 <button class="toggle-code">Скрыть код</button>
                 <div class="output"></div>
             </div>
-            <p>Теперь, если вы откроете страницу в браузере и кликнете на любое изображение в галерее, в консоли
-                разработчика должно появиться сообщение с URL большого изображения.</p>
         </section>
 
         <section id="gallery-basiclightbox" class="fade-in visible">
             <h3>6. Подключение и использование basicLightbox</h3>
-            <p>Для отображения полноразмерного изображения при клике мы используем библиотеку
-                <code>basicLightbox</code>. Мы уже подключили ее CSS и JS файлы через CDN в секции
-                <code>&lt;head&gt;</code> и перед закрывающим <code>&lt;/body&gt;</code> соответственно.
-            </p>
-            <p>Теперь нужно обновить наш обработчик кликов в <code>gallery.js</code>:</p>
-            <ol>
-                <li>Вместо вывода URL в консоль, мы будем создавать экземпляр модального окна с помощью
-                    <code>basicLightbox.create()</code>.
-                </li>
-                <li>Внутрь модального окна мы передадим HTML-строку с тегом <code>&lt;img&gt;</code>, у которого
-                    <code>src</code> будет равен URL большого изображения (<code>largeImageURL</code>), а
-                    <code>alt</code> - описанию изображения.
-                </li>
-                <li>Вызовем метод <code>.show()</code> у созданного экземпляра, чтобы открыть модальное окно.</li>
-                <li>(Опционально, но рекомендуется) Добавим слушатель события `keydown` на `document` для закрытия
-                    модального окна по клавише `Escape`. Важно не забыть удалить этот слушатель после закрытия окна,
-                    чтобы он не накапливался.</li>
-            </ol>
+            <p>Подключаем библиотеку <code>basicLightbox</code> и обновляем обработчик кликов для открытия модального
+                окна с полноразмерным изображением и возможностью закрытия по Escape.</p>
             <p>Финальный код для файла <code>gallery.js</code>:</p>
             <div class="code-block">
                 <pre><code class="language-javascript">// ===== Финальный код для gallery.js =====
-// console.log("===== Финальная версия gallery.js =====");
+// (Этот код должен быть в gallery.js)
 
-// --- 1. Массив данных для галереи (Киберпанк) ---
+// --- 1. Массив данных (замените пути и описания на свои) ---
 const images = [
-  { preview: 'https://placehold.co/600x400/000020/00ffff?text=Neon+Cityscape+Prev', original: 'https://placehold.co/1280x720/000020/00ffff?text=Neon+Cityscape', description: 'Неоновый городской пейзаж под дождем' },
-  { preview: 'https://placehold.co/600x400/1a001a/ff00ff?text=Cyborg+Alley+Prev', original: 'https://placehold.co/1280x720/1a001a/ff00ff?text=Cyborg+Alley', description: 'Киборг в темном переулке' },
-  { preview: 'https://placehold.co/600x400/202020/00ff00?text=Data+Stream+Prev', original: 'https://placehold.co/1280x720/202020/00ff00?text=Data+Stream', description: 'Поток цифровых данных' },
-  { preview: 'https://placehold.co/600x400/0d0d0d/ff4500?text=Rainy+Streets+Prev', original: 'https://placehold.co/1280x720/0d0d0d/ff4500?text=Rainy+Streets', description: 'Дождливые улицы мегаполиса ночью' },
-  { preview: 'https://placehold.co/600x400/001f3f/7fdbff?text=Hologram+Ad+Prev', original: 'https://placehold.co/1280x720/001f3f/7fdbff?text=Hologram+Ad', description: 'Голографическая реклама в городе будущего' },
-  { preview: 'https://placehold.co/600x400/301934/f0e68c?text=Tech+Noir+Prev', original: 'https://placehold.co/1280x720/301934/f0e68c?text=Tech+Noir', description: 'Атмосфера тек-нуара' },
-  { preview: 'https://placehold.co/600x400/4b0082/ee82ee?text=Cyberpunk+Rider+Prev', original: 'https://placehold.co/1280x720/4b0082/ee82ee?text=Cyberpunk+Rider', description: 'Гонщик на футуристическом байке' },
-  { preview: 'https://placehold.co/600x400/111111/ffcc00?text=Glitch+Art+Prev', original: 'https://placehold.co/1280x720/111111/ffcc00?text=Glitch+Art', description: 'Абстрактный глитч-арт' },
-  { preview: 'https://placehold.co/600x400/003366/ccffff?text=Android+Dream+Prev', original: 'https://placehold.co/1280x720/003366/ccffff?text=Android+Dream', description: 'Задумчивый андроид' },
+  { preview: '../img/image1-preview.jpg', original: '../img/image1-original.jpg', description: 'Киберпанк-детектив' },
+  { preview: '../img/image2-preview.jpg', original: '../img/image2-original.jpg', description: 'Робот-бармен' },
+  { preview: '../img/image3-preview.jpg', original: '../img/image3-original.jpg', description: 'Кибер-кот' },
+  // ... добавь остальные свои изображения ...
 ];
 
 // --- 2. Поиск контейнера галереи ---
@@ -488,7 +366,6 @@ const galleryContainer = document.querySelector('.gallery');
 
 // --- 3. Создание и добавление разметки галереи ---
 if (galleryContainer) {
-    // Создаем HTML-строку для всех элементов галереи.
     const galleryMarkup = images
       .map(({ preview, original, description }) => `
         &lt;li class="gallery-item"&gt;
@@ -503,62 +380,40 @@ if (galleryContainer) {
         &lt;/li&gt;
       `)
       .join('');
-    // Вставляем разметку в контейнер.
     galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
-    // console.log("Разметка галереи создана.");
 
     // --- 4. Делегирование и открытие модального окна basicLightbox ---
-    // Добавляем слушатель клика на контейнер.
     galleryContainer.addEventListener('click', (event) => {
-        // Отменяем стандартное действие ссылки.
         event.preventDefault();
-        // Ищем ближайший элемент .gallery-image, по которому кликнули.
         const targetImage = event.target.closest('.gallery-image');
-
-        // Если клик был не по изображению, выходим.
         if (!targetImage) return;
 
-        // Получаем URL большого изображения и описание.
         const largeImageURL = targetImage.dataset.source;
         const imageDescription = targetImage.alt;
-
-        // Если URL не найден, выходим.
         if (!largeImageURL) return;
 
-        // Объявляем переменную для хранения экземпляра basicLightbox.
-        let instance = null;
+        let instance = null; // Для доступа к экземпляру в обработчике Esc
 
-        // Объявляем функцию-обработчик для нажатия Escape.
+        // Обработчик нажатия Escape
         const onEscKeyPress = (e) => {
-            // Проверяем клавишу и видимость окна.
             if (e.key === 'Escape' &amp;&amp; instance &amp;&amp; instance.visible()) {
-                // console.log("Нажат Escape, закрываем модальное окно.");
-                instance.close(); // Закрываем окно.
+                instance.close();
             }
         };
 
-        // Создаем экземпляр basicLightbox.
+        // Создание и показ окна basicLightbox
         instance = basicLightbox.create(`
             &lt;img src="${largeImageURL}" alt="${imageDescription}" width="1112" height="640"&gt;
         `, {
-            // Опции:
             onShow: (instance) => {
-                // При показе окна добавляем слушатель Esc.
-                // console.log("Модальное окно открыто, добавлен слушатель Esc.");
-                document.addEventListener('keydown', onEscKeyPress);
+                document.addEventListener('keydown', onEscKeyPress); // Добавляем слушатель Esc
             },
             onClose: (instance) => {
-                // При закрытии окна удаляем слушатель Esc.
-                // console.log("Модальное окно закрыто, удален слушатель Esc.");
-                document.removeEventListener('keydown', onEscKeyPress);
+                document.removeEventListener('keydown', onEscKeyPress); // Удаляем слушатель Esc
             }
         });
-
-        // Показываем модальное окно.
         instance.show();
-        // console.log(`Открыто модальное окно для: ${largeImageURL}`);
     });
-    // console.log("Слушатель кликов с basicLightbox добавлен.");
 
 } else {
     console.error("Ошибка: Контейнер .gallery не найден!");
@@ -597,8 +452,7 @@ if (galleryContainer) {
 
 **3. CSS-код (для `style.css`)**
 
-Этот код содержит только стили, специфичные для галереи и модального окна. Добавь их в конец твоего основного файла
-`../css/style.css`.
+Этот CSS-код содержит стили для галереи и модального окна. Добавь его в конец твоего основного файла `../css/style.css`.
 
 
 ```css
@@ -685,7 +539,3 @@ max-height: 90vh; /* Макс. высота - 90% высоты окна */
 border-radius: 4px; /* Небольшое скругление для изображения */
 box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень для киберпанка */
 }
-
-```
-
-Теперь у тебя есть все необходимое для страницы галер
