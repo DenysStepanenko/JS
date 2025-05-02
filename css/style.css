@@ -1,74 +1,119 @@
+/* ============================================ */
+/* CSS Переменные для Киберпанк Темы          */
+/* ============================================ */
+:root {
+  /* Темная тема по умолчанию */
+  --bg-main: #0d1117;
+  --bg-panel: #161b22;
+  --text-main: #e1e4e8; /* Сделал чуть светлее */
+  --text-secondary: #8b949e;
+  --border-color: #30363d; /* Тонкая темная рамка */
+  --border-color-light: #555e68; /* Чуть светлее рамка для акцентов */
+
+  --accent-blue: #58a6ff;
+  --accent-green: #39FF14;
+  --accent-cyan: #00FFFF;
+  --accent-magenta: #FF00FF;
+
+  /* Цвета для свечения (с разной интенсивностью) */
+  --glow-blue: rgba(88, 166, 255, 0.6);
+  --glow-green: rgba(57, 255, 20, 0.6);
+  --glow-cyan: rgba(0, 255, 255, 0.4);
+  --glow-magenta: rgba(255, 0, 255, 0.5);
+
+  /* Цвета для градиента анимации */
+  --anim-grad-green-start: var(--accent-green);
+  --anim-grad-green-end: rgba(57, 255, 20, 0); /* Прозрачный зеленый */
+}
+
+/* Переопределяем переменные для светлой темы */
+body.light-theme {
+  --bg-main: #f0f2f5; /* Чуть холоднее белый */
+  --bg-panel: #ffffff;
+  --text-main: #1f2328; /* Почти черный */
+  --text-secondary: #57606a;
+  --border-color: #d0d7de;
+  --border-color-light: #b0b7be;
+
+  /* Акценты для светлой темы (могут быть менее "кислотными") */
+  --accent-blue: #1f6feb;
+  --accent-green: #2fad10; /* Менее кислотный */
+  --accent-cyan: #00a0a0;
+  --accent-magenta: #dd00dd;
+
+  /* Свечение для светлой темы (более мягкое) */
+  --glow-blue: rgba(31, 111, 235, 0.3);
+  --glow-green: rgba(47, 173, 16, 0.4);
+  --glow-cyan: rgba(0, 160, 160, 0.2);
+  --glow-magenta: rgba(221, 0, 221, 0.3);
+
+  /* Цвета для градиента анимации в светлой теме */
+  --anim-grad-green-start: var(--accent-green);
+  --anim-grad-green-end: rgba(47, 173, 16, 0); /* Прозрачный темно-зеленый */
+}
+/* ============================================ */
+/* Конец CSS Переменных                       */
+/* ============================================ */
+
+
 /* Общие стили */
 body {
   font-family: 'Roboto', Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: #0d1117; /* Темный фон как на картинке */
-  color: #c9d1d9;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.light-theme {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
+/* #progress-bar - Оставляем как есть или меняем цвет? */
 #progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 4px;
-  background: #58a6ff; /* Синий акцент */
+  background: var(--accent-green); /* Используем неоновый зеленый */
+  box-shadow: 0 0 10px var(--glow-green); /* Добавляем свечение */
   width: 0;
   z-index: 1000;
-  transition: width 0.2s ease-out; /* Плавный прогресс */
+  transition: width 0.2s ease-out;
 }
 
 header {
-  background: #161b22; /* Фон хедера */
-  color: #58a6ff;
+  background: var(--bg-panel);
+  color: var(--accent-blue);
   text-align: center;
-  padding: 2rem 0 1rem 0; /* Уменьшим нижний паддинг */
+  padding: 2rem 0 1rem 0;
   font-family: 'Raleway', sans-serif;
   position: relative;
-  border-bottom: 1px solid #30363d; /* Тонкая линия под хедером */
-}
-
-body.light-theme header {
-  background: #e9eef2; /* Светлый фон хедера */
-  border-bottom: 1px solid #d0d7de;
+  border-bottom: 1px solid var(--border-color);
+  /* Можно добавить фоновый паттерн */
+  /* background-image: linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px); */
+  /* background-size: 20px 20px; */
 }
 
 #theme-toggle {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: #1f6feb;
-  color: white;
-  border: none;
-  padding: 8px 15px;
+  background: transparent; /* Прозрачный фон */
+  color: var(--accent-magenta); /* Маджентовый цвет */
+  border: 1px solid var(--accent-magenta); /* Маджентовая рамка */
+  padding: 7px 14px; /* Чуть подогнал паддинг */
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 2px; /* Острые углы */
   z-index: 100;
-  transition: background-color 0.3s ease; /* Плавный переход для кнопки */
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
 }
 #theme-toggle:hover {
-    background: #58a6ff;
+    background: var(--accent-magenta);
+    color: var(--bg-panel); /* Цвет фона панели */
+    box-shadow: 0 0 8px var(--glow-magenta);
 }
 
-body.light-theme #theme-toggle {
-    background: #58a6ff;
-    color: #0d1117;
-}
-body.light-theme #theme-toggle:hover {
-    background: #1f6feb;
-    color: white;
-}
-
-/* ============================================ */
-/* Стили Навигации (Статичный Активный Пункт)   */
-/* ============================================ */
+/* --- Стили Навигации (Киберпанк) --- */
 nav ul {
   background: transparent;
   padding: 10px 0;
@@ -80,72 +125,48 @@ nav ul {
 nav ul li {
   display: inline-block;
   position: relative;
-  margin: 0 12px;
+  margin: 0 10px; /* Немного уменьшил отступ */
 }
 
-/* Базовые стили для ссылок навигации */
 nav ul li a {
   position: relative;
   text-decoration: none;
   display: inline-block;
   font-size: 1.1rem;
-  padding: 5px 0;
-  transition: color 0.2s ease, border-color 0.2s ease;
-  border-bottom: 2px solid transparent;
-  color: #8b949e; /* Серый цвет для неактивных ссылок */
+  padding: 5px 2px; /* Уменьшил горизонтальный паддинг */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  border-bottom: none; /* Убираем border совсем */
+  color: var(--text-secondary); /* Приглушенный цвет для неактивных */
+  font-weight: 500;
 }
 
-/* Стили при наведении */
+/* Ховер - свечение */
 nav ul li a:hover {
-  color: #c9d1d9;
-  border-bottom-color: #58a6ff; /* Синее подчеркивание при наведении */
+  color: #ffffff; /* Яркий белый */
+  text-shadow: 0 0 7px var(--glow-cyan); /* Циановое свечение */
 }
 
-/* Стили для СТАТИЧНО АКТИВНОЙ ссылки */
+/* Активная ссылка - зеленый текст и свечение */
 nav ul li a.active {
-  font-weight: 600;
-  color: #39FF14; /* Кислотно-зеленый текст активной ссылки */
-  border-bottom-color: #58a6ff; /* Синее подчеркивание активной ссылки */
-  /* Анимация убрана отсюда, она будет применяться JS через класс */
+  font-weight: 700; /* Жирнее */
+  color: var(--accent-green);
+  text-shadow: 0 0 8px var(--glow-green);
 }
+/* --- Конец стилей Навигации --- */
 
-/* --- Стили для Светлой Темы --- */
-body.light-theme nav ul li a {
-  color: #57606a;
-}
-body.light-theme nav ul li a:hover {
-  color: #1f6feb;
-  border-bottom-color: #1f6feb; /* Синее подчеркивание при наведении */
-}
-
-body.light-theme nav ul li a.active {
-  font-weight: 600;
-  color: #2fad10; /* Темно-зеленый текст активной ссылки для светлой темы */
-  border-bottom-color: #1f6feb; /* Синее подчеркивание активной ссылки */
-  /* Анимация убрана отсюда */
-}
-/* --- Конец стилей для Светлой Темы --- */
-/* ============================================ */
-/* Конец базовых стилей Навигации             */
-/* ============================================ */
-
-
-/* --- Стили для выпадающего меню (если оно будет) --- */
+/* --- Стили для выпадающего меню --- */
 nav ul li ul.submenu {
   display: none;
   position: absolute;
-  background: #161b22;
+  background: var(--bg-panel);
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 3px; /* Меньше скругление */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   z-index: 100;
   left: 0;
   width: max-content;
   text-align: left;
-}
-
-body.light-theme nav ul li ul.submenu {
-  background: #e0e0e0;
+  border: 1px solid var(--border-color-light); /* Добавим рамку */
 }
 
 nav ul li:hover ul.submenu {
@@ -154,7 +175,20 @@ nav ul li:hover ul.submenu {
 
 nav ul li ul.submenu li {
   display: block;
-  margin: 5px 0;
+  margin: 0; /* Убрал margin */
+}
+nav ul li ul.submenu li a {
+    padding: 5px 10px; /* Паддинг для пунктов подменю */
+    display: block; /* Чтобы занимали всю ширину */
+    font-size: 1rem; /* Чуть меньше шрифт */
+    border: none !important; /* Убрать любые рамки */
+    color: var(--text-secondary);
+    text-shadow: none; /* Убрать свечение у неактивных */
+}
+nav ul li ul.submenu li a:hover {
+    color: var(--accent-cyan);
+    background-color: rgba(0, 255, 255, 0.1); /* Легкая подсветка фона */
+    text-shadow: none;
 }
 /* --- Конец стилей для выпадающего меню --- */
 
@@ -162,18 +196,16 @@ main {
   max-width: 900px;
   margin: 30px auto;
   padding: 30px;
-  background: #161b22;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-body.light-theme main {
-  background: #ffffff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: var(--bg-panel);
+  border-radius: 4px; /* Меньше скругление */
+  border: 1px solid rgba(0, 255, 255, 0.2); /* Полупрозрачная циан рамка */
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); /* Легкое циан свечение */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #58a6ff;
+  color: var(--accent-cyan); /* Основной акцент - циан */
+  font-family: 'Raleway', sans-serif; /* Оставим Raleway для заголовков */
+  text-shadow: 0 0 8px var(--glow-cyan); /* Циан свечение */
 }
 
 h1 {
@@ -183,31 +215,34 @@ h1 {
 
 h2 {
     font-size: 1.8em;
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid var(--accent-cyan); /* Циан подчеркивание */
     padding-bottom: 8px;
     margin-top: 2em;
     margin-bottom: 1em;
 }
 h3 {
     font-size: 1.4em;
+    color: var(--accent-blue); /* Второстепенный акцент - синий */
+    text-shadow: 0 0 8px var(--glow-blue);
     padding-bottom: 6px;
     margin-top: 1.8em;
     margin-bottom: 0.8em;
+    border-bottom: none; /* Убрано подчеркивание для h3 */
 }
 
-body.light-theme h1,
-body.light-theme h2,
-body.light-theme h3,
-body.light-theme h4,
-body.light-theme h5,
-body.light-theme h6 {
-  color: #1f6feb;
+/* Ссылки в тексте */
+main a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent-blue);
+    transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+}
+main a:hover {
+    color: var(--accent-cyan);
+    border-bottom-color: var(--accent-cyan);
+    text-shadow: 0 0 6px var(--glow-cyan);
 }
 
-body.light-theme h2,
-body.light-theme h3 {
-  border-bottom-color: #d8dee4;
-}
 
 /* Стили для блоков кода */
 .code-block {
@@ -216,17 +251,13 @@ body.light-theme h3 {
 }
 
 .code-block pre {
-  background: #0d1117;
+  background: var(--bg-main); /* Темнее фона панели */
   padding: 1em;
-  border-radius: 6px;
-  border: 1px solid #30363d;
+  border-radius: 3px; /* Меньше скругление */
+  border: 1px solid var(--accent-magenta); /* Маджентовая рамка */
   overflow-x: auto;
   margin: 0;
-}
-
-body.light-theme .code-block pre {
-  background: #f6f8fa;
-  border: 1px solid #d0d7de;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 10px var(--glow-magenta); /* Внутренняя тень + свечение рамки */
 }
 
 .code-block pre code {
@@ -234,118 +265,92 @@ body.light-theme .code-block pre {
   font-size: 0.95em;
   line-height: 1.5;
   display: block;
-  color: #c9d1d9;
-}
-
-body.light-theme .code-block pre code {
-    color: #24292f;
+  color: var(--text-main);
 }
 
 /* Стили для кнопок управления кодом */
 .code-block button {
-  background: #21262d;
-  color: #c9d1d9;
-  border: 1px solid #30363d;
+  background: transparent;
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 2px; /* Острые углы */
   margin: 8px 5px 0 0;
   font-size: 0.85em;
-  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+  font-weight: 600;
+  transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-
 .code-block button:hover {
-    background: #30363d;
-    border-color: #8b949e;
+    background: var(--accent-cyan);
+    color: var(--bg-panel);
+    box-shadow: 0 0 8px var(--glow-cyan);
+    border-color: var(--accent-cyan);
 }
-
 .code-block button:active {
   transform: scale(0.95);
 }
 
-body.light-theme .code-block button {
-      background: #f6f8fa;
-      color: #24292f;
-      border: 1px solid #d0d7de;
-}
-body.light-theme .code-block button:hover {
-    background: #e9eef2;
-    border-color: #afb8c1;
-}
-
 /* Стили для кнопок запуска примеров */
 button.run-code {
-  background: #1f6feb;
-  color: white;
-  border: 1px solid #1f6feb;
+  background: transparent;
+  color: var(--accent-green); /* Зеленый для запуска */
+  border: 1px solid var(--accent-green);
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 2px;
   margin: 8px 0 0 0;
   font-size: 0.85em;
-  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+  font-weight: 600;
+  transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
-
 button.run-code:hover {
-  background: #58a6ff;
-  border-color: #58a6ff;
+  background: var(--accent-green);
+  color: var(--bg-panel);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 8px var(--glow-green);
 }
-
 button.run-code:active {
   transform: scale(0.95);
 }
 
-body.light-theme button.run-code {
-  background: #58a6ff;
-  border: 1px solid #58a6ff;
-  color: #0d1117;
-}
-
-body.light-theme button.run-code:hover {
-  background: #1f6feb;
-  border-color: #1f6feb;
-  color: white;
-}
-
 /* Стили для вывода результатов */
 .output {
-  background: #101a27;
-  padding: 10px;
-  border-radius: 6px;
+  background: var(--bg-main);
+  padding: 10px 15px;
+  border-radius: 3px;
   margin-top: 10px;
   min-height: 40px;
-  border: 1px solid #30363d;
-  font-family: monospace;
+  border: 1px solid var(--border-color);
+  font-family: 'Courier New', monospace; /* Моноширинный для вывода */
   font-size: 0.9em;
   white-space: pre-wrap;
+  color: var(--text-secondary);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
 }
-
-body.light-theme .output {
-  background: #e9eef2;
-  border: 1px solid #d0d7de;
-  color: #333;
-}
+.output p { margin: 0 0 5px 0;}
+.output p:last-child { margin-bottom: 0;}
 
 /* Стили для редактора кода (если используется) */
 .code-editor {
   width: 100%;
   height: 150px;
-  background: #0d1117;
-  color: #c9d1d9;
-  border: 1px solid #30363d;
+  background: var(--bg-main);
+  color: var(--text-main);
+  border: 1px solid var(--border-color-light);
   padding: 10px;
   font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
   resize: vertical;
   box-sizing: border-box;
   margin-top: 10px;
-  border-radius: 6px;
+  border-radius: 3px;
+}
+.code-editor:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--glow-cyan);
 }
 
-body.light-theme .code-editor {
-  background: #f6f8fa;
-  color: #24292f;
-  border: 1px solid #d0d7de;
-}
 
 /* Стили для демонстрации массивов */
 .array-container {
@@ -353,27 +358,25 @@ body.light-theme .code-editor {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 15px;
-  padding: 10px;
-  border: 1px dashed #30363d;
-  border-radius: 6px;
+  padding: 15px;
+  border: 1px dashed var(--accent-blue); /* Синяя пунктирная рамка */
+  border-radius: 3px;
   min-height: 50px;
-}
-
-body.light-theme .array-container {
-    border: 1px dashed #d0d7de;
+  background-color: rgba(88, 166, 255, 0.05); /* Легкий синий фон */
 }
 
 .array-element {
   width: 35px;
   height: 35px;
-  background: #58a6ff;
-  color: white;
+  background: var(--accent-blue);
+  color: var(--bg-panel);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 3px;
   font-weight: bold;
   font-size: 0.9em;
+  box-shadow: 0 0 6px var(--glow-blue);
 }
 
 /* Стили для кнопки "Наверх" */
@@ -381,50 +384,39 @@ body.light-theme .array-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #21262d;
-  color: #c9d1d9;
-  border: 1px solid #30363d;
+  background: var(--bg-panel);
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
   width: 40px;
   height: 40px;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 50%; /* Оставим круглой */
   cursor: pointer;
   display: none;
   font-size: 1.5em;
   line-height: 40px;
   text-align: center;
   z-index: 999;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 0 10px var(--glow-cyan);
 }
 #scroll-top:hover {
-    background: #30363d;
-    border-color: #8b949e;
+    background: var(--accent-cyan);
+    color: var(--bg-panel);
+    box-shadow: 0 0 15px var(--glow-cyan);
+    border-color: var(--accent-cyan);
 }
 
-body.light-theme #scroll-top {
-      background: #f6f8fa;
-      color: #24292f;
-      border: 1px solid #d0d7de;
-}
-body.light-theme #scroll-top:hover {
-    background: #e9eef2;
-    border-color: #afb8c1;
-}
 
 /* Стили для подвала */
 footer {
   text-align: center;
   padding: 20px;
-  background: #0d1117;
-  color: #8b949e;
+  background: var(--bg-main);
+  color: var(--text-secondary);
   margin-top: 40px;
-  border-top: 1px solid #30363d;
-}
-
-body.light-theme footer {
-  background: #f6f8fa;
-  color: #57606a;
-  border-top: 1px solid #d0d7de;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9em;
 }
 
 /* Стили для анимации появления секций */
@@ -433,7 +425,6 @@ body.light-theme footer {
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
@@ -448,38 +439,33 @@ table {
 }
 
 th, td {
-  border: 1px solid #30363d;
-  padding: 10px;
+  border: 1px solid var(--border-color);
+  padding: 10px 12px;
   text-align: left;
 }
 
 th {
-  background-color: #161b22;
-  color: #c9d1d9;
+  background-color: var(--bg-panel);
+  color: var(--accent-blue); /* Синий текст заголовков */
   font-weight: 600;
+  text-shadow: 0 0 5px var(--glow-blue);
 }
 
-body.light-theme th, body.light-theme td {
-   border: 1px solid #d0d7de;
+tbody tr {
+    background-color: transparent; /* Убрал зебру */
+    transition: background-color 0.2s ease;
 }
-body.light-theme th {
-   background-color: #f6f8fa;
-   color: #24292f;
+tbody tr:hover {
+    background-color: rgba(0, 255, 255, 0.05); /* Легкая циан подсветка строки при наведении */
 }
 
-tbody tr:nth-child(odd) {
-    background-color: #10151d;
-}
-body.light-theme tbody tr:nth-child(odd) {
-    background-color: #f6f8fa;
-}
 
 /* --- Стили для схем --- */
 pre code.diagram {
     background: none !important;
     border: none !important;
     padding: 0 !important;
-    color: inherit !important;
+    color: var(--text-secondary) !important; /* Цвет для схем */
     font-family: monospace;
     line-height: 1.5;
     white-space: pre;
@@ -489,81 +475,39 @@ pre code.diagram {
 .demo-container {
       margin-bottom: 30px;
       padding: 20px;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      background-color: #10151d;
-}
-body.light-theme .demo-container {
-    border: 1px solid #d0d7de;
-    background-color: #f6f8fa;
+      border: 1px solid var(--border-color-light);
+      border-radius: 4px;
+      background-color: rgba(22, 27, 34, 0.5); /* Полупрозрачный фон панели */
 }
 
 .controls {
       margin-bottom: 15px;
       padding-bottom: 15px;
-      border-bottom: 1px solid #30363d;
-}
-body.light-theme .controls {
-    border-bottom: 1px solid #d0d7de;
+      border-bottom: 1px solid var(--border-color);
 }
 
 .demo-container h5, .demo-container h6 {
     margin-top: 1em;
     margin-bottom: 0.5em;
     border-bottom: none;
-    color: #8b949e;
-}
-body.light-theme .demo-container h5,
-body.light-theme .demo-container h6 {
-    color: #57606a;
+    color: var(--text-secondary);
+    text-shadow: none; /* Убираем свечение у подзаголовков демо */
 }
 
-.demo-container button {
-      margin-right: 8px;
-      margin-bottom: 8px;
-      font-size: 0.9em;
-      padding: 6px 12px;
-      background: #21262d;
-      color: #c9d1d9;
-      border: 1px solid #30363d;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
-.demo-container button:hover {
-    background: #30363d;
-    border-color: #8b949e;
-}
-.demo-container button:active {
-    transform: scale(0.95);
-}
+/* Кнопки внутри демо наследуют стили от .code-block button и т.д. */
 
-body.light-theme .demo-container button {
-      background: #f6f8fa;
-      color: #24292f;
-      border: 1px solid #d0d7de;
-}
-body.light-theme .demo-container button:hover {
-    background: #e9eef2;
-    border-color: #afb8c1;
-}
-
-.code { /* Стиль для отображения примера кода внутри демо */
-      background-color: #0d1117;
+.code {
+      background-color: var(--bg-main);
       padding: 10px;
-      border: 1px solid #30363d;
-      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
       font-family: monospace;
       margin-bottom: 10px;
       white-space: pre-wrap;
       font-size: 0.9em;
+      color: var(--text-secondary);
 }
-body.light-theme .code {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #333;
-}
-/* --- Конец стилей из learning_guide.html --- */
+
 
 /* --- Стили для галереи --- */
 .gallery {
@@ -579,17 +523,17 @@ body.light-theme .code {
 
 .gallery-item {
   flex-basis: calc((100% - 32px) / 3);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-body.light-theme .gallery-item {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid transparent; /* Добавляем рамку для ховер эффекта */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 .gallery-item:hover {
     transform: scale(1.03);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan); /* Тень + свечение */
 }
 
 .gallery-link {
@@ -607,7 +551,7 @@ body.light-theme .gallery-item {
 
 /* --- Стили для модального окна basicLightbox --- */
 .basicLightbox {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(13, 17, 23, 0.9); /* Темнее фон */
 }
 
 .basicLightbox__placeholder {
@@ -622,50 +566,32 @@ body.light-theme .gallery-item {
     max-width: 90vw;
     max-height: 90vh;
     border-radius: 4px;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень */
+    border: 2px solid var(--accent-cyan); /* Рамка у увеличенного фото */
+    box-shadow: 0 0 35px var(--glow-cyan); /* Ярче свечение */
 }
 
 /* ============================================ */
-/* Анимация КЛИКА по пункту навигации (Новое) */
+/* Анимация КЛИКА по пункту навигации         */
 /* ============================================ */
 
-/* --- Ключевые кадры для анимации заполнения слева направо --- */
 @keyframes neon-fill-ltr {
-  from {
-    /* Градиент сдвинут влево за пределы текста */
-    background-position: -150% 0;
-  }
-  to {
-    /* Градиент полностью покрывает текст */
-    background-position: 0% 0;
-  }
+  from { background-position: -150% 0; }
+  to { background-position: 0% 0; }
 }
 
-/* --- Класс, запускающий анимацию по клику --- */
-/* Этот класс добавляется и удаляется с помощью JavaScript из main.js */
 .animate-neon-fill {
-  /* Используем тот же цвет-запасной вариант */
-  color: #2fad10; /* Темно-зеленый, если остальное не сработает */
-
-  /* Градиентный фон (кислотно-зеленый) */
+  color: var(--accent-green); /* Fallback - используем переменную */
   background-image: linear-gradient(
-    to right, /* Направление слева направо */
-    #39FF14 0%,   /* Сплошной зеленый в начале */
-    #39FF14 50%,   /* Сплошной зеленый до середины */
-    rgba(57, 255, 20, 0) 100% /* Резко уходит в прозрачный */
+    to right,
+    var(--anim-grad-green-start) 0%,
+    var(--anim-grad-green-start) 50%,
+    var(--anim-grad-green-end) 100%
   );
-  /* Фон шире текста */
   background-size: 250% 100%;
-
-  /* Обрезаем фон по тексту */
   -webkit-background-clip: text;
   background-clip: text;
-
-  /* Делаем текст прозрачным, чтобы перекрыть статичный цвет на время анимации */
   color: transparent !important;
-
-  /* Применяем анимацию (медленная, без 'forwards') */
-  animation: neon-fill-ltr 2s ease-out; /* Длительность 2 секунды */
+  animation: neon-fill-ltr 2s ease-out;
 }
 /* ============================================ */
 /* Конец стилей анимации клика                */
@@ -676,7 +602,10 @@ body.light-theme .gallery-item {
 @media (max-width: 768px) {
     main {
         padding: 20px;
-        margin: 20px 15px;
+        margin: 20px 10px; /* Уменьшил боковые */
+        border-left: none;
+        border-right: none;
+        border-radius: 0; /* Убрал скругление на мобильных */
     }
     h1 { font-size: 2em; }
     h2 { font-size: 1.6em; }
@@ -692,28 +621,28 @@ body.light-theme .gallery-item {
         font-size: 1.3em;
         line-height: 35px;
     }
-    /* Адаптация галереи для 2 колонок */
     .gallery-item {
         flex-basis: calc((100% - 16px) / 2);
     }
     .gallery {
-        padding: 20px;
+        padding: 15px; /* Уменьшил паддинг галереи */
+        gap: 10px; /* Уменьшил гэп */
     }
 }
 
 @media (max-width: 600px) {
+  nav ul { padding: 5px 0;}
   nav ul li {
-    display: block; /* Меню в столбик */
-    margin: 10px 0;
+    display: block;
+    margin: 8px 0;
   }
   nav ul li a {
-        padding: 8px 0;
-        border-bottom-width: 1px;
+        padding: 6px 0;
         font-size: 1rem;
     }
   main {
-    padding: 15px;
-    margin: 15px 10px;
+    padding: 15px 5px; /* Еще меньше */
+    margin: 15px 5px;
   }
   #theme-toggle {
         top: 15px;
@@ -723,96 +652,45 @@ body.light-theme .gallery-item {
     h2 { font-size: 1.4em; }
     h3 { font-size: 1.2em; }
 
-    .code-block button {
+    .code-block { margin-bottom: 1em; }
+    .code-block button, button.run-code {
         font-size: 0.8em;
         padding: 4px 8px;
     }
-    button.run-code {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
-    /* Адаптация галереи для 1 колонки */
     .gallery-item {
-        flex-basis: 100%;
+        flex-basis: 100%; /* Одна колонка */
     }
     .gallery {
-        padding: 16px;
-        gap: 16px;
+        padding: 10px;
+        gap: 10px;
     }
 }
 
-/* Стили для TODO-списка - УДАЛИТЬ, ЕСЛИ НЕ НУЖНЫ */
-/* ... (оставил без изменений) ... */
-.todo-app {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-}
-
-.todo-form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.todo-input, .add-btn {
-    padding: 8px;
-    font: inherit;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.add-btn {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-
-.todo-list {
-    list-style: none;
-    padding: 0;
-}
-
-.todo-item {
-    padding: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 4px;
-}
-
-.todo-item.completed {
-    background-color: #e0e0e0;
-    text-decoration: line-through;
-}
-
-.todo-item button {
-    padding: 4px 8px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.todo-item button:hover {
-    background-color: #d32f2f;
-}
+/* Стили для TODO-списка - ОСТАВЛЕНЫ БЕЗ ИЗМЕНЕНИЙ */
+.todo-app { max-width: 500px; margin: 0 auto; padding: 16px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9;}
+.todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
+.todo-input, .add-btn { padding: 8px; font: inherit; border: 1px solid #ccc; border-radius: 4px; }
+.add-btn { background-color: #4CAF50; color: white; cursor: pointer; }
+.todo-list { list-style: none; padding: 0; }
+.todo-item { padding: 8px; border: 1px solid #ccc; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; }
+.todo-item.completed { background-color: #e0e0e0; text-decoration: line-through; }
+.todo-item button { padding: 4px 8px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; }
+.todo-item button:hover { background-color: #d32f2f; }
 /* Конец стилей для TODO-списка */
 
-
 /* Дополнительные стили для подсветки Prism.js */
+/* Можно раскомментировать и настроить, если стандартная тема не нравится */
 /*
 .token.comment,
 .token.prolog,
 .token.doctype,
-.token.cdata {
-  color: #6a9955;
-}
+.token.cdata { color: #6a9955; }
+.token.punctuation { color: var(--accent-cyan); }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: var(--accent-magenta); }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: var(--accent-green); }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: var(--accent-cyan); background: none; }
+.token.atrule, .token.attr-value, .token.keyword { color: var(--accent-blue); }
+.token.function, .token.class-name { color: #ffc66d; } / * Желтый * /
+.token.regex, .token.important, .token.variable { color: #ffc66d; }
 */
 
