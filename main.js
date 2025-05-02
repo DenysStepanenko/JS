@@ -10,7 +10,6 @@ const body = document.body;
  */
 function setTheme(isLight) {
     if (!body || !themeToggle) {
-        // console.warn("Элементы для переключения темы не найдены.");
         return; // Тихо выходим, если элементов нет
     }
     if (isLight) {
@@ -62,14 +61,9 @@ if (progressBar) {
         const scrollableHeight = docHeight - windowHeight;
 
         // Избегаем деления на ноль и отрицательных значений
-        // --- ИСПРАВЛЕНИЕ ОШИБКИ ДЕЛЕНИЯ НА НОЛЬ ---
         const scrollPercent = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
-        // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
-
         progressBar.style.width = `${Math.min(scrollPercent, 100)}%`; // Ограничиваем 100%
     });
-} else {
-    // console.warn("Элемент прогресс-бара ('progress-bar') не найден.");
 }
 
 // --- Кнопка "Наверх" ---
@@ -85,12 +79,9 @@ if (scrollTopBtn) {
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-} else {
-    // console.warn("Кнопка 'Наверх' ('scroll-top') не найдена.");
 }
 
 // --- Скрытие/показ кода ---
-// Оборачиваем в DOMContentLoaded для гарантии наличия элементов
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.toggle-code').forEach(button => {
         // Инициализация текста кнопки при загрузке
@@ -98,11 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (preElementInit && preElementInit.style.display === 'none') {
             button.textContent = 'Показать код';
         } else if (preElementInit) {
-             button.textContent = 'Скрыть код'; // Устанавливаем по умолчанию, если не скрыт
+            button.textContent = 'Скрыть код'; // Устанавливаем по умолчанию, если не скрыт
         }
 
         button.addEventListener('click', () => {
-            const preElement = button.parentElement?.querySelector('pre'); // Используем Optional Chaining
+            const preElement = button.parentElement?.querySelector('pre');
             if (preElement) {
                 const isHidden = preElement.style.display === 'none';
                 preElement.style.display = isHidden ? 'block' : 'none';
@@ -114,19 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 // --- Копирование кода ---
-// Оборачиваем в DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.copy-code').forEach(button => {
-         // Устанавливаем исходный текст кнопки при загрузке
-         button.textContent = 'Скопировать';
+        button.textContent = 'Скопировать';
 
         button.addEventListener('click', () => {
-            const codeElement = button.parentElement?.querySelector('pre code'); // Optional Chaining
-
+            const codeElement = button.parentElement?.querySelector('pre code');
             if (codeElement && navigator.clipboard) {
-                const codeText = codeElement.textContent || ""; // Добавил || "" на случай null
+                const codeText = codeElement.textContent || "";
                 navigator.clipboard.writeText(codeText).then(() => {
                     button.textContent = 'Скопировано!';
                     setTimeout(() => {
@@ -150,9 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 // --- Выполнение кода из редактора (если используется) ---
-// Оборачиваем в DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.run-code-editor').forEach(button => {
         button.addEventListener('click', () => {
@@ -203,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.textContent = `Ошибка выполнения: ${error.message}`;
                 p.style.color = '#ff5555';
                 resultDiv.appendChild(p);
-                originalConsoleLog.error("Ошибка выполнения кода из редактора:", error); // Добавим вывод в консоль
+                originalConsoleLog.error("Ошибка выполнения кода из редактора:", error);
             } finally {
                 console.log = originalConsoleLog;
             }
@@ -211,96 +196,79 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 // --- Анимация появления секций ---
-// Запускаем после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => {
     const sectionsToFade = document.querySelectorAll('.fade-in');
+    console.log(`Найдено ${sectionsToFade.length} элементов с классом .fade-in`);
     if (sectionsToFade.length > 0) {
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        console.log(`Элемент ${entry.target.id} стал видимым, добавляю .visible`);
                         entry.target.classList.add('visible');
-                        // observer.unobserve(entry.target); // Раскомментируй, если анимация нужна только один раз
+                        // observer.unobserve(entry.target); // Раскомментируйте для однократной анимации
                     }
                 });
             }, { threshold: 0.1 });
-
-            sectionsToFade.forEach(section => observer.observe(section));
+            sectionsToFade.forEach(section => {
+                console.log(`Наблюдаю за элементом: ${section.id}`);
+                observer.observe(section);
+            });
         } else {
-            // Fallback для старых браузеров
+            console.warn('IntersectionObserver не поддерживается, добавляю .visible ко всем элементам');
             sectionsToFade.forEach(section => section.classList.add('visible'));
         }
     }
 });
 
-
-// --- Navigation Link Click Animation (ВЕРСИЯ С ЗАДЕРЖКОЙ НАВИГАЦИИ) ---
+// --- Navigation Link Click Animation ---
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded. Searching for nav links for click animation...');
-  const navLinks = document.querySelectorAll('nav ul li a');
-  console.log(`Found ${navLinks.length} nav links.`);
+    console.log('DOM loaded. Searching for nav links for click animation...');
+    const navLinks = document.querySelectorAll('nav ul li a');
+    console.log(`Found ${navLinks.length} nav links.`);
 
-  if (navLinks.length > 0) {
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(event) {
-        console.log('>>> Click detected on:', this.href);
+    if (navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                console.log('>>> Click detected on:', this.href);
+                event.preventDefault();
 
-        // --- Предотвращаем стандартный переход по ссылке ---
-        event.preventDefault();
-        // --- Конец ---
+                if (this.classList.contains('animate-neon-fill')) {
+                    console.log('Анимация уже идет для:', this.href);
+                    return;
+                }
 
-        // Проверяем, не анимируется ли уже эта ссылка
-        if (this.classList.contains('animate-neon-fill')) {
-            console.log('Анимация уже идет для:', this.href);
-            return; // Выходим, если анимация уже запущена
-        }
+                navLinks.forEach(el => {
+                    if (el !== this && el.classList.contains('animate-neon-fill')) {
+                        console.log('Удаляю класс анимации с другой ссылки:', el.href);
+                        el.classList.remove('animate-neon-fill');
+                    }
+                });
 
-        // Удаляем класс анимации со ВСЕХ ДРУГИХ ссылок
-        navLinks.forEach(el => {
-          if (el !== this && el.classList.contains('animate-neon-fill')) {
-            console.log('Удаляю класс анимации с другой ссылки:', el.href);
-            el.classList.remove('animate-neon-fill');
-          }
+                console.log('Добавляю класс .animate-neon-fill к:', this.href);
+                this.classList.add('animate-neon-fill');
+
+                const destination = this.href;
+
+                this.addEventListener('animationend', (e) => {
+                    if (e.animationName === 'neon-fill-ltr') {
+                        console.log('<<< Анимация закончилась для:', this.href);
+                        if (this.classList.contains('animate-neon-fill')) {
+                            console.log('Удаляю класс .animate-neon-fill после анимации.');
+                            this.classList.remove('animate-neon-fill');
+                        }
+                        console.log('Перехожу на:', destination);
+                        window.location.href = destination;
+                    }
+                }, { once: true });
+            });
         });
-
-        // Добавляем класс анимации ТЕКУЩЕЙ кликнутой ссылке
-        console.log('Добавляю класс .animate-neon-fill к:', this.href);
-        this.classList.add('animate-neon-fill');
-
-        // Запоминаем URL для перехода
-        const destination = this.href;
-
-        // Слушаем событие окончания анимации ТОЛЬКО ОДИН РАЗ
-        this.addEventListener('animationend', (e) => {
-           // Убедимся, что событие пришло от нужной анимации (на всякий случай)
-          if (e.animationName === 'neon-fill-ltr') {
-            console.log('<<< Анимация закончилась для:', this.href);
-            // Убираем класс анимации
-            if (this.classList.contains('animate-neon-fill')) {
-                console.log('Удаляю класс .animate-neon-fill после анимации.');
-                this.classList.remove('animate-neon-fill');
-            }
-
-            // --- Переходим по ссылке ПОСЛЕ анимации ---
-            console.log('Перехожу на:', destination);
-            window.location.href = destination;
-            // --- Конец ---
-          }
-
-        }, { once: true });
-      });
-    });
-    console.log("Обработчики кликов (с задержкой навигации) для анимации добавлены.");
-  } else {
-    console.warn("Ссылки навигации не найдены для анимации по клику.");
-  }
+        console.log("Обработчики кликов (с задержкой навигации) для анимации добавлены.");
+    } else {
+        console.warn("Ссылки навигации не найдены для анимации по клику.");
+    }
 });
 // --- End Navigation Link Click Animation ---
 
 // ===== Конец файла main.js ====
-document.addEventListener('DOMContentLoaded', () => {
-    const fadeIns = document.querySelectorAll('.fade-in');
-    fadeIns.forEach(el => el.classList.add('visible'));
-});
