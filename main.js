@@ -252,6 +252,3 @@ document.addEventListener('DOMContentLoaded', () => { // Запускаем по
   }
 });
 // --- End Navigation Link Click Animation ---
-
-
-// --- Конец файла main.js ---
