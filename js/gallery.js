@@ -5,48 +5,48 @@
 // ЗАМЕНИ пути и описания на свои реальные данные из папки ../img/
 const images = [
     {
-        preview: '/img/CyberpunkAlley600x400.jpg',
-        original: '/img/CyberpunkAlley1530x1024.jpg',
+        preview: '../img/CyberpunkAlley600x400.jpg',
+        original: '../img/CyberpunkAlley1530x1024.jpg',
         description: 'Киборг-детектив в неоновом плаще',
     },
     {
-        preview: '/img/CyberpunkBartender600x400.jpg',
-        original: '/img/CyberpunkBartender1530x1024.jpg',
+        preview: '../img/CyberpunkBartender600x400.jpg',
+        original: '../img/CyberpunkBartender1530x1024.jpg',
         description: 'Робот-бармен в футуристическом баре',
     },
     {
-        preview: '/img/NeonCatSign600x900.jpg',
-        original: '/img/NeonCatSign1024x1536.jpg',
+        preview: '../img/NeonCatSign600x900.jpg',
+        original: '../img/NeonCatSign1024x1536.jpg',
         description: 'Кибернетический кот с неоновыми глазами',
     },
     {
-        preview: '/img/NeonRunner600x400.jpg',
-        original: '/img/NeonRunner1530x1024.jpg',
+        preview: '../img/NeonRunner600x400.jpg',
+        original: '../img/NeonRunner1530x1024.jpg',
         description: 'Уличный самурай с кибер-катаной',
     },
     {
-        preview: '/img/NeonDogSign600x900.jpg',
-        original: '/img/NeonDogSign1024x1536.jpg',
+        preview: '../img/NeonDogSign600x900.jpg',
+        original: '../img/NeonDogSign1024x1536.jpg',
         description: 'Робо-пес патрулирует мегаполис',
     },
     {
-        preview: '/img/MaskedCyberpunk600x900.jpg',
-        original: '/img/MaskedCyberpunk1024x1536.jpg',
+        preview: '../img/MaskedCyberpunk600x900.jpg',
+        original: '../img/MaskedCyberpunk1024x1536.jpg',
         description: 'Девушка-хакер за терминалом',
     },
     {
-        preview: '/img/NeonRobot600x400.jpg',
-        original: '/img/NeonRobot1530x1024.jpg',
+        preview: '../img/NeonRobot600x400.jpg',
+        original: '../img/NeonRobot1530x1024.jpg',
         description: 'Рынок андроидов под неоновыми вывесками',
     },
     {
-        preview: '/img/A neon-lit scene with a dog600x900.jpg',
-        original: '/img/A neon-lit scene with a dog1024x1536.jpg',
+        preview: '../img/A neon-lit scene with a dog600x900.jpg',
+        original: '../img/A neon-lit scene with a dog1024x1536.jpg',
         description: 'Собака с кибернетическими улучшениями',
     },
     {
-        preview: '/img/NeonCatStreet600x900.jpg',
-        original: '/img/NeonCatStreet1024x1536.jpg',
+        preview: '../img/NeonCatStreet600x900.jpg',
+        original: '../img/NeonCatStreet1024x1536.jpg',
         description: 'Уличный кот в неоновом переулке',
     },
 ];
