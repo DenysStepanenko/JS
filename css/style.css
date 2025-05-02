@@ -411,3 +411,10 @@ pre code.diagram { background: none !important; border: none !important; padding
 .token.regex, .token.important, .token.variable { color: #ffc66d; }
 */
 
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.fade-in.visible {
+    opacity: 1;
+}
