@@ -4,7 +4,7 @@
 :root {
   /* Темная тема по умолчанию */
   --bg-main: #0d1117;
-  --bg-panel: #161b22;
+  --bg-panel: #161b22; /* НЕПРОЗРАЧНЫЙ фон панелей */
   --text-main: #e1e4e8;
   --text-secondary: #8b949e;
   --border-color: #30363d;
@@ -20,10 +20,6 @@
   --glow-cyan: rgba(0, 255, 255, 0.4);
   --glow-magenta: rgba(255, 0, 255, 0.5);
 
-  /* НОВОЕ: Полупрозрачные фоны (Настрой альфа-канал 0.0 - 1.0) */
-  --bg-panel-trans: rgba(22, 27, 34, 0.85); /* Фон панелей с прозрачностью */
-  --bg-main-trans: rgba(13, 17, 23, 0.9);  /* Основной фон (для code pre) с прозрачностью */
-
   /* Цвета для градиента анимации */
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(57, 255, 20, 0);
@@ -31,7 +27,7 @@
 
 body.light-theme {
   --bg-main: #f0f2f5;
-  --bg-panel: #ffffff;
+  --bg-panel: #ffffff; /* НЕПРОЗРАЧНЫЙ фон панелей */
   --text-main: #1f2328;
   --text-secondary: #57606a;
   --border-color: #d0d7de;
@@ -47,10 +43,7 @@ body.light-theme {
   --glow-cyan: rgba(0, 160, 160, 0.2);
   --glow-magenta: rgba(221, 0, 221, 0.3);
 
-  /* НОВОЕ: Полупрозрачные фоны для светлой темы */
-  --bg-panel-trans: rgba(255, 255, 255, 0.85); /* Белый с прозрачностью */
-  --bg-main-trans: rgba(240, 242, 245, 0.9);  /* Светло-серый с прозрачностью */
-
+  /* Цвета для градиента анимации в светлой теме */
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(47, 173, 16, 0);
 }
@@ -67,7 +60,7 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  /* background-color: var(--bg-main); Можно убрать, фон задает ::before */
+  background-color: var(--bg-main); /* Основной фон тела (виден если нет картинки) */
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -80,23 +73,25 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: -1; /* Помещаем под контент */
 
-  background-image: url('https://raw.githubusercontent.com/DenysStepanenko/JS/main/img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png'); /* <-- ПРОВЕРЬ ССЫЛКУ! */
+  /* Фоновое изображение (ПРОВЕРЬ ССЫЛКУ!) */
+  background-image: url('https://raw.githubusercontent.com/DenysStepanenko/JS/main/img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  /* Затемняющий оверлей */
-  background-color: rgba(13, 17, 23, 0.85); /* Настрой прозрачность (0.85) */
+  /* Затемняющий оверлей (темная тема) */
+  /* Можно сделать его чуть прозрачнее, чтобы фон был виднее */
+  background-color: rgba(13, 17, 23, 0.9); /* Настрой прозрачность (0.9) */
   background-blend-mode: multiply;
 }
 
-/* Убираем картинку для светлой темы */
+/* Убираем картинку для светлой темы, ставим просто фон */
 body.light-theme::before {
   background-image: none;
-  background-color: var(--bg-main); /* Просто фон светлой темы */
+  background-color: var(--bg-main);
 }
 
 
@@ -112,15 +107,13 @@ body.light-theme::before {
   transition: width 0.2s ease-out;
 }
 
-/* Основные контейнеры - поверх фона */
+/* Основные контейнеры - поверх фона, НЕПРОЗРАЧНЫЕ */
 header, nav, main, footer {
   position: relative;
   z-index: 2;
-  /* Фон теперь ПОЛУПРОЗРАЧНЫЙ */
-  background-color: var(--bg-panel-trans);
+  background-color: var(--bg-panel); /* Используем НЕПРОЗРАЧНЫЙ фон панели */
 }
 /* Специфичные стили */
-
 
 header {
   color: var(--accent-blue);
@@ -150,7 +143,7 @@ body.light-theme header {
 }
 #theme-toggle:hover {
     background: var(--accent-magenta);
-    color: var(--bg-panel);
+    color: var(--bg-panel); /* Используем НЕпрозрачный фон панели */
     box-shadow: 0 0 8px var(--glow-magenta);
 }
 
@@ -195,7 +188,7 @@ nav ul li ul.submenu {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: var(--bg-panel-trans); /* Полупрозрачный фон */
+  background-color: var(--bg-panel); /* НЕПРОЗРАЧНЫЙ фон */
   padding: 5px 0;
   border-radius: 3px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -232,7 +225,7 @@ main {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
-/* Стили для заголовков, ссылок и т.д. внутри main остаются как в прошлой версии */
+/* Стили для заголовков, ссылок и т.д. внутри main */
 h1, h2, h3, h4, h5, h6 { color: var(--accent-cyan); font-family: 'Raleway', sans-serif; text-shadow: 0 0 8px var(--glow-cyan); }
 h1 { font-size: 2.2em; margin-bottom: 0.8em; }
 h2 { font-size: 1.8em; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 8px; margin-top: 2em; margin-bottom: 1em; }
@@ -240,11 +233,10 @@ h3 { font-size: 1.4em; color: var(--accent-blue); text-shadow: 0 0 8px var(--glo
 main a { color: var(--accent-blue); text-decoration: none; border-bottom: 1px dashed var(--accent-blue); transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease; }
 main a:hover { color: var(--accent-cyan); border-bottom-style: solid; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 6px var(--glow-cyan); }
 
-
 /* Стили для блоков кода */
 .code-block { margin-bottom: 1.5em; position: relative; }
 .code-block pre {
-  background: var(--bg-main-trans); /* Полупрозрачный */
+  background: var(--bg-main); /* НЕПРОЗРАЧНЫЙ */
   padding: 1em;
   border-radius: 3px;
   border: 1px solid var(--accent-magenta);
@@ -258,7 +250,7 @@ main a:hover { color: var(--accent-cyan); border-bottom-style: solid; border-bot
   line-height: 1.5;
   display: block;
   color: var(--text-main);
-  background: transparent !important; /* Убедимся, что фон кода прозрачный */
+  background: transparent !important;
 }
 
 /* Стили для кнопок управления кодом */
@@ -273,7 +265,7 @@ button.run-code:active { transform: scale(0.95); }
 
 /* Стили для вывода результатов */
 .output {
-  background: var(--bg-main-trans); /* Полупрозрачный */
+  background: var(--bg-main); /* НЕПРОЗРАЧНЫЙ */
   padding: 10px 15px;
   border-radius: 3px;
   margin-top: 10px;
@@ -291,7 +283,7 @@ button.run-code:active { transform: scale(0.95); }
 /* Стили для редактора кода */
 .code-editor {
     width: 100%; height: 150px;
-    background: var(--bg-main-trans); /* Полупрозрачный */
+    background: var(--bg-main); /* НЕПРОЗРАЧНЫЙ */
     color: var(--text-main);
     border: 1px solid var(--border-color-light); padding: 10px;
     font-family: 'Consolas', 'Menlo', 'Courier New', monospace; resize: vertical;
@@ -300,16 +292,16 @@ button.run-code:active { transform: scale(0.95); }
 .code-editor:focus { outline: none; border-color: var(--accent-cyan); box-shadow: 0 0 8px var(--glow-cyan); }
 
 /* Стили для демонстрации массивов */
-.array-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 15px; border: 1px dashed var(--accent-blue); border-radius: 3px; background-color: rgba(88, 166, 255, 0.1); /* Чуть прозрачнее фон */ }
+.array-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 15px; border: 1px dashed var(--accent-blue); border-radius: 3px; background-color: rgba(88, 166, 255, 0.05); }
 .array-element { width: 35px; height: 35px; background: var(--accent-blue); color: var(--bg-panel); display: flex; align-items: center; justify-content: center; border-radius: 3px; font-weight: bold; font-size: 0.9em; box-shadow: 0 0 6px var(--glow-blue); }
 
 /* Стили для кнопки "Наверх" */
-#scroll-top { position: fixed; bottom: 20px; right: 20px; background: var(--bg-panel-trans); /* Полупрозрачный */ color: var(--accent-cyan); border: 1px solid var(--accent-cyan); width: 40px; height: 40px; padding: 0; border-radius: 50%; cursor: pointer; display: none; font-size: 1.5em; line-height: 40px; text-align: center; z-index: 999; transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; box-shadow: 0 0 10px var(--glow-cyan); }
+#scroll-top { position: fixed; bottom: 20px; right: 20px; background: var(--bg-panel); /* НЕПРОЗРАЧНЫЙ */ color: var(--accent-cyan); border: 1px solid var(--accent-cyan); width: 40px; height: 40px; padding: 0; border-radius: 50%; cursor: pointer; display: none; font-size: 1.5em; line-height: 40px; text-align: center; z-index: 999; transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; box-shadow: 0 0 10px var(--glow-cyan); }
 #scroll-top:hover { background: var(--accent-cyan); color: var(--bg-panel); box-shadow: 0 0 15px var(--glow-cyan); border-color: var(--accent-cyan); }
 
 /* Стили для подвала */
 footer {
-  /* background: var(--bg-panel-trans); уже задан выше */
+  /* background: var(--bg-panel); уже задан выше */
   text-align: center; padding: 20px; color: var(--text-secondary);
   margin-top: 40px; border-top: 1px solid var(--border-color); font-size: 0.9em;
 }
@@ -319,9 +311,9 @@ footer {
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* --- Стили для таблиц --- */
-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em; background-color: rgba(22, 27, 34, 0.3); /* Легкий фон для всей таблицы */ }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em; background-color: rgba(22, 27, 34, 0.3); }
 th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
-th { background-color: rgba(88, 166, 255, 0.15); /* Полупрозрачный синий фон заголовков */ color: var(--accent-blue); font-weight: 600; text-shadow: 0 0 5px var(--glow-blue); border-bottom-width: 2px; /* Жирнее нижняя граница */ border-bottom-color: var(--accent-blue); }
+th { background-color: rgba(88, 166, 255, 0.15); color: var(--accent-blue); font-weight: 600; text-shadow: 0 0 5px var(--glow-blue); border-bottom-width: 2px; border-bottom-color: var(--accent-blue); }
 tbody tr { background-color: transparent; transition: background-color 0.2s ease; }
 tbody tr:hover { background-color: rgba(0, 255, 255, 0.05); }
 
@@ -329,14 +321,13 @@ tbody tr:hover { background-color: rgba(0, 255, 255, 0.05); }
 pre code.diagram { background: none !important; border: none !important; padding: 0 !important; color: var(--text-secondary) !important; font-family: monospace; line-height: 1.5; white-space: pre; }
 
 /* --- Стили для интерактивных демо --- */
-.demo-container { margin-bottom: 30px; padding: 20px; border: 1px solid var(--border-color-light); border-radius: 4px; background-color: rgba(22, 27, 34, 0.6); /* Немного прозрачнее */ }
+.demo-container { margin-bottom: 30px; padding: 20px; border: 1px solid var(--border-color-light); border-radius: 4px; background-color: rgba(22, 27, 34, 0.6); }
 .controls { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
 .demo-container h5, .demo-container h6 { margin-top: 1em; margin-bottom: 0.5em; border-bottom: none; color: var(--text-secondary); text-shadow: none; }
-/* Кнопки наследуют общие стили */
-.code { background-color: var(--bg-main-trans); /* Полупрозрачный */ padding: 10px; border: 1px solid var(--border-color); border-radius: 3px; font-family: monospace; margin-bottom: 10px; white-space: pre-wrap; font-size: 0.9em; color: var(--text-secondary); }
+.code { background-color: var(--bg-main); /* НЕПРОЗРАЧНЫЙ */ padding: 10px; border: 1px solid var(--border-color); border-radius: 3px; font-family: monospace; margin-bottom: 10px; white-space: pre-wrap; font-size: 0.9em; color: var(--text-secondary); }
 
 /* --- Стили для галереи --- */
-.gallery { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; padding: 24px; margin: 0 auto; max-width: 1128px; justify-content: center; background-color: rgba(22, 27, 34, 0.3); /* Легкий фон */ border-radius: 4px;}
+.gallery { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; padding: 24px; margin: 0 auto; max-width: 1128px; justify-content: center; background-color: rgba(22, 27, 34, 0.3); border-radius: 4px;}
 .gallery-item { flex-basis: calc((100% - 32px) / 3); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; border-radius: 4px; overflow: hidden; border: 1px solid transparent; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
 .gallery-item:hover { transform: scale(1.03); border-color: var(--accent-cyan); box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan); }
 .gallery-link { display: block; text-decoration: none; height: 100%; }
@@ -363,7 +354,6 @@ pre code.diagram { background: none !important; border: none !important; padding
 /* Конец стилей анимации клика                */
 /* ============================================ */
 
-
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
     main { padding: 20px; margin: 20px 10px; border-left: none; border-right: none; border-radius: 0; }
@@ -388,6 +378,7 @@ pre code.diagram { background: none !important; border: none !important; padding
 }
 
 /* Стили для TODO-списка - ОСТАВЛЕНЫ БЕЗ ИЗМЕНЕНИЙ */
+/* ... (код TODO) ... */
 .todo-app { max-width: 500px; margin: 0 auto; padding: 16px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9;}
 .todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
 .todo-input, .add-btn { padding: 8px; font: inherit; border: 1px solid #ccc; border-radius: 4px; }
@@ -398,6 +389,7 @@ pre code.diagram { background: none !important; border: none !important; padding
 .todo-item button { padding: 4px 8px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; }
 .todo-item button:hover { background-color: #d32f2f; }
 /* Конец стилей для TODO-списка */
+
 
 /* Дополнительные стили для подсветки Prism.js */
 /* Можно раскомментировать и настроить */
