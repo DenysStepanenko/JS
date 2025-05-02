@@ -2,51 +2,51 @@
 // Содержит данные и логику для галереи изображений на странице gallery.html
 
 // --- 1. Массив данных для галереи ---
-// ЗАМЕНИ пути и описания на свои реальные данные из папки ../img/
+// ИСПОЛЬЗОВАНЫ ОТНОСИТЕЛЬНЫЕ ПУТИ (../img/) для совместимости с GitHub Pages
 const images = [
     {
-        preview: '/img/CyberpunkAlley600x400.jpg',
-        original: '/img/CyberpunkAlley1530x1024.jpg',
+        preview: '../img/CyberpunkAlley600x400.jpg',
+        original: '../img/CyberpunkAlley1530x1024.jpg',
         description: 'Киборг-детектив в неоновом плаще',
     },
     {
-        preview: '/img/CyberpunkBartender600x400.jpg',
-        original: '/img/CyberpunkBartender1530x1024.jpg',
+        preview: '../img/CyberpunkBartender600x400.jpg',
+        original: '../img/CyberpunkBartender1530x1024.jpg',
         description: 'Робот-бармен в футуристическом баре',
     },
     {
-        preview: '/img/NeonCatSign600x900.jpg',
-        original: '/img/NeonCatSign1024x1536.jpg',
+        preview: '../img/NeonCatSign600x900.jpg',
+        original: '../img/NeonCatSign1024x1536.jpg',
         description: 'Кибернетический кот с неоновыми глазами',
     },
     {
-        preview: '/img/NeonRunner600x400.jpg',
-        original: '/img/NeonRunner1530x1024.jpg',
+        preview: '../img/NeonRunner600x400.jpg',
+        original: '../img/NeonRunner1530x1024.jpg',
         description: 'Уличный самурай с кибер-катаной',
     },
     {
-        preview: '/img/NeonDogSign600x900.jpg',
-        original: '/img/NeonDogSign1024x1536.jpg',
+        preview: '../img/NeonDogSign600x900.jpg',
+        original: '../img/NeonDogSign1024x1536.jpg',
         description: 'Робо-пес патрулирует мегаполис',
     },
     {
-        preview: '/img/MaskedCyberpunk600x900.jpg',
-        original: '/img/MaskedCyberpunk1024x1536.jpg',
+        preview: '../img/MaskedCyberpunk600x900.jpg',
+        original: '../img/MaskedCyberpunk1024x1536.jpg',
         description: 'Девушка-хакер за терминалом',
     },
     {
-        preview: '/img/NeonRobot600x400.jpg',
-        original: '/img/NeonRobot1530x1024.jpg',
+        preview: '../img/NeonRobot600x400.jpg',
+        original: '../img/NeonRobot1530x1024.jpg',
         description: 'Рынок андроидов под неоновыми вывесками',
     },
     {
-        preview: '/img/A neon-lit scene with a dog600x900.jpg',
-        original: '/img/A neon-lit scene with a dog1024x1536.jpg',
+        preview: '../img/A neon-lit scene with a dog600x900.jpg',
+        original: '../img/A neon-lit scene with a dog1024x1536.jpg',
         description: 'Собака с кибернетическими улучшениями',
     },
     {
-        preview: '/img/NeonCatStreet600x900.jpg',
-        original: '/img/NeonCatStreet1024x1536.jpg',
+        preview: '../img/NeonCatStreet600x900.jpg',
+        original: '../img/NeonCatStreet1024x1536.jpg',
         description: 'Уличный кот в неоновом переулке',
     },
 ];
@@ -101,6 +101,9 @@ if (galleryContainer) {
         }
 
         // Получаем URL большого изображения из data-атрибута 'source'.
+        // Важно: basicLightbox будет использовать этот URL как есть.
+        // Поскольку он относительный (../img/), браузер правильно построит полный URL
+        // относительно текущего HTML-файла (partials/gallery.html).
         const largeImageURL = targetImage.dataset.source;
         // Получаем описание из атрибута 'alt'.
         const imageDescription = targetImage.alt;
@@ -116,26 +119,30 @@ if (galleryContainer) {
 
         // Функция для закрытия окна по Escape
         const onEscKeyPress = (e) => {
+            // Используем e.key === 'Escape' для лучшей совместимости
             if (e.key === 'Escape' && instance && instance.visible()) {
                 instance.close();
             }
         };
 
-        // Создаем экземпляр окна
+        // Создаем экземпляр окна basicLightbox
         instance = basicLightbox.create(`
             <img src="${largeImageURL}" alt="${imageDescription}" width="1112" height="640">
         `, {
             onShow: (instance) => {
-                // Добавляем слушатель Esc при показе
+                // Добавляем слушатель Esc при показе окна
                 document.addEventListener('keydown', onEscKeyPress);
+                console.log("Окно basicLightbox показано, добавлен слушатель Esc.");
             },
             onClose: (instance) => {
-                // Удаляем слушатель Esc при закрытии
+                // Удаляем слушатель Esc при закрытии окна
                 document.removeEventListener('keydown', onEscKeyPress);
+                console.log("Окно basicLightbox закрыто, удален слушатель Esc.");
             }
         });
 
         // Показываем окно
+        console.log("Попытка показать basicLightbox с URL:", largeImageURL);
         instance.show();
     });
     console.log("Слушатель кликов с basicLightbox добавлен на .gallery.");
