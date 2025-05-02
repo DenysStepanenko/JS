@@ -58,7 +58,6 @@ body.light-theme {
 /* Конец CSS Переменных                       */
 /* ============================================ */
 
-
 /* Общие стили */
 body {
   position: relative;
@@ -98,7 +97,6 @@ body.light-theme::before {
   background-image: none;
   background-color: var(--bg-main);
 }
-
 
 #progress-bar {
   position: fixed;
@@ -322,6 +320,7 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
 /* --- Стили для таблиц --- */
 table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em; /* background-color: rgba(22, 27, 34, 0.3); */ } /* Убрал фон таблицы */
 th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
@@ -366,7 +365,6 @@ pre code.diagram { background: none !important; border: none !important; padding
 /* Конец стилей анимации клика                */
 /* ============================================ */
 
-
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
     main { padding: 20px; margin: 20px 10px; border-left: none; border-right: none; border-radius: 0; }
@@ -390,8 +388,7 @@ pre code.diagram { background: none !important; border: none !important; padding
   .gallery { padding: 10px; gap: 10px; }
 }
 
-/* Стили для TODO-списка  ОСТАВЛЕНЫ БЕЗ ИЗМЕНЕНИЙ */
-/* ... (код TODO) ... */
+/* Стили для TODO-списка */
 .todo-app { max-width: 500px; margin: 0 auto; padding: 16px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9;}
 .todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
 .todo-input, .add-btn { padding: 8px; font: inherit; border: 1px solid #ccc; border-radius: 4px; }
@@ -403,9 +400,7 @@ pre code.diagram { background: none !important; border: none !important; padding
 .todo-item button:hover { background-color: #d32f2f; }
 /* Конец стилей для TODO-списка */
 
-
 /* Дополнительные стили для подсветки Prism.js */
-/* Можно раскомментировать и настроить */
 /*
 .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
 .token.punctuation { color: var(--accent-cyan); }
