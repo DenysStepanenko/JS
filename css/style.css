@@ -65,8 +65,9 @@ body.light-theme #theme-toggle:hover {
     background: #1f6feb;
     color: white;
 }
+
 /* ============================================ */
-/* Стили Навигации с Анимацией Активного Пункта */
+/* Стили Навигации (Статичный Активный Пункт)   */
 /* ============================================ */
 nav ul {
   background: transparent;
@@ -97,43 +98,15 @@ nav ul li a {
 /* Стили при наведении */
 nav ul li a:hover {
   color: #c9d1d9;
-  border-bottom-color: #58a6ff; /* Оставим синее подчеркивание при наведении? */
+  border-bottom-color: #58a6ff; /* Синее подчеркивание при наведении */
 }
 
-/* Стили для АКТИВНОЙ ссылки (с КИСЛОТНО-ЗЕЛЕНОЙ анимацией) */
+/* Стили для СТАТИЧНО АКТИВНОЙ ссылки */
 nav ul li a.active {
   font-weight: 600;
-  border-bottom-color: #58a6ff; /* Оставим синее подчеркивание для активной? Или сделать зеленым #39FF14? Пока синее. */
-
-  /* --- Текстовая анимация (Кислотно-зеленая) --- */
-  /* Цвет-запасной вариант для старых браузеров */
-  color: #2fad10; /* Темно-зеленый цвет текста, если анимация не поддерживается */
-
-  /* Создаем градиентный фон */
-  background-image: linear-gradient(
-    90deg, /* Направление градиента */
-    rgba(57, 255, 20, 0.7) 0%, /* Полупрозрачный кислотно-зеленый (#39FF14) */
-    #39FF14 50%, /* Яркий кислотно-зеленый */
-    rgba(57, 255, 20, 0.7) 100% /* Полупрозрачный кислотно-зеленый */
-  );
-
-  /* Делаем фон больше самого текста */
-  background-size: 250% 100%;
-
-  /* Начальная позиция фона (сдвинут вправо) */
-  background-position: 100% 0;
-
-  /* Обрезаем фон по форме текста */
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  /* Делаем сам текст прозрачным */
-  color: transparent;
-
-  /* Применяем НОВУЮ анимацию */
-  animation: neon-fill 1.5s ease-out forwards; /* Новое имя и длительность */
-  animation-delay: 0.1s;
-  /* --- Конец текстовой анимации --- */
+  color: #39FF14; /* Кислотно-зеленый текст активной ссылки */
+  border-bottom-color: #39FF14; /* Кислотно-зеленое подчеркивание */
+  /* Анимация убрана отсюда, она будет применяться JS через класс */
 }
 
 /* --- Стили для Светлой Темы --- */
@@ -142,45 +115,18 @@ body.light-theme nav ul li a {
 }
 body.light-theme nav ul li a:hover {
   color: #1f6feb;
-  border-bottom-color: #1f6feb; /* Синее подчеркивание при наведении */
+  border-bottom-color: #1f6feb;
 }
 
 body.light-theme nav ul li a.active {
   font-weight: 600;
-  border-bottom-color: #1f6feb; /* Синее подчеркивание для активной */
-
-  /* --- Текстовая анимация (Светлая тема - Кислотно-зеленая) --- */
-  /* Цвет-запасной вариант */
-  color: #2fad10; /* Темно-зеленый */
-
-  /* Градиентный фон (используем тот же кислотно-зеленый) */
-  background-image: linear-gradient(
-    90deg,
-    rgba(57, 255, 20, 0.7) 0%,
-    #39FF14 50%,
-    rgba(57, 255, 20, 0.7) 100%
-  );
-  /* Остальные свойства анимации наследуются или можно переопределить */
-   color: transparent;
-   animation-name: neon-fill; /* Убедимся, что используется новое имя */
-  /* --- Конец текстовой анимации --- */
+  color: #2fad10; /* Темно-зеленый текст активной ссылки для светлой темы */
+  border-bottom-color: #2fad10; /* Темно-зеленое подчеркивание */
+  /* Анимация убрана отсюда */
 }
 /* --- Конец стилей для Светлой Темы --- */
-
-/* --- Ключевые кадры НОВОЙ анимации --- */
-@keyframes neon-fill { /* Переименовали */
-  0% {
-    background-position: 100% 0;
-  }
-  60% {
-     background-position: 40% 0;
-  }
-  100% {
-    background-position: 0% 0;
-  }
-}
 /* ============================================ */
-/* Конец стилей Навигации                     */
+/* Конец базовых стилей Навигации             */
 /* ============================================ */
 
 
@@ -193,9 +139,9 @@ nav ul li ul.submenu {
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 100;
-  left: 0; /* Выравнивание по левому краю родителя */
-  width: max-content; /* Ширина по содержимому */
-  text-align: left; /* Текст влево */
+  left: 0;
+  width: max-content;
+  text-align: left;
 }
 
 body.light-theme nav ul li ul.submenu {
@@ -214,37 +160,36 @@ nav ul li ul.submenu li {
 
 main {
   max-width: 900px;
-  margin: 30px auto; /* Увеличим отступ сверху */
-  padding: 30px; /* Увеличим паддинг */
-  background: #161b22; /* Фон основной части */
-  border-radius: 8px; /* Чуть больше скругление */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Мягкая тень */
+  margin: 30px auto;
+  padding: 30px;
+  background: #161b22;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 body.light-theme main {
-  background: #ffffff; /* Белый фон */
+  background: #ffffff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #58a6ff; /* Синий акцент для заголовков */
+  color: #58a6ff;
 }
 
 h1 {
-    font-size: 2.2em; /* Крупнее главный заголовок */
+    font-size: 2.2em;
     margin-bottom: 0.8em;
 }
 
 h2 {
     font-size: 1.8em;
-    border-bottom: 1px solid #30363d; /* Тоньше линия */
+    border-bottom: 1px solid #30363d;
     padding-bottom: 8px;
     margin-top: 2em;
     margin-bottom: 1em;
 }
 h3 {
     font-size: 1.4em;
-    /* Убрали границу у h3 для стиля как на картинке */
     padding-bottom: 6px;
     margin-top: 1.8em;
     margin-bottom: 0.8em;
@@ -256,12 +201,12 @@ body.light-theme h3,
 body.light-theme h4,
 body.light-theme h5,
 body.light-theme h6 {
-  color: #1f6feb; /* Синий для светлой темы */
+  color: #1f6feb;
 }
 
 body.light-theme h2,
 body.light-theme h3 {
-  border-bottom-color: #d8dee4; /* Светлая линия */
+  border-bottom-color: #d8dee4;
 }
 
 /* Стили для блоков кода */
@@ -271,8 +216,8 @@ body.light-theme h3 {
 }
 
 .code-block pre {
-  background: #0d1117; /* Фон блока кода */
-  padding: 1em; /* Паддинг */
+  background: #0d1117;
+  padding: 1em;
   border-radius: 6px;
   border: 1px solid #30363d;
   overflow-x: auto;
@@ -280,7 +225,7 @@ body.light-theme h3 {
 }
 
 body.light-theme .code-block pre {
-  background: #f6f8fa; /* Светлый фон */
+  background: #f6f8fa;
   border: 1px solid #d0d7de;
 }
 
@@ -289,28 +234,28 @@ body.light-theme .code-block pre {
   font-size: 0.95em;
   line-height: 1.5;
   display: block;
-  color: #c9d1d9; /* Цвет текста кода */
+  color: #c9d1d9;
 }
 
 body.light-theme .code-block pre code {
-    color: #24292f; /* Цвет текста кода для светлой темы */
+    color: #24292f;
 }
 
 /* Стили для кнопок управления кодом */
 .code-block button {
-  background: #21262d; /* Темный фон кнопок */
-  color: #c9d1d9; /* Светлый текст */
-  border: 1px solid #30363d; /* Граница */
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 6px;
   margin: 8px 5px 0 0;
   font-size: 0.85em;
-  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease; /* Плавные переходы */
+  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .code-block button:hover {
-    background: #30363d; /* Темнее при наведении */
+    background: #30363d;
     border-color: #8b949e;
 }
 
@@ -319,18 +264,18 @@ body.light-theme .code-block pre code {
 }
 
 body.light-theme .code-block button {
-      background: #f6f8fa; /* Светлый фон */
-      color: #24292f; /* Темный текст */
-      border: 1px solid #d0d7de; /* Светлая граница */
+      background: #f6f8fa;
+      color: #24292f;
+      border: 1px solid #d0d7de;
 }
 body.light-theme .code-block button:hover {
-    background: #e9eef2; /* Светлее при наведении */
+    background: #e9eef2;
     border-color: #afb8c1;
 }
 
 /* Стили для кнопок запуска примеров */
 button.run-code {
-  background: #1f6feb; /* Синий фон для кнопки запуска */
+  background: #1f6feb;
   color: white;
   border: 1px solid #1f6feb;
   padding: 5px 10px;
@@ -436,20 +381,20 @@ body.light-theme .array-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #21262d; /* Темный фон */
-  color: #c9d1d9; /* Светлая стрелка */
+  background: #21262d;
+  color: #c9d1d9;
   border: 1px solid #30363d;
   width: 40px;
   height: 40px;
   padding: 0;
   border-radius: 50%;
   cursor: pointer;
-  display: none; /* Изначально скрыта */
+  display: none;
   font-size: 1.5em;
   line-height: 40px;
   text-align: center;
   z-index: 999;
-  transition: background-color 0.2s ease, border-color 0.2s ease; /* Плавный переход */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 #scroll-top:hover {
     background: #30363d;
@@ -457,8 +402,8 @@ body.light-theme .array-container {
 }
 
 body.light-theme #scroll-top {
-      background: #f6f8fa; /* Светлый фон */
-      color: #24292f; /* Темная стрелка */
+      background: #f6f8fa;
+      color: #24292f;
       border: 1px solid #d0d7de;
 }
 body.light-theme #scroll-top:hover {
@@ -470,19 +415,19 @@ body.light-theme #scroll-top:hover {
 footer {
   text-align: center;
   padding: 20px;
-  background: #0d1117; /* Фон как у body */
-  color: #8b949e; /* Серый текст */
+  background: #0d1117;
+  color: #8b949e;
   margin-top: 40px;
-  border-top: 1px solid #30363d; /* Линия над подвалом */
+  border-top: 1px solid #30363d;
 }
 
 body.light-theme footer {
-  background: #f6f8fa; /* Светлый фон */
+  background: #f6f8fa;
   color: #57606a;
   border-top: 1px solid #d0d7de;
 }
 
-/* Стили для анимации появления */
+/* Стили для анимации появления секций */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -509,25 +454,24 @@ th, td {
 }
 
 th {
-  background-color: #161b22; /* Фон заголовков */
-  color: #c9d1d9; /* Цвет текста заголовков */
-  font-weight: 600; /* Полужирный */
+  background-color: #161b22;
+  color: #c9d1d9;
+  font-weight: 600;
 }
 
 body.light-theme th, body.light-theme td {
-   border: 1px solid #d0d7de; /* Светлая граница */
+   border: 1px solid #d0d7de;
 }
 body.light-theme th {
-   background-color: #f6f8fa; /* Светлый фон */
-   color: #24292f; /* Темный текст */
+   background-color: #f6f8fa;
+   color: #24292f;
 }
 
-/* Чередование строк */
 tbody tr:nth-child(odd) {
-    background-color: #10151d; /* Темнее для темной темы */
+    background-color: #10151d;
 }
 body.light-theme tbody tr:nth-child(odd) {
-    background-color: #f6f8fa; /* Светлее для светлой темы */
+    background-color: #f6f8fa;
 }
 
 /* --- Стили для схем --- */
@@ -567,7 +511,7 @@ body.light-theme .controls {
     margin-top: 1em;
     margin-bottom: 0.5em;
     border-bottom: none;
-    color: #8b949e; /* Серый цвет для подзаголовков */
+    color: #8b949e;
 }
 body.light-theme .demo-container h5,
 body.light-theme .demo-container h6 {
@@ -579,7 +523,6 @@ body.light-theme .demo-container h6 {
       margin-bottom: 8px;
       font-size: 0.9em;
       padding: 6px 12px;
-      /* Используем стили кнопок кода */
       background: #21262d;
       color: #c9d1d9;
       border: 1px solid #30363d;
@@ -622,12 +565,118 @@ body.light-theme .code {
 }
 /* --- Конец стилей из learning_guide.html --- */
 
+/* --- Стили для галереи --- */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 1128px;
+  justify-content: center;
+}
+
+.gallery-item {
+  flex-basis: calc((100% - 32px) / 3);
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+body.light-theme .gallery-item {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-link {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* --- Стили для модального окна basicLightbox --- */
+.basicLightbox {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.basicLightbox__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.basicLightbox__placeholder img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 4px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень */
+}
+
+/* ============================================ */
+/* Анимация КЛИКА по пункту навигации (Новое) */
+/* ============================================ */
+
+/* --- Ключевые кадры для анимации заполнения слева направо --- */
+@keyframes neon-fill-ltr {
+  from {
+    /* Градиент сдвинут влево за пределы текста */
+    background-position: -150% 0;
+  }
+  to {
+    /* Градиент полностью покрывает текст */
+    background-position: 0% 0;
+  }
+}
+
+/* --- Класс, запускающий анимацию по клику --- */
+/* Этот класс добавляется и удаляется с помощью JavaScript из main.js */
+.animate-neon-fill {
+  /* Используем тот же цвет-запасной вариант */
+  color: #2fad10; /* Темно-зеленый, если остальное не сработает */
+
+  /* Градиентный фон (кислотно-зеленый) */
+  background-image: linear-gradient(
+    to right, /* Направление слева направо */
+    #39FF14 0%,   /* Сплошной зеленый в начале */
+    #39FF14 50%,   /* Сплошной зеленый до середины */
+    rgba(57, 255, 20, 0) 100% /* Резко уходит в прозрачный */
+  );
+  /* Фон шире текста */
+  background-size: 250% 100%;
+
+  /* Обрезаем фон по тексту */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Делаем текст прозрачным, чтобы перекрыть статичный цвет на время анимации */
+  color: transparent !important;
+
+  /* Применяем анимацию (медленная, без 'forwards') */
+  animation: neon-fill-ltr 2s ease-out; /* Длительность 2 секунды */
+}
+/* ============================================ */
+/* Конец стилей анимации клика                */
+/* ============================================ */
+
+
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
-    /* Убрали стили для nav из этого блока, т.к. они теперь в @media (max-width: 600px) */
     main {
         padding: 20px;
-        margin: 20px 15px; /* Добавим боковые отступы */
+        margin: 20px 15px;
     }
     h1 { font-size: 2em; }
     h2 { font-size: 1.6em; }
@@ -648,7 +697,7 @@ body.light-theme .code {
         flex-basis: calc((100% - 16px) / 2);
     }
     .gallery {
-        padding: 20px; /* Уменьшим паддинг */
+        padding: 20px;
     }
 }
 
@@ -658,9 +707,9 @@ body.light-theme .code {
     margin: 10px 0;
   }
   nav ul li a {
-        padding: 8px 0; /* Увеличим область клика */
-        border-bottom-width: 1px; /* Тоньше подчеркивание */
-        font-size: 1rem; /* Уменьшим шрифт для мобильных */
+        padding: 8px 0;
+        border-bottom-width: 1px;
+        font-size: 1rem;
     }
   main {
     padding: 15px;
@@ -693,7 +742,6 @@ body.light-theme .code {
 }
 
 /* Стили для TODO-списка - УДАЛИТЬ, ЕСЛИ НЕ НУЖНЫ */
-/* ... (стили TODO оставлены без изменений, т.к. не относятся к задаче) ... */
 .todo-app {
     max-width: 500px;
     margin: 0 auto;
@@ -756,8 +804,7 @@ body.light-theme .code {
 }
 /* Конец стилей для TODO-списка */
 
-/* Дополнительные стили для подсветки Prism.js (могут быть переопределены темой) */
-/* Пример: изменение цвета комментариев */
+/* Дополнительные стили для подсветки Prism.js */
 /*
 .token.comment,
 .token.prolog,
@@ -766,72 +813,4 @@ body.light-theme .code {
   color: #6a9955;
 }
 */
-
-/* --- Стили для галереи (Оставил один блок, удалил дубликат) --- */
-.gallery {
-  display: flex; /* Используем Flexbox для расположения элементов */
-  flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
-  gap: 16px; /* Промежуток между элементами */
-  list-style: none; /* Убираем маркеры списка */
-  padding: 24px; /* Внутренний отступ контейнера */
-  margin: 0 auto; /* Центрируем галерею, если есть max-width */
-  max-width: 1128px; /* Ограничиваем максимальную ширину */
-  justify-content: center; /* Центрируем элементы по горизонтали */
-}
-
-.gallery-item {
-  /* Расчет ширины для 3 элементов в ряду с учетом промежутка */
-  flex-basis: calc((100% - 32px) / 3);
-  transition: transform 0.3s ease; /* Плавный переход для ховера */
-  border-radius: 4px; /* Небольшое скругление */
-  overflow: hidden; /* Скрываем части изображения, выходящие за рамки */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Тень для темной темы */
-}
-body.light-theme .gallery-item {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень для светлой темы */
-}
-
-.gallery-item:hover {
-    transform: scale(1.03); /* Немного увеличиваем при наведении */
-}
-
-.gallery-link {
-  display: block; /* Ссылка занимает всю область элемента */
-  text-decoration: none; /* Убираем подчеркивание */
-  height: 100%; /* Ссылка растягивается на всю высоту */
-}
-
-.gallery-image {
-  display: block; /* Убираем лишний отступ под изображением */
-  width: 100%; /* Изображение занимает всю ширину */
-  height: 200px; /* Фиксированная высота для превью */
-  object-fit: cover; /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
-}
-/* Адаптация галереи перенесена в общие @media блоки */
-
-
-/* --- Стили для модального окна basicLightbox --- */
-/* Стилизуем фон */
-.basicLightbox {
-    background: rgba(0, 0, 0, 0.85); /* Полупрозрачный темный фон */
-}
-
-/* Стилизуем контейнер изображения внутри модалки */
-.basicLightbox__placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-/* Ограничиваем размер изображения внутри модалки */
-.basicLightbox__placeholder img {
-    max-width: 90vw;  /* Макс. ширина - 90% ширины окна */
-    max-height: 90vh; /* Макс. высота - 90% высоты окна */
-    border-radius: 4px; /* Небольшое скругление для изображения */
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень для киберпанка */
-}
-
-/* УДАЛЕН ДУБЛИРУЮЩИЙ БЛОК СТИЛЕЙ GALLERY/LIGHTBOX ЗДЕСЬ */
 
