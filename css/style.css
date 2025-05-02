@@ -313,9 +313,15 @@ footer {
 }
 
 /* Стили для анимации появления секций */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* --- Стили для таблиц --- */
 table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em; /* background-color: rgba(22, 27, 34, 0.3); */ } /* Убрал фон таблицы */
 th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
@@ -410,11 +416,3 @@ pre code.diagram { background: none !important; border: none !important; padding
 .token.function, .token.class-name { color: #ffc66d; } / * Желтый * /
 .token.regex, .token.important, .token.variable { color: #ffc66d; }
 */
-
-.fade-in {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-.fade-in.visible {
-    opacity: 1;
-}
