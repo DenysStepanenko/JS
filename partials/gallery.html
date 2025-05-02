@@ -4,101 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <title>Галерея изображений (Киберпанк) - Руководство по JavaScript</title>
-    <style>
-        /* Базовые стили для галереи */
-        .gallery {
-            display: flex;
-            /* Используем Flexbox для расположения элементов */
-            flex-wrap: wrap;
-            /* Разрешаем перенос элементов на новую строку */
-            gap: 16px;
-            /* Промежуток между элементами */
-            list-style: none;
-            /* Убираем маркеры списка */
-            padding: 24px;
-            /* Внутренний отступ контейнера */
-            margin: 0 auto;
-            /* Центрируем галерею, если есть max-width */
-            max-width: 1128px;
-            /* Ограничиваем максимальную ширину */
-            justify-content: center;
-            /* Центрируем элементы по горизонтали */
-        }
+    <!-- Подключение basicLightbox CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css" rel="stylesheet">
+</head>
 
-        .gallery-item {
-            /* Расчет ширины для 3 элементов в ряду с учетом промежутка */
-            flex-basis: calc((100% - 32px) / 3);
-            transition: transform 0.3s ease;
-            /* Плавный переход для ховера */
-            border-radius: 4px;
-            /* Небольшое скругление */
-            overflow: hidden;
-            /* Скрываем части изображения, выходящие за рамки */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* Легкая тень */
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+<title>Галерея изображений (Киберпанк) - Руководство по JavaScript</title>
 
-        .gallery-item:hover {
-            transform: scale(1.03);
-            /* Немного увеличиваем при наведении */
-        }
-
-        .gallery-link {
-            display: block;
-            /* Ссылка занимает всю область элемента */
-            text-decoration: none;
-            /* Убираем подчеркивание */
-            height: 100%;
-            /* Ссылка растягивается на всю высоту */
-        }
-
-        .gallery-image {
-            display: block;
-            /* Убираем лишний отступ под изображением */
-            width: 100%;
-            /* Изображение занимает всю ширину */
-            height: 200px;
-            /* Фиксированная высота для превью */
-            object-fit: cover;
-            /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
-        }
-
-        /* Адаптивность (пример для 2 колонок на средних экранах) */
-        @media (max-width: 768px) {
-            .gallery-item {
-                flex-basis: calc((100% - 16px) / 2);
-            }
-        }
-
-        /* Адаптивность (пример для 1 колонки на маленьких экранах) */
-        @media (max-width: 480px) {
-            .gallery-item {
-                flex-basis: 100%;
-            }
-
-            .gallery {
-                padding: 16px;
-                gap: 16px;
-            }
-        }
-
-        /* Стили для модального окна basicLightbox (если нужны кастомные) */
-        .basicLightbox__placeholder img {
-            max-width: 90vw;
-            max-height: 90vh;
-        }
-    </style>
 </head>
 
 <body>
