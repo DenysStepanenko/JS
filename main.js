@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // --- End Navigation Link Click Animation ---
 
-// ===== Конец файла main.js =====
+// ===== Конец файла main.js ====
 document.addEventListener('DOMContentLoaded', () => {
     const fadeIns = document.querySelectorAll('.fade-in');
     fadeIns.forEach(el => el.classList.add('visible'));
