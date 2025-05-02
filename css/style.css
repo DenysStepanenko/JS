@@ -1,0 +1,768 @@
+/* Общие стили */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117; /* Темный фон как на картинке */
+  color: #c9d1d9;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+}
+
+body.light-theme {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: #58a6ff; /* Синий акцент */
+  width: 0;
+  z-index: 1000;
+  transition: width 0.2s ease-out; /* Плавный прогресс */
+}
+
+header {
+  background: #161b22; /* Фон хедера */
+  color: #58a6ff;
+  text-align: center;
+  padding: 2rem 0 1rem 0; /* Уменьшим нижний паддинг */
+  font-family: 'Raleway', sans-serif;
+  position: relative;
+  border-bottom: 1px solid #30363d; /* Тонкая линия под хедером */
+}
+
+body.light-theme header {
+  background: #e9eef2; /* Светлый фон хедера */
+  border-bottom: 1px solid #d0d7de;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #1f6feb;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 100;
+  transition: background-color 0.3s ease; /* Плавный переход для кнопки */
+}
+#theme-toggle:hover {
+    background: #58a6ff;
+}
+
+body.light-theme #theme-toggle {
+    background: #58a6ff;
+    color: #0d1117;
+}
+body.light-theme #theme-toggle:hover {
+    background: #1f6feb;
+    color: white;
+}
+
+nav ul {
+  background: transparent; /* Убираем фон у ul */
+  padding: 10px 0; /* Паддинг сверху/снизу */
+  list-style: none;
+  margin: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline-block;
+  position: relative;
+  margin: 0 12px; /* Отступы между ссылками */
+}
+
+nav ul li a {
+  color: #8b949e; /* Серый цвет для неактивных ссылок */
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 5px 0; /* Паддинг для области клика и подчеркивания */
+  transition: color 0.2s ease, border-color 0.2s ease; /* Плавный переход */
+  border-bottom: 2px solid transparent; /* Прозрачная граница для ховера */
+}
+
+nav ul li a:hover {
+  color: #c9d1d9; /* Светлее при наведении */
+  border-bottom-color: #58a6ff; /* Подчеркивание при наведении */
+}
+
+nav ul li a.active {
+  color: #c9d1d9; /* Цвет активной ссылки */
+  font-weight: 600; /* Полужирный */
+  border-bottom-color: #58a6ff; /* Подчеркивание активной ссылки */
+}
+
+body.light-theme nav ul li a {
+  color: #57606a; /* Темно-серый для светлой темы */
+}
+body.light-theme nav ul li a:hover {
+  color: #1f6feb; /* Синий при наведении */
+  border-bottom-color: #1f6feb;
+}
+body.light-theme nav ul li a.active {
+  color: #1f6feb; /* Синий активный */
+  border-bottom-color: #1f6feb;
+}
+
+/* --- Стили для выпадающего меню (если оно будет) --- */
+nav ul li ul.submenu {
+  display: none;
+  position: absolute;
+  background: #161b22;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  left: 0; /* Выравнивание по левому краю родителя */
+  width: max-content; /* Ширина по содержимому */
+  text-align: left; /* Текст влево */
+}
+
+body.light-theme nav ul li ul.submenu {
+  background: #e0e0e0;
+}
+
+nav ul li:hover ul.submenu {
+  display: block;
+}
+
+nav ul li ul.submenu li {
+  display: block;
+  margin: 5px 0;
+}
+/* --- Конец стилей для выпадающего меню --- */
+
+main {
+  max-width: 900px;
+  margin: 30px auto; /* Увеличим отступ сверху */
+  padding: 30px; /* Увеличим паддинг */
+  background: #161b22; /* Фон основной части */
+  border-radius: 8px; /* Чуть больше скругление */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Мягкая тень */
+}
+
+body.light-theme main {
+  background: #ffffff; /* Белый фон */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #58a6ff; /* Синий акцент для заголовков */
+}
+
+h1 {
+    font-size: 2.2em; /* Крупнее главный заголовок */
+    margin-bottom: 0.8em;
+}
+
+h2 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #30363d; /* Тоньше линия */
+    padding-bottom: 8px;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+h3 {
+    font-size: 1.4em;
+    /* Убрали границу у h3 для стиля как на картинке */
+    padding-bottom: 6px;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+  color: #1f6feb; /* Синий для светлой темы */
+}
+
+body.light-theme h2,
+body.light-theme h3 {
+  border-bottom-color: #d8dee4; /* Светлая линия */
+}
+
+/* Стили для блоков кода */
+.code-block {
+    margin-bottom: 1.5em;
+    position: relative;
+}
+
+.code-block pre {
+  background: #0d1117; /* Фон блока кода */
+  padding: 1em; /* Паддинг */
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  overflow-x: auto;
+  margin: 0;
+}
+
+body.light-theme .code-block pre {
+  background: #f6f8fa; /* Светлый фон */
+  border: 1px solid #d0d7de;
+}
+
+.code-block pre code {
+  font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
+  font-size: 0.95em;
+  line-height: 1.5;
+  display: block;
+  color: #c9d1d9; /* Цвет текста кода */
+}
+
+body.light-theme .code-block pre code {
+    color: #24292f; /* Цвет текста кода для светлой темы */
+}
+
+/* Стили для кнопок управления кодом */
+.code-block button {
+  background: #21262d; /* Темный фон кнопок */
+  color: #c9d1d9; /* Светлый текст */
+  border: 1px solid #30363d; /* Граница */
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 8px 5px 0 0;
+  font-size: 0.85em;
+  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease; /* Плавные переходы */
+}
+
+.code-block button:hover {
+    background: #30363d; /* Темнее при наведении */
+    border-color: #8b949e;
+}
+
+.code-block button:active {
+  transform: scale(0.95);
+}
+
+body.light-theme .code-block button {
+      background: #f6f8fa; /* Светлый фон */
+      color: #24292f; /* Темный текст */
+      border: 1px solid #d0d7de; /* Светлая граница */
+}
+body.light-theme .code-block button:hover {
+    background: #e9eef2; /* Светлее при наведении */
+    border-color: #afb8c1;
+}
+
+/* Стили для кнопок запуска примеров */
+button.run-code {
+  background: #1f6feb; /* Синий фон для кнопки запуска */
+  color: white;
+  border: 1px solid #1f6feb;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 8px 0 0 0;
+  font-size: 0.85em;
+  transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+button.run-code:hover {
+  background: #58a6ff;
+  border-color: #58a6ff;
+}
+
+button.run-code:active {
+  transform: scale(0.95);
+}
+
+body.light-theme button.run-code {
+  background: #58a6ff;
+  border: 1px solid #58a6ff;
+  color: #0d1117;
+}
+
+body.light-theme button.run-code:hover {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: white;
+}
+
+/* Стили для вывода результатов */
+.output {
+  background: #101a27;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  min-height: 40px;
+  border: 1px solid #30363d;
+  font-family: monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+}
+
+body.light-theme .output {
+  background: #e9eef2;
+  border: 1px solid #d0d7de;
+  color: #333;
+}
+
+/* Стили для редактора кода (если используется) */
+.code-editor {
+  width: 100%;
+  height: 150px;
+  background: #0d1117;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  padding: 10px;
+  font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
+  resize: vertical;
+  box-sizing: border-box;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+body.light-theme .code-editor {
+  background: #f6f8fa;
+  color: #24292f;
+  border: 1px solid #d0d7de;
+}
+
+/* Стили для демонстрации массивов */
+.array-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px dashed #30363d;
+  border-radius: 6px;
+  min-height: 50px;
+}
+
+body.light-theme .array-container {
+    border: 1px dashed #d0d7de;
+}
+
+.array-element {
+  width: 35px;
+  height: 35px;
+  background: #58a6ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+/* Стили для кнопки "Наверх" */
+#scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #21262d; /* Темный фон */
+  color: #c9d1d9; /* Светлая стрелка */
+  border: 1px solid #30363d;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none; /* Изначально скрыта */
+  font-size: 1.5em;
+  line-height: 40px;
+  text-align: center;
+  z-index: 999;
+  transition: background-color 0.2s ease, border-color 0.2s ease; /* Плавный переход */
+}
+#scroll-top:hover {
+    background: #30363d;
+    border-color: #8b949e;
+}
+
+body.light-theme #scroll-top {
+      background: #f6f8fa; /* Светлый фон */
+      color: #24292f; /* Темная стрелка */
+      border: 1px solid #d0d7de;
+}
+body.light-theme #scroll-top:hover {
+    background: #e9eef2;
+    border-color: #afb8c1;
+}
+
+/* Стили для подвала */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0d1117; /* Фон как у body */
+  color: #8b949e; /* Серый текст */
+  margin-top: 40px;
+  border-top: 1px solid #30363d; /* Линия над подвалом */
+}
+
+body.light-theme footer {
+  background: #f6f8fa; /* Светлый фон */
+  color: #57606a;
+  border-top: 1px solid #d0d7de;
+}
+
+/* Стили для анимации появления */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Стили для таблиц --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid #30363d;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #161b22; /* Фон заголовков */
+  color: #c9d1d9; /* Цвет текста заголовков */
+  font-weight: 600; /* Полужирный */
+}
+
+body.light-theme th, body.light-theme td {
+   border: 1px solid #d0d7de; /* Светлая граница */
+}
+body.light-theme th {
+   background-color: #f6f8fa; /* Светлый фон */
+   color: #24292f; /* Темный текст */
+}
+
+/* Чередование строк */
+tbody tr:nth-child(odd) {
+    background-color: #10151d; /* Темнее для темной темы */
+}
+body.light-theme tbody tr:nth-child(odd) {
+    background-color: #f6f8fa; /* Светлее для светлой темы */
+}
+
+/* --- Стили для схем --- */
+pre code.diagram {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+    font-family: monospace;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+/* --- Стили для интерактивных демо --- */
+.demo-container {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      background-color: #10151d;
+}
+body.light-theme .demo-container {
+    border: 1px solid #d0d7de;
+    background-color: #f6f8fa;
+}
+
+.controls {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #30363d;
+}
+body.light-theme .controls {
+    border-bottom: 1px solid #d0d7de;
+}
+
+.demo-container h5, .demo-container h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    border-bottom: none;
+    color: #8b949e; /* Серый цвет для подзаголовков */
+}
+body.light-theme .demo-container h5,
+body.light-theme .demo-container h6 {
+    color: #57606a;
+}
+
+.demo-container button {
+      margin-right: 8px;
+      margin-bottom: 8px;
+      font-size: 0.9em;
+      padding: 6px 12px;
+      /* Используем стили кнопок кода */
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.1s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.demo-container button:hover {
+    background: #30363d;
+    border-color: #8b949e;
+}
+.demo-container button:active {
+    transform: scale(0.95);
+}
+
+body.light-theme .demo-container button {
+      background: #f6f8fa;
+      color: #24292f;
+      border: 1px solid #d0d7de;
+}
+body.light-theme .demo-container button:hover {
+    background: #e9eef2;
+    border-color: #afb8c1;
+}
+
+.code { /* Стиль для отображения примера кода внутри демо */
+      background-color: #0d1117;
+      padding: 10px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      font-family: monospace;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+      font-size: 0.9em;
+}
+body.light-theme .code {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
+}
+/* --- Конец стилей из learning_guide.html --- */
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    nav ul li {
+        margin: 0 8px;
+    }
+    nav ul li a {
+        font-size: 1rem;
+    }
+    main {
+        padding: 20px;
+        margin: 20px 15px; /* Добавим боковые отступы */
+    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+    h3 { font-size: 1.3em; }
+
+    #theme-toggle {
+        padding: 6px 10px;
+        font-size: 0.9em;
+    }
+    #scroll-top {
+        width: 35px;
+        height: 35px;
+        font-size: 1.3em;
+        line-height: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+  nav ul li {
+    display: block; /* Меню в столбик */
+    margin: 10px 0;
+  }
+  nav ul li a {
+        padding: 8px 0; /* Увеличим область клика */
+        border-bottom-width: 1px; /* Тоньше подчеркивание */
+    }
+  main {
+    padding: 15px;
+    margin: 15px 10px;
+  }
+  #theme-toggle {
+        top: 15px;
+        right: 15px;
+    }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.4em; }
+    h3 { font-size: 1.2em; }
+
+    .code-block button {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+    button.run-code {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+}
+
+/* Стили для TODO-списка - УДАЛИТЬ, ЕСЛИ НЕ НУЖНЫ */
+.todo-app {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.todo-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.todo-input, .add-btn {
+    padding: 8px;
+    font: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-btn {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.todo-item.completed {
+    background-color: #e0e0e0;
+    text-decoration: line-through;
+}
+
+.todo-item button {
+    padding: 4px 8px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.todo-item button:hover {
+    background-color: #d32f2f;
+}
+/* Конец стилей для TODO-списка */
+
+/* Дополнительные стили для подсветки Prism.js (могут быть переопределены темой) */
+/* Пример: изменение цвета комментариев */
+/*
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a9955;
+}
+/* --- Стили для галереи --- */
+.gallery {
+  display: flex; /* Используем Flexbox для расположения элементов */
+  flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+  gap: 16px; /* Промежуток между элементами */
+  list-style: none; /* Убираем маркеры списка */
+  padding: 24px; /* Внутренний отступ контейнера */
+  margin: 0 auto; /* Центрируем галерею, если есть max-width */
+  max-width: 1128px; /* Ограничиваем максимальную ширину */
+  justify-content: center; /* Центрируем элементы по горизонтали */
+}
+
+.gallery-item {
+  /* Расчет ширины для 3 элементов в ряду с учетом промежутка */
+  flex-basis: calc((100% - 32px) / 3);
+  transition: transform 0.3s ease; /* Плавный переход для ховера */
+  border-radius: 4px; /* Небольшое скругление */
+  overflow: hidden; /* Скрываем части изображения, выходящие за рамки */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Тень для темной темы */
+}
+body.light-theme .gallery-item {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень для светлой темы */
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); /* Немного увеличиваем при наведении */
+}
+
+.gallery-link {
+  display: block; /* Ссылка занимает всю область элемента */
+  text-decoration: none; /* Убираем подчеркивание */
+  height: 100%; /* Ссылка растягивается на всю высоту */
+}
+
+.gallery-image {
+  display: block; /* Убираем лишний отступ под изображением */
+  width: 100%; /* Изображение занимает всю ширину */
+  height: 200px; /* Фиксированная высота для превью */
+  object-fit: cover; /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
+}
+
+/* Адаптивность (пример для 2 колонок на средних экранах) */
+@media (max-width: 768px) {
+    .gallery-item {
+        flex-basis: calc((100% - 16px) / 2);
+    }
+    .gallery {
+        padding: 20px; /* Уменьшим паддинг */
+    }
+}
+/* Адаптивность (пример для 1 колонки на маленьких экранах) */
+@media (max-width: 480px) {
+    .gallery-item {
+        flex-basis: 100%;
+    }
+    .gallery {
+        padding: 16px;
+        gap: 16px;
+    }
+}
+
+/* --- Стили для модального окна basicLightbox --- */
+/* Стилизуем фон */
+.basicLightbox {
+    background: rgba(0, 0, 0, 0.85); /* Полупрозрачный темный фон */
+}
+
+/* Стилизуем контейнер изображения внутри модалки */
+.basicLightbox__placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ограничиваем размер изображения внутри модалки */
+.basicLightbox__placeholder img {
+    max-width: 90vw;  /* Макс. ширина - 90% ширины окна */
+    max-height: 90vh; /* Макс. высота - 90% высоты окна */
+    border-radius: 4px; /* Небольшое скругление для изображения */
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень для киберпанка */
+}
+
+

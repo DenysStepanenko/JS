@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Упражнения - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы и Деструктуризация</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
+                    <li><a href="exercises.html" class="active">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
+                    <li><a href="gallery.html">Галерея(пример)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 id="практические-упражнения">Практические упражнения</h2>
+        <p>Закрепите свои знания, выполнив следующие упражнения. Попробуйте решить их самостоятельно перед тем, как
+            смотреть решения в блоках кода.</p>
+
+        <section id="exercise-basics" class="fade-in visible">
+            <h3>Упражнения по основам</h3>
+            <ol>
+                <li>Объявите переменную для хранения вашего имени и выведите ее в консоль.</li>
+                <li>Создайте две числовые переменные, сложите их и выведите результат.</li>
+                <li>Напишите условную конструкцию (<code>if...else</code>), которая проверяет, является ли число четным
+                    или нечетным.</li>
+                <li>Создайте строку и выведите ее длину и первый символ.</li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по основам =====
+// Выводим заголовок секции в консоль.
+console.log("===== Упражнения по основам =====");
+
+// --- 1. Имя ---
+// Объявляем переменную 'myName' с помощью 'let' (значение можно будет изменить позже).
+// Присваиваем ей строковое значение. Замените "ВашеИмя" на свое имя.
+let myName = "Алексей";
+// Выводим значение переменной 'myName' в консоль.
+console.log("1. Имя:", myName);
+
+// --- 2. Сложение ---
+// Объявляем две числовые переменные 'num1' и 'num2'.
+let num1 = 15;
+let num2 = 7;
+// Выполняем сложение и сразу выводим результат в консоль.
+console.log("2. Сумма:", num1 + num2); // Выведет 22
+
+// --- 3. Чет/Нечет ---
+// Объявляем переменную 'checkNum' с числом для проверки.
+let checkNum = 10;
+// Используем оператор остатка от деления '%'. Если число делится на 2 без остатка (остаток === 0), оно четное.
+if (checkNum % 2 === 0) {
+    // Этот блок выполнится, если условие истинно (число четное).
+    console.log(`3. Число ${checkNum} - четное`);
+} else {
+    // Этот блок выполнится, если условие ложно (число нечетное).
+    console.log(`3. Число ${checkNum} - нечетное`);
+}
+// Попробуйте изменить значение checkNum на нечетное (например, 11) и посмотреть результат.
+
+// --- 4. Строка ---
+// Объявляем строковую переменную 'myString'.
+let myString = "JavaScript";
+// Свойство 'length' строки возвращает ее длину (количество символов).
+console.log("4. Строка:", myString);
+console.log("   Длина:", myString.length); // Выведет 10
+// Доступ к символу строки по индексу (нумерация с 0). myString[0] - первый символ.
+console.log("   Первый символ:", myString[0]); // Выведет 'J'
+</code></pre>
+                <button class="run-code" data-example="exercise-basics">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="exercise-arrays" class="fade-in visible">
+            <h3>Упражнения по массивам</h3>
+            <ol>
+                <li>Создайте массив ваших любимых фруктов. Добавьте новый фрукт в конец массива с помощью метода
+                    <code>push()</code>.
+                </li>
+                <li>Используя метод <code>map()</code>, создайте новый массив, где каждый элемент исходного числового
+                    массива умножен на 2.</li>
+                <li>Используя метод <code>filter()</code>, создайте новый массив, содержащий только строки длиннее 5
+                    символов из исходного массива строк.</li>
+                <li>Найдите сумму всех чисел в массиве с помощью метода <code>reduce()</code>.</li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по массивам =====
+// Выводим заголовок секции.
+console.log("\n===== Упражнения по массивам =====");
+
+// --- 1. Фрукты ---
+// Создаем массив строк 'favFruits'.
+let favFruits = ["Яблоко", "Банан"];
+console.log("1. Исходный массив фруктов:", favFruits);
+// Метод 'push()' добавляет один или несколько элементов в КОНЕЦ массива.
+favFruits.push("Манго");
+// Выводим измененный массив.
+console.log("   Массив после push('Манго'):", favFruits); // ["Яблоко", "Банан", "Манго"]
+
+// --- 2. Map ---
+// Метод 'map()' создает НОВЫЙ массив, применяя переданную функцию к КАЖДОМУ элементу исходного массива.
+const numbersMap = [1, 2, 3, 4]; // Исходный числовой массив.
+console.log("\n2. Исходный массив для map:", numbersMap);
+// Вызываем map. Передаем стрелочную функцию (n => n * 2).
+// Эта функция будет вызвана для каждого элемента 'n' массива numbersMap.
+// Результат (n * 2) будет добавлен в новый массив 'doubled'.
+const doubled = numbersMap.map(n => n * 2);
+// Выводим новый массив. Исходный numbersMap не изменился.
+console.log("   Результат map(n => n * 2):", doubled); // [2, 4, 6, 8]
+
+// --- 3. Filter ---
+// Метод 'filter()' создает НОВЫЙ массив, содержащий только те элементы исходного массива,
+// для которых переданная функция вернула 'true'.
+const words = ["Привет", "Мир", "JavaScript", "Кот", "Программирование"]; // Исходный массив строк.
+console.log("\n3. Исходный массив для filter:", words);
+// Вызываем filter. Передаем стрелочную функцию (word => word.length > 5).
+// Эта функция проверяет длину каждой строки 'word'.
+// Только те строки, для которых условие word.length > 5 истинно, попадут в новый массив 'longWords'.
+const longWords = words.filter(word => word.length > 5);
+// Выводим отфильтрованный массив.
+console.log("   Результат filter(word => word.length > 5):", longWords); // ["Привет", "JavaScript", "Программирование"]
+
+// --- 4. Reduce ---
+// Метод 'reduce()' "сворачивает" массив к одному значению (например, сумме, произведению, объекту).
+// Он принимает два аргумента:
+// 1. Callback-функция (accumulator, currentValue) => { ... }
+//    - 'accumulator' (аккумулятор) - значение, накопленное на предыдущих шагах (или начальное значение).
+//    - 'currentValue' (текущее значение) - текущий обрабатываемый элемент массива.
+//    - Функция должна вернуть НОВОЕ значение аккумулятора.
+// 2. Начальное значение аккумулятора (initialValue) - необязательно, но часто используется (здесь 0).
+const numbersReduce = [5, 10, 15, 20]; // Исходный массив чисел.
+console.log("\n4. Исходный массив для reduce:", numbersReduce);
+// Вызываем reduce.
+// acc (аккумулятор) начинается с 0 (второй аргумент reduce).
+// current - текущий элемент массива.
+// На каждом шаге к аккумулятору 'acc' прибавляется текущий элемент 'current'.
+const sum = numbersReduce.reduce((acc, current) => {
+    console.log(`   reduce: acc=${acc}, current=${current} -> acc+current=${acc + current}`); // Показываем шаги
+    return acc + current; // Возвращаем новое значение аккумулятора.
+}, 0); // 0 - начальное значение аккумулятора.
+// Выводим итоговую сумму.
+console.log("   Результат reduce (сумма):", sum); // 50 (0+5 -> 5+10 -> 15+15 -> 30+20 -> 50)
+</code></pre>
+                <button class="run-code" data-example="exercise-arrays">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="exercise-functions" class="fade-in visible">
+            <h3>Упражнения по функциям</h3>
+            <ol>
+                <li>Напишите функцию (Function Declaration), которая принимает два числа и возвращает их сумму.</li>
+                <li>Создайте функцию (Function Expression), которая принимает массив чисел и возвращает наибольшее число
+                    в этом массиве (используйте <code>Math.max</code> и spread-оператор <code>...</code>).</li>
+                <li>Напишите стрелочную функцию, которая принимает строку и возвращает ее в верхнем регистре
+                    (используйте метод строк <code>toUpperCase()</code>).</li>
+                <li>Создайте функцию, которая возвращает другую функцию (замыкание). Внутренняя функция должна
+                    использовать переменную из внешней функции для создания приветствия.</li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по функциям =====
+// Выводим заголовок секции.
+console.log("\n===== Упражнения по функциям =====");
+
+// --- 1. Сумма (Function Declaration) ---
+// Объявляем функцию классическим способом.
+function sumNumbers(a, b) { // Принимает два аргумента: a и b.
+    // Возвращает результат их сложения.
+    return a + b;
+}
+// Вызываем функцию и выводим результат.
+console.log("1. Сумма 5 и 3:", sumNumbers(5, 3)); // Вывод: 8
+
+// --- 2. Максимум в массиве (Function Expression) ---
+// Создаем функцию и присваиваем ее переменной 'findMax'.
+const findMax = function(arr) { // Принимает массив 'arr'.
+    // Проверка на пустой массив (чтобы Math.max не вернул -Infinity).
+    if (!arr || arr.length === 0) {
+        console.log("   Массив пуст, невозможно найти максимум.");
+        return undefined; // Возвращаем undefined, если массив пуст.
+    }
+    // Math.max() принимает список чисел, а не массив.
+    // Spread-оператор '...' "раскрывает" массив 'arr' в список отдельных аргументов: Math.max(1, 5, 2, 9, 3).
+    return Math.max(...arr);
+};
+// Вызываем функцию и выводим результат.
+console.log("2. Максимум в [1, 5, 2, 9, 3]:", findMax([1, 5, 2, 9, 3])); // Вывод: 9
+console.log("   Максимум в []:", findMax([])); // Вывод: undefined
+
+// --- 3. Верхний регистр (Стрелочная функция) ---
+// Краткий синтаксис для функции с одним параметром 'str'.
+// Если тело функции состоит из одного выражения, которое нужно вернуть,
+// можно опустить фигурные скобки {} и слово 'return'.
+const toUpper = str => str.toUpperCase(); // toUpperCase() - стандартный метод строк.
+// Вызываем функцию и выводим результат.
+console.log("3. 'hello' в верхнем регистре:", toUpper("hello")); // Вывод: HELLO
+
+// --- 4. Замыкание ---
+// Внешняя функция 'createGreeter' принимает строку приветствия.
+function createGreeter(greeting) {
+    console.log(`   [createGreeter] Создан гритер с приветствием: "${greeting}"`);
+    // Она ВОЗВРАЩАЕТ НОВУЮ (внутреннюю) функцию.
+    return function(name) { // Внутренняя функция принимает имя.
+        // Внутренняя функция "помнит" переменную 'greeting' из внешнего окружения (это и есть замыкание).
+        console.log(`   ${greeting}, ${name}!`); // Используем и 'greeting', и 'name'.
+    }
+}
+// Вызываем внешнюю функцию, чтобы СОЗДАТЬ внутреннюю функцию-приветствие.
+console.log("\n4. Создание и использование замыкания:");
+const greetHello = createGreeter("Здравствуйте"); // greetHello теперь содержит внутреннюю функцию, которая помнит "Здравствуйте".
+// Вызываем СОЗДАННУЮ внутреннюю функцию.
+greetHello("Ирина"); // Вывод: Здравствуйте, Ирина!
+const greetHi = createGreeter("Привет"); // Создаем другую функцию-приветствие.
+greetHi("Максим"); // Вывод: Привет, Максим!
+</code></pre>
+                <button class="run-code" data-example="exercise-functions">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="exercise-loops" class="fade-in visible">
+            <h3>Упражнения по циклам</h3>
+            <ol>
+                <li>Используя цикл <code>for</code>, выведите числа от 1 до 10.</li>
+                <li>Используя цикл <code>while</code>, найдите факториал числа 5 (5! = 5 * 4 * 3 * 2 * 1).</li>
+                <li>Переберите массив строк с помощью <code>for...of</code> и выведите каждую строку.</li>
+                <li>Переберите свойства объекта с помощью <code>for...in</code> и выведите их ключи и значения
+                    (убедитесь, что не выводите унаследованные свойства).</li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по циклам =====
+// Выводим заголовок секции.
+console.log("\n===== Упражнения по циклам =====");
+
+// --- 1. Цикл for 1-10 ---
+console.log("1. Числа от 1 до 10 (for):");
+// Инициализация: i = 1.
+// Условие: пока i МЕНЬШЕ ИЛИ РАВНО 10.
+// Шаг: увеличить i на 1 после каждой итерации.
+for (let i = 1; i <= 10; i++) {
+    console.log("   " + i); // Выводим текущее значение i.
+}
+
+// --- 2. Факториал (while) ---
+// Факториал n! = n * (n-1) * ... * 1.
+let numFact = 5; // Число, факториал которого ищем.
+let resultFact = 1; // Переменная для хранения результата (начинаем с 1, т.к. умножаем).
+let iFact = numFact; // Счетчик для цикла, начинаем с самого числа.
+console.log(`\n2. Факториал числа ${numFact} (while):`);
+// Условие: пока счетчик iFact БОЛЬШЕ 1.
+while (iFact > 1) {
+    console.log(`   Шаг: resultFact=${resultFact}, iFact=${iFact} -> resultFact *= iFact`);
+    resultFact = resultFact * iFact; // Умножаем текущий результат на значение счетчика.
+    iFact = iFact - 1; // Уменьшаем счетчик на 1.
+}
+// Выводим итоговый результат.
+console.log(`   Результат: Факториал ${numFact} = ${resultFact}`); // Вывод: 120
+
+// --- 3. for...of ---
+// Перебор ЗНАЧЕНИЙ итерируемых объектов (массивов, строк и т.д.).
+const loopWords = ["Один", "Два", "Три"]; // Массив строк.
+console.log("\n3. Перебор массива (for...of):");
+// 'word' будет последовательно принимать значения "Один", "Два", "Три".
+for (const word of loopWords) {
+    console.log("   " + word); // Выводим текущее слово.
+}
+
+// --- 4. for...in ---
+// Перебор КЛЮЧЕЙ (имен свойств) объекта.
+const loopPerson = { name: "Олег", age: 40, city: "Минск" }; // Объект для перебора.
+console.log("\n4. Перебор объекта (for...in с проверкой):");
+// 'key' будет последовательно принимать значения "name", "age", "city".
+for (const key in loopPerson) {
+    // ВАЖНО: Добавляем проверку, чтобы убедиться, что свойство принадлежит
+    // самому объекту loopPerson, а не унаследовано от прототипа (Object.prototype).
+    if (Object.hasOwnProperty.call(loopPerson, key)) {
+        // Выводим ключ и значение (доступ к значению через obj[key]).
+        console.log(`   ${key}: ${loopPerson[key]}`);
+    }
+}
+</code></pre>
+                <button class="run-code" data-example="exercise-loops">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="exercise-objects" class="fade-in visible">
+            <h3>Упражнения по объектам</h3>
+            <ol>
+                <li>Создайте объект, представляющий книгу, используя литеральную нотацию. Он должен иметь свойства:
+                    <code>title</code> (название, строка), <code>author</code> (автор, строка), <code>year</code> (год
+                    издания, число).
+                </li>
+                <li>Добавьте метод <code>getInfo</code> к объекту книги. Этот метод должен выводить в консоль информацию
+                    о книге в формате "Название - Автор (Год)". Используйте <code>this</code> для доступа к свойствам
+                    объекта.</li>
+                <li>Создайте массив <code>library</code>, содержащий несколько объектов книг (включая созданную в п.1).
+                </li>
+                <li>Напишите функцию <code>getModernBooks(books)</code>, которая принимает массив книг
+                    (<code>books</code>) и возвращает новый массив, содержащий только <strong>названия</strong> книг,
+                    опубликованных после 2000 года. Используйте методы массивов <code>filter()</code> и
+                    <code>map()</code>.
+                </li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Упражнения по объектам =====
+// Выводим заголовок секции.
+console.log("\n===== Упражнения по объектам =====");
+
+// --- 1, 2. Объект Книга с методом ---
+// Создаем объект 'book' с помощью литерала объекта.
+const book = {
+    // Свойство: Название книги.
+    title: "Мастер и Маргарита",
+    // Свойство: Автор книги.
+    author: "М. Булгаков",
+    // Свойство: Год издания.
+    year: 1967,
+    // Метод объекта для вывода информации.
+    getInfo: function() {
+        // 'this' внутри метода ссылается на сам объект 'book'.
+        console.log(`   Информация о книге: ${this.title} - ${this.author} (${this.year})`);
+    }
+    // Можно использовать и сокращенный синтаксис метода:
+    // getInfo() { console.log(...); }
+};
+// Вызываем метод объекта.
+console.log("1, 2. Вызов метода book.getInfo():");
+book.getInfo();
+
+// --- 3. Массив книг ---
+// Создаем массив 'library', содержащий несколько объектов книг.
+// Первый элемент - наша уже созданная книга 'book'.
+// Остальные создаем прямо внутри массива с помощью литералов.
+const library = [
+    book, // Добавляем существующий объект.
+    { title: "1984", author: "Дж. Оруэлл", year: 1949 },
+    { title: "Гарри Поттер и философский камень", author: "Дж. Роулинг", year: 1997 },
+    { title: "Код да Винчи", author: "Д. Браун", year: 2003 },
+    { title: "Алгоритмы: построение и анализ", author: "Т. Кормен", year: 2009 } // Еще одна современная книга
+];
+console.log("\n3. Массив книг (библиотека):", library);
+
+// --- 4. Фильтр по году ---
+// Функция принимает массив объектов книг 'books'.
+function getModernBooks(books) {
+    console.log("   [getModernBooks] Фильтрация книг...");
+    // 1. Фильтруем массив 'books'.
+    const modernBooks = books.filter(b => { // 'b' - текущий объект книги.
+        // Условие фильтрации: год издания книги 'b.year' должен быть больше 2000.
+        const isModern = b.year > 2000;
+        console.log(`      - ${b.title} (${b.year}): ${isModern ? 'Современная' : 'Старая'}`);
+        return isModern; // Возвращаем true, если книга современная, иначе false.
+    });
+    console.log("   [getModernBooks] Отображение названий...");
+    // 2. Отображаем (map) отфильтрованный массив 'modernBooks'.
+    // Преобразуем каждый объект современной книги 'b' в ее НАЗВАНИЕ 'b.title'.
+    const modernTitles = modernBooks.map(b => {
+        console.log(`      - Извлечение названия: ${b.title}`);
+        return b.title;
+    });
+    // Возвращаем массив названий современных книг.
+    return modernTitles;
+}
+// Вызываем функцию и выводим результат.
+console.log("\n4. Названия книг, опубликованных после 2000 года:");
+console.log(getModernBooks(library)); // Вывод: ["Код да Винчи", "Алгоритмы: построение и анализ"]
+</code></pre>
+                <button class="run-code" data-example="exercise-objects">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="oop-classes.html" class="button">← ООП и классы</a> <a href="projects.html" class="button">Проекты
+                →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../main.js" defer></script>
+    <script src="../js/07_exercises.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+
+</html>
+```
+
+Я добавил комментарии к решениям упражнений прямо в HTML-файл `exercises.html`. Код для запуска примеров в файле
+`07_exercises.js` также остается рабочим и содержит комментарии к своей логике.
+
+Пожалуйста, проверь результ

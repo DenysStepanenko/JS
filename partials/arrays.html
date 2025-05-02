@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Массивы - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы и Деструктуризация</a></li>
+                    <li><a href="arrays.html" class="active">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
+                    <li><a href="gallery.html">Галерея(пример)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 id="массивы">Массивы</h2>
+        <p>Массивы в JavaScript - это упорядоченные коллекции элементов, которые могут быть разных типов. Они являются
+            одним из самых часто используемых типов данных для хранения списков.</p>
+
+        <section id="создание-массивов" class="fade-in visible">
+            <h3>Создание массивов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">
+// Выводим заголовок секции в консоль для наглядности
+console.log("===== МАССИВЫ =====");
+// Выводим подзаголовок в консоль, указывая, что сейчас будут примеры создания
+console.log("\n--- Создание массивов ---");
+
+// 1. Создание массива с помощью литерала (квадратных скобок []) - самый частый способ
+// Создаем переменную `fruitsCreate` и записываем в нее массив строк
+const fruitsCreate = ["яблоко", "банан", "апельсин"];
+// Выводим в консоль метку "Литерал:" и сам созданный массив `fruitsCreate`
+console.log("Литерал:", fruitsCreate); // Ожидаемый вывод: Литерал: ["яблоко", "банан", "апельсин"]
+
+// 2. Создание массива с помощью конструктора `new Array()` с перечислением элементов
+// Создаем переменную `numbersCreate` и записываем в нее массив чисел
+const numbersCreate = new Array(1, 2, 3);
+// Выводим в консоль метку "Конструктор:" и сам созданный массив `numbersCreate`
+console.log("Конструктор:", numbersCreate); // Ожидаемый вывод: Конструктор: [1, 2, 3]
+
+// 3. Создание массива с помощью конструктора `new Array()` с указанием длины
+// Если передать ОДНО число в `new Array()`, создается пустой массив указанной длины
+const arrayWithLengthCreate = new Array(3);
+// Выводим в консоль метку "Массив с длиной:" и сам созданный массив `arrayWithLengthCreate`
+console.log("Массив с длиной:", arrayWithLengthCreate); // Ожидаемый вывод: Массив с длиной: [ <3 empty items> ] (массив из 3 пустых слотов)
+
+// 4. Создание массива из итерируемого объекта (например, строки) с помощью `Array.from()`
+// Строка "hi" - итерируемый объект (можно пройтись по буквам). `Array.from` создает массив из этих букв.
+const lettersCreate = Array.from("hi");
+// Выводим в консоль метку "Массив из строки:" и сам созданный массив `lettersCreate`
+console.log("Массив из строки:", lettersCreate); // Ожидаемый вывод: Массив из строки: ["h", "i"]
+
+// 5. Создание массива из набора элементов с помощью `Array.of()`
+// `Array.of()` создает массив из ЛЮБОГО количества переданных аргументов. Полезно, если нужен массив из одного числа.
+const digitsCreate = Array.of(1, 2);
+// Выводим в консоль метку "Array.of:" и сам созданный массив `digitsCreate`
+console.log("Array.of:", digitsCreate); // Ожидаемый вывод: Array.of: [1, 2]
+                </code></pre>
+                <button class="run-code" data-example="create-arrays">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="доступ-к-элементам-массива" class="fade-in visible">
+            <h3>Доступ и изменение элементов</h3>
+            <div class="code-block">
+                <pre><code class="language-javascript">
+// Выводим подзаголовок в консоль
+console.log("\n--- Доступ и изменение ---");
+
+// Создаем массив `fruitsAccess` с помощью литерала. Используем `let`, так как будем его изменять.
+let fruitsAccess = ["яблоко", "банан", "киви"];
+// Выводим исходное состояние массива
+console.log("Исходный:", fruitsAccess); // Ожидаемый вывод: Исходный: ["яблоко", "банан", "киви"]
+
+// Доступ к элементу по индексу и его изменение. Индексы начинаются с 0!
+// `fruitsAccess[1]` - это второй элемент ("банан"). Присваиваем ему новое значение "груша".
+fruitsAccess[1] = "груша";
+// Выводим массив после изменения
+console.log("Измененный:", fruitsAccess); // Ожидаемый вывод: Измененный: ["яблоко", "груша", "киви"]
+
+// Получение длины массива (количества элементов) с помощью свойства `length`
+console.log("Длина:", fruitsAccess.length); // Ожидаемый вывод: Длина: 3
+
+// Доступ к последнему элементу массива.
+// Индекс последнего элемента всегда `длина - 1`.
+// `fruitsAccess.length` равно 3, значит `fruitsAccess.length - 1` равно 2.
+// `fruitsAccess[2]` - это "киви".
+console.log("Последний:", fruitsAccess[fruitsAccess.length - 1]); // Ожидаемый вывод: Последний: "киви"
+                </code></pre>
+                <button class="run-code" data-example="access-elements">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="основные-методы-массивов" class="fade-in visible">
+            <h3>Основные методы массивов (Мутирующие и нет)</h3>
+            <p>Существуют методы, которые изменяют (мутируют) исходный массив, и методы, которые возвращают новый
+                массив, не трогая старый.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">
+// Выводим подзаголовок в консоль
+console.log("\n--- Основные методы ---");
+
+// Создаем массив `planetsMethods`. Используем `let`, так как будем его изменять мутирующими методами.
+let planetsMethods = ["Земля", "Марс"];
+
+// --- Мутирующие методы (изменяют исходный массив `planetsMethods`) ---
+
+// `push()`: Добавляет один или несколько элементов в КОНЕЦ массива.
+planetsMethods.push("Венера");
+// Выводим результат после `push`. Массив `planetsMethods` изменился.
+console.log("push:", planetsMethods); // Ожидаемый вывод: push: ["Земля", "Марс", "Венера"]
+
+// `pop()`: Удаляет ПОСЛЕДНИЙ элемент из массива и возвращает его (здесь мы не сохраняем возвращенное значение).
+planetsMethods.pop();
+// Выводим результат после `pop`. Массив `planetsMethods` снова изменился.
+console.log("pop:", planetsMethods); // Ожидаемый вывод: pop: ["Земля", "Марс"]
+
+// `unshift()`: Добавляет один или несколько элементов в НАЧАЛО массива.
+planetsMethods.unshift("Меркурий");
+// Выводим результат после `unshift`. Массив `planetsMethods` изменился.
+console.log("unshift:", planetsMethods); // Ожидаемый вывод: unshift: ["Меркурий", "Земля", "Марс"]
+
+// `shift()`: Удаляет ПЕРВЫЙ элемент из массива и возвращает его.
+planetsMethods.shift();
+// Выводим результат после `shift`. Массив `planetsMethods` изменился.
+console.log("shift:", planetsMethods); // Ожидаемый вывод: shift: ["Земля", "Марс"]
+
+// `splice()`: Универсальный метод для добавления/удаления/замены элементов.
+// `splice(1, 0, "Юпитер")` означает:
+// - Начать с индекса 1 ("Марс").
+// - Удалить 0 элементов.
+// - Вставить "Юпитер" на эту позицию.
+planetsMethods.splice(1, 0, "Юпитер");
+// Выводим результат после `splice`. Массив `planetsMethods` изменился.
+console.log("splice (вставка):", planetsMethods); // Ожидаемый вывод: splice (вставка): ["Земля", "Юпитер", "Марс"]
+
+// `reverse()`: Меняет порядок элементов в массиве на обратный.
+planetsMethods.reverse();
+// Выводим результат после `reverse`. Массив `planetsMethods` изменился.
+console.log("reverse:", planetsMethods); // Ожидаемый вывод: reverse: ["Марс", "Юпитер", "Земля"]
+
+// --- Не мутирующие методы (НЕ изменяют исходный массив, возвращают новое значение или массив) ---
+
+// Создаем массив `colorsSearch` для демонстрации методов поиска. Используем `const`, так как массив не будет изменяться.
+const colorsSearch = ["red", "green", "blue", "green"];
+
+// `indexOf()`: Ищет элемент и возвращает индекс ПЕРВОГО найденного совпадения или -1, если не найден.
+// Ищем "green". Первое совпадение на индексе 1.
+console.log('indexOf("green"):', colorsSearch.indexOf("green")); // Ожидаемый вывод: indexOf("green"): 1
+
+// `includes()`: Проверяет, есть ли элемент в массиве. Возвращает `true` или `false`.
+// Ищем "blue". Элемент есть.
+console.log('includes("blue"):', colorsSearch.includes("blue")); // Ожидаемый вывод: includes("blue"): true
+
+// `concat()`: Объединяет два или более массива (или значения) в НОВЫЙ массив.
+// Создаем два массива для объединения
+const arrConcat1 = [1];
+const arrConcat2 = [2];
+// Объединяем `arrConcat1`, `arrConcat2` и еще один массив `[3]` в новый массив `combinedConcat`.
+// Исходные `arrConcat1` и `arrConcat2` не изменяются.
+const combinedConcat = arrConcat1.concat(arrConcat2, [3]);
+// Выводим результат объединения.
+console.log("concat:", combinedConcat); // Ожидаемый вывод: concat: [1, 2, 3]
+
+// `slice()`: Создает НОВЫЙ массив, копируя часть старого.
+// `slice(startIndex, endIndex)` - копирует элементы от `startIndex` (включительно) до `endIndex` (НЕ включительно).
+const numsSlice = [1, 2, 3, 4];
+// Копируем элементы с индекса 1 ("2") до индекса 3 ("4"), но не включая индекс 3. Получаем [2, 3].
+const sliced = numsSlice.slice(1, 3);
+// Выводим скопированный массив. `numsSlice` остался без изменений.
+console.log("slice(1,3):", sliced); // Ожидаемый вывод: slice(1,3): [2, 3]
+
+// `join()`: Объединяет все элементы массива в СТРОКУ, используя указанный разделитель.
+// Объединяем элементы `numsSlice` в строку, используя '-' как разделитель.
+const joinedStr = numsSlice.join('-');
+// Выводим полученную строку. `numsSlice` остался без изменений.
+console.log("join('-'):", joinedStr); // Ожидаемый вывод: join('-'): "1-2-3-4"
+                </code></pre>
+                <button class="run-code" data-example="array-methods">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="методы-перебора-массивов" class="fade-in visible">
+            <h2>Методы перебора, трансформации, поиска и сортировки</h2>
+            <p>Эти методы позволяют удобно обрабатывать каждый элемент массива, часто с использованием колбэк-функций.
+                Большинство из них являются <strong>чистыми функциями</strong> (не изменяют исходный массив).</p>
+
+            <section id="array-map">
+                <h3>Метод map()</h3>
+                <p>Используется для <strong>трансформации</strong> каждого элемента массива. Создает <strong>новый
+                        массив</strong> той же длины.</p>
+                <p><strong>Аналогия:</strong> Конвейер, где каждую деталь красят или изменяют.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// Выводим заголовок секции в консоль
+console.log("\n\n===== ЧИСТЫЕ ФУНКЦИИ, MAP, FLATMAP =====");
+
+// --- Чистые функции ---
+// Пример чистой функции: она не изменяет исходный массив `array`, а создает и возвращает `newArray`.
+// Функция `pureMultiply` умножает каждый элемент массива `array` на `value`.
+const pureMultiply = (array, value) => {
+  // 1. Создаем пустой массив для хранения результатов.
+  const newArray = [];
+  // 2. Перебираем каждый элемент `e` исходного массива `array` с помощью `forEach`.
+  array.forEach(e =>
+    // 3. Для каждого элемента `e` умножаем его на `value` и добавляем результат в `newArray`.
+    newArray.push(e * value)
+  );
+  // 4. Возвращаем новый массив с результатами.
+  return newArray;
+};
+// Исходный массив чисел
+const originalNumbersPure = [1, 2];
+// Вызываем нашу чистую функцию, передавая массив и множитель 3.
+const doubledNumbersPure = pureMultiply(originalNumbersPure, 3);
+// Выводим исходный и новый массив. Исходный не изменился.
+console.log("pureMultiply:", originalNumbersPure, "->", doubledNumbersPure); // Вывод: pureMultiply: [1, 2] -> [3, 6]
+
+// Task: changeEven - пример функции, использующей `map` (который является чистым).
+// Эта функция должна увеличить четные числа в массиве на `value`.
+const changeEvenArrow = (numbers, value) => {
+  // Используем `map` для создания НОВОГО массива на основе `numbers`.
+  // `map` передает каждый элемент `num` в стрелочную функцию `(num => ...)`
+  return numbers.map(num =>
+    // Внутри `map`: проверяем, является ли число `num` четным (`num % 2 === 0`).
+    // Если да (true), возвращаем `num + value`.
+    // Если нет (false), возвращаем сам `num` без изменений.
+    num % 2 === 0 ? num + value : num
+  );
+};
+// Тестовый массив
+const testNumbersPure = [1, 2, 3];
+// Вызываем функцию, увеличиваем четные на 10.
+const changedNumbersPure = changeEvenArrow(testNumbersPure, 10);
+// Выводим исходный и измененный массивы. Исходный не изменился.
+console.log("changeEven:", testNumbersPure, "->", changedNumbersPure); // Вывод: changeEven: [1, 2, 3] -> [1, 12, 3]
+
+// --- Метод map() ---
+// Исходный массив строк
+const planetsMap = ["Earth", "Mars"];
+// Применяем `map` к `planetsMap`. Для каждой планеты `p` вызывается `p.toUpperCase()`.
+// Результаты (`"EARTH"`, `"MARS"`) собираются в НОВЫЙ массив `planetsUpper`.
+const planetsUpper = planetsMap.map(p => p.toUpperCase());
+console.log("map upper:", planetsUpper); // Вывод: map upper: ["EARTH", "MARS"]
+
+// Применяем `map` снова. Для каждой планеты `p` получаем ее длину `p.length`.
+// Результаты (5, 4) собираются в НОВЫЙ массив `planetsLengths`.
+const planetsLengths = planetsMap.map(p => p.length);
+console.log("map lengths:", planetsLengths); // Вывод: map lengths: [5, 4]
+
+// Исходный массив объектов
+const studentsMap = [{ name: "Mango" }, { name: "Poly" }];
+// Применяем `map` к `studentsMap`. Для каждого студента `s` извлекаем его имя `s.name`.
+// Результаты ("Mango", "Poly") собираются в НОВЫЙ массив `namesMap`.
+const namesMap = studentsMap.map(s => s.name);
+console.log("map names:", namesMap); // Вывод: map names: ["Mango", "Poly"]
+
+// Task 2: Названия книг (упрощено)
+// Массив объектов-книг
+const booksMap = [{ title: "Book A" }, { title: "Book B" }];
+// Используем `map`, чтобы из каждого объекта `b` извлечь свойство `title`.
+// Результаты ("Book A", "Book B") попадают в новый массив `titlesMap`.
+const titlesMap = booksMap.map(b => b.title);
+console.log("Названия книг:", titlesMap); // Вывод: Названия книг: ["Book A", "Book B"]
+                </code></pre>
+                    <button class="run-code" data-example="array-map">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+            </section>
+
+            <section id="array-flatmap">
+                <h3>Метод flatMap()</h3>
+                <p>Похож на <code>map()</code>, но дополнительно "разглаживает" результат на один уровень. Полезен,
+                    когда колбэк возвращает массив.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// --- Метод flatMap() ---
+// Массив студентов, у каждого есть массив курсов.
+const studentsWithCourses = [{ name: "M", courses: ["math", "phys"] }, { name: "P", courses: ["sci", "math"] }];
+// Применяем `flatMap`. Для каждого студента `s` возвращаем массив его курсов `s.courses`.
+// `flatMap` сначала создает [['math', 'phys'], ['sci', 'math']], а потом "разглаживает" это в один массив.
+const flattenedCourses = studentsWithCourses.flatMap(s => s.courses);
+console.log("flatMap courses:", flattenedCourses); // Вывод: flatMap courses: ["math", "phys", "sci", "math"]
+
+// Массив книг, у каждой есть массив жанров.
+const booksWithGenres = [{ genres: ["adv", "hist"] }, { genres: ["fic"] }];
+// Применяем `flatMap`. Для каждой книги `b` возвращаем массив ее жанров `b.genres`.
+// `flatMap` сначала создает [['adv', 'hist'], ['fic']], а потом "разглаживает".
+const genresFlatMap = booksWithGenres.flatMap(b => b.genres);
+console.log("flatMap genres:", genresFlatMap); // Вывод: flatMap genres: ["adv", "hist", "fic"]
+                    </code></pre>
+                    <button class="run-code" data-example="array-flatmap">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+            </section>
+
+            <section id="array-filter-find">
+                <h3>Методы filter() и find()</h3>
+                <p>Используются для поиска элементов по критериям.</p>
+                <section id="array-filter">
+                    <h4>Метод `filter()` (Фильтрация)</h4>
+                    <p>Отбирает **все элементы**, удовлетворяющие условию. Возвращает **новый массив**.</p>
+                    <p><strong>Аналогия:</strong> Сито.</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">
+// Выводим заголовок секции в консоль
+console.log("\n\n===== FILTER И FIND =====");
+
+// --- Метод filter() ---
+// Исходный массив чисел
+const valuesFilter = [51, -3, 27, -68];
+// Применяем `filter`. Для каждого значения `value` проверяем условие `value >= 0`.
+// `filter` собирает ВСЕ элементы, для которых условие истинно (true), в НОВЫЙ массив.
+const positiveValuesFilter = valuesFilter.filter(value => value >= 0);
+console.log("filter (>0):", positiveValuesFilter); // Вывод: filter (>0): [51, 27]
+
+// Task 1: Четные/нечетные
+// Исходный массив чисел
+const numbersFilter = [17, 24, 82, 61];
+// Используем `filter`, чтобы отобрать только четные числа (`n % 2 === 0`).
+// В новый массив `evenNumbersFilter` попадут 24 и 82.
+const evenNumbersFilter = numbersFilter.filter(n => n % 2 === 0);
+console.log("filter (четные):", evenNumbersFilter); // Вывод: filter (четные): [24, 82]
+
+// Объекты: Фильтрация массива объектов
+// Исходный массив студентов (объектов)
+const studentsFilter = [{ name: "Mango", score: 83 }, { name: "Kiwi", score: 94 }]; // Упрощенный
+// Задаем пороговое значение балла
+const HIGH_SCORE_F = 80;
+// Используем `filter`. Для каждого студента `s` проверяем, что его балл `s.score` больше или равен `HIGH_SCORE_F`.
+// В новый массив `bestStudentsFilter` попадут оба студента.
+const bestStudentsFilter = studentsFilter.filter(s => s.score >= HIGH_SCORE_F);
+console.log("filter (лучшие):", bestStudentsFilter); // Вывод: filter (лучшие): [{ name: "Mango", score: 83 }, { name: "Kiwi", score: 94 }]
+
+// Task 3: Цвет глаз (упрощено)
+// Исходный массив пользователей
+const usersEyeColorFilter = [{ name: "M", eyeColor: "blue" }, { name: "S", eyeColor: "blue" }];
+// Создаем функцию, которая принимает массив `arr` и цвет `color`.
+const getUsersWithEyeColorFilter = (arr, color) =>
+  // Функция использует `filter`, чтобы вернуть НОВЫЙ массив пользователей `u`, у которых `u.eyeColor` совпадает с `color`.
+  arr.filter(u => u.eyeColor === color);
+
+// Вызываем функцию для поиска синеглазых. Результат - массив объектов.
+// Затем используем `map` на результате, чтобы извлечь только имена.
+console.log("filter (синеглазые):", getUsersWithEyeColorFilter(usersEyeColorFilter, "blue").map(u => u.name)); // Вывод: filter (синеглазые): ["M", "S"]
+                        </code></pre>
+                        <button class="run-code" data-example="array-filter">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
+                    </div>
+                </section>
+                <section id="array-find">
+                    <h4>Метод `find()` (Поиск Первого)</h4>
+                    <p>Ищет **первый элемент**, удовлетворяющий условию. Возвращает **элемент** или `undefined`.</p>
+                    <p><strong>Аналогия:</strong> Поиск первого человека в красной шляпе.</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">
+// --- Метод find() ---
+// Исходный массив объектов (цветовые опции)
+const colorOptionsFind = [{ label: "red" }, { label: "blue" }];
+// Используем `find`. Для каждого объекта `o` проверяем `o.label === "blue"`.
+// `find` останавливается на ПЕРВОМ элементе, для которого условие истинно, и возвращает этот ЭЛЕМЕНТ.
+const blueOptionFind = colorOptionsFind.find(o => o.label === "blue");
+console.log("find(blue):", blueOptionFind); // Вывод: find(blue): { label: "blue" }
+
+// Используем `find` для поиска элемента с `label === "yellow"`.
+// Такого элемента нет, поэтому `find` возвращает `undefined`.
+const yellowOptionFind = colorOptionsFind.find(o => o.label === "yellow");
+console.log("find(yellow):", yellowOptionFind); // Вывод: find(yellow): undefined
+
+// Task 2: Поиск email (упрощено)
+// Исходный массив пользователей
+const usersFind = [{ name: "M", email: "m@e.co" }, { name: "S", email: "s@e.co" }];
+// Создаем функцию, которая принимает массив `arr` и email `email`.
+const getUserWithEmailFind = (arr, email) =>
+  // Функция использует `find`, чтобы вернуть ПЕРВОГО пользователя `u`, у которого `u.email` совпадает с `email`.
+  arr.find(u => u.email === email);
+
+// Вызываем функцию для поиска пользователя с email "s@e.co".
+const user1Find = getUserWithEmailFind(usersFind, "s@e.co");
+// Выводим найденный объект пользователя.
+console.log("find (user1):", user1Find); // Вывод: find (user1): { name: "S", email: "s@e.co" }
+                        </code></pre>
+                        <button class="run-code" data-example="array-find">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
+                    </div>
+                </section>
+                <section id="filter-vs-find-comparison">
+                    <h4>Сравнение `filter()` и `find()`</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Характеристика</th>
+                                <th><code>filter(callback)</code></th>
+                                <th><code>find(callback)</code></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Цель</strong></td>
+                                <td>Найти <strong>ВСЕ</strong> элементы</td>
+                                <td>Найти <strong>ПЕРВЫЙ</strong> элемент</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Возвращает</strong></td>
+                                <td>Новый <strong>массив</strong></td>
+                                <td><strong>Элемент</strong> или <code>undefined</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Прерывание</strong></td>
+                                <td>Нет (всегда проходит весь массив)</td>
+                                <td>Да (останавливается после первого совпадения)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Сценарий</strong></td>
+                                <td>Нужно получить подмножество элементов</td>
+                                <td>Нужен один конкретный (уникальный) элемент</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <section id="array-every-some-reduce">
+                <h3>Методы every(), some() и reduce()</h3>
+                <section id="array-every">
+                    <h4>Метод `every()` (Все ли?)</h4>
+                    <p>Проверяет, удовлетворяют ли **все** элементы условию. Возвращает `true` или `false`.</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">
+// Выводим заголовок секции в консоль
+console.log("\n\n===== EVERY, SOME, REDUCE =====");
+
+// --- Метод every() ---
+// Проверяем, ВСЕ ли элементы в массиве [1, 2] больше или равны 0.
+// Для 1: 1 >= 0 (true). Для 2: 2 >= 0 (true). Все true -> результат true.
+const allPositive1Every = [1, 2].every(v => v >= 0);
+console.log("[1,2].every(>=0):", allPositive1Every); // Вывод: [1,2].every(>=0): true
+
+// Проверяем, ВСЕ ли элементы в массиве [1, -2] больше или равны 0.
+// Для 1: 1 >= 0 (true). Для -2: -2 >= 0 (false). Нашли false -> `every` останавливается и возвращает false.
+const allPositive2Every = [1, -2].every(v => v >= 0);
+console.log("[1,-2].every(>=0):", allPositive2Every); // Вывод: [1,-2].every(>=0): false
+
+// Исходный массив объектов (продукты)
+const productsEvery = [{ qty: 2 }, { qty: 0 }];
+// Проверяем, у ВСЕХ ли продуктов `p` количество `p.qty` больше 0.
+// Для { qty: 2 }: 2 > 0 (true). Для { qty: 0 }: 0 > 0 (false). Нашли false -> результат false.
+const hasEvery = productsEvery.every(p => p.qty > 0);
+console.log("Every(qty>0):", hasEvery); // Вывод: Every(qty>0): false
+
+// Task: Все активны?
+// Исходный массив пользователей
+const usersEvery = [{ isActive: true }, { isActive: false }];
+// Создаем функцию, которая проверяет, активны ли ВСЕ пользователи в массиве `arr`.
+const isEveryActive = (arr) =>
+  // Используем `every`. Для каждого пользователя `u` проверяем `u.isActive`.
+  // Для {isActive: true}: true. Для {isActive: false}: false. Нашли false -> результат false.
+  arr.every(u => u.isActive);
+console.log("Every(active):", isEveryActive(usersEvery)); // Вывод: Every(active): false
+                        </code></pre>
+                        <button class="run-code" data-example="array-every">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
+                    </div>
+                </section>
+                <section id="array-some">
+                    <h4>Метод `some()` (Хотя бы один?)</h4>
+                    <p>Проверяет, удовлетворяет ли **хотя бы один** элемент условию. Возвращает `true` или `false`.</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">
+// --- Метод some() ---
+// Проверяем, есть ли ХОТЯ БЫ ОДИН элемент в массиве [-1, 3], который больше или равен 0.
+// Для -1: -1 >= 0 (false). Для 3: 3 >= 0 (true). Нашли true -> `some` останавливается и возвращает true.
+const hasPositive1Some = [-1, 3].some(v => v >= 0);
+console.log("[-1,3].some(>=0):", hasPositive1Some); // Вывод: [-1,3].some(>=0): true
+
+// Проверяем, есть ли ХОТЯ БЫ ОДИН элемент в массиве [1, 2], который меньше 0.
+// Для 1: 1 < 0 (false). Для 2: 2 < 0 (false). Дошли до конца, все false -> результат false.
+const hasNegative1Some = [1, 2].some(v => v < 0);
+console.log("[1,2].some(<0):", hasNegative1Some); // Вывод: [1,2].some(<0): false
+
+// Task: Есть активные?
+// Исходный массив пользователей
+const usersSome = [{ isActive: false }, { isActive: true }];
+// Создаем функцию, которая проверяет, есть ли ХОТЯ БЫ ОДИН активный пользователь.
+const isAnyActive = (arr) =>
+  // Используем `some`. Для каждого пользователя `u` проверяем `u.isActive`.
+  // Для {isActive: false}: false. Для {isActive: true}: true. Нашли true -> результат true.
+  arr.some(u => u.isActive);
+console.log("Some(active):", isAnyActive(usersSome)); // Вывод: Some(active): true
+                        </code></pre>
+                        <button class="run-code" data-example="array-some">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
+                    </div>
+                    <h4>Сравнение `every()` и `some()`</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Метод</th>
+                                <th>Проверяет...</th>
+                                <th>`true`, если...</th>
+                                <th>`false`, если...</th>
+                                <th>Останавливается?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>every()</code></td>
+                                <td>**ВСЕ**</td>
+                                <td>Колбэк `true` для всех</td>
+                                <td>Колбэк `false` хотя бы раз</td>
+                                <td>На первом `false`</td>
+                            </tr>
+                            <tr>
+                                <td><code>some()</code></td>
+                                <td>**ХОТЯ БЫ ОДИН**</td>
+                                <td>Колбэк `true` хотя бы раз</td>
+                                <td>Колбэк `false` для всех</td>
+                                <td>На первом `true`</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section id="array-reduce">
+                    <h4>Метод `reduce()` (Сведение)</h4>
+                    <p>Последовательно обрабатывает элементы, **накапливая результат** в аккумуляторе. Возвращает одно
+                        финальное значение.</p>
+                    <p><strong>Аналогия:</strong> Снежный ком.</p>
+                    <p><strong>Синтаксис:</strong> <code>reduce((acc, el, idx, arr) => newAcc, initialValue)</code></p>
+                    <ul>
+                        <li><code>acc</code> (аккумулятор): Значение, накопленное на предыдущем шаге (или
+                            <code>initialValue</code> на первом шаге).
+                        </li>
+                        <li><code>el</code> (элемент): Текущий обрабатываемый элемент массива.</li>
+                        <li><code>idx</code> (индекс): Индекс текущего элемента (необязательный).</li>
+                        <li><code>arr</code> (массив): Сам массив, по которому идет перебор (необязательный).</li>
+                        <li><code>newAcc</code>: Новое значение аккумулятора, которое вернет ваша функция для следующего
+                            шага.</li>
+                        <li><code>initialValue</code>: Начальное значение аккумулятора (важно!). Если не указано, первым
+                            `acc` будет первый элемент массива, а перебор начнется со второго.</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">
+// --- Метод reduce() ---
+// Исходный массив чисел
+const numbersReduce = [2, 7, 3];
+// Используем `reduce` для вычисления суммы всех элементов.
+// `(s, n) => s + n` - колбэк-функция: `s` - аккумулятор (сумма), `n` - текущий элемент. Она возвращает новую сумму.
+// `0` - начальное значение аккумулятора `s`.
+// Шаг 1: s=0, n=2 -> возвращает 0+2=2
+// Шаг 2: s=2, n=7 -> возвращает 2+7=9
+// Шаг 3: s=9, n=3 -> возвращает 9+3=12
+// Конечный результат `reduce` - 12.
+const totalSumReduce = numbersReduce.reduce((s, n) => s + n, 0);
+console.log("Reduce(сумма):", totalSumReduce); // Вывод: Reduce(сумма): 12
+
+// Task 1: Общее время
+// Массив времени воспроизведения (в секундах, например)
+const playtimesReduce = [1270, 468];
+// Используем `reduce` для суммирования времени. `t` - аккумулятор, `time` - текущее время. Начальное значение `0`.
+// Шаг 1: t=0, time=1270 -> возвращает 0+1270=1270
+// Шаг 2: t=1270, time=468 -> возвращает 1270+468=1738
+const totalPlayTimeReduce = playtimesReduce.reduce((t, time) => t + time, 0);
+console.log("Reduce(время):", totalPlayTimeReduce); // Вывод: Reduce(время): 1738
+
+// Объекты: сумма баллов
+// Массив студентов (объектов)
+const studentsReduce = [{ score: 83 }, { score: 59 }];
+// Используем `reduce` для суммирования баллов. `t` - аккумулятор, `s` - текущий студент. Начальное значение `0`.
+// Колбэк извлекает балл `s.score` и добавляет к аккумулятору `t`.
+// Шаг 1: t=0, s={score: 83} -> возвращает 0 + 83 = 83
+// Шаг 2: t=83, s={score: 59} -> возвращает 83 + 59 = 142
+const totalScoreReduce = studentsReduce.reduce((t, s) => t + s.score, 0);
+console.log("Reduce(баллы):", totalScoreReduce); // Вывод: Reduce(баллы): 142
+
+// Task 3: Общий баланс (упрощено)
+// Массив пользователей с балансами
+const usersBalanceReduce = [{ balance: 2811 }, { balance: 3821 }];
+// Функция для расчета общего баланса с помощью `reduce`.
+const calcTotalBal = (arr) =>
+  // `t` - аккумулятор (общий баланс), `u` - текущий пользователь. Начальное значение `0`.
+  // Колбэк извлекает `u.balance` и добавляет к `t`.
+  arr.reduce((t, u) => t + u.balance, 0);
+// Вызываем функцию и выводим результат.
+console.log("Reduce(баланс):", calcTotalBal(usersBalanceReduce)); // Вывод: Reduce(баланс): 6632
+                        </code></pre>
+                        <button class="run-code" data-example="array-reduce">Запустить пример</button>
+                        <button class="copy-code">Скопировать</button>
+                        <button class="toggle-code">Скрыть код</button>
+                        <div class="output"></div>
+                    </div>
+                </section>
+            </section>
+
+            <section id="метод-toSorted" class="fade-in visible">
+                <h3>Метод toSorted() и сортировка</h3>
+                <p>Метод toSorted() (появился в 2023 году) создает новый отсортированный список, не меняя оригинал. Это
+                    как сделать копию списка и отсортировать ее, оставив старый список нетронутым.</p>
+
+                <h4>1. Сортировка по умолчанию (как алфавит для слов)</h4>
+                <p>Без аргументов сортирует как строки, например, числа будут как слова.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// Выводим заголовок секции в консоль
+console.log("\n\n===== toSorted() =====");
+
+// --- Сортировка по умолчанию ---
+// Исходный массив чисел
+const scoresDefaultSort = [61, 19, 74];
+// Вызываем `toSorted()` без аргументов. Числа преобразуются в строки ("61", "19", "74") и сортируются лексикографически (как слова в словаре).
+// "19" идет раньше "61", "61" идет раньше "74".
+// Создается НОВЫЙ массив `ascScoresDefSort`. Исходный `scoresDefaultSort` не меняется.
+const ascScoresDefSort = scoresDefaultSort.toSorted();
+console.log("toSorted() числа (умолч.):", ascScoresDefSort); // Вывод: toSorted() числа (умолч.): [19, 61, 74] (Здесь случайно совпало с числовым порядком)
+
+// Другой пример, где строковая сортировка отличается от числовой.
+const trickyScoresDefaultSort = [27, 2, 41];
+// Сортируем как строки: "2", "27", "41".
+const trickySortedDefSort = trickyScoresDefaultSort.toSorted();
+console.log("toSorted() tricky (умолч.):", trickySortedDefSort); // Вывод: toSorted() tricky (умолч.): [2, 27, 41] (Снова случайно совпало)
+// Важно: если бы было число 100, то "100" шло бы ПЕРЕД "2" и "27" при строковой сортировке! [100, 2, 27] -> [100, 2, 27]
+
+// Task 1: Даты и авторы по умолчанию
+// Массив чисел (годы)
+const releaseDatesDefSort = [2016, 1967];
+// Сортируем как строки: "1967", "2016"
+const ascRelDatesDefSort = releaseDatesDefSort.toSorted();
+console.log("toSorted() даты (умолч.):", ascRelDatesDefSort); // Вывод: toSorted() даты (умолч.): [1967, 2016]
+// Массив строк (имена)
+const authorsDefSort = ["Lee", "Cornwell"];
+// Сортируем как строки (алфавитный порядок): "Cornwell", "Lee"
+const alphaAuthDefSort = authorsDefSort.toSorted();
+console.log("toSorted() авторы (умолч.):", alphaAuthDefSort); // Вывод: toSorted() авторы (умолч.): ["Cornwell", "Lee"]
+                    </code></pre>
+                    <button class="run-code" data-example="tosorted-default">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+
+                <h4>2. Пользовательская сортировка (как выбрать, что важнее)</h4>
+                <p>Можно передать функцию сравнения, например, для чисел: a - b для возрастания, b - a для убывания.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// --- Пользовательская сортировка чисел ---
+// Исходный массив чисел
+const scoresCustomSort = [61, 19, 74];
+// Передаем в `toSorted` функцию сравнения `(a, b) => a - b`.
+// Эта функция вызывается для пар элементов (a, b).
+// Если a - b < 0 (a меньше b), то `a` идет перед `b`.
+// Если a - b > 0 (a больше b), то `b` идет перед `a`.
+// Если a - b = 0 (a равно b), порядок не меняется.
+// Это стандартный способ сортировки чисел ПО ВОЗРАСТАНИЮ.
+const ascScoresCustom = scoresCustomSort.toSorted((a, b) => a - b);
+console.log("toSorted() числа (возр.):", ascScoresCustom); // Вывод: toSorted() числа (возр.): [19, 61, 74]
+
+// Передаем функцию сравнения `(a, b) => b - a`.
+// Если b - a < 0 (b меньше a), то `b` идет перед `a`.
+// Если b - a > 0 (b больше a), то `a` идет перед `b`.
+// Это стандартный способ сортировки чисел ПО УБЫВАНИЮ.
+const descScoresCustom = scoresCustomSort.toSorted((a, b) => b - a);
+console.log("toSorted() числа (убыв.):", descScoresCustom); // Вывод: toSorted() числа (убыв.): [74, 61, 19]
+
+// Task 2: Даты (числа)
+// Исходный массив лет
+const releaseDatesCustomSort = [2016, 1967, 2008];
+// Сортируем по возрастанию с помощью `a - b`
+const ascDatesCustom = releaseDatesCustomSort.toSorted((a, b) => a - b);
+console.log("toSorted() даты (возр.):", ascDatesCustom); // Вывод: toSorted() даты (возр.): [1967, 2008, 2016]
+// Сортируем по убыванию с помощью `b - a`
+const descDatesCustom = releaseDatesCustomSort.toSorted((a, b) => b - a);
+console.log("toSorted() даты (убыв.):", descDatesCustom); // Вывод: toSorted() даты (убыв.): [2016, 2008, 1967]
+                    </code></pre>
+                    <button class="run-code" data-example="tosorted-custom">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+
+                <h4>3. Сортировка строк (как алфавит для русского языка)</h4>
+                <p>Для строк используем localeCompare(), чтобы правильно сортировать, например, кириллицу.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// --- Пользовательская сортировка строк (localeCompare) ---
+// Исходный массив строк
+const studentsLocaleSort = ["Jacob", "Artemis"];
+// Используем `localeCompare` в функции сравнения.
+// `a.localeCompare(b)` возвращает:
+//   - отрицательное число, если `a` идет перед `b` в алфавитном порядке (учитывая язык).
+//   - положительное число, если `a` идет после `b`.
+//   - 0, если строки равны.
+// Это стандартный способ сортировки строк ПО АЛФАВИТУ.
+const alphaLocale = studentsLocaleSort.toSorted((a, b) => a.localeCompare(b));
+console.log("toSorted() строки (алф):", alphaLocale); // Вывод: toSorted() строки (алф): ["Artemis", "Jacob"]
+
+// Используем `b.localeCompare(a)` для сортировки в ОБРАТНОМ алфавитном порядке.
+const revAlphaLocale = studentsLocaleSort.toSorted((a, b) => b.localeCompare(a));
+console.log("toSorted() строки (обр):", revAlphaLocale); // Вывод: toSorted() строки (обр): ["Jacob", "Artemis"]
+
+// Task 3: Авторы (строки)
+// Исходный массив авторов
+const authorsLocaleSort = ["Lee", "Cornwell"];
+// Сортируем по алфавиту с `a.localeCompare(b)`
+const authorsAlpha = authorsLocaleSort.toSorted((a, b) => a.localeCompare(b));
+console.log("toSorted() авторы (алф):", authorsAlpha); // Вывод: toSorted() авторы (алф): ["Cornwell", "Lee"]
+// Сортируем в обратном порядке с `b.localeCompare(a)`
+const authorsRev = authorsLocaleSort.toSorted((a, b) => b.localeCompare(a));
+console.log("toSorted() авторы (обр):", authorsRev); // Вывод: toSorted() авторы (обр): ["Lee", "Cornwell"]
+                    </code></pre>
+                    <button class="run-code" data-example="tosorted-localecompare">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+
+                <h4>4. Сортировка массива объектов (как сортировать по возрасту)</h4>
+                <p>Можно сортировать список людей по возрасту или имени, не меняя оригинал.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// --- Сортировка массива объектов ---
+// Исходный массив студентов (объектов)
+const studentsSortObj = [{ name: "Mango", score: 83 }, { name: "Ajax", score: 37 }];
+
+// Сортируем по свойству `score` (число) по возрастанию.
+// В функции сравнения получаем доступ к свойствам `a.score` и `b.score`.
+const ascScoreObj = studentsSortObj.toSorted((a, b) => a.score - b.score);
+// Выводим НОВЫЙ отсортированный массив объектов.
+console.log("toSorted() объекты (балл возр.):", ascScoreObj);
+// Вывод: toSorted() объекты (балл возр): [{ name: "Ajax", score: 37 }, { name: "Mango", score: 83 }]
+
+// Сортируем по свойству `name` (строка) по алфавиту.
+// В функции сравнения используем `localeCompare` для имен `a.name` и `b.name`.
+const alphaNameObj = studentsSortObj.toSorted((a, b) => a.name.localeCompare(b.name));
+// Выводим НОВЫЙ отсортированный массив объектов.
+console.log("toSorted() объекты (имя алф):", alphaNameObj);
+// Вывод: toSorted() объекты (имя алф): [{ name: "Ajax", score: 37 }, { name: "Mango", score: 83 }]
+
+// Task 4: Книги (объекты)
+// Исходный массив книг
+const booksSort = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }];
+
+// Сортируем по автору (строка) по алфавиту.
+const sortedByAuthorSort = booksSort.toSorted((a, b) => a.author.localeCompare(b.author));
+// Выводим только имена авторов из отсортированного массива для наглядности, используя `map`.
+console.log("toSorted() книги (автор):", sortedByAuthorSort.map(b => b.author)); // Вывод: ["BC", "RS"]
+
+// Сортируем по рейтингу (число) по убыванию.
+const sortedByRatingDescSort = booksSort.toSorted((a, b) => b.rating - a.rating);
+// Выводим только рейтинги из отсортированного массива для наглядности, используя `map`.
+console.log("toSorted() книги (рейт убыв):", sortedByRatingDescSort.map(b => b.rating)); // Вывод: [8.51, 8.38]
+                    </code></pre>
+                    <button class="run-code" data-example="tosorted-objects">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+
+                <h4>5. Сравнение toSorted() и sort() (как старый и новый способ)</h4>
+                <p>sort() меняет оригинал, а toSorted() — нет. Это как копировать список перед сортировкой.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// --- sort() vs toSorted() ---
+// Исходный массив
+const originalArraySort = [3, 1, 4];
+// Используем `toSorted()` для создания НОВОЙ отсортированной копии.
+const sortedCopy = originalArraySort.toSorted((a, b) => a - b);
+// Выводим исходный массив (он НЕ изменился) и новую отсортированную копию.
+console.log("toSorted():", originalArraySort, sortedCopy); // Вывод: toSorted(): [3, 1, 4] [1, 3, 4]
+
+// Исходный массив (другой)
+const sortMutates = [3, 1, 4];
+// Используем `sort()` для сортировки. Этот метод ИЗМЕНЯЕТ ОРИГИНАЛЬНЫЙ массив.
+// Он также возвращает ССЫЛКУ на этот же измененный массив.
+const ref = sortMutates.sort((a, b) => a - b);
+// Выводим измененный исходный массив `sortMutates` и ссылку `ref` (они указывают на один и тот же массив).
+console.log("sort():", sortMutates, ref); // Вывод: sort(): [1, 3, 4] [1, 3, 4]
+// Видно, что `sortMutates` был изменен.
+                    </code></pre>
+                    <button class="run-code" data-example="sort-vs-tosorted">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Характеристика</th>
+                            <th>sort()</th>
+                            <th>toSorted()</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Изменяет оригинал?</td>
+                            <td>Да (мутирует)</td>
+                            <td>Нет (чистая функция)</td>
+                        </tr>
+                        <tr>
+                            <td>Возвращает</td>
+                            <td>Ссылку на измененный оригинал</td>
+                            <td>Новый отсортированный массив</td>
+                        </tr>
+                        <tr>
+                            <td>Предпочтение</td>
+                            <td>Использовать с осторожностью, если не хотите менять оригинал</td>
+                            <td>Рекомендуемый, если нужно сохранить исходный массив</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="method-chaining" class="fade-in visible">
+                <h3>Цепочки методов (Method Chaining)</h3>
+                <p>Вызов методов последовательно друг за другом. Результат одного метода становится входными данными для
+                    следующего.</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">
+// Выводим подзаголовок в консоль
+console.log("\n--- Цепочки методов ---");
+
+// Исходный массив студентов
+const studentsChain = [{ name: "Poly", score: 59 }, { name: "Mango", score: 83 }];
+// Строим цепочку:
+// 1. `studentsChain.toSorted((a, b) => a.score - b.score)`:
+//    Создает НОВЫЙ массив, отсортированный по баллам: [{ name: "Poly", score: 59 }, { name: "Mango", score: 83 }]
+// 2. `.map(s => s.name)`:
+//    Применяется к результату шага 1. Извлекает имена из отсортированных студентов.
+//    Создает НОВЫЙ массив имен: ["Poly", "Mango"]
+const namesChain = studentsChain
+  .toSorted((a, b) => a.score - b.score) // Сортируем копию по баллам
+  .map(s => s.name); // Извлекаем имена из отсортированной копии
+console.log("Chain (имена по баллам):", namesChain); // Вывод: Chain (имена по баллам): ["Poly", "Mango"]
+
+// Исходный массив студентов с курсами
+const studentsCoursesChain = [{ courses: ["math", "phys"] }, { courses: ["sci", "math"] }];
+// Строим цепочку для получения уникальных курсов в алфавитном порядке:
+// 1. `studentsCoursesChain.flatMap(s => s.courses)`:
+//    Создает НОВЫЙ "плоский" массив всех курсов: ["math", "phys", "sci", "math"]
+// 2. `.filter((c, i, a) => a.indexOf(c) === i)`:
+//    Применяется к результату шага 1. Оставляет только уникальные элементы.
+//    `indexOf(c)` находит ПЕРВЫЙ индекс элемента `c` в массиве `a`.
+//    Условие `a.indexOf(c) === i` истинно только для первого вхождения каждого элемента.
+//    Результат: ["math", "phys", "sci"]
+// 3. `.toSorted((a, b) => a.localeCompare(b))`:
+//    Применяется к результату шага 2. Создает НОВЫЙ массив, отсортированный по алфавиту.
+//    Результат: ["math", "phys", "sci"] -> ["math", "phys", "sci"] (уже был почти отсортирован)
+const uniqueCoursesChain = studentsCoursesChain
+  .flatMap(s => s.courses) // Получаем плоский список всех курсов
+  .filter((c, i, a) => a.indexOf(c) === i) // Оставляем только уникальные
+  .toSorted((a, b) => a.localeCompare(b)); // Сортируем уникальные по алфавиту
+console.log("Chain (уник. курсы):", uniqueCoursesChain); // Вывод: Chain (уник. курсы): ["math", "phys", "sci"]
+
+// Task 5: Имена авторов (цепочка)
+// Исходный массив книг
+const booksChain = [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }, { author: "BC", rating: 8.67 }];
+// Минимальный рейтинг для отбора
+const MIN_RATING_CHAIN = 8;
+// Цепочка для получения уникальных имен авторов книг с рейтингом выше MIN_RATING_CHAIN, отсортированных по алфавиту:
+// 1. `booksChain.filter(b => b.rating > MIN_RATING_CHAIN)`:
+//    Отбираем книги с рейтингом > 8. Результат: [{ author: "BC", rating: 8.38 }, { author: "RS", rating: 8.51 }, { author: "BC", rating: 8.67 }]
+// 2. `.map(b => b.author)`:
+//    Извлекаем имена авторов из отфильтрованных книг. Результат: ["BC", "RS", "BC"]
+// 3. `.filter((a, i, arr) => arr.indexOf(a) === i)`:
+//    Оставляем только уникальные имена авторов. Результат: ["BC", "RS"]
+// 4. `.toSorted((a, b) => a.localeCompare(b))`:
+//    Сортируем уникальные имена по алфавиту. Результат: ["BC", "RS"]
+const highRatedUniqueAuthors = booksChain
+  .filter(b => b.rating > MIN_RATING_CHAIN) // Фильтруем по рейтингу
+  .map(b => b.author) // Извлекаем авторов
+  .filter((a, i, arr) => arr.indexOf(a) === i) // Оставляем уникальных авторов
+  .toSorted((a, b) => a.localeCompare(b)); // Сортируем уникальных авторов
+// Используем шаблонную строку для красивого вывода
+console.log(`Chain (Авторы >${MIN_RATING_CHAIN} рейт.):`, highRatedUniqueAuthors); // Вывод: Chain (Авторы >8 рейт.): ["BC", "RS"]
+                    </code></pre>
+                    <button class="run-code" data-example="method-chaining">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                    <div class="output"></div>
+                </div>
+            </section>
+        </section>
+
+        <section id="деструктуризация-массивов" class="fade-in visible">
+            <h3>Деструктуризация массивов</h3>
+            <p>Удобный синтаксис для извлечения значений из массивов в отдельные переменные.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">
+// Выводим подзаголовок в консоль
+console.log("\n--- Деструктуризация ---");
+
+// Исходный массив цветов
+let colorsDestr = ["красный", "зеленый"];
+// Деструктуризация: создаем переменные `red` и `green`.
+// Значение ПЕРВОГО элемента массива (`colorsDestr[0]`) присваивается ПЕРВОЙ переменной (`red`).
+// Значение ВТОРОГО элемента массива (`colorsDestr[1]`) присваивается ВТОРОЙ переменной (`green`).
+let [red, green] = colorsDestr;
+// Выводим значения созданных переменных
+console.log(red, green); // Вывод: красный зеленый
+
+// Деструктуризация с использованием rest-синтаксиса (`...`)
+// Создаем переменные `head` и `tail`.
+// ПЕРВЫЙ элемент массива `[1, 2, 3]` (т.е. 1) присваивается переменной `head`.
+// ВСЕ ОСТАЛЬНЫЕ элементы массива (2, 3) собираются в НОВЫЙ массив и присваиваются переменной `tail`.
+let [head, ...tail] = [1, 2, 3];
+// Выводим значение `head` и массив `tail`.
+console.log("rest:", head, tail); // Вывод: rest: 1 [2, 3]
+
+// Выводим сообщение об окончании раздела в консоль
+console.log("\n===== КОНЕЦ РАЗДЕЛА МАССИВЫ =====");
+                </code></pre>
+                <button class="run-code" data-example="destructure-arrays">Запустить пример</button>
+                <button class="copy-code">Скопировать</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="basics.html" class="button">← Основы</a>
+            <a href="functions.html" class="button">Функции →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../main.js" defer></script>
+    <script src="../js/02_arrays.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // Инициализируем подсветку синтаксиса после загрузки DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>Галерея изображений (Киберпанк) - Руководство по JavaScript</title>
+    <style>
+        /* Базовые стили для галереи */
+        .gallery {
+            display: flex;
+            /* Используем Flexbox для расположения элементов */
+            flex-wrap: wrap;
+            /* Разрешаем перенос элементов на новую строку */
+            gap: 16px;
+            /* Промежуток между элементами */
+            list-style: none;
+            /* Убираем маркеры списка */
+            padding: 24px;
+            /* Внутренний отступ контейнера */
+            margin: 0 auto;
+            /* Центрируем галерею, если есть max-width */
+            max-width: 1128px;
+            /* Ограничиваем максимальную ширину */
+            justify-content: center;
+            /* Центрируем элементы по горизонтали */
+        }
+
+        .gallery-item {
+            /* Расчет ширины для 3 элементов в ряду с учетом промежутка */
+            flex-basis: calc((100% - 32px) / 3);
+            transition: transform 0.3s ease;
+            /* Плавный переход для ховера */
+            border-radius: 4px;
+            /* Небольшое скругление */
+            overflow: hidden;
+            /* Скрываем части изображения, выходящие за рамки */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Легкая тень */
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            /* Немного увеличиваем при наведении */
+        }
+
+        .gallery-link {
+            display: block;
+            /* Ссылка занимает всю область элемента */
+            text-decoration: none;
+            /* Убираем подчеркивание */
+            height: 100%;
+            /* Ссылка растягивается на всю высоту */
+        }
+
+        .gallery-image {
+            display: block;
+            /* Убираем лишний отступ под изображением */
+            width: 100%;
+            /* Изображение занимает всю ширину */
+            height: 200px;
+            /* Фиксированная высота для превью */
+            object-fit: cover;
+            /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
+        }
+
+        /* Адаптивность (пример для 2 колонок на средних экранах) */
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex-basis: calc((100% - 16px) / 2);
+            }
+        }
+
+        /* Адаптивность (пример для 1 колонки на маленьких экранах) */
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex-basis: 100%;
+            }
+
+            .gallery {
+                padding: 16px;
+                gap: 16px;
+            }
+        }
+
+        /* Стили для модального окна basicLightbox (если нужны кастомные) */
+        .basicLightbox__placeholder img {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="container">
+            <button id="theme-toggle">Светлая тема</button>
+            <h1>JavaScript: Полное руководство для изучения</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li><a href="basics.html">Основы</a></li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
+                    <li><a href="gallery.html" class="active">Галерея (Пример)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 id="галерея-изображений">Создание галереи изображений (Киберпанк)</h2>
+        <p>В этом уроке мы создадим интерактивную галерею изображений в стиле киберпанк с возможностью просмотра
+            увеличенных версий в модальном окне. Мы будем использовать HTML, CSS, JavaScript и внешнюю библиотеку
+            <code>basicLightbox</code>.
+        </p>
+
+        <section id="gallery-html-markup" class="fade-in visible">
+            <h3>1. HTML-разметка для галереи</h3>
+            <p>Сначала нам нужен контейнер в HTML, куда JavaScript будет добавлять элементы галереи. Создадим
+                невпорядкований список <code>&lt;ul&gt;</code> с классом <code>gallery</code>.</p>
+            <ul class="gallery">
+            </ul>
+            <p>Пока этот список пуст. Мы наполним его с помощью JavaScript на следующих шагах.</p>
+        </section>
+
+        <section id="gallery-image-data" class="fade-in visible">
+            <h3>2. Массив изображений (Киберпанк-тематика)</h3>
+            <p>Для создания галереи нам нужны данные. Создадим в JavaScript массив объектов. Каждый объект будет
+                представлять одно изображение и содержать:</p>
+            <ul>
+                <li><code>preview</code>: URL маленького изображения для превью в галерее.</li>
+                <li><code>original</code>: URL большого изображения для модального окна.</li>
+                <li><code>description</code>: Текстовое описание изображения (для атрибута <code>alt</code> и подписи).
+                </li>
+            </ul>
+            <p>Мы используем плейсхолдеры для изображений в стиле киберпанк.</p>
+            <p>Пример кода (этот код нужно добавить в ваш файл <code>gallery.js</code>):</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Массив данных для галереи (Киберпанк) =====
+// Используем плейсхолдеры с placehold.co для надежности
+const images = [
+  {
+    // preview: ссылка на маленькое изображение (для отображения в сетке галереи)
+    preview: '../img/image1-preview.jpg', // &lt;-- ЗАМЕНИ НА СВОЙ ФАЙЛ
+    // original: ссылка на большое изображение (для модального окна)
+    original: '../img/image1-original.jpg', // &lt;-- ЗАМЕНИ НА СВОЙ ФАЙЛ
+    // description: текстовое описание изображения
+    description: 'Киберпанк-детектив', // &lt;-- ЗАМЕНИ НА СВОЕ ОПИСАНИЕ
+  },
+  // ... (остальные объекты с твоими путями и описаниями) ...
+];
+// (Этот console.log будет в gallery.js, здесь он для примера)
+// console.log("Массив данных images:", images);
+</code></pre>
+                <button class="copy-code">Скопировать данные</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="gallery-markup-creation" class="fade-in visible">
+            <h3>3. Создание разметки элементов галереи</h3>
+            <p>Теперь, имея данные и контейнер, мы можем динамически создать HTML-разметку для каждого элемента галереи
+                и вставить ее на страницу.</p>
+            <p>Пример кода (этот код также нужно добавить в ваш файл <code>gallery.js</code>, после массива
+                <code>images</code>):
+            </p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Создание и добавление разметки галереи =====
+// (Этот код должен быть в gallery.js)
+
+// Находим наш контейнер галереи &lt;ul class="gallery"&gt; в документе.
+const galleryContainer = document.querySelector('.gallery');
+
+// Проверяем, найден ли контейнер.
+if (galleryContainer) {
+    // Создаем HTML-разметку для всех элементов галереи.
+    const galleryMarkup = images.map(({ preview, original, description }) => {
+        // Возвращаем строку HTML для элемента &lt;li&gt;.
+        return `
+        &lt;li class="gallery-item"&gt;
+          &lt;a class="gallery-link" href="${original}"&gt;
+            &lt;img
+              class="gallery-image"
+              src="${preview}"
+              data-source="${original}"
+              alt="${description}"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+        `;
+    }).join('');
+
+    // Вставляем всю созданную HTML-разметку внутрь контейнера .gallery.
+    galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+
+} else {
+    console.error("Ошибка: Контейнер .gallery не найден на странице!");
+}
+</code></pre>
+                <button class="copy-code">Скопировать код</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+            <p>После выполнения этого кода в вашем списке <code>&lt;ul class="gallery"&gt;</code> появятся элементы
+                <code>&lt;li&gt;</code> с изображениями.
+            </p>
+        </section>
+
+        <section id="gallery-styling" class="fade-in visible">
+            <h3>4. Стилизация галереи</h3>
+            <p>Добавим CSS-стили для отображения галереи в виде сетки. Эти стили можно добавить в
+                <code>&lt;style&gt;</code> или в файл <code>../css/style.css</code>.
+            </p>
+            <div class="code-block">
+                <pre><code class="language-css">/* Базовые стили для галереи */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 1128px;
+  justify-content: center;
+}
+
+.gallery-item {
+  flex-basis: calc((100% - 32px) / 3);
+  transition: transform 0.3s ease;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Тень для темной темы */
+}
+body.light-theme .gallery-item {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень для светлой темы */
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-link {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .gallery-item { flex-basis: calc((100% - 16px) / 2); }
+}
+@media (max-width: 480px) {
+    .gallery-item { flex-basis: 100%; }
+    .gallery { padding: 16px; gap: 16px; }
+}
+
+/* Стили для модального окна basicLightbox */
+.basicLightbox {
+    background: rgba(0, 0, 0, 0.85);
+}
+.basicLightbox__placeholder img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 4px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень */
+}
+</code></pre>
+                <button class="copy-code">Скопировать CSS</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <section id="gallery-event-delegation" class="fade-in visible">
+            <h3>5. Делегирование событий для кликов</h3>
+            <p>Используем делегирование событий на контейнере <code>.gallery</code> для отслеживания кликов по
+                изображениям.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Делегирование событий на галерее =====
+// (Этот код должен быть в gallery.js)
+
+// Находим контейнер галереи (если он не был сохранен ранее).
+const galleryDelegateContainer = document.querySelector('.gallery');
+
+// Проверяем, найден ли контейнер.
+if (galleryDelegateContainer) {
+    // Добавляем ОДИН слушатель события 'click' на весь контейнер &lt;ul&gt;.
+    galleryDelegateContainer.addEventListener('click', (event) => {
+        // Отменяем действие по умолчанию для ссылки.
+        event.preventDefault();
+
+        // Ищем ближайший элемент .gallery-image, по которому кликнули.
+        const targetImage = event.target.closest('.gallery-image');
+
+        // Если клик был не по изображению, выходим.
+        if (!targetImage) return;
+
+        // Получаем URL большого изображения.
+        const largeImageURL = targetImage.dataset.source;
+
+        // Если URL есть, выводим его (позже здесь будет открытие модалки).
+        if (largeImageURL) {
+            console.log(`Клик по изображению! URL: ${largeImageURL}`);
+            // Код для basicLightbox будет добавлен на следующем шаге.
+        } else {
+            console.warn("Не найден атрибут data-source.");
+        }
+    });
+
+} else {
+    console.error("Ошибка: Контейнер .gallery не найден!");
+}
+</code></pre>
+                <button class="run-code" data-example="guide-delegation">Запустить пример</button>
+                <button class="copy-code">Скопировать код</button>
+                <button class="toggle-code">Скрыть код</button>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="gallery-basiclightbox" class="fade-in visible">
+            <h3>6. Подключение и использование basicLightbox</h3>
+            <p>Подключаем библиотеку <code>basicLightbox</code> и обновляем обработчик кликов для открытия модального
+                окна с полноразмерным изображением и возможностью закрытия по Escape.</p>
+            <p>Финальный код для файла <code>gallery.js</code>:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Финальный код для gallery.js =====
+// (Этот код должен быть в gallery.js)
+
+// --- 1. Массив данных (замените пути и описания на свои) ---
+const images = [
+  { preview: '../img/image1-preview.jpg', original: '../img/image1-original.jpg', description: 'Киберпанк-детектив' },
+  { preview: '../img/image2-preview.jpg', original: '../img/image2-original.jpg', description: 'Робот-бармен' },
+  { preview: '../img/image3-preview.jpg', original: '../img/image3-original.jpg', description: 'Кибер-кот' },
+  // ... добавь остальные свои изображения ...
+];
+
+// --- 2. Поиск контейнера галереи ---
+const galleryContainer = document.querySelector('.gallery');
+
+// --- 3. Создание и добавление разметки галереи ---
+if (galleryContainer) {
+    const galleryMarkup = images
+      .map(({ preview, original, description }) => `
+        &lt;li class="gallery-item"&gt;
+          &lt;a class="gallery-link" href="${original}"&gt;
+            &lt;img
+              class="gallery-image"
+              src="${preview}"
+              data-source="${original}"
+              alt="${description}"
+            /&gt;
+          &lt;/a&gt;
+        &lt;/li&gt;
+      `)
+      .join('');
+    galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+
+    // --- 4. Делегирование и открытие модального окна basicLightbox ---
+    galleryContainer.addEventListener('click', (event) => {
+        event.preventDefault();
+        const targetImage = event.target.closest('.gallery-image');
+        if (!targetImage) return;
+
+        const largeImageURL = targetImage.dataset.source;
+        const imageDescription = targetImage.alt;
+        if (!largeImageURL) return;
+
+        let instance = null; // Для доступа к экземпляру в обработчике Esc
+
+        // Обработчик нажатия Escape
+        const onEscKeyPress = (e) => {
+            if (e.key === 'Escape' &amp;&amp; instance &amp;&amp; instance.visible()) {
+                instance.close();
+            }
+        };
+
+        // Создание и показ окна basicLightbox
+        instance = basicLightbox.create(`
+            &lt;img src="${largeImageURL}" alt="${imageDescription}" width="1112" height="640"&gt;
+        `, {
+            onShow: (instance) => {
+                document.addEventListener('keydown', onEscKeyPress); // Добавляем слушатель Esc
+            },
+            onClose: (instance) => {
+                document.removeEventListener('keydown', onEscKeyPress); // Удаляем слушатель Esc
+            }
+        });
+        instance.show();
+    });
+
+} else {
+    console.error("Ошибка: Контейнер .gallery не найден!");
+}
+</code></pre>
+                <button class="copy-code">Скопировать финальный JS</button>
+                <button class="toggle-code">Скрыть код</button>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="dom_summary.html" class="button">← Памятка по DOM</a>
+            <a href="resources.html" class="button">Ресурсы →</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" style="display: none;">↑</button>
+
+    <script src="../main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>
+    <script src="../js/gallery.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+
+</html>
+```
+
+**3. CSS-код (для `style.css`)**
+
+Этот CSS-код содержит стили для галереи и модального окна. Добавь его в конец твоего основного файла `../css/style.css`.
+
+
+```css
+/* --- Стили для галереи --- */
+.gallery {
+display: flex; /* Используем Flexbox для расположения элементов */
+flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+gap: 16px; /* Промежуток между элементами */
+list-style: none; /* Убираем маркеры списка */
+padding: 24px; /* Внутренний отступ контейнера */
+margin: 0 auto; /* Центрируем галерею, если есть max-width */
+max-width: 1128px; /* Ограничиваем максимальную ширину */
+justify-content: center; /* Центрируем элементы по горизонтали */
+}
+
+.gallery-item {
+/* Расчет ширины для 3 элементов в ряду с учетом промежутка */
+flex-basis: calc((100% - 32px) / 3);
+transition: transform 0.3s ease; /* Плавный переход для ховера */
+border-radius: 4px; /* Небольшое скругление */
+overflow: hidden; /* Скрываем части изображения, выходящие за рамки */
+box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Тень для темной темы */
+}
+body.light-theme .gallery-item {
+box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Легкая тень для светлой темы */
+}
+
+.gallery-item:hover {
+transform: scale(1.03); /* Немного увеличиваем при наведении */
+}
+
+.gallery-link {
+display: block; /* Ссылка занимает всю область элемента */
+text-decoration: none; /* Убираем подчеркивание */
+height: 100%; /* Ссылка растягивается на всю высоту */
+}
+
+.gallery-image {
+display: block; /* Убираем лишний отступ под изображением */
+width: 100%; /* Изображение занимает всю ширину */
+height: 200px; /* Фиксированная высота для превью */
+object-fit: cover; /* Масштабируем изображение, сохраняя пропорции и обрезая лишнее */
+}
+
+/* Адаптивность (пример для 2 колонок на средних экранах) */
+@media (max-width: 768px) {
+.gallery-item {
+flex-basis: calc((100% - 16px) / 2);
+}
+.gallery {
+padding: 20px; /* Уменьшим паддинг */
+}
+}
+/* Адаптивность (пример для 1 колонки на маленьких экранах) */
+@media (max-width: 480px) {
+.gallery-item {
+flex-basis: 100%;
+}
+.gallery {
+padding: 16px;
+gap: 16px;
+}
+}
+
+/* --- Стили для модального окна basicLightbox --- */
+/* Стилизуем фон */
+.basicLightbox {
+background: rgba(0, 0, 0, 0.85); /* Полупрозрачный темный фон */
+}
+
+/* Стилизуем контейнер изображения внутри модалки */
+.basicLightbox__placeholder {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 100%;
+}
+
+/* Ограничиваем размер изображения внутри модалки */
+.basicLightbox__placeholder img {
+max-width: 90vw; /* Макс. ширина - 90% ширины окна */
+max-height: 90vh; /* Макс. высота - 90% высоты окна */
+border-radius: 4px; /* Небольшое скругление для изображения */
+box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); /* Неоновая тень для киберпанка */
+}
