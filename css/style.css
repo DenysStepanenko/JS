@@ -5,51 +5,45 @@
   /* Темная тема по умолчанию */
   --bg-main: #0d1117;
   --bg-panel: #161b22;
-  --text-main: #e1e4e8; /* Сделал чуть светлее */
+  --text-main: #e1e4e8;
   --text-secondary: #8b949e;
-  --border-color: #30363d; /* Тонкая темная рамка */
-  --border-color-light: #555e68; /* Чуть светлее рамка для акцентов */
+  --border-color: #30363d;
+  --border-color-light: #555e68;
 
   --accent-blue: #58a6ff;
   --accent-green: #39FF14;
   --accent-cyan: #00FFFF;
   --accent-magenta: #FF00FF;
 
-  /* Цвета для свечения (с разной интенсивностью) */
   --glow-blue: rgba(88, 166, 255, 0.6);
   --glow-green: rgba(57, 255, 20, 0.6);
   --glow-cyan: rgba(0, 255, 255, 0.4);
   --glow-magenta: rgba(255, 0, 255, 0.5);
 
-  /* Цвета для градиента анимации */
   --anim-grad-green-start: var(--accent-green);
-  --anim-grad-green-end: rgba(57, 255, 20, 0); /* Прозрачный зеленый */
+  --anim-grad-green-end: rgba(57, 255, 20, 0);
 }
 
-/* Переопределяем переменные для светлой темы */
 body.light-theme {
-  --bg-main: #f0f2f5; /* Чуть холоднее белый */
+  --bg-main: #f0f2f5;
   --bg-panel: #ffffff;
-  --text-main: #1f2328; /* Почти черный */
+  --text-main: #1f2328;
   --text-secondary: #57606a;
   --border-color: #d0d7de;
   --border-color-light: #b0b7be;
 
-  /* Акценты для светлой темы (могут быть менее "кислотными") */
   --accent-blue: #1f6feb;
-  --accent-green: #2fad10; /* Менее кислотный */
+  --accent-green: #2fad10;
   --accent-cyan: #00a0a0;
   --accent-magenta: #dd00dd;
 
-  /* Свечение для светлой темы (более мягкое) */
   --glow-blue: rgba(31, 111, 235, 0.3);
   --glow-green: rgba(47, 173, 16, 0.4);
   --glow-cyan: rgba(0, 160, 160, 0.2);
   --glow-magenta: rgba(221, 0, 221, 0.3);
 
-  /* Цвета для градиента анимации в светлой теме */
   --anim-grad-green-start: var(--accent-green);
-  --anim-grad-green-end: rgba(47, 173, 16, 0); /* Прозрачный темно-зеленый */
+  --anim-grad-green-end: rgba(47, 173, 16, 0);
 }
 /* ============================================ */
 /* Конец CSS Переменных                       */
@@ -58,64 +52,111 @@ body.light-theme {
 
 /* Общие стили */
 body {
+  position: relative; /* Нужно для ::before */
+  z-index: 1; /* Контент выше фона */
   font-family: 'Roboto', Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-main);
+  background-color: var(--bg-main); /* Fallback цвет */
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* #progress-bar - Оставляем как есть или меняем цвет? */
+/* Псевдоэлемент для фонового изображения и оверлея */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Помещаем под контент */
+
+  /* Фоновое изображение (ПРОВЕРЬ ССЫЛКУ!) */
+  background-image: url('https://raw.githubusercontent.com/DenysStepanenko/JS/main/img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Затемняющий оверлей (темная тема) */
+  background-color: rgba(13, 17, 23, 0.85); /* Настрой прозрачность (0.85) */
+  background-blend-mode: multiply; /* Попробуй 'darken', 'overlay' */
+}
+
+/* Убираем картинку и оверлей для светлой темы */
+body.light-theme::before {
+  background-image: none;
+  background-color: transparent; /* Или var(--bg-main) если нужно */
+}
+
+
 #progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 4px;
-  background: var(--accent-green); /* Используем неоновый зеленый */
-  box-shadow: 0 0 10px var(--glow-green); /* Добавляем свечение */
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--glow-green);
   width: 0;
   z-index: 1000;
   transition: width 0.2s ease-out;
 }
 
+/* Основные контейнеры - поверх фона */
+header, main, footer {
+  position: relative; /* Чтобы z-index сработал */
+  z-index: 2; /* Выше фона body::before */
+  background-color: var(--bg-panel); /* Непрозрачный фон панели */
+}
+/* Специфичные стили для header, main, footer ниже */
+
+
 header {
-  background: var(--bg-panel);
+  /* background: var(--bg-panel); уже задан выше */
   color: var(--accent-blue);
   text-align: center;
   padding: 2rem 0 1rem 0;
   font-family: 'Raleway', sans-serif;
-  position: relative;
   border-bottom: 1px solid var(--border-color);
-  /* Можно добавить фоновый паттерн */
-  /* background-image: linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px); */
-  /* background-size: 20px 20px; */
+}
+
+body.light-theme header {
+   /* background: var(--bg-panel); уже задан выше для .light-theme */
+   border-bottom: 1px solid var(--border-color);
 }
 
 #theme-toggle {
   position: absolute;
   top: 20px;
   right: 20px;
-  background: transparent; /* Прозрачный фон */
-  color: var(--accent-magenta); /* Маджентовый цвет */
-  border: 1px solid var(--accent-magenta); /* Маджентовая рамка */
-  padding: 7px 14px; /* Чуть подогнал паддинг */
+  background: transparent;
+  color: var(--accent-magenta);
+  border: 1px solid var(--accent-magenta);
+  padding: 7px 14px;
   cursor: pointer;
-  border-radius: 2px; /* Острые углы */
-  z-index: 100;
+  border-radius: 2px;
+  z-index: 100; /* Выше чем header/main */
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   font-weight: 600;
 }
 #theme-toggle:hover {
     background: var(--accent-magenta);
-    color: var(--bg-panel); /* Цвет фона панели */
+    color: var(--bg-panel);
     box-shadow: 0 0 8px var(--glow-magenta);
 }
 
 /* --- Стили Навигации (Киберпанк) --- */
+nav {
+    position: relative; /* Чтобы подменю позиционировалось */
+    z-index: 5; /* Выше чем main */
+    background: var(--bg-panel); /* Даем фон самой навигации */
+    /* Можно добавить рамку снизу, если убрали у header */
+    /* border-bottom: 1px solid var(--border-color); */
+}
 nav ul {
-  background: transparent;
+  /* background: transparent; */ /* Убрали, т.к. фон у nav */
   padding: 10px 0;
   list-style: none;
   margin: 0;
@@ -125,7 +166,7 @@ nav ul {
 nav ul li {
   display: inline-block;
   position: relative;
-  margin: 0 10px; /* Немного уменьшил отступ */
+  margin: 0 10px;
 }
 
 nav ul li a {
@@ -133,22 +174,20 @@ nav ul li a {
   text-decoration: none;
   display: inline-block;
   font-size: 1.1rem;
-  padding: 5px 2px; /* Уменьшил горизонтальный паддинг */
+  padding: 5px 2px;
   transition: color 0.2s ease, text-shadow 0.2s ease;
-  border-bottom: none; /* Убираем border совсем */
-  color: var(--text-secondary); /* Приглушенный цвет для неактивных */
+  border-bottom: none;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
-/* Ховер - свечение */
 nav ul li a:hover {
-  color: #ffffff; /* Яркий белый */
-  text-shadow: 0 0 7px var(--glow-cyan); /* Циановое свечение */
+  color: #ffffff;
+  text-shadow: 0 0 7px var(--glow-cyan);
 }
 
-/* Активная ссылка - зеленый текст и свечение */
 nav ul li a.active {
-  font-weight: 700; /* Жирнее */
+  font-weight: 700;
   color: var(--accent-green);
   text-shadow: 0 0 8px var(--glow-green);
 }
@@ -158,15 +197,17 @@ nav ul li a.active {
 nav ul li ul.submenu {
   display: none;
   position: absolute;
-  background: var(--bg-panel);
-  padding: 10px;
-  border-radius: 3px; /* Меньше скругление */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  z-index: 100;
+  top: 100%; /* Появляется под родительским пунктом */
   left: 0;
+  background: var(--bg-panel);
+  padding: 5px 0; /* Уменьшил паддинг */
+  border-radius: 3px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 100; /* Выше всего */
   width: max-content;
+  min-width: 100%; /* Минимум ширина родителя */
   text-align: left;
-  border: 1px solid var(--border-color-light); /* Добавим рамку */
+  border: 1px solid var(--border-color-light);
 }
 
 nav ul li:hover ul.submenu {
@@ -175,19 +216,20 @@ nav ul li:hover ul.submenu {
 
 nav ul li ul.submenu li {
   display: block;
-  margin: 0; /* Убрал margin */
+  margin: 0;
 }
 nav ul li ul.submenu li a {
-    padding: 5px 10px; /* Паддинг для пунктов подменю */
-    display: block; /* Чтобы занимали всю ширину */
-    font-size: 1rem; /* Чуть меньше шрифт */
-    border: none !important; /* Убрать любые рамки */
+    padding: 6px 12px; /* Увеличил паддинг для читаемости */
+    display: block;
+    font-size: 1rem;
+    border: none !important;
     color: var(--text-secondary);
-    text-shadow: none; /* Убрать свечение у неактивных */
+    text-shadow: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 nav ul li ul.submenu li a:hover {
     color: var(--accent-cyan);
-    background-color: rgba(0, 255, 255, 0.1); /* Легкая подсветка фона */
+    background-color: rgba(0, 255, 255, 0.1);
     text-shadow: none;
 }
 /* --- Конец стилей для выпадающего меню --- */
@@ -196,16 +238,16 @@ main {
   max-width: 900px;
   margin: 30px auto;
   padding: 30px;
-  background: var(--bg-panel);
-  border-radius: 4px; /* Меньше скругление */
-  border: 1px solid rgba(0, 255, 255, 0.2); /* Полупрозрачная циан рамка */
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); /* Легкое циан свечение */
+  /* background: var(--bg-panel); уже задан выше */
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--accent-cyan); /* Основной акцент - циан */
-  font-family: 'Raleway', sans-serif; /* Оставим Raleway для заголовков */
-  text-shadow: 0 0 8px var(--glow-cyan); /* Циан свечение */
+  color: var(--accent-cyan);
+  font-family: 'Raleway', sans-serif;
+  text-shadow: 0 0 8px var(--glow-cyan);
 }
 
 h1 {
@@ -215,19 +257,19 @@ h1 {
 
 h2 {
     font-size: 1.8em;
-    border-bottom: 1px solid var(--accent-cyan); /* Циан подчеркивание */
+    border-bottom: 1px solid var(--accent-cyan);
     padding-bottom: 8px;
     margin-top: 2em;
     margin-bottom: 1em;
 }
 h3 {
     font-size: 1.4em;
-    color: var(--accent-blue); /* Второстепенный акцент - синий */
+    color: var(--accent-blue);
     text-shadow: 0 0 8px var(--glow-blue);
     padding-bottom: 6px;
     margin-top: 1.8em;
     margin-bottom: 0.8em;
-    border-bottom: none; /* Убрано подчеркивание для h3 */
+    border-bottom: none;
 }
 
 /* Ссылки в тексте */
@@ -239,6 +281,7 @@ main a {
 }
 main a:hover {
     color: var(--accent-cyan);
+    border-bottom-style: solid; /* Делаем сплошной при наведении */
     border-bottom-color: var(--accent-cyan);
     text-shadow: 0 0 6px var(--glow-cyan);
 }
@@ -251,13 +294,13 @@ main a:hover {
 }
 
 .code-block pre {
-  background: var(--bg-main); /* Темнее фона панели */
+  background: var(--bg-main);
   padding: 1em;
-  border-radius: 3px; /* Меньше скругление */
-  border: 1px solid var(--accent-magenta); /* Маджентовая рамка */
+  border-radius: 3px;
+  border: 1px solid var(--accent-magenta);
   overflow-x: auto;
   margin: 0;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 10px var(--glow-magenta); /* Внутренняя тень + свечение рамки */
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 10px var(--glow-magenta);
 }
 
 .code-block pre code {
@@ -275,7 +318,7 @@ main a:hover {
   border: 1px solid var(--accent-cyan);
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 2px; /* Острые углы */
+  border-radius: 2px;
   margin: 8px 5px 0 0;
   font-size: 0.85em;
   font-weight: 600;
@@ -294,7 +337,7 @@ main a:hover {
 /* Стили для кнопок запуска примеров */
 button.run-code {
   background: transparent;
-  color: var(--accent-green); /* Зеленый для запуска */
+  color: var(--accent-green);
   border: 1px solid var(--accent-green);
   padding: 5px 10px;
   cursor: pointer;
@@ -322,7 +365,7 @@ button.run-code:active {
   margin-top: 10px;
   min-height: 40px;
   border: 1px solid var(--border-color);
-  font-family: 'Courier New', monospace; /* Моноширинный для вывода */
+  font-family: 'Courier New', monospace;
   font-size: 0.9em;
   white-space: pre-wrap;
   color: var(--text-secondary);
@@ -359,10 +402,9 @@ button.run-code:active {
   gap: 8px;
   margin-bottom: 15px;
   padding: 15px;
-  border: 1px dashed var(--accent-blue); /* Синяя пунктирная рамка */
+  border: 1px dashed var(--accent-blue);
   border-radius: 3px;
-  min-height: 50px;
-  background-color: rgba(88, 166, 255, 0.05); /* Легкий синий фон */
+  background-color: rgba(88, 166, 255, 0.05);
 }
 
 .array-element {
@@ -390,7 +432,7 @@ button.run-code:active {
   width: 40px;
   height: 40px;
   padding: 0;
-  border-radius: 50%; /* Оставим круглой */
+  border-radius: 50%;
   cursor: pointer;
   display: none;
   font-size: 1.5em;
@@ -410,9 +452,9 @@ button.run-code:active {
 
 /* Стили для подвала */
 footer {
+  /* background: var(--bg-panel); уже задан выше */
   text-align: center;
   padding: 20px;
-  background: var(--bg-main);
   color: var(--text-secondary);
   margin-top: 40px;
   border-top: 1px solid var(--border-color);
@@ -446,17 +488,17 @@ th, td {
 
 th {
   background-color: var(--bg-panel);
-  color: var(--accent-blue); /* Синий текст заголовков */
+  color: var(--accent-blue);
   font-weight: 600;
   text-shadow: 0 0 5px var(--glow-blue);
 }
 
 tbody tr {
-    background-color: transparent; /* Убрал зебру */
+    background-color: transparent;
     transition: background-color 0.2s ease;
 }
 tbody tr:hover {
-    background-color: rgba(0, 255, 255, 0.05); /* Легкая циан подсветка строки при наведении */
+    background-color: rgba(0, 255, 255, 0.05);
 }
 
 
@@ -465,7 +507,7 @@ pre code.diagram {
     background: none !important;
     border: none !important;
     padding: 0 !important;
-    color: var(--text-secondary) !important; /* Цвет для схем */
+    color: var(--text-secondary) !important;
     font-family: monospace;
     line-height: 1.5;
     white-space: pre;
@@ -477,7 +519,7 @@ pre code.diagram {
       padding: 20px;
       border: 1px solid var(--border-color-light);
       border-radius: 4px;
-      background-color: rgba(22, 27, 34, 0.5); /* Полупрозрачный фон панели */
+      background-color: rgba(22, 27, 34, 0.5);
 }
 
 .controls {
@@ -491,7 +533,7 @@ pre code.diagram {
     margin-bottom: 0.5em;
     border-bottom: none;
     color: var(--text-secondary);
-    text-shadow: none; /* Убираем свечение у подзаголовков демо */
+    text-shadow: none;
 }
 
 /* Кнопки внутри демо наследуют стили от .code-block button и т.д. */
@@ -523,17 +565,17 @@ pre code.diagram {
 
 .gallery-item {
   flex-basis: calc((100% - 32px) / 3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid transparent; /* Добавляем рамку для ховер эффекта */
+  border: 1px solid transparent;
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 .gallery-item:hover {
     transform: scale(1.03);
     border-color: var(--accent-cyan);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan); /* Тень + свечение */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan);
 }
 
 .gallery-link {
@@ -551,7 +593,7 @@ pre code.diagram {
 
 /* --- Стили для модального окна basicLightbox --- */
 .basicLightbox {
-    background: rgba(13, 17, 23, 0.9); /* Темнее фон */
+    background: rgba(13, 17, 23, 0.9);
 }
 
 .basicLightbox__placeholder {
@@ -566,8 +608,8 @@ pre code.diagram {
     max-width: 90vw;
     max-height: 90vh;
     border-radius: 4px;
-    border: 2px solid var(--accent-cyan); /* Рамка у увеличенного фото */
-    box-shadow: 0 0 35px var(--glow-cyan); /* Ярче свечение */
+    border: 2px solid var(--accent-cyan);
+    box-shadow: 0 0 35px var(--glow-cyan);
 }
 
 /* ============================================ */
@@ -580,7 +622,7 @@ pre code.diagram {
 }
 
 .animate-neon-fill {
-  color: var(--accent-green); /* Fallback - используем переменную */
+  color: var(--accent-green); /* Fallback */
   background-image: linear-gradient(
     to right,
     var(--anim-grad-green-start) 0%,
@@ -590,7 +632,7 @@ pre code.diagram {
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent !important;
+  color: transparent !important; /* Override static color during animation */
   animation: neon-fill-ltr 2s ease-out;
 }
 /* ============================================ */
@@ -602,10 +644,10 @@ pre code.diagram {
 @media (max-width: 768px) {
     main {
         padding: 20px;
-        margin: 20px 10px; /* Уменьшил боковые */
+        margin: 20px 10px;
         border-left: none;
         border-right: none;
-        border-radius: 0; /* Убрал скругление на мобильных */
+        border-radius: 0;
     }
     h1 { font-size: 2em; }
     h2 { font-size: 1.6em; }
@@ -625,8 +667,8 @@ pre code.diagram {
         flex-basis: calc((100% - 16px) / 2);
     }
     .gallery {
-        padding: 15px; /* Уменьшил паддинг галереи */
-        gap: 10px; /* Уменьшил гэп */
+        padding: 15px;
+        gap: 10px;
     }
 }
 
@@ -637,11 +679,12 @@ pre code.diagram {
     margin: 8px 0;
   }
   nav ul li a {
-        padding: 6px 0;
+        padding: 6px 0; /* Увеличил кликабельную область */
         font-size: 1rem;
+        border: none !important; /* Убираем любой border в мобильном меню */
     }
   main {
-    padding: 15px 5px; /* Еще меньше */
+    padding: 15px 5px;
     margin: 15px 5px;
   }
   #theme-toggle {
@@ -658,7 +701,7 @@ pre code.diagram {
         padding: 4px 8px;
     }
     .gallery-item {
-        flex-basis: 100%; /* Одна колонка */
+        flex-basis: 100%;
     }
     .gallery {
         padding: 10px;
@@ -679,18 +722,15 @@ pre code.diagram {
 /* Конец стилей для TODO-списка */
 
 /* Дополнительные стили для подсветки Prism.js */
-/* Можно раскомментировать и настроить, если стандартная тема не нравится */
+/* Можно раскомментировать и настроить */
 /*
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata { color: #6a9955; }
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
 .token.punctuation { color: var(--accent-cyan); }
 .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: var(--accent-magenta); }
 .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: var(--accent-green); }
 .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: var(--accent-cyan); background: none; }
 .token.atrule, .token.attr-value, .token.keyword { color: var(--accent-blue); }
-.token.function, .token.class-name { color: #ffc66d; } / * Желтый * /
+.token.function, .token.class-name { color: #ffc66d; }
 .token.regex, .token.important, .token.variable { color: #ffc66d; }
 */
 
