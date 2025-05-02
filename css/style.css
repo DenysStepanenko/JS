@@ -20,6 +20,11 @@
   --glow-cyan: rgba(0, 255, 255, 0.4);
   --glow-magenta: rgba(255, 0, 255, 0.5);
 
+  /* НОВОЕ: Полупрозрачные фоны (Настрой альфа-канал 0.0 - 1.0) */
+  --bg-panel-trans: rgba(22, 27, 34, 0.85); /* Фон панелей с прозрачностью */
+  --bg-main-trans: rgba(13, 17, 23, 0.9);  /* Основной фон (для code pre) с прозрачностью */
+
+  /* Цвета для градиента анимации */
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(57, 255, 20, 0);
 }
@@ -42,6 +47,10 @@ body.light-theme {
   --glow-cyan: rgba(0, 160, 160, 0.2);
   --glow-magenta: rgba(221, 0, 221, 0.3);
 
+  /* НОВОЕ: Полупрозрачные фоны для светлой темы */
+  --bg-panel-trans: rgba(255, 255, 255, 0.85); /* Белый с прозрачностью */
+  --bg-main-trans: rgba(240, 242, 245, 0.9);  /* Светло-серый с прозрачностью */
+
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(47, 173, 16, 0);
 }
@@ -52,13 +61,13 @@ body.light-theme {
 
 /* Общие стили */
 body {
-  position: relative; /* Нужно для ::before */
-  z-index: 1; /* Контент выше фона */
+  position: relative;
+  z-index: 1;
   font-family: 'Roboto', Arial, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-main); /* Fallback цвет */
+  /* background-color: var(--bg-main); Можно убрать, фон задает ::before */
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -71,24 +80,23 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1; /* Помещаем под контент */
+  z-index: -1;
 
-  /* Фоновое изображение (ПРОВЕРЬ ССЫЛКУ!) */
-  background-image: url('https://raw.githubusercontent.com/DenysStepanenko/JS/main/img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png');
+  background-image: url('https://raw.githubusercontent.com/DenysStepanenko/JS/main/img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png'); /* <-- ПРОВЕРЬ ССЫЛКУ! */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  /* Затемняющий оверлей (темная тема) */
+  /* Затемняющий оверлей */
   background-color: rgba(13, 17, 23, 0.85); /* Настрой прозрачность (0.85) */
-  background-blend-mode: multiply; /* Попробуй 'darken', 'overlay' */
+  background-blend-mode: multiply;
 }
 
-/* Убираем картинку и оверлей для светлой темы */
+/* Убираем картинку для светлой темы */
 body.light-theme::before {
   background-image: none;
-  background-color: transparent; /* Или var(--bg-main) если нужно */
+  background-color: var(--bg-main); /* Просто фон светлой темы */
 }
 
 
@@ -105,16 +113,16 @@ body.light-theme::before {
 }
 
 /* Основные контейнеры - поверх фона */
-header, main, footer {
-  position: relative; /* Чтобы z-index сработал */
-  z-index: 2; /* Выше фона body::before */
-  background-color: var(--bg-panel); /* Непрозрачный фон панели */
+header, nav, main, footer {
+  position: relative;
+  z-index: 2;
+  /* Фон теперь ПОЛУПРОЗРАЧНЫЙ */
+  background-color: var(--bg-panel-trans);
 }
-/* Специфичные стили для header, main, footer ниже */
+/* Специфичные стили */
 
 
 header {
-  /* background: var(--bg-panel); уже задан выше */
   color: var(--accent-blue);
   text-align: center;
   padding: 2rem 0 1rem 0;
@@ -123,7 +131,6 @@ header {
 }
 
 body.light-theme header {
-   /* background: var(--bg-panel); уже задан выше для .light-theme */
    border-bottom: 1px solid var(--border-color);
 }
 
@@ -137,7 +144,7 @@ body.light-theme header {
   padding: 7px 14px;
   cursor: pointer;
   border-radius: 2px;
-  z-index: 100; /* Выше чем header/main */
+  z-index: 100;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   font-weight: 600;
 }
@@ -148,27 +155,18 @@ body.light-theme header {
 }
 
 /* --- Стили Навигации (Киберпанк) --- */
-nav {
-    position: relative; /* Чтобы подменю позиционировалось */
-    z-index: 5; /* Выше чем main */
-    background: var(--bg-panel); /* Даем фон самой навигации */
-    /* Можно добавить рамку снизу, если убрали у header */
-    /* border-bottom: 1px solid var(--border-color); */
-}
+/* nav - фон задан выше */
 nav ul {
-  /* background: transparent; */ /* Убрали, т.к. фон у nav */
   padding: 10px 0;
   list-style: none;
   margin: 0;
   text-align: center;
 }
-
 nav ul li {
   display: inline-block;
   position: relative;
   margin: 0 10px;
 }
-
 nav ul li a {
   position: relative;
   text-decoration: none;
@@ -180,12 +178,10 @@ nav ul li a {
   color: var(--text-secondary);
   font-weight: 500;
 }
-
 nav ul li a:hover {
   color: #ffffff;
   text-shadow: 0 0 7px var(--glow-cyan);
 }
-
 nav ul li a.active {
   font-weight: 700;
   color: var(--accent-green);
@@ -197,29 +193,22 @@ nav ul li a.active {
 nav ul li ul.submenu {
   display: none;
   position: absolute;
-  top: 100%; /* Появляется под родительским пунктом */
+  top: 100%;
   left: 0;
-  background: var(--bg-panel);
-  padding: 5px 0; /* Уменьшил паддинг */
+  background-color: var(--bg-panel-trans); /* Полупрозрачный фон */
+  padding: 5px 0;
   border-radius: 3px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  z-index: 100; /* Выше всего */
+  z-index: 100;
   width: max-content;
-  min-width: 100%; /* Минимум ширина родителя */
+  min-width: 100%;
   text-align: left;
   border: 1px solid var(--border-color-light);
 }
-
-nav ul li:hover ul.submenu {
-  display: block;
-}
-
-nav ul li ul.submenu li {
-  display: block;
-  margin: 0;
-}
+nav ul li:hover ul.submenu { display: block; }
+nav ul li ul.submenu li { display: block; margin: 0; }
 nav ul li ul.submenu li a {
-    padding: 6px 12px; /* Увеличил паддинг для читаемости */
+    padding: 6px 12px;
     display: block;
     font-size: 1rem;
     border: none !important;
@@ -238,63 +227,24 @@ main {
   max-width: 900px;
   margin: 30px auto;
   padding: 30px;
-  /* background: var(--bg-panel); уже задан выше */
   border-radius: 4px;
   border: 1px solid rgba(0, 255, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--accent-cyan);
-  font-family: 'Raleway', sans-serif;
-  text-shadow: 0 0 8px var(--glow-cyan);
-}
-
-h1 {
-    font-size: 2.2em;
-    margin-bottom: 0.8em;
-}
-
-h2 {
-    font-size: 1.8em;
-    border-bottom: 1px solid var(--accent-cyan);
-    padding-bottom: 8px;
-    margin-top: 2em;
-    margin-bottom: 1em;
-}
-h3 {
-    font-size: 1.4em;
-    color: var(--accent-blue);
-    text-shadow: 0 0 8px var(--glow-blue);
-    padding-bottom: 6px;
-    margin-top: 1.8em;
-    margin-bottom: 0.8em;
-    border-bottom: none;
-}
-
-/* Ссылки в тексте */
-main a {
-    color: var(--accent-blue);
-    text-decoration: none;
-    border-bottom: 1px dashed var(--accent-blue);
-    transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
-}
-main a:hover {
-    color: var(--accent-cyan);
-    border-bottom-style: solid; /* Делаем сплошной при наведении */
-    border-bottom-color: var(--accent-cyan);
-    text-shadow: 0 0 6px var(--glow-cyan);
-}
+/* Стили для заголовков, ссылок и т.д. внутри main остаются как в прошлой версии */
+h1, h2, h3, h4, h5, h6 { color: var(--accent-cyan); font-family: 'Raleway', sans-serif; text-shadow: 0 0 8px var(--glow-cyan); }
+h1 { font-size: 2.2em; margin-bottom: 0.8em; }
+h2 { font-size: 1.8em; border-bottom: 1px solid var(--accent-cyan); padding-bottom: 8px; margin-top: 2em; margin-bottom: 1em; }
+h3 { font-size: 1.4em; color: var(--accent-blue); text-shadow: 0 0 8px var(--glow-blue); padding-bottom: 6px; margin-top: 1.8em; margin-bottom: 0.8em; border-bottom: none; }
+main a { color: var(--accent-blue); text-decoration: none; border-bottom: 1px dashed var(--accent-blue); transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease; }
+main a:hover { color: var(--accent-cyan); border-bottom-style: solid; border-bottom-color: var(--accent-cyan); text-shadow: 0 0 6px var(--glow-cyan); }
 
 
 /* Стили для блоков кода */
-.code-block {
-    margin-bottom: 1.5em;
-    position: relative;
-}
-
+.code-block { margin-bottom: 1.5em; position: relative; }
 .code-block pre {
-  background: var(--bg-main);
+  background: var(--bg-main-trans); /* Полупрозрачный */
   padding: 1em;
   border-radius: 3px;
   border: 1px solid var(--accent-magenta);
@@ -302,64 +252,28 @@ main a:hover {
   margin: 0;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 10px var(--glow-magenta);
 }
-
 .code-block pre code {
   font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
   font-size: 0.95em;
   line-height: 1.5;
   display: block;
   color: var(--text-main);
+  background: transparent !important; /* Убедимся, что фон кода прозрачный */
 }
 
 /* Стили для кнопок управления кодом */
-.code-block button {
-  background: transparent;
-  color: var(--accent-cyan);
-  border: 1px solid var(--accent-cyan);
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 2px;
-  margin: 8px 5px 0 0;
-  font-size: 0.85em;
-  font-weight: 600;
-  transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-}
-.code-block button:hover {
-    background: var(--accent-cyan);
-    color: var(--bg-panel);
-    box-shadow: 0 0 8px var(--glow-cyan);
-    border-color: var(--accent-cyan);
-}
-.code-block button:active {
-  transform: scale(0.95);
-}
+.code-block button { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); padding: 5px 10px; cursor: pointer; border-radius: 2px; margin: 8px 5px 0 0; font-size: 0.85em; font-weight: 600; transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+.code-block button:hover { background: var(--accent-cyan); color: var(--bg-panel); box-shadow: 0 0 8px var(--glow-cyan); border-color: var(--accent-cyan); }
+.code-block button:active { transform: scale(0.95); }
 
 /* Стили для кнопок запуска примеров */
-button.run-code {
-  background: transparent;
-  color: var(--accent-green);
-  border: 1px solid var(--accent-green);
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 2px;
-  margin: 8px 0 0 0;
-  font-size: 0.85em;
-  font-weight: 600;
-  transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-}
-button.run-code:hover {
-  background: var(--accent-green);
-  color: var(--bg-panel);
-  border-color: var(--accent-green);
-  box-shadow: 0 0 8px var(--glow-green);
-}
-button.run-code:active {
-  transform: scale(0.95);
-}
+button.run-code { background: transparent; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 5px 10px; cursor: pointer; border-radius: 2px; margin: 8px 0 0 0; font-size: 0.85em; font-weight: 600; transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+button.run-code:hover { background: var(--accent-green); color: var(--bg-panel); border-color: var(--accent-green); box-shadow: 0 0 8px var(--glow-green); }
+button.run-code:active { transform: scale(0.95); }
 
 /* Стили для вывода результатов */
 .output {
-  background: var(--bg-main);
+  background: var(--bg-main-trans); /* Полупрозрачный */
   padding: 10px 15px;
   border-radius: 3px;
   margin-top: 10px;
@@ -374,264 +288,74 @@ button.run-code:active {
 .output p { margin: 0 0 5px 0;}
 .output p:last-child { margin-bottom: 0;}
 
-/* Стили для редактора кода (если используется) */
+/* Стили для редактора кода */
 .code-editor {
-  width: 100%;
-  height: 150px;
-  background: var(--bg-main);
-  color: var(--text-main);
-  border: 1px solid var(--border-color-light);
-  padding: 10px;
-  font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
-  resize: vertical;
-  box-sizing: border-box;
-  margin-top: 10px;
-  border-radius: 3px;
+    width: 100%; height: 150px;
+    background: var(--bg-main-trans); /* Полупрозрачный */
+    color: var(--text-main);
+    border: 1px solid var(--border-color-light); padding: 10px;
+    font-family: 'Consolas', 'Menlo', 'Courier New', monospace; resize: vertical;
+    box-sizing: border-box; margin-top: 10px; border-radius: 3px;
 }
-.code-editor:focus {
-    outline: none;
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 8px var(--glow-cyan);
-}
-
+.code-editor:focus { outline: none; border-color: var(--accent-cyan); box-shadow: 0 0 8px var(--glow-cyan); }
 
 /* Стили для демонстрации массивов */
-.array-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
-  padding: 15px;
-  border: 1px dashed var(--accent-blue);
-  border-radius: 3px;
-  background-color: rgba(88, 166, 255, 0.05);
-}
-
-.array-element {
-  width: 35px;
-  height: 35px;
-  background: var(--accent-blue);
-  color: var(--bg-panel);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  font-weight: bold;
-  font-size: 0.9em;
-  box-shadow: 0 0 6px var(--glow-blue);
-}
+.array-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 15px; border: 1px dashed var(--accent-blue); border-radius: 3px; background-color: rgba(88, 166, 255, 0.1); /* Чуть прозрачнее фон */ }
+.array-element { width: 35px; height: 35px; background: var(--accent-blue); color: var(--bg-panel); display: flex; align-items: center; justify-content: center; border-radius: 3px; font-weight: bold; font-size: 0.9em; box-shadow: 0 0 6px var(--glow-blue); }
 
 /* Стили для кнопки "Наверх" */
-#scroll-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--bg-panel);
-  color: var(--accent-cyan);
-  border: 1px solid var(--accent-cyan);
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  font-size: 1.5em;
-  line-height: 40px;
-  text-align: center;
-  z-index: 999;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 0 10px var(--glow-cyan);
-}
-#scroll-top:hover {
-    background: var(--accent-cyan);
-    color: var(--bg-panel);
-    box-shadow: 0 0 15px var(--glow-cyan);
-    border-color: var(--accent-cyan);
-}
-
+#scroll-top { position: fixed; bottom: 20px; right: 20px; background: var(--bg-panel-trans); /* Полупрозрачный */ color: var(--accent-cyan); border: 1px solid var(--accent-cyan); width: 40px; height: 40px; padding: 0; border-radius: 50%; cursor: pointer; display: none; font-size: 1.5em; line-height: 40px; text-align: center; z-index: 999; transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; box-shadow: 0 0 10px var(--glow-cyan); }
+#scroll-top:hover { background: var(--accent-cyan); color: var(--bg-panel); box-shadow: 0 0 15px var(--glow-cyan); border-color: var(--accent-cyan); }
 
 /* Стили для подвала */
 footer {
-  /* background: var(--bg-panel); уже задан выше */
-  text-align: center;
-  padding: 20px;
-  color: var(--text-secondary);
-  margin-top: 40px;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.9em;
+  /* background: var(--bg-panel-trans); уже задан выше */
+  text-align: center; padding: 20px; color: var(--text-secondary);
+  margin-top: 40px; border-top: 1px solid var(--border-color); font-size: 0.9em;
 }
 
 /* Стили для анимации появления секций */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* --- Стили для таблиц --- */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  font-size: 0.95em;
-}
-
-th, td {
-  border: 1px solid var(--border-color);
-  padding: 10px 12px;
-  text-align: left;
-}
-
-th {
-  background-color: var(--bg-panel);
-  color: var(--accent-blue);
-  font-weight: 600;
-  text-shadow: 0 0 5px var(--glow-blue);
-}
-
-tbody tr {
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-}
-tbody tr:hover {
-    background-color: rgba(0, 255, 255, 0.05);
-}
-
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.95em; background-color: rgba(22, 27, 34, 0.3); /* Легкий фон для всей таблицы */ }
+th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
+th { background-color: rgba(88, 166, 255, 0.15); /* Полупрозрачный синий фон заголовков */ color: var(--accent-blue); font-weight: 600; text-shadow: 0 0 5px var(--glow-blue); border-bottom-width: 2px; /* Жирнее нижняя граница */ border-bottom-color: var(--accent-blue); }
+tbody tr { background-color: transparent; transition: background-color 0.2s ease; }
+tbody tr:hover { background-color: rgba(0, 255, 255, 0.05); }
 
 /* --- Стили для схем --- */
-pre code.diagram {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    color: var(--text-secondary) !important;
-    font-family: monospace;
-    line-height: 1.5;
-    white-space: pre;
-}
+pre code.diagram { background: none !important; border: none !important; padding: 0 !important; color: var(--text-secondary) !important; font-family: monospace; line-height: 1.5; white-space: pre; }
 
 /* --- Стили для интерактивных демо --- */
-.demo-container {
-      margin-bottom: 30px;
-      padding: 20px;
-      border: 1px solid var(--border-color-light);
-      border-radius: 4px;
-      background-color: rgba(22, 27, 34, 0.5);
-}
-
-.controls {
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--border-color);
-}
-
-.demo-container h5, .demo-container h6 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-    border-bottom: none;
-    color: var(--text-secondary);
-    text-shadow: none;
-}
-
-/* Кнопки внутри демо наследуют стили от .code-block button и т.д. */
-
-.code {
-      background-color: var(--bg-main);
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 3px;
-      font-family: monospace;
-      margin-bottom: 10px;
-      white-space: pre-wrap;
-      font-size: 0.9em;
-      color: var(--text-secondary);
-}
-
+.demo-container { margin-bottom: 30px; padding: 20px; border: 1px solid var(--border-color-light); border-radius: 4px; background-color: rgba(22, 27, 34, 0.6); /* Немного прозрачнее */ }
+.controls { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+.demo-container h5, .demo-container h6 { margin-top: 1em; margin-bottom: 0.5em; border-bottom: none; color: var(--text-secondary); text-shadow: none; }
+/* Кнопки наследуют общие стили */
+.code { background-color: var(--bg-main-trans); /* Полупрозрачный */ padding: 10px; border: 1px solid var(--border-color); border-radius: 3px; font-family: monospace; margin-bottom: 10px; white-space: pre-wrap; font-size: 0.9em; color: var(--text-secondary); }
 
 /* --- Стили для галереи --- */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  list-style: none;
-  padding: 24px;
-  margin: 0 auto;
-  max-width: 1128px;
-  justify-content: center;
-}
-
-.gallery-item {
-  flex-basis: calc((100% - 32px) / 3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-}
-
-.gallery-item:hover {
-    transform: scale(1.03);
-    border-color: var(--accent-cyan);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan);
-}
-
-.gallery-link {
-  display: block;
-  text-decoration: none;
-  height: 100%;
-}
-
-.gallery-image {
-  display: block;
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
+.gallery { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; padding: 24px; margin: 0 auto; max-width: 1128px; justify-content: center; background-color: rgba(22, 27, 34, 0.3); /* Легкий фон */ border-radius: 4px;}
+.gallery-item { flex-basis: calc((100% - 32px) / 3); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; border-radius: 4px; overflow: hidden; border: 1px solid transparent; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
+.gallery-item:hover { transform: scale(1.03); border-color: var(--accent-cyan); box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan); }
+.gallery-link { display: block; text-decoration: none; height: 100%; }
+.gallery-image { display: block; width: 100%; height: 200px; object-fit: cover; }
 
 /* --- Стили для модального окна basicLightbox --- */
-.basicLightbox {
-    background: rgba(13, 17, 23, 0.9);
-}
-
-.basicLightbox__placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.basicLightbox__placeholder img {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 4px;
-    border: 2px solid var(--accent-cyan);
-    box-shadow: 0 0 35px var(--glow-cyan);
-}
+.basicLightbox { background: rgba(13, 17, 23, 0.9); }
+.basicLightbox__placeholder { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.basicLightbox__placeholder img { max-width: 90vw; max-height: 90vh; border-radius: 4px; border: 2px solid var(--accent-cyan); box-shadow: 0 0 35px var(--glow-cyan); }
 
 /* ============================================ */
 /* Анимация КЛИКА по пункту навигации         */
 /* ============================================ */
-
-@keyframes neon-fill-ltr {
-  from { background-position: -150% 0; }
-  to { background-position: 0% 0; }
-}
-
+@keyframes neon-fill-ltr { from { background-position: -150% 0; } to { background-position: 0% 0; } }
 .animate-neon-fill {
-  color: var(--accent-green); /* Fallback */
-  background-image: linear-gradient(
-    to right,
-    var(--anim-grad-green-start) 0%,
-    var(--anim-grad-green-start) 50%,
-    var(--anim-grad-green-end) 100%
-  );
+  color: var(--accent-green) !important; /* Fallback */
+  background-image: linear-gradient( to right, var(--anim-grad-green-start) 0%, var(--anim-grad-green-start) 50%, var(--anim-grad-green-end) 100% );
   background-size: 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
+  -webkit-background-clip: text; background-clip: text;
   color: transparent !important; /* Override static color during animation */
   animation: neon-fill-ltr 2s ease-out;
 }
@@ -642,71 +366,25 @@ pre code.diagram {
 
 /* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
-    main {
-        padding: 20px;
-        margin: 20px 10px;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-    }
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.6em; }
-    h3 { font-size: 1.3em; }
-
-    #theme-toggle {
-        padding: 6px 10px;
-        font-size: 0.9em;
-    }
-    #scroll-top {
-        width: 35px;
-        height: 35px;
-        font-size: 1.3em;
-        line-height: 35px;
-    }
-    .gallery-item {
-        flex-basis: calc((100% - 16px) / 2);
-    }
-    .gallery {
-        padding: 15px;
-        gap: 10px;
-    }
+    main { padding: 20px; margin: 20px 10px; border-left: none; border-right: none; border-radius: 0; }
+    h1 { font-size: 2em; } h2 { font-size: 1.6em; } h3 { font-size: 1.3em; }
+    #theme-toggle { padding: 6px 10px; font-size: 0.9em; }
+    #scroll-top { width: 35px; height: 35px; font-size: 1.3em; line-height: 35px; }
+    .gallery-item { flex-basis: calc((100% - 16px) / 2); }
+    .gallery { padding: 15px; gap: 10px; }
 }
 
 @media (max-width: 600px) {
   nav ul { padding: 5px 0;}
-  nav ul li {
-    display: block;
-    margin: 8px 0;
-  }
-  nav ul li a {
-        padding: 6px 0; /* Увеличил кликабельную область */
-        font-size: 1rem;
-        border: none !important; /* Убираем любой border в мобильном меню */
-    }
-  main {
-    padding: 15px 5px;
-    margin: 15px 5px;
-  }
-  #theme-toggle {
-        top: 15px;
-        right: 15px;
-    }
-    h1 { font-size: 1.8em; }
-    h2 { font-size: 1.4em; }
-    h3 { font-size: 1.2em; }
-
-    .code-block { margin-bottom: 1em; }
-    .code-block button, button.run-code {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
-    .gallery-item {
-        flex-basis: 100%;
-    }
-    .gallery {
-        padding: 10px;
-        gap: 10px;
-    }
+  nav ul li { display: block; margin: 8px 0; }
+  nav ul li a { padding: 6px 0; font-size: 1rem; border: none !important; }
+  main { padding: 15px 5px; margin: 15px 5px; }
+  #theme-toggle { top: 15px; right: 15px; }
+  h1 { font-size: 1.8em; } h2 { font-size: 1.4em; } h3 { font-size: 1.2em; }
+  .code-block { margin-bottom: 1em; }
+  .code-block button, button.run-code { font-size: 0.8em; padding: 4px 8px; }
+  .gallery-item { flex-basis: 100%; }
+  .gallery { padding: 10px; gap: 10px; }
 }
 
 /* Стили для TODO-списка - ОСТАВЛЕНЫ БЕЗ ИЗМЕНЕНИЙ */
@@ -730,7 +408,7 @@ pre code.diagram {
 .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: var(--accent-green); }
 .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: var(--accent-cyan); background: none; }
 .token.atrule, .token.attr-value, .token.keyword { color: var(--accent-blue); }
-.token.function, .token.class-name { color: #ffc66d; }
+.token.function, .token.class-name { color: #ffc66d; } / * Желтый * /
 .token.regex, .token.important, .token.variable { color: #ffc66d; }
 */
 
