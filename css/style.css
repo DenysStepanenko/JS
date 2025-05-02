@@ -105,7 +105,7 @@ nav ul li a:hover {
 nav ul li a.active {
   font-weight: 600;
   color: #39FF14; /* Кислотно-зеленый текст активной ссылки */
-  border-bottom-color: #39FF14; /* Кислотно-зеленое подчеркивание */
+  border-bottom-color: #58a6ff; /* Синее подчеркивание активной ссылки */
   /* Анимация убрана отсюда, она будет применяться JS через класс */
 }
 
@@ -115,13 +115,13 @@ body.light-theme nav ul li a {
 }
 body.light-theme nav ul li a:hover {
   color: #1f6feb;
-  border-bottom-color: #1f6feb;
+  border-bottom-color: #1f6feb; /* Синее подчеркивание при наведении */
 }
 
 body.light-theme nav ul li a.active {
   font-weight: 600;
   color: #2fad10; /* Темно-зеленый текст активной ссылки для светлой темы */
-  border-bottom-color: #2fad10; /* Темно-зеленое подчеркивание */
+  border-bottom-color: #1f6feb; /* Синее подчеркивание активной ссылки */
   /* Анимация убрана отсюда */
 }
 /* --- Конец стилей для Светлой Темы --- */
@@ -742,6 +742,7 @@ body.light-theme .gallery-item {
 }
 
 /* Стили для TODO-списка - УДАЛИТЬ, ЕСЛИ НЕ НУЖНЫ */
+/* ... (оставил без изменений) ... */
 .todo-app {
     max-width: 500px;
     margin: 0 auto;
@@ -803,6 +804,7 @@ body.light-theme .gallery-item {
     background-color: #d32f2f;
 }
 /* Конец стилей для TODO-списка */
+
 
 /* Дополнительные стили для подсветки Prism.js */
 /*
