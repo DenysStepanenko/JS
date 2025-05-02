@@ -224,4 +224,34 @@ if ('IntersectionObserver' in window) {
     sectionsToFade.forEach(section => section.classList.add('visible'));
 }
 
+// --- Navigation Link Click Animation ---
+document.addEventListener('DOMContentLoaded', () => { // Запускаем после загрузки DOM
+  const navLinks = document.querySelectorAll('nav ul li a');
+
+  if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(event) {
+        // Не предотвращаем переход по ссылке по умолчанию event.preventDefault();
+
+        // Удаляем класс анимации со ВСЕХ ссылок (на всякий случай, если кликнуть очень быстро)
+        navLinks.forEach(el => el.classList.remove('animate-neon-fill'));
+
+        // Добавляем класс анимации ТЕКУЩЕЙ кликнутой ссылке
+        this.classList.add('animate-neon-fill');
+
+        // Слушаем событие окончания анимации ТОЛЬКО ОДИН РАЗ
+        this.addEventListener('animationend', () => {
+          // Убираем класс анимации, чтобы она могла сработать снова
+          this.classList.remove('animate-neon-fill');
+        }, { once: true }); // { once: true } автоматически удаляет слушатель после срабатывания
+      });
+    });
+    console.log("Навигационная анимация по клику инициализирована.");
+  } else {
+    console.warn("Ссылки навигации не найдены для анимации по клику.");
+  }
+});
+// --- End Navigation Link Click Animation ---
+
+
 // --- Конец файла main.js ---
