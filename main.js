@@ -225,28 +225,41 @@ if ('IntersectionObserver' in window) {
 }
 
 // --- Navigation Link Click Animation ---
-document.addEventListener('DOMContentLoaded', () => { // Запускаем после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded. Searching for nav links...'); // ДОБАВЛЕНО
   const navLinks = document.querySelectorAll('nav ul li a');
+  console.log(`Found ${navLinks.length} nav links.`); // ДОБАВЛЕНО
 
   if (navLinks.length > 0) {
     navLinks.forEach(link => {
+      // console.log('Adding listener to:', link.href); // Можно раскомментировать для детальной проверки
       link.addEventListener('click', function(event) {
-        // Не предотвращаем переход по ссылке по умолчанию event.preventDefault();
+        console.log('>>> Клик! Ссылка:', this.href); // ДОБАВЛЕНО
 
-        // Удаляем класс анимации со ВСЕХ ссылок (на всякий случай, если кликнуть очень быстро)
-        navLinks.forEach(el => el.classList.remove('animate-neon-fill'));
+        // Удаляем класс анимации со ВСЕХ ссылок (на всякий случай)
+        navLinks.forEach(el => {
+          if (el.classList.contains('animate-neon-fill')) {
+            console.log('Удаляю класс анимации с:', el.href); // ДОБАВЛЕНО
+            el.classList.remove('animate-neon-fill');
+          }
+        });
 
         // Добавляем класс анимации ТЕКУЩЕЙ кликнутой ссылке
+        console.log('Добавляю класс .animate-neon-fill к:', this.href); // ДОБАВЛЕНО
         this.classList.add('animate-neon-fill');
 
         // Слушаем событие окончания анимации ТОЛЬКО ОДИН РАЗ
         this.addEventListener('animationend', () => {
-          // Убираем класс анимации, чтобы она могла сработать снова
-          this.classList.remove('animate-neon-fill');
+          console.log('<<< Анимация закончилась для:', this.href); // ДОБАВЛЕНО
+          // Проверяем, есть ли еще класс перед удалением (на всякий случай)
+          if (this.classList.contains('animate-neon-fill')) {
+            console.log('Удаляю класс .animate-neon-fill после анимации.'); // ДОБАВЛЕНО
+             this.classList.remove('animate-neon-fill');
+          }
         }, { once: true }); // { once: true } автоматически удаляет слушатель после срабатывания
       });
     });
-    console.log("Навигационная анимация по клику инициализирована.");
+    console.log("Обработчики кликов для анимации навигации добавлены."); // Изменено сообщение
   } else {
     console.warn("Ссылки навигации не найдены для анимации по клику.");
   }
