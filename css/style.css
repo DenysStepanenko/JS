@@ -31,8 +31,8 @@
 
 body.light-theme {
   --bg-main: #f0f2f5;
-  --bg-panel: #ffffff; /* НЕПРОЗРАЧНЫЙ для текста внутри */
-  --text-main: #1f2328;
+    --bg-panel-trans: rgba(22, 27, 34, 0.6); /* БЫЛО: 0.85, СТАЛО: 0.6 */
+  --bg-main-trans: rgba(13, 17, 23, 0.7);  /* БЫЛО: 0.9, СТАЛО: 0.7 */
   --text-secondary: #57606a;
   --border-color: #d0d7de;
   --border-color-light: #b0b7be;
@@ -48,8 +48,8 @@ body.light-theme {
   --glow-magenta: rgba(221, 0, 221, 0.3);
 
   /* Полупрозрачные фоны для светлой темы (ВОССТАНОВЛЕНА НЕПРОЗРАЧНОСТЬ) */
-  --bg-panel-trans: rgba(255, 255, 255, 0.85); /* Белый с прозрачностью */
-  --bg-main-trans: rgba(240, 242, 245, 0.9);  /* Светло-серый с прозрачностью */
+  --bg-panel-trans: rgba(255, 255, 255, 0.6); /* БЫЛО: 0.85, СТАЛО: 0.6 */
+   --bg-main-trans: rgba(240, 242, 245, 0.7);  /* БЫЛО: 0.9, СТАЛО: 0.7 */
 
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(47, 173, 16, 0);
