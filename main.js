@@ -1,4 +1,4 @@
-// ===== Файл: main.js (Финальная исправленная версия 2) =====
+// ===== Файл: main.js (Финальная исправленная версия 3) =====
 
 document.addEventListener('DOMContentLoaded', () => {
     // Весь код, который должен выполниться ПОСЛЕ загрузки HTML, помещаем СЮДА
@@ -108,87 +108,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Выполнение кода из редактора ---
-    // Используем делегирование событий для кнопок запуска кода, чтобы работало для динамически добавленного контента
+    // --- Выполнение кода из редактора и примеров (с делегированием) ---
     document.addEventListener('click', function (event) {
-        // Проверяем, кликнули ли по кнопке запуска кода в редакторе
-        if (event.target.matches('.run-code-editor')) {
-            const button = event.target;
-            const codeBlock = button.closest('.code-block'); // Находим родительский блок кода
-            if (!codeBlock) return;
+        const runEditorBtn = event.target.closest('.run-code-editor');
+        const runExampleBtn = event.target.closest('button.run-code:not(.run-code-editor)');
 
-            const textarea = codeBlock.querySelector('.code-editor');
-            const resultDiv = codeBlock.querySelector('.result');
+        if (runEditorBtn) {
+            const codeBlock = runEditorBtn.closest('.code-block');
+            const textarea = codeBlock?.querySelector('.code-editor');
+            const resultDiv = codeBlock?.querySelector('.result');
+            if (!textarea || !resultDiv) return;
 
-            if (!textarea || !resultDiv) {
-                console.warn("Не найдены '.code-editor' или '.result' для кнопки 'Запустить'.");
-                return;
-            }
-
-            resultDiv.innerHTML = ''; // Очищаем результат
+            resultDiv.innerHTML = '';
             const originalConsoleLog = console.log;
             const logs = [];
-
-            // Перехватываем console.log
-            console.log = (...args) => {
-                const formattedArgs = args.map(arg => {
-                    try {
-                        return (typeof arg === 'object' && arg !== null) ? JSON.stringify(arg, null, 2) : String(arg);
-                    } catch (e) {
-                        return '[Circular Object]';
-                    }
-                }).join(' ');
-                logs.push(formattedArgs);
-                originalConsoleLog.apply(console, args); // Выводим и в реальную консоль
-            };
-
-            // Выполняем код
-            try {
-                new Function(textarea.value)(); // Выполняем код из textarea
-                if (logs.length > 0) {
-                    resultDiv.innerHTML = logs.map(log => `<p>${log.replace(/\n/g, '<br>')}</p>`).join('');
-                } else {
-                    resultDiv.innerHTML = `<p style="font-style: italic;">Код выполнен без вывода.</p>`;
-                }
-            } catch (error) {
-                resultDiv.innerHTML = `<p style="color: #ff5555;">Ошибка: ${error.message}</p>`;
-                originalConsoleLog.error("Ошибка выполнения кода из редактора:", error);
-            } finally {
-                console.log = originalConsoleLog; // Восстанавливаем console.log
-            }
-        }
-
-        // Проверяем, кликнули ли по кнопке запуска обычного примера кода (не редактора)
-        if (event.target.matches('button.run-code:not(.run-code-editor)')) {
-            const button = event.target;
-            const codeBlock = button.closest('.code-block');
-            if (!codeBlock) return;
-
-            const codeElement = codeBlock.querySelector('pre code');
-            const outputDiv = codeBlock.querySelector('.output'); // Ищем .output для вывода
-
-            if (!codeElement || !outputDiv) {
-                console.warn("Не найдены 'pre code' или '.output' для кнопки 'Запустить пример'.");
-                return;
-            }
-
-            outputDiv.innerHTML = ''; // Очищаем результат
-            const originalConsoleLog = console.log;
-            const logs = [];
-
             console.log = (...args) => {
                 const formattedArgs = args.map(arg => typeof arg === 'object' && arg !== null ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
                 logs.push(formattedArgs);
                 originalConsoleLog.apply(console, args);
             };
-
             try {
-                new Function(codeElement.textContent || "")(); // Выполняем код из pre code
-                if (logs.length > 0) {
-                    outputDiv.innerHTML = logs.map(log => `<p>${log.replace(/\n/g, '<br>')}</p>`).join('');
-                } else {
-                    outputDiv.innerHTML = `<p style="font-style: italic;">Пример выполнен без вывода.</p>`;
-                }
+                new Function(textarea.value)();
+                resultDiv.innerHTML = logs.length > 0 ? logs.map(log => `<p>${log.replace(/\n/g, '<br>')}</p>`).join('') : `<p style="font-style: italic;">Код выполнен без вывода.</p>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: #ff5555;">Ошибка: ${error.message}</p>`;
+                originalConsoleLog.error("Ошибка выполнения кода из редактора:", error);
+            } finally {
+                console.log = originalConsoleLog;
+            }
+        } else if (runExampleBtn) {
+            const codeBlock = runExampleBtn.closest('.code-block');
+            const codeElement = codeBlock?.querySelector('pre code');
+            const outputDiv = codeBlock?.querySelector('.output');
+            if (!codeElement || !outputDiv) return;
+
+            outputDiv.innerHTML = '';
+            const originalConsoleLog = console.log;
+            const logs = [];
+            console.log = (...args) => {
+                const formattedArgs = args.map(arg => typeof arg === 'object' && arg !== null ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
+                logs.push(formattedArgs);
+                originalConsoleLog.apply(console, args);
+            };
+            try {
+                new Function(codeElement.textContent || "")();
+                outputDiv.innerHTML = logs.length > 0 ? logs.map(log => `<p>${log.replace(/\n/g, '<br>')}</p>`).join('') : `<p style="font-style: italic;">Пример выполнен без вывода.</p>`;
             } catch (error) {
                 outputDiv.innerHTML = `<p style="color: #ff5555;">Ошибка: ${error.message}</p>`;
                 originalConsoleLog.error("Ошибка выполнения примера кода:", error);
@@ -204,11 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`[Scroll Reveal] Найдено секций для анимации: ${sectionsToReveal.length}`);
     if (sectionsToReveal.length > 0) {
         if ('IntersectionObserver' in window) {
-            const observerOptions = {
-                threshold: 0.15 // Срабатывать, когда видно 15% элемента
-            };
+            const observerOptions = { threshold: 0.15 };
             const observer = new IntersectionObserver((entries, obs) => {
-                console.log(`[Scroll Reveal] IntersectionObserver сработал (записей: ${entries.length})`);
+                // console.log(`[Scroll Reveal] IntersectionObserver сработал (записей: ${entries.length})`); // Можно раскомментировать для отладки
                 entries.forEach(entry => {
                     const targetId = entry.target.id || '[без ID]';
                     if (entry.isIntersecting) {
@@ -216,13 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         entry.target.classList.add('is-visible'); // Используем новый класс для видимости
                         // obs.unobserve(entry.target); // Для однократной анимации
                     }
-                    // Не убираем класс при выходе из видимости
                 });
             }, observerOptions);
 
             sectionsToReveal.forEach(section => {
                 observer.observe(section);
-                console.log(`[Scroll Reveal] Наблюдение за секцией ${section.id || '[без ID]'}`);
+                // console.log(`[Scroll Reveal] Наблюдение за секцией ${section.id || '[без ID]'}`); // Можно раскомментировать для отладки
             });
             console.log("[Scroll Reveal] Наблюдение за всеми секциями установлено.");
         } else {
@@ -239,18 +200,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinks.length > 0) {
         navLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                event.preventDefault();
+                const href = this.getAttribute('href');
+                // Не предотвращаем переход для подменю или если нет href
+                if (!href || href === '#') {
+                    console.log('[Nav Anim] Клик по ссылке без href или #, переход не предотвращен.');
+                    return;
+                }
+
+                event.preventDefault(); // Предотвращаем только для реальных ссылок
                 if (this.classList.contains('animate-neon-fill')) return;
                 navLinks.forEach(el => el.classList.remove('animate-neon-fill'));
                 this.classList.add('animate-neon-fill');
                 const destination = this.href;
                 console.log(`[Nav Anim] Анимация для ${destination}...`);
-                // Используем requestAnimationFrame для плавности перед переходом
                 requestAnimationFrame(() => {
-                    setTimeout(() => { // Небольшая задержка
+                    setTimeout(() => {
                         console.log('[Nav Anim] Переход на:', destination);
                         window.location.href = destination;
-                    }, 50); // Уменьшил задержку
+                    }, 50);
                 });
             });
         });
@@ -259,8 +226,60 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("[Nav Anim] Ссылки навигации не найдены.");
     }
 
+    // --- Бургер-меню ---
+    console.log("[Mobile Menu] Поиск элементов меню...");
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const menuCloseBtn = document.getElementById('menu-close');
+    const mainNav = document.getElementById('main-nav');
+
+    if (menuToggleBtn && menuCloseBtn && mainNav) {
+        console.log("[Mobile Menu] Элементы найдены, добавляем обработчики.");
+        menuToggleBtn.addEventListener('click', () => {
+            console.log("[Mobile Menu] Клик по бургеру - открываем меню.");
+            mainNav.classList.add('is-open');
+            document.body.classList.add('no-scroll');
+            menuToggleBtn.setAttribute('aria-expanded', 'true');
+        });
+
+        menuCloseBtn.addEventListener('click', () => {
+            console.log("[Mobile Menu] Клик по крестику - закрываем меню.");
+            mainNav.classList.remove('is-open');
+            document.body.classList.remove('no-scroll');
+            menuToggleBtn.setAttribute('aria-expanded', 'false');
+        });
+
+        // Закрытие меню при клике на РЕАЛЬНУЮ ссылку внутри него
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (!href || href === '#') { return; } // Игнорируем ссылки-заглушки
+
+                console.log("[Mobile Menu] Клик по ссылке - закрываем меню.");
+                mainNav.classList.remove('is-open');
+                document.body.classList.remove('no-scroll');
+                menuToggleBtn.setAttribute('aria-expanded', 'false');
+                // Переход по ссылке произойдет автоматически после этого,
+                // т.к. мы НЕ вызываем event.preventDefault() здесь для реальных ссылок
+            });
+        });
+
+        // Закрытие меню при клике вне области навигации (на фон оверлея)
+        mainNav.addEventListener('click', (event) => {
+            if (event.target === mainNav) {
+                console.log("[Mobile Menu] Клик по фону оверлея - закрываем меню.");
+                mainNav.classList.remove('is-open');
+                document.body.classList.remove('no-scroll');
+                menuToggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+    } else {
+        console.warn("[Mobile Menu] Не найдены все необходимые элементы: #menu-toggle, #menu-close, #main-nav.");
+    }
+
     console.log("Инициализация всех скриптов завершена.");
 
 }); // Конец ЕДИНОГО DOMContentLoaded
 
 // ===== Конец файла main.js =====
+

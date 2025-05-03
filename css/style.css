@@ -20,9 +20,9 @@
   --glow-cyan: rgba(0, 255, 255, 0.4);
   --glow-magenta: rgba(255, 0, 255, 0.5);
 
-  /* Полупрозрачные фоны (ВОССТАНОВЛЕНА НЕПРОЗРАЧНОСТЬ) */
-  --bg-panel-trans: rgba(22, 27, 34, 0.85); /* Фон панелей с прозрачностью */
-  --bg-main-trans: rgba(13, 17, 23, 0.9);  /* Фон для pre/output/code с прозрачностью */
+  /* Полупрозрачные фоны (УМЕНЬШЕНА ПРОЗРАЧНОСТЬ для читаемости) */
+  --bg-panel-trans: rgba(22, 27, 34, 0.7); /* Фон панелей */
+  --bg-main-trans: rgba(13, 17, 23, 0.8);  /* Фон для pre/output/code */
 
   /* Цвета для градиента анимации */
   --anim-grad-green-start: var(--accent-green);
@@ -31,8 +31,8 @@
 
 body.light-theme {
   --bg-main: #f0f2f5;
-    --bg-panel-trans: rgba(22, 27, 34, 0.6); /* БЫЛО: 0.85, СТАЛО: 0.6 */
-  --bg-main-trans: rgba(13, 17, 23, 0.7);  /* БЫЛО: 0.9, СТАЛО: 0.7 */
+  --bg-panel: #ffffff; /* НЕПРОЗРАЧНЫЙ для текста внутри */
+  --text-main: #1f2328;
   --text-secondary: #57606a;
   --border-color: #d0d7de;
   --border-color-light: #b0b7be;
@@ -47,9 +47,9 @@ body.light-theme {
   --glow-cyan: rgba(0, 160, 160, 0.2);
   --glow-magenta: rgba(221, 0, 221, 0.3);
 
-  /* Полупрозрачные фоны для светлой темы (ВОССТАНОВЛЕНА НЕПРОЗРАЧНОСТЬ) */
-  --bg-panel-trans: rgba(255, 255, 255, 0.6); /* БЫЛО: 0.85, СТАЛО: 0.6 */
-   --bg-main-trans: rgba(240, 242, 245, 0.7);  /* БЫЛО: 0.9, СТАЛО: 0.7 */
+  /* Полупрозрачные фоны для светлой темы (УМЕНЬШЕНА ПРОЗРАЧНОСТЬ) */
+  --bg-panel-trans: rgba(255, 255, 255, 0.7); /* Белый с прозрачностью */
+  --bg-main-trans: rgba(240, 242, 245, 0.8);  /* Светло-серый с прозрачностью */
 
   --anim-grad-green-start: var(--accent-green);
   --anim-grad-green-end: rgba(47, 173, 16, 0);
@@ -83,9 +83,8 @@ body::before {
   z-index: -1;
   background-image: url('../img/cyberpunk_cat_background_web_friendly.jpg'); /* Проверь путь! */
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size:cover;
   background-attachment: fixed;
   background-color: rgba(13, 17, 23, 0.85); /* Настрой прозрачность оверлея */
   background-blend-mode: multiply;
@@ -109,7 +108,7 @@ body.light-theme::before {
 }
 
 /* Основные контейнеры - поверх фона, ПОЛУПРОЗРАЧНЫЕ */
-header, nav, main, footer {
+header, nav, main, footer, .demo-container, .gallery { /* Добавлены .demo-container, .gallery */
   position: relative;
   z-index: 2;
   background-color: var(--bg-panel-trans); /* Полупрозрачный фон */
@@ -164,7 +163,7 @@ main {
   border-radius: 4px;
   border: 1px solid rgba(0, 255, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-  background-color: var(--bg-panel-trans); /* Фон для основного контента */
+  /* background-color уже задан выше для main */
 }
 
 /* Заголовки, ссылки */
@@ -186,7 +185,7 @@ main a:hover { color: var(--accent-cyan); border-bottom-style: solid; border-bot
 .code-block button:active { transform: scale(0.95); }
 
 /* Кнопки запуска примеров */
-button.run-code, button.run-code-editor { /* Добавил .run-code-editor */ background: transparent; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 5px 10px; cursor: pointer; border-radius: 2px; margin: 8px 0 0 0; font-size: 0.85em; font-weight: 600; transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+button.run-code, button.run-code-editor { background: transparent; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 5px 10px; cursor: pointer; border-radius: 2px; margin: 8px 0 0 0; font-size: 0.85em; font-weight: 600; transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
 button.run-code:hover, button.run-code-editor:hover { background: var(--accent-green); color: var(--text-main); border-color: var(--accent-green); box-shadow: 0 0 8px var(--glow-green); }
 button.run-code:active, button.run-code-editor:active { transform: scale(0.95); }
 
@@ -235,13 +234,13 @@ tbody tr:hover { background-color: rgba(0, 255, 255, 0.05); }
 pre code.diagram { background: none !important; border: none !important; padding: 0 !important; color: var(--text-secondary) !important; font-family: monospace; line-height: 1.5; white-space: pre; }
 
 /* Интерактивные демо */
-.demo-container { margin-bottom: 30px; padding: 20px; border: 1px solid var(--border-color-light); border-radius: 4px; background-color: var(--bg-panel-trans); }
+.demo-container { margin-bottom: 30px; padding: 20px; border: 1px solid var(--border-color-light); border-radius: 4px; /* background-color убран, т.к. задан выше */ }
 .controls { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
 .demo-container h5, .demo-container h6 { margin-top: 1em; margin-bottom: 0.5em; border-bottom: none; color: var(--text-secondary); text-shadow: none; }
 .code { background-color: var(--bg-main-trans); padding: 10px; border: 1px solid var(--border-color); border-radius: 3px; font-family: monospace; margin-bottom: 10px; white-space: pre-wrap; font-size: 0.9em; color: var(--text-secondary); }
 
 /* Галерея */
-.gallery { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; padding: 24px; margin: 20px auto; max-width: 1128px; justify-content: center; background-color: var(--bg-panel-trans); border-radius: 4px;}
+.gallery { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; padding: 24px; margin: 20px auto; max-width: 1128px; justify-content: center; /* background-color убран, т.к. задан выше */ border-radius: 4px;}
 .gallery-item { flex-basis: calc((100% - 32px) / 3); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; border-radius: 4px; overflow: hidden; border: 1px solid transparent; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
 .gallery-item:hover { transform: scale(1.03); border-color: var(--accent-cyan); box-shadow: 0 6px 12px rgba(0,0,0,0.5), 0 0 15px var(--glow-cyan); }
 .gallery-link { display: block; text-decoration: none; height: 100%; }
@@ -275,6 +274,316 @@ pre code.diagram { background: none !important; border: none !important; padding
   h1 { font-size: 1.8em; } h2 { font-size: 1.4em; } h3 { font-size: 1.2em; }
   .code-block { margin-bottom: 1em; }
   .code-block button, button.run-code, button.run-code-editor { font-size: 0.8em; padding: 4px 8px; } /* Добавил .run-code-editor */
+  .gallery-item { flex-basis: 100%; }
+  .gallery { padding: 10px; gap: 10px; }
+}
+
+/* Стили для TODO-списка */
+.todo-app { max-width: 500px; margin: 20px auto; padding: 16px; border: 1px solid var(--border-color); border-radius: 4px; background-color: var(--bg-panel-trans); }
+.todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
+.todo-input { flex-grow: 1; padding: 8px; font: inherit; border: 1px solid var(--border-color-light); border-radius: 4px; background-color: var(--bg-main-trans); color: var(--text-main); }
+.add-btn { padding: 8px 12px; background-color: var(--accent-green); color: var(--bg-main); border: none; border-radius: 4px; cursor: pointer; font-weight: 600; transition: background-color 0.2s ease, box-shadow 0.2s ease; }
+.add-btn:hover { background-color: #4cff3c; box-shadow: 0 0 8px var(--glow-green); }
+.todo-list { list-style: none; padding: 0; margin: 0; }
+.todo-item { padding: 10px; border: 1px solid var(--border-color); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; background-color: var(--bg-main-trans); transition: background-color 0.2s ease; }
+.todo-item.completed { background-color: rgba(88, 166, 255, 0.1); border-color: var(--accent-blue); }
+.todo-item span { flex-grow: 1; margin-right: 10px; transition: text-decoration 0.3s ease, color 0.3s ease; }
+.todo-item.completed span { text-decoration: line-through; color: var(--text-secondary); }
+.todo-item button { padding: 4px 8px; background-color: transparent; color: var(--accent-magenta); border: 1px solid var(--accent-magenta); border-radius: 4px; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+.todo-item button:hover { background-color: var(--accent-magenta); color: var(--text-main); box-shadow: 0 0 6px var(--glow-magenta); }
+/* Конец стилей для TODO-списка */
+
+/* Дополнительные стили для подсветки Prism.js */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; font-style: italic;}
+.token.punctuation { color: var(--accent-cyan); }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: var(--accent-magenta); }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: var(--accent-green); }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: var(--accent-cyan); background: none; }
+.token.atrule, .token.attr-value, .token.keyword { color: var(--accent-blue); }
+.token.function, .token.class-name { color: #ffc66d; } /* Желтый */
+.token.regex, .token.important, .token.variable { color: #ffc66d; }
+
+/* ============================================ */
+/* Стили для бургер-меню и оверлея             */
+/* ============================================ */
+
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Лого слева, нав и тема справа */
+    align-items: center;
+    position: relative; /* Для позиционирования кнопки темы */
+}
+
+.logo h1 {
+    margin: 0; /* Убираем лишние отступы у заголовка логотипа */
+    font-size: 1.5em; /* Можно настроить размер */
+    color: var(--accent-blue);
+    text-shadow: 0 0 5px var(--glow-blue);
+}
+
+/* Кнопка бургер-меню */
+.menu-toggle-btn {
+    display: none; /* Скрыта по умолчанию на больших экранах */
+    background: transparent;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-size: 1.8rem; /* Размер иконки */
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    line-height: 1;
+    z-index: 1002; /* Выше оверлея, но ниже кнопки закрытия */
+    transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.menu-toggle-btn:hover {
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+    box-shadow: 0 0 8px var(--glow-green);
+}
+
+/* Кнопка закрытия меню */
+.menu-close-btn {
+    display: none; /* Скрыта по умолчанию */
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    color: var(--accent-magenta);
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    z-index: 1003; /* Выше всего */
+    transition: color 0.2s, transform 0.2s;
+}
+.menu-close-btn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Стили для оверлея навигации */
+#main-nav {
+    /* На больших экранах - обычное поведение */
+    display: block;
+    position: static;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+    transform: none;
+    transition: none;
+    overflow-y: visible;
+}
+
+#main-nav ul#main-nav-list {
+    /* Стили для списка на больших экранах остаются как были */
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    text-align: right; /* Выравниваем по правому краю в шапке */
+}
+
+#main-nav ul#main-nav-list li {
+    display: inline-block;
+    position: relative;
+    margin: 0 0 0 15px; /* Отступ слева между пунктами */
+}
+
+#main-nav ul#main-nav-list li a {
+    /* Стили ссылок на больших экранах остаются как были */
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1rem;
+    padding: 5px 2px;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+    border-bottom: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+/* Стили для выпадающего меню на больших экранах */
+#main-nav ul#main-nav-list li ul.submenu {
+    /* Стили остаются как были */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+     background-color: var(--bg-panel-trans); /* Добавлено для консистентности */
+    padding: 5px 0;
+    border-radius: 3px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    width: max-content;
+    min-width: 100%;
+    text-align: left;
+    border: 1px solid var(--border-color-light);
+    /* ... остальные стили ... */
+}
+#main-nav ul#main-nav-list li:hover ul.submenu { display: block; }
+#main-nav ul#main-nav-list li ul.submenu li { display: block; margin: 0; }
+#main-nav ul#main-nav-list li ul.submenu li a {
+    padding: 6px 12px;
+    display: block;
+    font-size: 1rem;
+    border: none !important;
+    color: var(--text-secondary);
+    text-shadow: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+#main-nav ul#main-nav-list li ul.submenu li a:hover {
+    color: var(--accent-cyan);
+    background-color: rgba(0, 255, 255, 0.1);
+    text-shadow: none;
+}
+/* ... */
+
+
+/* Медиа-запрос для мобильных и планшетов */
+@media (max-width: 950px) { /* Точка перехода - подбери под свой дизайн */
+
+    .menu-toggle-btn {
+        display: block; /* Показываем кнопку бургера */
+    }
+
+    #theme-toggle { /* Сдвигаем кнопку темы левее бургера */
+        right: 70px;
+    }
+
+    #main-nav {
+        position: fixed; /* Позиционируем как оверлей */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(13, 17, 23, 0.97); /* Почти непрозрачный фон оверлея */
+        z-index: 1001; /* Выше контента, но ниже кнопок */
+        display: flex; /* Используем flex для центрирования */
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%); /* Скрываем за левым краем */
+        transition: transform 0.4s ease-in-out;
+        overflow-y: auto; /* Добавляем скролл, если меню длинное */
+    }
+
+    #main-nav.is-open {
+        transform: translateX(0); /* Показываем оверлей */
+    }
+
+    #main-nav .menu-close-btn {
+        display: block; /* Показываем кнопку закрытия в оверлее */
+    }
+
+    #main-nav ul#main-nav-list {
+        padding: 0;
+        text-align: center; /* Центрируем текст ссылок */
+        width: 80%; /* Ограничиваем ширину списка */
+    }
+
+    #main-nav ul#main-nav-list li {
+        display: block; /* Ссылки в столбик */
+        margin: 0 0 25px 0; /* Вертикальный отступ */
+        position: static; /* Убираем relative для подменю */
+    }
+
+    #main-nav ul#main-nav-list li a {
+        font-size: 1.8rem; /* Крупнее шрифт в оверлее */
+        padding: 10px 0;
+        display: block; /* Ссылка занимает всю ширину li */
+        color: var(--text-main); /* Белый цвет для лучшей видимости */
+        text-shadow: none; /* Убираем тень по умолчанию */
+    }
+     #main-nav ul#main-nav-list li a:hover {
+        color: var(--accent-cyan);
+        text-shadow: 0 0 8px var(--glow-cyan);
+    }
+     #main-nav ul#main-nav-list li a.active {
+        color: var(--accent-green);
+        text-shadow: 0 0 8px var(--glow-green);
+    }
+
+    /* Стили для подменю в оверлее (упрощенные) */
+    #main-nav ul#main-nav-list li ul.submenu {
+        display: block; /* Показываем сразу */
+        position: static; /* Убираем абсолютное позиционирование */
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 10px 0 0 20px; /* Отступ слева для вложенности */
+        margin-top: 5px;
+        width: auto;
+    }
+
+    #main-nav ul#main-nav-list li ul.submenu li {
+        margin-bottom: 10px;
+    }
+
+    #main-nav ul#main-nav-list li ul.submenu li a {
+        font-size: 1.2rem; /* Меньше шрифт для подпунктов */
+        color: var(--text-secondary);
+        padding: 5px 0;
+    }
+     #main-nav ul#main-nav-list li ul.submenu li a:hover {
+        color: var(--accent-blue);
+        text-shadow: 0 0 5px var(--glow-blue);
+    }
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+     .logo h1 {
+        font-size: 1.3em;
+    }
+     #theme-toggle {
+        padding: 5px 8px;
+        font-size: 0.8em;
+        right: 60px; /* Еще левее */
+    }
+     .menu-toggle-btn {
+        font-size: 1.6rem;
+        padding: 4px 8px;
+    }
+     .menu-close-btn {
+        top: 15px;
+        right: 20px;
+        font-size: 2.2rem;
+    }
+     #main-nav ul#main-nav-list li a {
+        font-size: 1.6rem;
+    }
+     #main-nav ul#main-nav-list li ul.submenu li a {
+        font-size: 1.1rem;
+    }
+}
+
+/* Класс для блокировки скролла фона */
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+/* ============================================ */
+/* Конец стилей для бургер-меню                */
+/* ============================================ */
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    main { padding: 20px; margin: 20px 10px; border-left: none; border-right: none; border-radius: 0; }
+    h1 { font-size: 2em; } h2 { font-size: 1.6em; } h3 { font-size: 1.3em; }
+    #theme-toggle { padding: 6px 10px; font-size: 0.9em; }
+    #scroll-top { width: 35px; height: 35px; font-size: 1.3em; line-height: 35px; }
+    .gallery-item { flex-basis: calc((100% - 16px) / 2); }
+    .gallery { padding: 15px; gap: 10px; }
+}
+
+@media (max-width: 600px) {
+  /* Убрали дублирующиеся стили для nav, они уже в секции бургер-меню */
+  main { padding: 15px 5px; margin: 15px 5px; }
+  #theme-toggle { top: 15px; right: 65px; } /* Скорректировано */
+  .menu-toggle-btn { right: 15px; top: 15px; } /* Позиция бургер-кнопки */
+  h1 { font-size: 1.5em; } /* Уменьшено для лого */
+  h2 { font-size: 1.4em; } h3 { font-size: 1.2em; }
+  .code-block { margin-bottom: 1em; }
+  .code-block button, button.run-code, button.run-code-editor { font-size: 0.8em; padding: 4px 8px; }
   .gallery-item { flex-basis: 100%; }
   .gallery { padding: 10px; gap: 10px; }
 }
