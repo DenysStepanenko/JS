@@ -14,8 +14,8 @@
     --glow-green: rgba(57, 255, 20, 0.6);
     --glow-cyan: rgba(0, 255, 255, 0.4);
     --glow-magenta: rgba(255, 0, 255, 0.5);
-    --bg-panel-trans: rgba(22, 27, 34, 0.5); /* Исправлено для прозрачности */
-    --bg-main-trans: rgba(13, 17, 23, 0.5); /* Исправлено для прозрачности */
+    --bg-panel-trans: rgba(22, 27, 34, 0.1);
+    --bg-main-trans: rgba(13, 17, 23, 0.1);
     --anim-grad-green-start: var(--accent-green);
     --anim-grad-green-end: rgba(57, 255, 20, 0);
 }
@@ -35,8 +35,8 @@ body.light-theme {
     --glow-green: rgba(47, 173, 16, 0.4);
     --glow-cyan: rgba(0, 160, 160, 0.2);
     --glow-magenta: rgba(221, 0, 221, 0.3);
-    --bg-panel-trans: rgba(255, 255, 255, 0.5);
-    --bg-main-trans: rgba(240, 242, 245, 0.5);
+    --bg-panel-trans: rgba(255, 255, 255, 0.1);
+    --bg-main-trans: rgba(240, 242, 245, 0.1);
     --anim-grad-green-start: var(--accent-green);
     --anim-grad-green-end: rgba(47, 173, 16, 0);
 }
@@ -52,6 +52,7 @@ body {
     background-color: var(--bg-main);
     color: var(--text-main);
     transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 200vh; /* Убедимся, что страница прокручивается */
 }
 
 /* Псевдоэлемент для фонового изображения */
@@ -63,13 +64,13 @@ body::before {
     right: 0;
     bottom: 0;
     z-index: -1;
-    background-image: url('../img/file_000000000bb061f6b3f6e83937abd5c3%20(1).png');
+    background-image: url('../img/cyberpunk_cat_background_web_friendly.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgba(13, 17, 23, 0.5);
-    background-blend-mode: multiply;
+    background-color: rgba(13, 17, 23, 0.3);
+    background-blend-mode: overlay;
 }
 
 body.light-theme::before {
@@ -121,6 +122,7 @@ body.light-theme header {
     transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     font-weight: 600;
 }
+
 #theme-toggle:hover {
     background: var(--accent-magenta);
     color: var(--text-main);
@@ -411,15 +413,18 @@ footer {
 }
 
 /* Анимация появления секций */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+section.fade-in {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
+    visibility: hidden !important;
+    will-change: opacity, transform;
 }
 
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+section.fade-in.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
 }
 
 /* Таблицы */
@@ -544,7 +549,7 @@ pre code.diagram {
 
 /* Модальное окно */
 .basicLightbox {
-    background: rgba(13, 17, 23, 0.5);
+    background: rgba(13, 17, 23, 0.3);
     position: fixed;
     top: 0;
     left: 0;
@@ -680,3 +685,13 @@ pre code.diagram {
 .todo-item button:hover {
     background-color: #d32f2f;
 }
+
+/* Дополнительные стили для подсветки Prism.js */
+.token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955; }
+.token.punctuation { color: var(--accent-cyan); }
+.token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { color: var(--accent-magenta); }
+.token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { color: var(--accent-green); }
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { color: var(--accent-cyan); background: none; }
+.token.atrule, .token.attr-value, .token.keyword { color: var(--accent-blue); }
+.token.function, .token.class-name { color: #ffc66d; }
+.token.regex, .token.important, .token.variable { color: #ffc66d; }
