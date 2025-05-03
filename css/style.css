@@ -81,10 +81,11 @@ body::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url('../img/cyberpunk_cat_background_web_friendly.jpg'); /* Проверь путь! */
+  background-image: url('../img/cyberpunk_cat_background_web_friendly.png'); /* Проверь путь! */
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
+  background-size:cover;
   background-attachment: fixed;
   background-color: rgba(13, 17, 23, 0.85); /* Настрой прозрачность оверлея */
   background-blend-mode: multiply;
