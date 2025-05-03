@@ -43,7 +43,7 @@
   </header>
 
   <main class="container">
-    <section class="fade-in visible">
+    <section class="scroll-reveal visible">
       <h2>ООП и классы в JavaScript</h2>
       <p>Этот урок охватывает ключевые концепции <strong>объектно-ориентированного программирования (ООП)</strong> в
         JavaScript, реализованные с помощью синтаксиса <strong>классов</strong> (введенного в ES6/2015). Классы — это,
@@ -62,7 +62,7 @@
       </ul>
     </section>
 
-    <section id="введение-в-классы" class="fade-in visible">
+    <section id="введение-в-классы" class="scroll-reveal visible">
       <h3>1. Введение в классы</h3>
       <p><strong>Класс</strong> — это как чертеж или шаблон для создания объектов. Он описывает, какие свойства (данные)
         и методы (функции для работы с данными) будут у объектов, созданных по этому чертежу.</p>
@@ -117,7 +117,7 @@ poly.sayHello(); // Привет, я Poly, мне 30 лет!
       </div>
     </section>
 
-    <section id="конструктор-и-объект-параметров" class="fade-in visible">
+    <section id="конструктор-и-объект-параметров" class="scroll-reveal visible">
       <h3>2. Конструктор и объект параметров</h3>
       <p>Метод <code>constructor</code> — это сердце инициализации объекта. Он вызывается оператором <code>new</code> и
         отвечает за создание свойств экземпляра.</p>
@@ -167,7 +167,7 @@ console.log("   Созданный объект car2:", car2);
       </div>
     </section>
 
-    <section id="методы-класса-и-прототипы" class="fade-in visible">
+    <section id="методы-класса-и-прототипы" class="scroll-reveal visible">
       <h3>3. Методы класса и прототипы</h3>
       <p>Методы, объявленные внутри класса (как <code>getPrice</code> и <code>changePrice</code> в примере),
         автоматически добавляются не в каждый экземпляр объекта, а в специальный объект — <strong>прототип</strong>
@@ -229,7 +229,7 @@ console.log("Результат car.getPrice() после изменения:", 
       </div>
     </section>
 
-    <section id="приватные-свойства-и-методы" class="fade-in visible">
+    <section id="приватные-свойства-и-методы" class="scroll-reveal visible">
       <h3>4. Приватные свойства и методы</h3>
       <p>Иногда нужно скрыть детали реализации класса от внешнего мира (<strong>инкапсуляция</strong>). Для этого в
         современном JavaScript используются <strong>приватные свойства и методы</strong>.</p>
@@ -318,7 +318,7 @@ try {
       </div>
     </section>
 
-    <section id="геттеры-и-сеттеры-классы" class="fade-in visible">
+    <section id="геттеры-и-сеттеры-классы" class="scroll-reveal visible">
       <h3>5. Геттеры и сеттеры в классах</h3>
       <p>Геттеры и сеттеры в классах работают так же, как и в литеральных объектах. Они позволяют определить методы,
         которые вызываются при чтении (<code>get</code>) или записи (<code>set</code>) свойства, но выглядят при
@@ -417,7 +417,7 @@ console.log("Чтение car.brand:", car.brand); // Вызывается get b
       </div>
     </section>
 
-    <section id="статические-свойства-и-методы" class="fade-in visible">
+    <section id="статические-свойства-и-методы" class="scroll-reveal visible">
       <h3>6. Статические свойства и методы</h3>
       <p><strong>Статические</strong> свойства и методы принадлежат <strong>самому классу</strong>, а не его
         экземплярам. Они вызываются напрямую у класса (<code>ИмяКласса.свойство</code>, <code>ИмяКласса.метод()</code>),
@@ -521,7 +521,7 @@ console.log("Цена после попытки установки 55000:", car.
       </div>
     </section>
 
-    <section id="наследование-классов" class="fade-in visible">
+    <section id="наследование-классов" class="scroll-reveal visible">
       <h3>7. Наследование классов</h3>
       <p><strong>Наследование</strong> — это механизм ООП, который позволяет одному классу (<strong>дочернему</strong>
         или подклассу) перенимать свойства и методы другого класса (<strong>родительского</strong> или суперкласса).</p>
@@ -661,7 +661,7 @@ console.log("Чтение mango.email после установки:", mango.ema
       </div>
     </section>
 
-    <section id="контекст-this-повторение" class="fade-in visible">
+    <section id="контекст-this-повторение" class="scroll-reveal visible">
       <h3>8. Контекст <code>this</code> (Повторение)</h3>
       <p>Понимание контекста <code>this</code> критически важно при работе с объектами и классами. Напомним:</p>
       <ul>
@@ -741,7 +741,7 @@ console.log(boundOrder("Big Mike")); // Работает!
       </div>
     </section>
 
-    <section id="прототипы-повторение" class="fade-in visible">
+    <section id="прототипы-повторение" class="scroll-reveal visible">
       <h3>9. Прототипы (Повторение)</h3>
       <p>Классы в JavaScript — это синтаксис, построенный поверх <strong>прототипного наследования</strong>. Каждый
         объект имеет скрытое свойство <code>[[Prototype]]</code> (доступное через
@@ -812,7 +812,7 @@ console.log("   child.isPrototypeOf(parent):", child.isPrototypeOf(parent)); // 
       </div>
     </section>
 
-    <section id="ооп-основы-пример" class="fade-in visible">
+    <section id="ооп-основы-пример" class="scroll-reveal visible">
       <h3>10. ООП: Основы (Практический пример)</h3>
       <p>Давайте соберем некоторые концепции вместе на примере класса <code>Car</code>, который моделирует автомобиль с
         базовыми действиями.</p>

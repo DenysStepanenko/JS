@@ -53,7 +53,7 @@
             "Output", так как они создают элементы в памяти. Однако, если элемент добавляется в `document.body` (как в
             примерах "Создание/удаление" и "События"), он временно появится на самой странице ниже.</p>
 
-        <section id="поиск-dom-элементов" class="fade-in visible">
+        <section id="поиск-dom-элементов" class="scroll-reveal visible">
             <h3>1. Поиск DOM-элементов</h3>
             <p>Чтобы взаимодействовать с элементом на странице, его сначала нужно найти. Основные методы поиска:</p>
             <ul>
@@ -133,7 +133,7 @@ if (mainElement) {
             </div>
         </section>
 
-        <section id="навигация-по-dom" class="fade-in visible">
+        <section id="навигация-по-dom" class="scroll-reveal visible">
             <h3>2. Навигация по DOM</h3>
             <p>После того как элемент найден, можно перемещаться от него к другим элементам по дереву DOM, используя
                 специальные свойства:</p>
@@ -212,7 +212,7 @@ console.log("Следующий соседний элемент для li2 (li2.
             </div>
         </section>
 
-        <section id="свойства-dom-элемента" class="fade-in visible">
+        <section id="свойства-dom-элемента" class="scroll-reveal visible">
             <h3>3. Свойства DOM-элемента</h3>
             <p>После нахождения элемента можно читать или изменять его содержимое, стили и атрибуты:</p>
             <ul>
@@ -318,7 +318,7 @@ console.log("   HTML после removeAttribute:", div.outerHTML);
             </div>
         </section>
 
-        <section id="css-классы" class="fade-in visible">
+        <section id="css-классы" class="scroll-reveal visible">
             <h3>4. CSS-классы на DOM-элементах</h3>
             <p>Управлять CSS-классами элемента удобнее всего через свойство <code>element.classList</code>. Оно
                 предоставляет методы:</p>
@@ -399,7 +399,7 @@ console.log("   Классы после замены:", box.className); // "impo
             </div>
         </section>
 
-        <section id="создание-и-удаление" class="fade-in visible">
+        <section id="создание-и-удаление" class="scroll-reveal visible">
             <h3>5. Создание и удаление DOM-элементов</h3>
             <p>Методы для динамического создания HTML-элементов, их добавления на страницу и удаления:</p>
             <ul>
@@ -498,7 +498,7 @@ setTimeout(() => {
             </div>
         </section>
 
-        <section id="события" class="fade-in visible">
+        <section id="события" class="scroll-reveal visible">
             <h3>6. События</h3>
             <p>События позволяют JavaScript реагировать на действия пользователя (клики, нажатия клавиш, отправка формы)
                 или на события браузера (загрузка страницы, изменение размера окна).</p>
@@ -652,7 +652,7 @@ setTimeout(() => {
             </div>
         </section>
 
-        <section id="интерактивный-пример-todo" class="fade-in visible">
+        <section id="интерактивный-пример-todo" class="scroll-reveal visible">
             <h3>Интерактивный пример: TODO-список</h3>
             <p>Этот пример объединяет многие из рассмотренных концепций DOM: поиск элементов, создание элементов,
                 добавление/удаление классов и обработку событий (отправка формы, клики).</p>

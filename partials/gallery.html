@@ -54,7 +54,7 @@
             <code>basicLightbox</code>.
         </p>
 
-        <section id="gallery-html-markup" class="fade-in visible">
+        <section id="gallery-html-markup" class="scroll-reveal visible">
             <h3>1. HTML-разметка для галереи</h3>
             <p>Сначала нам нужен контейнер в HTML, куда JavaScript будет добавлять элементы галереи. Создадим
                 невпорядкований список <code>&lt;ul&gt;</code> с классом <code>gallery</code>.</p>
@@ -63,7 +63,7 @@
             <p>Пока этот список пуст. Мы наполним его с помощью JavaScript на следующих шагах.</p>
         </section>
 
-        <section id="gallery-image-data" class="fade-in visible">
+        <section id="gallery-image-data" class="scroll-reveal visible">
             <h3>2. Массив изображений (Киберпанк-тематика)</h3>
             <p>Для создания галереи нам нужны данные. Создадим в JavaScript массив объектов. Каждый объект будет
                 представлять одно изображение и содержать:</p>
@@ -97,7 +97,7 @@ const images = [
             </div>
         </section>
 
-        <section id="gallery-markup-creation" class="fade-in visible">
+        <section id="gallery-markup-creation" class="scroll-reveal visible">
             <h3>3. Создание разметки элементов галереи</h3>
             <p>Теперь, имея данные и контейнер, мы можем динамически создать HTML-разметку для каждого элемента галереи
                 и вставить ее на страницу.</p>
@@ -145,7 +145,7 @@ if (galleryContainer) {
             </p>
         </section>
 
-        <section id="gallery-styling" class="fade-in visible">
+        <section id="gallery-styling" class="scroll-reveal visible">
             <h3>4. Стилизация галереи</h3>
             <p>Добавим CSS-стили для отображения галереи в виде сетки. Эти стили можно добавить в
                 <code>&lt;style&gt;</code> или в файл <code>../css/style.css</code>.
@@ -216,7 +216,7 @@ body.light-theme .gallery-item {
             </div>
         </section>
 
-        <section id="gallery-event-delegation" class="fade-in visible">
+        <section id="gallery-event-delegation" class="scroll-reveal visible">
             <h3>5. Делегирование событий для кликов</h3>
             <p>Используем делегирование событий на контейнере <code>.gallery</code> для отслеживания кликов по
                 изображениям.</p>
@@ -263,7 +263,7 @@ if (galleryDelegateContainer) {
             </div>
         </section>
 
-        <section id="gallery-basiclightbox" class="fade-in visible">
+        <section id="gallery-basiclightbox" class="scroll-reveal visible">
             <h3>6. Подключение и использование basicLightbox</h3>
             <p>Подключаем библиотеку <code>basicLightbox</code> и обновляем обработчик кликов для открытия модального
                 окна с полноразмерным изображением и возможностью закрытия по Escape.</p>
