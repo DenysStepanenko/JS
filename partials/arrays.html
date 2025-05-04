@@ -20,14 +20,32 @@
     <div id="progress-bar"></div>
 
     <header>
-        <div class="container">
-            <button id="theme-toggle">Светлая тема</button>
-            <h1>JavaScript: Полное руководство для изучения</h1>
-            <nav>
-                <ul>
+        <div class="container header-container">
+            {/* ССЫЛКА НА ЛОГО - на уровень выше */}
+            <a href="../index.html" class="logo">
+                <h1>JavaScript: Руководство</h1>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню" aria-expanded="false">
+                ☰ {/* Символ бургера */}
+            </button>
+
+            {/* НАВИГАЦИЯ (ПУТИ СКОРРЕКТИРОВАНЫ ДЛЯ partials/) */}
+            <nav id="main-nav">
+                <button id="menu-close" class="menu-close-btn" aria-label="Закрыть меню">
+                    &times; {/* Символ крестика */}
+                </button>
+                <ul id="main-nav-list">
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
-                    <li><a href="basics.html">Основы и Деструктуризация</a></li>
+                    <li>
+                        <a href="basics.html">Основы и Деструктуризация</a>
+                        <ul class="submenu">
+                            <li><a href="basics.html#деструктуризация-объектов">Деструктуризация</a></li>
+                            <li><a href="basics.html#переменные">Переменные</a></li>
+                            <li><a href="basics.html#операторы">Операторы</a></li>
+                        </ul>
+                    </li>
                     <li><a href="arrays.html" class="active animate-neon-fill">Массивы</a></li>
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
@@ -40,6 +58,7 @@
                     <li><a href="gallery.html">Галерея(пример)</a></li>
                 </ul>
             </nav>
+            <button id="theme-toggle">Светлая тема</button>
         </div>
     </header>
 

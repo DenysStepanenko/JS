@@ -4,46 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <meta name="description"
+        content="Полное руководство по изучению JavaScript  c нуля: основы, массивы, функции, циклы, объекты, ООП, упражнения и проекты.">
+    <meta name="keywords"
+        content="JavaScript, учебник, руководство, основы, массивы, функции, циклы, объекты, ООП, упражнения, проекты, обучение, программирование">
+    <meta name="author" content="Ваше Имя или Ник">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Добавьте свой favicon.ico -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+        integrity="sha512-rz9zzlK5wN/vC/r2R7kK3XqW9xT320Pz30g3/72W8g3w5d5m5s2y30v3w20/4k0f20l80z8l8e30d30l8e"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+    <!-- Подключение основного файла стилей. Проверь путь! -->
     <link rel="stylesheet" href="./css/style.css" />
-    <title>JavaScript: Полное руководство для изучения</title>
+
+    <title>JavaScript: Руководство</title>
 </head>
 
 <body>
     <div id="progress-bar"></div>
 
     <header>
-        <div class="container header-container">
-            <a href="index.html" class="logo">
+        <div class="header-container">
+            <div class="logo"></div>
+            <a href="index.html">
                 <h1>JavaScript: Руководство</h1>
             </a>
 
+            <button id="theme-toggle" aria-label="Переключить тему">
+                Светлая тема
+            </button>
+
+            <!-- Кнопка бургер-меню (появляется на мобильных по CSS) -->
             <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню" aria-expanded="false">
                 ☰
             </button>
 
+            <!-- Основная навигация -->
             <nav id="main-nav">
+                <!-- Кнопка закрытия меню (появляется в модальном окне по CSS) -->
                 <button id="menu-close" class="menu-close-btn" aria-label="Закрыть меню">
-                    &times;
+                    ×
                 </button>
+                <!-- Убедитесь, что этот UL имеет ID -->
                 <ul id="main-nav-list">
                     <li><a href="index.html" class="active animate-neon-fill">Главная</a></li>
                     <li><a href="partials/learning_guide.html">Гайд по обучению</a></li>
-                    <li>
+                    <!-- Добавлен класс "has-submenu" -->
+                    <li class="has-submenu">
                         <a href="partials/basics.html">Основы и Деструктуризация</a>
                         <ul class="submenu">
                             <li><a href="partials/basics.html#деструктуризация-объектов">Деструктуризация</a></li>
                             <li><a href="partials/basics.html#переменные">Переменные</a></li>
                             <li><a href="partials/basics.html#операторы">Операторы</a></li>
                         </ul>
-                    </li>
+
                     <li><a href="partials/arrays.html">Массивы</a></li>
                     <li><a href="partials/functions.html">Функции</a></li>
                     <li><a href="partials/loops.html">Циклы</a></li>
@@ -53,14 +73,18 @@
                     <li><a href="partials/projects.html">Проекты</a></li>
                     <li><a href="partials/resources.html">Ресурсы</a></li>
                     <li><a href="partials/dom_summary.html">Памятка по DOM</a></li>
-                    <li><a href="partials/gallery.html">Галерея(пример)</a></li>
+                    <li><a href="partials/gallery.html">Галерея (пример)</a></li>
                 </ul>
             </nav>
-            <button id="theme-toggle">Светлая тема</button>
         </div>
     </header>
 
     <main class="container">
+        <!-- ============================================ -->
+        <!-- ВАШ КОНТЕНТ И БЛОКИ КОДА -->
+        <!-- Убедитесь, что этот контент присутствует здесь -->
+        <!-- ============================================ -->
+
         <h2 id="введение">Добро пожаловать в руководство по JavaScript!</h2>
         <p>Это руководство создано для того, чтобы помочь вам освоить JavaScript с нуля. Здесь вы найдете
             структурированный подход к обучению, начиная с основ и заканчивая созданием собственных проектов.</p>
@@ -97,6 +121,7 @@
                 </li>
                 <li>Ознакомьтесь с <a href="partials/dom_summary.html">памяткой по DOM</a>, чтобы закрепить работу с
                     DOM.</li>
+                <li>Посмотрите <a href="partials/gallery.html">пример галереи</a>.</li>
             </ol>
         </section>
 
@@ -115,16 +140,27 @@
 
         <section id="интерактивный-пример" class="scroll-reveal">
             <h3>Интерактивный пример: Случайный выбор ресурса</h3>
-            <p>Ниже приведен пример кода, который выбирает случайный ресурс из списка выше, чтобы вы могли попробовать
-                его прямо сейчас.</p>
+            <!-- ============================================ -->
+            <!-- !!!!!!!!!!!! БЛОК КОДА ПРИМЕРА !!!!!!!!!!!! -->
+            <!-- Убедитесь, что этот блок присутствует и содержит <pre><code> и .button-group/.output -->
+            <!-- ============================================ -->
             <div class="code-block">
-                <pre><code class="language-javascript">console.log("===== Случайный выбор ресурса для изучения =====");
+                <pre><code class="language-javascript">// Этот код выберет случайный ресурс из предопределенного списка.
+console.log("===== Случайный выбор ресурса для изучения =====");
 
 // Список ресурсов
 const resources = [
     { name: "MDN Web Docs", url: "https://developer.mozilla.org/ru/docs/Web/JavaScript" },
     { name: "Современный учебник JavaScript", url: "https://learn.javascript.ru/" },
-    // ... (остальные ресурсы)
+    { name: "The Modern JavaScript Tutorial", url: "https://javascript.info/" },
+    { name: "W3Schools JavaScript Tutorial", url: "https://www.w3schools.com/js/" },
+    { name: "Coursera", url: "https://www.coursera.org/" },
+    { name: "Udemy", url: "https://www.udemy.com/" },
+    { name: "Codecademy", url: "https://www.codecademy.com/" },
+    { name: "freeCodeCamp", url: "https://www.freecodecamp.org/" },
+    { name: "Codewars", url: "https://www.codewars.com/" },
+    { name: "LeetCode", url: "https://leetcode.com/" },
+    { name: "HackerRank", url: "https://www.hackerrank.com/" },
     { name: "Stack Overflow", url: "https://stackoverflow.com/questions/tagged/javascript" }
 ];
 
@@ -138,36 +174,53 @@ function getRandomResource() {
 
 // Демонстрация работы
 getRandomResource();</code></pre>
-                <button class="run-code">Запустить пример</button>
-                <button class="copy-code">Скопировать</button>
-                <button class="toggle-code">Скрыть код</button>
+                <div class="button-group">
+                    <button class="run-code" data-example="random-resource">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
                 <div class="output"></div>
             </div>
+            <!-- ============================================ -->
+            <!-- !!!!!!! КОНЕЦ БЛОКА КОДА ПРИМЕРА !!!!!!!!! -->
+            <!-- ============================================ -->
         </section>
 
         <div class="navigation-buttons">
+            <!-- Пример кнопки-ссылки со стилем кнопки -->
             <a href="partials/learning_guide.html" class="button">Гайд по обучению →</a>
         </div>
+
     </main>
 
     <footer>
         <div class="container">
-            <p>© 2025 JavaScript: Полное руководство для изучения</p>
+            <p>© 2025 JavaScript: Полное руководство для изучения. Все права защищены.</p>
         </div>
     </footer>
 
-    <button id="scroll-top" style="display: none;">↑</button>
+    <button id="scroll-top" aria-label="Прокрутить наверх" style="display: none;">↑</button>
 
-    <script src="./js/index.js" defer></script> {/* Если есть специфичный JS для index.html */}
-    <script src="../js/mobile-menu.js" defer></script>
-    <script src="../main.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            Prism.highlightAll();
-        });
-    </script>
-</body>
+    <!-- Скрипты для подсветки кода Prism -->
+    <!-- Подключаем core и autoloader, чтобы языки загружались динамически -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"
+        defer></script>
+
+    <!-- Подключение основного скрипта main.js. Проверь путь! -->
+    <script src="main.js" defer></script>
+
+    <!-- !!! ВАЖНО !!! Убедитесь, что вы УДАЛИЛИ или ЗАКОММЕНТИРОВАЛИ строки,
+         которые подключают отдельные JS-файлы с логикой выполнения примеров,
+         если эта логика перенесена в main.js.
+         Например, УДАЛИТЕ или ЗАКОММЕНТИРУЙТЕ СТРОКИ типа:
+         <script src="../js/01_basics.js" defer></script>
+         <script src="../js/02_arrays.js" defer></script>
+         ... и так далее для всех подобных файлов ...
+         ОСТАВЬТЕ только main.js и, возможно, js/learning_guide.js, если там есть уникальная логика демо
+         (но судя по файлам из вашего последнего запроса, большинство JS-логики там тоже дублируется).
+         -->
+
+    </<body>
 
 </html>

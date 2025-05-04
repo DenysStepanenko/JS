@@ -20,11 +20,28 @@
     <div id="progress-bar"></div>
 
     <header>
-        <div class="container">
-            <button id="theme-toggle">Светлая тема</button>
-            <h1>JavaScript: Полное руководство для изучения</h1>
-            <nav>
-                <ul>
+        <div class="header-container">
+            <div class="logo"></div>
+            <a href="index.html">
+                <h1>JavaScript: Полное руководство для изучения</h1>
+            </a>
+
+            <button id="theme-toggle" aria-label="Переключить тему">
+                Светлая тема
+            </button>
+            <!-- Кнопка бургер-меню (появляется на мобильных по CSS) -->
+            <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню" aria-expanded="false">
+                ☰
+            </button>
+
+            <!-- Основная навигация -->
+            <nav id="main-nav">
+                <!-- Кнопка закрытия меню (появляется в модальном окне по CSS) -->
+                <button id="menu-close" class="menu-close-btn" aria-label="Закрыть меню">
+                    ×
+                </button>
+                <!-- Убедитесь, что этот UL имеет ID -->
+                <ul id="main-nav-list">
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html">Гайд по обучению</a></li>
                     <li><a href="basics.html">Основы и Деструктуризация</a></li>
