@@ -127,7 +127,7 @@ body::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url('../img/cyberpunk_cat_background_web_friendly.jpg');
+  background-image: url('../img/cyberpunk_cat_background_web_friendly.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -180,6 +180,7 @@ body.light-theme header {
   -webkit-backdrop-filter: blur(3px);
 }
 
+/* Эффект при прокрутке */
 header.header-scrolled {
   opacity: 0.95;
   transform: translateY(0);
@@ -188,6 +189,11 @@ header.header-scrolled {
 
 body.light-theme header.header-scrolled {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Скрытие шапки при скролле вниз */
+header.header-hidden {
+  transform: translateY(-100%);
 }
 
 /* Контейнер внутри шапки */
@@ -458,7 +464,7 @@ header.header-scrolled #main-nav ul#main-nav-list li a:hover {
   display: none;
   position: absolute;
   top: 20px;
-  right: 25px;
+  left: 25px;
   background: transparent;
   border: none;
   color: var(--accent-magenta);
@@ -640,7 +646,7 @@ pre code.diagram { background: none !important; border: none !important; padding
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--nav-mobile-bg);
+    background-color: rgba(13, 17, 23, 0.85); /* Прозрачная пелена */
     z-index: 1001;
     display: flex;
     justify-content: center;
@@ -655,7 +661,6 @@ pre code.diagram { background: none !important; border: none !important; padding
   #main-nav.is-open {
     transform: translateX(0);
   }
-
   #main-nav #menu-close {
     display: block;
   }
