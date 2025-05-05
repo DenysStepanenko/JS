@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Изучение JavaScript: JSON, Веб-хранилище (localStorage, sessionStorage), Инструменты (Node.js, npm, Vite), Модули (ESM).">
+    <meta name="keywords"
+        content="JavaScript, JSON, localStorage, sessionStorage, Node.js, npm, Vite, ESM, модули, веб-хранилище, инструменты разработки, обучение, программирование">
+    <meta name="author" content="Твое Имя или Ник">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Модуль: JSON, Хранилище, Инструменты, Модули - Руководство по JavaScript</title>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo"></div>
+            <a href="../index.html">
+                <h1>JavaScript</h1>
+            </a>
+
+            <button id="theme-toggle" aria-label="Переключить тему">
+                Светлая тема
+            </button>
+            <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню" aria-expanded="false">
+                ☰
+            </button>
+
+            <nav id="main-nav">
+                <button id="menu-close" class="menu-close-btn" aria-label="Закрыть меню">
+                    ×
+                </button>
+                <ul id="main-nav-list">
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="learning_guide.html">Гайд по обучению</a></li>
+                    <li class="has-submenu"> <a href="basics.html">Основы и Деструктуризация</a>
+                        <ul class="submenu">
+                            <li><a href="basics.html#деструктуризация-объектов">Деструктуризация</a></li>
+                            <li><a href="basics.html#переменные">Переменные</a></li>
+                            <li><a href="basics.html#операторы">Операторы</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="arrays.html">Массивы</a></li>
+                    <li><a href="functions.html">Функции</a></li>
+                    <li><a href="loops.html">Циклы</a></li>
+                    <li><a href="objects.html">Объекты</a></li>
+                    <li><a href="oop-classes.html">ООП и классы</a></li>
+                    <li><a href="module4_page.html" class="active animate-neon-fill">JSON, Хранилище, Инструменты,
+                            Модули</a></li>
+                    <li><a href="exercises.html">Упражнения</a></li>
+                    <li><a href="projects.html">Проекты</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
+                    <li><a href="gallery.html">Галерея(пример)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <h2 id="module-title">Модуль: JSON, Веб-хранилище, Инструменты, Модули</h2>
+        <p>Этот раздел объединяет материалы по четырем важным темам современной веб-разработки: формат данных JSON,
+            механизмы хранения данных в браузере, инструменты автоматизации и модульная система JavaScript.</p>
+
+        <section id="json-intro" class="scroll-reveal">
+            <h3>1. Формат JSON: Что это и зачем нужно?</h3>
+            <p>Представь, что тебе нужно передать информацию о каком-то объекте (например, о пользователе, товаре или
+                настройках) между разными частями программы или даже между разными компьютерами через интернет. Как это
+                сделать так, чтобы и отправитель, и получатель одинаково поняли структуру данных?</p>
+            <p>Для этого и придумали <strong>JSON (JavaScript Object Notation)</strong>. Это текстовый формат для
+                хранения и обмена структурированными данными. Несмотря на название (JavaScript Object Notation), JSON
+                используется не только в JavaScript, но и во многих других языках программирования. Он стал стандартом
+                для передачи данных между веб-сервером (где хранятся данные) и веб-браузером (что ты видишь на сайте).
+            </p>
+
+            <h4>Как выглядит JSON?</h4>
+            <p>JSON очень похож на объекты в JavaScript, но это <strong>не объект</strong>, а <strong>строка</strong>,
+                которая описывает данные. Вот пример JSON:</p>
+            <div class="code-block">
+                <pre><code class="language-json">{
+  "name": "Josh",
+  "weight": 175,
+  "age": 30,
+  "eyecolor": "brown",
+  "isHappy": true,
+  "cars": ["Chevy", "Honda"],
+  "favoriteBook": {
+    "title": "The Last Kingdom",
+    "author": "Bernard Cornwell",
+    "rating": 8.38
+  }
+}</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+
+            <h4>Основные правила синтаксиса JSON:</h4>
+            <ul>
+                <li><strong>Ключи (имена свойств):</strong> Всегда строки и всегда в <strong>двойных кавычках</strong>
+                    (`"`). Например, `"name"`, `"age"`.</li>
+                <li><strong>Строковые значения:</strong> Тоже всегда в <strong>двойных кавычках</strong> (`"`).
+                    Например, `"Josh"`, `"brown"`. Одинарные кавычки (`'`) или обратные кавычки (`` ` ``) <strong>не
+                        допускаются</strong>.</li>
+                <li><strong>Числа:</strong> Могут быть целыми (`30`) или дробными (`8.38`, с точкой в качестве
+                    разделителя). Кавычки для чисел не нужны.</li>
+                <li><strong>Логические значения (булевы):</strong> `true` и `false` (без кавычек).</li>
+                <li><strong>Массивы (списки):</strong> Заключаются в квадратные скобки `[]`. Элементы разделяются
+                    запятыми. Например, `["Chevy", "Honda"]`.</li>
+                <li><strong>Объекты (словари):</strong> Заключаются в фигурные скобки `{}`. Состоят из пар "ключ:
+                    значение", разделенных запятыми. Например, `{"title": "The Last Kingdom", "author": "Bernard
+                    Cornwell"}`.</li>
+                <li><strong>Значение `null`:** Означает "ничего" или "отсутствие значения" (без кавычек).</li>
+                <li><strong>Запятые:</strong> Используются для разделения элементов в массивах и пар ключ-значение в
+                    объектах. <strong>Важно:</strong> После последнего элемента в массиве или последней пары в объекте
+                    запятая <strong>не ставится</strong>.</li>
+                <li><strong>Что НЕЛЬЗЯ хранить в JSON:</strong>
+                    <ul>
+                        <li>Функции (методы). JSON предназначен только для данных.</li>
+                        <li>Значение `undefined`. Используйте `null`, если нужно показать отсутствие значения.</li>
+                        <li>Комментарии.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Ключевое отличие от объектов JavaScript:</strong> В JSON ключи и строки <em>всегда</em> в двойных
+                кавычках, и нет "висячих" запятых в конце списков или объектов.</p>
+        </section>
+
+        <section id="json-conversion" class="scroll-reveal">
+            <h4>Преобразование данных: JavaScript &lt;-&gt; JSON</h4>
+            <p>JavaScript предоставляет встроенные инструменты для работы с JSON.</p>
+
+            <h5>1. Превращаем JavaScript в JSON: <code>JSON.stringify()</code></h5>
+            <p>Метод <code>JSON.stringify(value)</code> берет значение JavaScript (объект, массив, число, строку,
+                `true`, `false`, `null`) и превращает его в строку формата JSON.</p>
+            <p><strong>Зачем это нужно?</strong> Чтобы сохранить данные (например, в памяти браузера) или отправить их
+                по сети.</p>
+
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== JSON.stringify() с объектом =====
+console.log("===== Пример JSON.stringify() с объектом =====");
+
+// Создаем обычный JavaScript объект
+const dog = {
+  name: "Mango", // Свойство name со строковым значением "Mango"
+  age: 3,        // Свойство age с числовым значением 3
+  isGoodBoy: true // Свойство isGoodBoy с логическим значением true
+};
+console.log("Исходный объект:", dog);
+
+// Превращаем объект dog в строку JSON
+// Все ключи ("name", "age", "isGoodBoy") и строковые значения ("Mango") будут в двойных кавычках
+// Числа (3) и булевы значения (true) останутся без кавычек
+const jsonString = JSON.stringify(dog);
+
+// Выводим полученную JSON-строку в консоль
+console.log("Результат JSON.stringify():", jsonString);
+// Тип переменной jsonString - это строка
+console.log("Тип результата:", typeof jsonString);</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="json-stringify-object">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+
+            <p><strong>Примеры с другими типами:</strong></p>
+            <ul>
+                <li><code>JSON.stringify(32)</code> вернет строку <code>"32"</code></li>
+                <li><code>JSON.stringify(true)</code> вернет строку <code>"true"</code></li>
+                <li><code>JSON.stringify(null)</code> вернет строку <code>"null"</code></li>
+                <li><code>JSON.stringify("hello")</code> вернет строку <code>"\"hello\""</code> (с экранированными
+                    кавычками)</li>
+                <li><code>JSON.stringify([1, "два", false])</code> вернет строку <code>"[1,\"два\",false]"</code></li>
+            </ul>
+
+            <p><strong>Что происходит с функциями (методами)?</strong> Если в объекте JavaScript есть методы (функции),
+                <code>JSON.stringify()</code> их просто <strong>проигнорирует</strong>. Они не попадут в итоговую
+                JSON-строку. Также нельзя напрямую превратить функцию в JSON – результатом будет `undefined`.
+            </p>
+
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== JSON.stringify() с методами и функциями =====
+console.log("\n===== Пример JSON.stringify() с методами =====");
+
+// Объект с данными и методом (функцией)
+const dogWithMethod = {
+  name: "Mango",
+  age: 3,
+  isGoodBoy: true,
+  // Это метод объекта (функция внутри объекта)
+  bark() {
+    console.log("Woof!"); // Этот метод будет проигнорирован
+  },
+};
+console.log("Объект с методом:", dogWithMethod);
+
+// Превращаем объект в JSON. Метод bark() будет проигнорирован.
+const jsonStringWithMethod = JSON.stringify(dogWithMethod);
+console.log("Результат JSON.stringify():", jsonStringWithMethod);
+
+// Пытаемся превратить саму функцию в JSON
+console.log("\n===== Попытка JSON.stringify() с функцией =====");
+const myFunc = () => console.log("Это не сработает");
+console.log("Исходная функция:", myFunc);
+const jsonFromFunction = JSON.stringify(myFunc);
+console.log("Результат JSON.stringify(функция):", jsonFromFunction); // undefined</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="json-stringify-methods">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+
+            <h5>2. Превращаем JSON обратно в JavaScript: <code>JSON.parse()</code></h5>
+            <p>Метод <code>JSON.parse(jsonString)</code> делает обратное: берет строку в формате JSON и превращает ее
+                обратно в полноценное значение JavaScript (объект, массив, число и т.д.).</p>
+            <p><strong>Зачем это нужно?</strong> Чтобы использовать данные, полученные в виде JSON-строки (например, с
+                сервера или из хранилища).</p>
+
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== JSON.parse() =====
+console.log("===== Пример JSON.parse() =====");
+
+// Пример JSON-строки (например, полученной с сервера)
+const jsonString = '{"name":"Mango","age":3,"isGoodBoy":true,"features":["loyal", "friendly"]}';
+console.log("Исходная JSON-строка:", jsonString);
+console.log("Тип исходной строки:", typeof jsonString);
+
+// Превращаем JSON-строку обратно в JavaScript объект
+// JSON.parse() "читает" строку и создает на ее основе объект
+const dogObject = JSON.parse(jsonString);
+
+// Теперь dogObject - это обычный JavaScript объект
+console.log("\nРезультат JSON.parse():", dogObject);
+console.log("Тип результата:", typeof dogObject);
+
+// Мы можем обращаться к его свойствам как обычно
+console.log("Свойство name:", dogObject.name);
+console.log("Свойство age:", dogObject.age);
+console.log("Свойство features (массив):", dogObject.features);
+
+// Примеры с другими типами:
+console.log("\nПарсинг других типов:");
+console.log("JSON.parse('5'):", JSON.parse("5"), `(тип: ${typeof JSON.parse("5")})`);
+console.log("JSON.parse('false'):", JSON.parse("false"), `(тип: ${typeof JSON.parse("false")})`);
+console.log("JSON.parse('null'):", JSON.parse("null"), `(тип: ${typeof JSON.parse("null")})`);
+console.log("JSON.parse('[1, \"два\", true]'):", JSON.parse('[1, "два", true]'), `(тип: ${typeof JSON.parse('[1, "два", true]')})`);</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="json-parse">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="json-errors" class="scroll-reveal">
+            <h4>Обработка ошибок при <code>JSON.parse()</code></h4>
+            <p>Что будет, если попытаться "распарсить" строку, которая <strong>не является</strong> валидным JSON? В
+                этом случае <code>JSON.parse()</code> <strong>выбросит ошибку</strong>, и выполнение скрипта
+                <strong>прервется</strong>.
+            </p>
+            <p>Примеры невалидного JSON:</p>
+            <ul>
+                <li><code>JSON.parse("Просто текст")</code> // ОШИБКА!</li>
+                <li><code>JSON.parse('{username: "Mango"}')</code> // ОШИБКА! (ключ без двойных кавычек)</li>
+            </ul>
+
+            <h5>Как избежать падения скрипта: <code>try...catch</code></h5>
+            <p>Чтобы программа не "падала" из-за таких ошибок, используется конструкция <code>try...catch</code>. Она
+                позволяет "попробовать" выполнить код, который может вызвать ошибку, и "поймать" эту ошибку, если она
+                произойдет, не прерывая работу остального скрипта.</p>
+            <p><strong>Синтаксис:</strong></p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Синтаксис try...catch
+try {
+  // Код, который может вызвать ошибку (например, JSON.parse())
+  // ...попытка...
+} catch (error) {
+  // Этот блок выполняется ТОЛЬКО ЕСЛИ в блоке try произошла ошибка
+  // Здесь можно обработать ошибку: вывести сообщение, записать в лог и т.д.
+  // 'error' - это объект с информацией об ошибке (error.name, error.message)
+}
+// Код здесь выполнится в любом случае (если только не было ошибки ВНЕ try...catch)</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <p><strong>Пример с <code>JSON.parse()</code>:</strong></p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== try...catch с JSON.parse() =====
+console.log("===== Пример try...catch с JSON.parse() =====");
+
+// Невалидная JSON строка (просто текст)
+const invalidJsonString = "Это точно не JSON";
+console.log(`\nПытаемся распарсить невалидный JSON: "${invalidJsonString}"`);
+
+try {
+  // Помещаем потенциально проблемный код внутрь try
+  const data = JSON.parse(invalidJsonString);
+  // Эта строка не выполнится, если JSON.parse() вызовет ошибку
+  console.log("Успешно распарсили:", data);
+
+} catch (error) {
+  // Этот блок сработает, так как invalidJsonString - невалидный JSON
+  console.error("❌ Поймали ошибку при парсинге!"); // Выводим свое сообщение об ошибке
+
+  // Объект 'error' содержит детали ошибки
+  console.error("   Тип ошибки (error.name):", error.name);       // Обычно "SyntaxError"
+  console.error("   Сообщение (error.message):", error.message); // Описание, что пошло не так
+}
+
+// Этот код выполнится, потому что мы "поймали" ошибку в catch
+console.log("✅ Скрипт продолжает работать после try...catch.");
+
+// Пример с валидным JSON внутри try...catch
+const validJsonString = '{"city": "Kyiv", "country": "Ukraine"}';
+console.log(`\nПытаемся распарсить валидный JSON: "${validJsonString}"`);
+try {
+  const locationData = JSON.parse(validJsonString);
+  console.log("✅ Успешно распарсили валидный JSON:", locationData); // Этот код выполнится
+} catch (error) {
+  // Этот блок не выполнится, так как ошибок не было
+  console.error("❌ Эта ошибка не должна появиться:", error.message);
+}
+console.log("✅ Скрипт завершил работу.");</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="json-try-catch">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+            <p><strong>Зачем использовать <code>try...catch</code> при парсинге JSON?</strong> Главная причина —
+                <strong>надежность</strong>. Ты не всегда можешь быть уверен, что данные, которые приходят (например, с
+                сервера), будут в идеальном формате JSON. Используя <code>try...catch</code>, ты защищаешь свой скрипт
+                от падения из-за некорректных данных.
+            </p>
+        </section>
+
+        <section id="js-error-phases" class="scroll-reveal">
+            <h4>Немного о типах ошибок: Фаза оценки vs Фаза выполнения</h4>
+            <p>Важно понимать, что <code>try...catch</code> ловит не все ошибки подряд.</p>
+            <p>В JavaScript есть две основные фазы работы с кодом:</p>
+            <ol>
+                <li><strong>Фаза Оценки (Compile Time / Evaluation Time):</strong> Перед тем как запустить код,
+                    JavaScript "читает" его и проверяет на наличие грубых <strong>синтаксических ошибок</strong>. Если
+                    есть такие ошибки, код <strong>вообще не начнет выполняться</strong>. <code>try...catch</code>
+                    <strong>не может</strong> поймать такие ошибки.
+                </li>
+                <li><strong>Фаза Выполнения (Runtime):</strong> Если синтаксических ошибок нет, код начинает
+                    выполняться. Ошибки, которые происходят на этой фазе, называются <strong>ошибками времени выполнения
+                        (runtime errors)</strong>. Это могут быть ошибки вроде попытки использовать несуществующую
+                    переменную или ошибка парсинга невалидного JSON с помощью <code>JSON.parse()</code>.</li>
+            </ol>
+            <p><strong>Именно ошибки времени выполнения (runtime errors) и ловятся конструкцией
+                    <code>try...catch</code>.</strong></p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Ошибки времени выполнения и try...catch =====
+console.log("===== Пример ошибки времени выполнения =====");
+
+try {
+  let user = { name: "Alice" };
+  console.log("Пользователь:", user);
+  // Пытаемся получить свойство 'age' из 'profile', которого нет в объекте 'user'.
+  // Это вызовет ошибку TypeError во время выполнения.
+  console.log("Пытаемся получить user.profile.age...");
+  console.log(user.profile.age); // ОШИБКА ЗДЕСЬ!
+  // Этот код не выполнится.
+  console.log("Этот текст не будет выведен.");
+
+} catch (e) {
+  // Ошибка будет поймана здесь.
+  console.error("❌ Поймали ошибку времени выполнения!");
+  console.error("   Тип ошибки:", e.name);   // TypeError
+  console.error("   Сообщение:", e.message); // Cannot read properties of undefined (reading 'age')
+}
+
+console.log("✅ Скрипт продолжает работу после ошибки.");
+
+// Пример синтаксической ошибки (НЕ ловится try...catch)
+// Если раскомментировать следующую строку, скрипт вообще не запустится.
+// console.log('Это сообщение не появится');
+// cos value = 5; // Синтаксическая ошибка!</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="runtime-error">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="web-storage-intro" class="scroll-reveal">
+            <h2 id="web-storage-title">Веб-хранилище: localStorage и sessionStorage</h2>
+            <p>Представь, что ты заходишь на сайт, выбираешь темную тему оформления, добавляешь товары в корзину. Если
+                ты закроешь вкладку, а потом откроешь сайт снова, было бы удобно, чтобы сайт "помнил" твой выбор темы и
+                содержимое корзины, верно?</p>
+            <p>Раньше для этого использовали <strong>cookie (куки)</strong> - маленькие кусочки данных, но у них есть
+                ограничения по размеру и они отправляются на сервер с каждым запросом.</p>
+            <p>Современные браузеры предлагают более мощный инструмент — <strong>Web Storage API (API
+                    Веб-хранилища)</strong>. Он предоставляет два механизма:</p>
+            <ul>
+                <li><strong>Локальное хранилище (<code>localStorage</code>)</strong></li>
+                <li><strong>Хранилище сеанса (<code>sessionStorage</code>)</strong></li>
+            </ul>
+            <p><strong>Преимущества перед cookie:</strong> больший объем (5-10 МБ), данные не отправляются на сервер
+                автоматически, проще работать из JavaScript.</p>
+            <p><strong>Важно:</strong> Веб-хранилище <strong>не предназначено</strong> для хранения чувствительной
+                информации (пароли, карты).</p>
+        </section>
+
+        <section id="web-storage-types" class="scroll-reveal">
+            <h4>Типы Веб-хранилища</h4>
+            <h5>1. Локальное хранилище (<code>localStorage</code>)</h5>
+            <ul>
+                <li><strong>Суть:</strong> Постоянное хранилище данных для конкретного сайта.</li>
+                <li><strong>Жизненный цикл:</strong> Данные <strong>сохраняются</strong> даже после закрытия браузера и
+                    перезагрузки. Удаляются только вручную (кодом или через настройки).</li>
+                <li><strong>Доступность:</strong> Данные доступны из любой вкладки/окна того же сайта.</li>
+                <li><strong>Применение:</strong> Настройки пользователя (тема, язык), корзина, состояние интерфейса.
+                </li>
+            </ul>
+
+            <h5>2. Хранилище сеанса (<code>sessionStorage</code>)</h5>
+            <ul>
+                <li><strong>Суть:</strong> Временное хранилище данных для конкретного сайта в рамках **одной сессии**.
+                </li>
+                <li><strong>Жизненный цикл:</strong> Данные <strong>удаляются автоматически</strong> при закрытии
+                    вкладки/окна.</li>
+                <li><strong>Доступность:</strong> Данные доступны только в той вкладке/окне, где созданы.</li>
+                <li><strong>Применение:</strong> Временные данные форм, состояние фильтров, временные сообщения.</li>
+            </ul>
+        </section>
+
+        <section id="web-storage-devtools" class="scroll-reveal">
+            <h4>Как посмотреть Веб-хранилище в браузере?</h4>
+            <p>Ты можешь увидеть сохраненные данные в инструментах разработчика (F12):</p>
+            <ol>
+                <li>Перейди на вкладку <strong>"Application"</strong> (Приложение) или <strong>"Storage"</strong>
+                    (Хранилище).</li>
+                <li>В меню слева найди разделы <strong>"Local Storage"</strong> и <strong>"Session Storage"</strong>.
+                </li>
+                <li>Кликни на них, чтобы увидеть пары "ключ-значение" для текущего сайта.</li>
+            </ol>
+            <p>[Изображение вкладки Application в инструментах разработчика с выделенными Local Storage и Session
+                Storage]</p>
+        </section>
+
+        <section id="local-storage-usage" class="scroll-reveal">
+            <h4>Работа с <code>localStorage</code></h4>
+            <p>Доступ осуществляется через глобальный объект <code>localStorage</code>.</p>
+
+            <h5>Добавление/Обновление данных: <code>setItem(key, value)</code></h5>
+            <p>Метод <code>setItem()</code> добавляет новую пару "ключ-значение" или обновляет значение существующего
+                ключа. Оба аргумента (`key` и `value`) сохраняются как **строки**.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== localStorage: setItem() =====
+console.log("===== Пример localStorage.setItem() =====");
+
+// Перед добавлением проверяем текущее состояние (может быть не пустым от прошлых запусков)
+console.log("localStorage до:", localStorage);
+
+// Сохраняем простую строку "light" под ключом "ui-theme"
+localStorage.setItem("ui-theme", "light");
+console.log("Добавили ключ 'ui-theme' со значением 'light'");
+
+// Сохраняем другую строку "muted" под ключом "notification-preference"
+localStorage.setItem("notification-preference", "muted");
+console.log("Добавили ключ 'notification-preference' со значением 'muted'");
+
+// Проверяем содержимое localStorage после добавления
+// В консоли разработчика (F12 -> Application -> Local Storage) можно увидеть эти записи.
+console.log("localStorage после добавления:", localStorage);
+
+// Если мы снова вызовем setItem с существующим ключом, значение перезапишется
+localStorage.setItem("ui-theme", "dark"); // Теперь значение для "ui-theme" - "dark"
+console.log("Обновили ключ 'ui-theme' на значение 'dark'");
+console.log("localStorage после обновления:", localStorage);
+
+// Очистим добавленные ключи для чистоты следующих примеров
+localStorage.removeItem("ui-theme");
+localStorage.removeItem("notification-preference");
+console.log("Очистили добавленные ключи.");</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="localstorage-setitem">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+
+            <h5>Добавление сложных данных (объекты, массивы)</h5>
+            <p>Поскольку <code>localStorage</code> хранит только строки, объекты/массивы нужно сначала **преобразовать в
+                JSON-строку** с помощью <code>JSON.stringify()</code>.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== localStorage: setItem() со сложными данными =====
+console.log("===== Пример localStorage.setItem() с объектом =====");
+
+// Создаем JavaScript объект с настройками
+const settings = {
+  theme: "dark",
+  isAuthenticated: true,
+  options: [1, 2, 3],
+  userName: "Alex"
+};
+console.log("Исходный объект:", settings);
+
+// Преобразуем объект settings в JSON-строку
+const settingsString = JSON.stringify(settings);
+console.log("Объект как JSON-строка:", settingsString);
+
+// Сохраняем JSON-строку в localStorage под ключом "app-settings"
+localStorage.setItem("app-settings", settingsString);
+console.log("Строка сохранена в localStorage под ключом 'app-settings'.");
+
+// Проверяем localStorage (в консоли разработчика F12 -> Application)
+console.log("localStorage после сохранения объекта:", localStorage);
+
+// Очистим ключ после примера
+localStorage.removeItem("app-settings");
+console.log("Очистили ключ 'app-settings'.");</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="localstorage-setitem-complex">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+
+            <h5>Получение данных: <code>getItem(key)</code></h5>
+            <p>Метод <code>getItem()</code> читает значение по ключу. Возвращает **строку** или `null`, если ключ не
+                найден.</p>
+            <p>Если сохраняли сложный объект/массив, полученную строку нужно **распарсить** обратно с помощью
+                <code>JSON.parse()</code>.
+            </p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== localStorage: getItem() =====
+console.log("===== Пример localStorage.getItem() =====");
+
+// Сначала сохраним данные для примера
+localStorage.setItem("user-name", "Bob");
+const userSettings = { level: 5, premium: false };
+localStorage.setItem("user-settings", JSON.stringify(userSettings));
+console.log("Сохранили 'user-name' и 'user-settings' в localStorage.");
+console.log("Текущий localStorage:", localStorage);
+
+// --- Получаем простое значение (строку) ---
+const savedName = localStorage.getItem("user-name");
+console.log("\nПолучаем 'user-name':");
+console.log("   Значение:", savedName); // "Bob"
+console.log("   Тип:", typeof savedName); // string
+
+// --- Получаем значение по несуществующему ключу ---
+const nonExistent = localStorage.getItem("non-existent-key");
+console.log("\nПолучаем 'non-existent-key':");
+console.log("   Значение:", nonExistent); // null
+
+// --- Получаем сложное значение (JSON-строку) ---
+const savedSettingsString = localStorage.getItem("user-settings");
+console.log("\nПолучаем 'user-settings' (как строку):");
+console.log("   Значение:", savedSettingsString); // '{"level":5,"premium":false}'
+console.log("   Тип:", typeof savedSettingsString); // string
+
+// --- Парсим JSON-строку обратно в объект ---
+let parsedSettings = null;
+console.log("\nПарсим строку 'user-settings':");
+if (savedSettingsString) { // Проверяем, что строка не null
+  try {
+    parsedSettings = JSON.parse(savedSettingsString);
+    console.log("   Результат парсинга:", parsedSettings);
+    console.log("   Тип результата:", typeof parsedSettings); // object
+    // Теперь можно работать с объектом
+    console.log("   Уровень пользователя:", parsedSettings.level); // 5
+  } catch (error) {
+    console.error("❌ Ошибка парсинга 'user-settings':", error);
+  }
+} else {
+    console.log("Строка 'user-settings' не найдена в localStorage.");
+}
+
+// Очищаем добавленные ключи
+localStorage.removeItem("user-name");
+localStorage.removeItem("user-settings");
+console.log("\nОчистили ключи 'user-name' и 'user-settings'.");</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="localstorage-getitem">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+
+            <h5>Удаление данных: <code>removeItem(key)</code> и <code>clear()</code></h5>
+            <ul>
+                <li><code>removeItem(key)</code>: Удаляет одну пару "ключ-значение".</li>
+                <li><code>clear()</code>: **Полностью очищает** всё локальное хранилище для сайта (используй с
+                    осторожностью!).</li>
+            </ul>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== localStorage: removeItem() и clear() =====
+console.log("===== Пример localStorage.removeItem() и clear() =====");
+
+// Добавим несколько элементов
+localStorage.setItem("theme", "dark");
+localStorage.setItem("lang", "ru");
+localStorage.setItem("temp", "123");
+console.log("localStorage перед удалением:", localStorage);
+
+// --- removeItem ---
+// Удаляем элемент с ключом "temp"
+localStorage.removeItem("temp");
+console.log("\nУдалили ключ 'temp'.");
+console.log("localStorage после removeItem:", localStorage);
+// Проверяем, что он удален
+console.log("Значение удаленного ключа 'temp':", localStorage.getItem("temp")); // null
+
+// --- clear ---
+// Полностью очищаем localStorage
+console.log("\nВызываем clear()...");
+localStorage.clear();
+console.log("localStorage после clear:", localStorage); // Должен быть пустым
+console.log("Длина localStorage:", localStorage.length); // 0</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="localstorage-remove">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="session-storage-usage" class="scroll-reveal">
+            <h4>Работа с <code>sessionStorage</code></h4>
+            <p>Хранилище сеанса (<code>sessionStorage</code>) работает **абсолютно так же**, как и
+                <code>localStorage</code>, с точки зрения методов (`setItem`, `getItem`, `removeItem`, `clear`).
+            </p>
+            <p><strong>Главное отличие</strong> — в жизненном цикле данных (удаляются при закрытии вкладки/окна) и в
+                том, что доступ к нему осуществляется через объект <code>sessionStorage</code>.</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Примеры работы с sessionStorage =====
+console.log("===== Примеры работы с sessionStorage =====");
+
+// Проверяем sessionStorage (изначально пуст для новой сессии)
+console.log("Начальное состояние sessionStorage:", sessionStorage);
+
+// --- setItem ---
+sessionStorage.setItem("user-id", "12345");
+sessionStorage.setItem("current-tab-status", "active");
+const sessionData = { page: "/profile", timestamp: Date.now() };
+sessionStorage.setItem("session-info", JSON.stringify(sessionData));
+console.log("\nДобавили данные в sessionStorage.");
+console.log("sessionStorage после добавления:", sessionStorage);
+
+// --- getItem ---
+const userId = sessionStorage.getItem("user-id");
+console.log("\nПолучаем 'user-id':", userId); // "12345"
+
+const sessionInfoString = sessionStorage.getItem("session-info");
+let parsedSessionInfo = null;
+try {
+    parsedSessionInfo = JSON.parse(sessionInfoString);
+} catch(e) {
+    console.error("Ошибка парсинга данных сессии:", e);
+}
+console.log("Получаем и парсим 'session-info':", parsedSessionInfo);
+
+// --- removeItem ---
+sessionStorage.removeItem("current-tab-status");
+console.log("\nУдалили 'current-tab-status'.");
+console.log("sessionStorage после removeItem:", sessionStorage);
+
+// --- clear ---
+// sessionStorage.clear(); // Раскомментируй, чтобы очистить всё для этой сессии
+// console.log("sessionStorage после clear:", sessionStorage);
+
+console.log("\n--- Важно ---");
+console.log("Данные sessionStorage удалятся при закрытии этой вкладки/окна.");
+console.log("Откройте этот же сайт в новой вкладке - sessionStorage там будет пустым.");
+
+// Очистим sessionStorage после примера
+sessionStorage.removeItem("user-id");
+sessionStorage.removeItem("session-info");</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="sessionstorage-examples">Запустить пример</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output"></div>
+            </div>
+        </section>
+
+        <section id="web-storage-example" class="scroll-reveal">
+            <h4>Практический пример: Форма обратной связи с сохранением ввода</h4>
+            <p>Рассмотрим реальный сценарий, где <code>localStorage</code> очень полезен. У нас есть простая форма с
+                полем для ввода сообщения. Мы будем сохранять введенный текст в <code>localStorage</code> по мере ввода
+                и восстанавливать его при загрузке страницы, чтобы пользователь не потерял свой текст при случайной
+                перезагрузке.</p>
+
+            <h5>HTML код формы:</h5>
+            <div class="code-block">
+                <pre><code class="language-html">&lt;!-- Форма с классом для поиска в JS --&gt;
+&lt;form class="feedback-form-example"&gt;
+  &lt;h5&gt;Форма обратной связи (с сохранением)&lt;/h5&gt;
+  &lt;!-- Текстовое поле с именем 'message' --&gt;
+  &lt;textarea name="message" placeholder="Введите сообщение..." style="width: 95%; min-height: 80px; margin-bottom: 10px; padding: 8px; border: 1px solid var(--border-color-light); border-radius: 3px; background-color: var(--bg-main-trans); color: var(--text-main);"&gt;&lt;/textarea&gt;
+  &lt;!-- Кнопка отправки формы --&gt;
+  &lt;button type="submit" class="button" style="background-color: var(--accent-blue); color: white; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer;"&gt;Отправить отзыв&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <form class="feedback-form-example">
+                <h5>Форма обратной связи (с сохранением)</h5>
+                <textarea name="message" placeholder="Введите сообщение..."
+                    style="width: 95%; min-height: 80px; margin-bottom: 10px; padding: 8px; border: 1px solid var(--border-color-light); border-radius: 3px; background-color: var(--bg-main-trans); color: var(--text-main);"></textarea>
+                <button type="submit" class="button"
+                    style="background-color: var(--accent-blue); color: white; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer;">Отправить
+                    отзыв</button>
+            </form>
+
+            <h5>JavaScript код (выполняется при загрузке страницы):</h5>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Логика для формы обратной связи с сохранением =====
+// Этот код выполняется при загрузке страницы, чтобы форма работала.
+// Кнопка "Запустить пример" для этого блока не нужна, т.к. это инициализация.
+console.log("===== Инициализация формы обратной связи с localStorage =====");
+
+// Находим форму и текстовое поле
+const feedbackForm = document.querySelector(".feedback-form-example");
+const feedbackTextarea = feedbackForm ? feedbackForm.elements.message : null;
+// Ключ для localStorage
+const feedbackStorageKey = "feedback-form-message-example";
+
+if (feedbackForm && feedbackTextarea) {
+  console.log("   Форма и поле ввода найдены.");
+
+  // --- 1. Восстановление сохраненного сообщения ---
+  try {
+    const savedMessage = localStorage.getItem(feedbackStorageKey);
+    if (savedMessage) {
+      feedbackTextarea.value = savedMessage;
+      console.log("   Восстановлено сообщение из localStorage.");
+    } else {
+      console.log("   Сохраненного сообщения нет.");
+    }
+  } catch (e) {
+    console.error("   Ошибка чтения из localStorage:", e);
+  }
+
+
+  // --- 2. Сохранение сообщения при вводе ---
+  feedbackForm.addEventListener("input", (event) => {
+    // Проверяем, что событие произошло именно на textarea
+    if (event.target === feedbackTextarea) {
+      try {
+        localStorage.setItem(feedbackStorageKey, feedbackTextarea.value);
+        // console.log("Сообщение сохранено в localStorage."); // Можно раскомментировать для отладки
+      } catch (e) {
+        console.error("   Ошибка записи в localStorage:", e);
+      }
+    }
+  });
+  console.log("   Добавлен слушатель 'input' для сохранения.");
+
+  // --- 3. Очистка localStorage и формы при отправке ---
+  feedbackForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // Предотвращаем перезагрузку
+    const submittedMessage = feedbackTextarea.value;
+
+    if (submittedMessage.trim() === "") {
+      alert("Пожалуйста, введите сообщение.");
+      return;
+    }
+
+    console.log("Отправляем отзыв (в консоль):", submittedMessage);
+    // В реальном приложении здесь была бы отправка на сервер
+
+    // Удаляем из localStorage
+    try {
+      localStorage.removeItem(feedbackStorageKey);
+      console.log("   Сообщение удалено из localStorage.");
+    } catch (e) {
+      console.error("   Ошибка удаления из localStorage:", e);
+    }
+
+    // Очищаем форму
+    feedbackForm.reset();
+    console.log("   Форма очищена.");
+    alert("Отзыв 'отправлен' (см. консоль)!"); // Сообщение пользователю
+  });
+  console.log("   Добавлен слушатель 'submit' для отправки и очистки.");
+
+} else {
+  console.warn("Элементы формы '.feedback-form-example' или textarea не найдены. Логика сохранения не будет работать.");
+}</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <p><strong>Как проверить:</strong> Начните вводить текст в форму выше. Перезагрузите страницу. Введенный
+                текст должен остаться в поле. После нажатия "Отправить отзыв" поле очистится, и при следующей
+                перезагрузке оно будет пустым.</p>
+        </section>
+
+        <section id="dev-tools-intro" class="scroll-reveal">
+            <h2 id="dev-tools-title">Инструменты веб-разработки: Автоматизация</h2>
+            <p>В современной веб-разработке существует множество рутинных задач: подготовка кода к работе (объединение,
+                сжатие), проверка на ошибки, установка и обновление сторонних библиотек, запуск проекта для проверки,
+                подготовка финальной версии. Делать это вручную долго и легко ошибиться.</p>
+            <p>Поэтому разработчики используют <strong>инструменты автоматизации</strong> — специальные программы,
+                которые берут на себя эти задачи, позволяя сосредоточиться на написании кода.</p>
+            <p>Основные задачи, которые автоматизируют:</p>
+            <ul>
+                <li>Сборка и компиляция кода.</li>
+                <li>Поддержка разных браузеров.</li>
+                <li>Линтинг (проверка стиля и ошибок) и тестирование.</li>
+                <li>Управление зависимостями (пакетами).</li>
+                <li>Развертывание (подготовка к "выпуску").</li>
+                <li>Генерация документации.</li>
+            </ul>
+        </section>
+
+        <section id="vite-intro" class="scroll-reveal">
+            <h4>Сборка проекта с Vite</h4>
+            <p><strong>Vite</strong> (произносится "вит") — это один из самых популярных и быстрых современных
+                инструментов для автоматизации сборки и разработки веб-проектов.</p>
+            <p><strong>Что он помогает делать:</strong></p>
+            <ul>
+                <li>Быстро <strong>создать</strong> структуру нового проекта.</li>
+                <li>Очень быстро <strong>запускать</strong> проект для разработки (сервер разработки).</li>
+                <li>Мгновенно <strong>видеть изменения</strong> в браузере после сохранения кода (Hot Module Replacement
+                    - HMR).</li>
+                <li>Эффективно <strong>собирать</strong> финальную версию проекта.</li>
+            </ul>
+            <p>Vite использует современные возможности браузеров (ES-модули), что делает его очень быстрым. Он
+                поддерживает чистый JavaScript (Vanilla JS), TypeScript и популярные фреймворки (React, Vue и др.).</p>
+        </section>
+
+        <section id="nodejs-intro" class="scroll-reveal">
+            <h4>Node.js: JavaScript вне браузера</h4>
+            <p>Чтобы использовать Vite и многие другие инструменты, нам нужна среда **Node.js**. Она позволяет
+                **запускать JavaScript-код прямо на компьютере**, вне браузера.</p>
+            <p><strong>Зачем нужен Node.js?</strong></p>
+            <ul>
+                <li>Для запуска инструментов разработки (Vite, npm, линтеры и т.д.).</li>
+                <li>Для серверной разработки (написания бэкенда).</li>
+            </ul>
+            <h5>Установка Node.js</h5>
+            <ol>
+                <li>Перейди на <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">официальный сайт
+                        Node.js</a>.</li>
+                <li>Скачай и установи <strong>LTS-версию</strong> для твоей операционной системы.</li>
+                <li><strong>(Для Windows)</strong> Обязательно отметь галочку <strong>"Automatically install the
+                        necessary tools..."</strong> во время установки.</li>
+                <li>После установки перезагрузи компьютер.</li>
+                <li>Проверь установку, выполнив в терминале команду: <code>node --version</code>. Ты должен увидеть
+                    номер версии.</li>
+            </ol>
+            <p>[Изображение страницы загрузки Node.js с выделенной LTS версией]</p>
+            <p>[Изображение шага установки Node.js в Windows с чекбоксом "Automatically install..."]</p>
+        </section>
+
+        <section id="npm-intro" class="scroll-reveal">
+            <h4>Пакетный менеджер NPM</h4>
+            <p>Вместе с Node.js устанавливается **NPM (Node Package Manager)** — менеджер пакетов.</p>
+            <p><strong>Пакеты</strong> — это готовые кусочки кода (библиотеки, инструменты), созданные другими
+                разработчиками. NPM позволяет:</p>
+            <ul>
+                <li>Находить пакеты (на сайте <a href="https://npmjs.com" target="_blank"
+                        rel="noopener noreferrer">npmjs.com</a>).</li>
+                <li>Устанавливать, обновлять и удалять пакеты в твоем проекте.</li>
+                <li>Управлять зависимостями проекта (списком нужных пакетов).</li>
+                <li>Запускать скрипты автоматизации.</li>
+            </ul>
+            <h5>Проверка установки NPM</h5>
+            <p>Выполни в терминале: <code>npm --version</code>. Ты должен увидеть номер версии.</p>
+            <h5>Начальная настройка NPM (Имя и Email автора)</h5>
+            <p>Выполни в терминале (заменив на свои данные):</p>
+            <div class="code-block">
+                <pre><code class="language-bash"># Установка имени автора по умолчанию
+npm config set init-author-name "Твое Имя"
+
+# Установка email автора по умолчанию (желательно GitHub email)
+npm config set init-author-email "твой@email.com"</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="vite-init" class="scroll-reveal">
+            <h4>Инициализация проекта с Vite</h4>
+            <p>Создадим новый проект:</p>
+            <ol>
+                <li>Открой терминал.</li>
+                <li>Перейди в папку, где будут храниться твои проекты (используй команду `cd`).</li>
+                <li>Выполни команду: <code>npm create vite@latest</code></li>
+                <li>Ответь на вопросы:
+                    <ul>
+                        <li>Подтверди установку `create-vite` (введи `y`, если спросит).</li>
+                        <li>Введи имя проекта (например, `my-vite-project`).</li>
+                        <li>Выбери фреймворк: стрелками выбери **`Vanilla`** и нажми Enter.</li>
+                        <li>Выбери вариант: выбери **`JavaScript`** и нажми Enter.</li>
+                    </ul>
+                </li>
+                <li>Vite создаст папку проекта с базовой структурой (index.html, main.js, style.css, package.json и
+                    др.).</li>
+                <li>Перейди в папку проекта (`cd my-vite-project`) и открой ее в редакторе кода (`code .`).</li>
+            </ol>
+            <p>[Видео или анимированное изображение процесса `npm create vite@latest` с выбором опций]</p>
+        </section>
+
+        <section id="package-json-intro" class="scroll-reveal">
+            <h4>Файл <code>package.json</code></h4>
+            <p>Это главный конфигурационный файл проекта для NPM. Он содержит:</p>
+            <ul>
+                <li>Информацию о проекте (имя, версия).</li>
+                <li>Списки зависимостей (`dependencies` и `devDependencies`).</li>
+                <li>Скрипты для автоматизации (`scripts`).</li>
+                <li>Другие настройки (например, `"type": "module"` для использования ESM).</li>
+            </ul>
+            <p>Пример `package.json` после создания проекта Vite:</p>
+            <div class="code-block">
+                <pre><code class="language-json">{
+  "name": "my-vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0" // Версия может отличаться
+  }
+  // "dependencies" пока нет
+}</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="npm-install-deps" class="scroll-reveal">
+            <h4>Установка зависимостей (`npm install`)</h4>
+            <p>После создания проекта (или скачивания чужого) нужно установить все зависимости, перечисленные в
+                `package.json`.</p>
+            <ol>
+                <li>Убедись, что ты в папке проекта в терминале.</li>
+                <li>Выполни команду: <code>npm install</code> (или <code>npm i</code>).</li>
+            </ol>
+            <p>NPM скачает все нужные пакеты из интернета и поместит их в папку **`node_modules`**. Эта папка содержит
+                код сторонних библиотек и **никогда** не добавляется в Git.</p>
+            <p>Также создается/обновляется файл **`package-lock.json`**, который содержит точный список всех
+                установленных версий пакетов. Его **нужно** добавлять в Git.</p>
+            <p>[Видео или анимированное изображение процесса `npm install`]</p>
+        </section>
+
+        <section id="npm-run-dev" class="scroll-reveal">
+            <h4>Запуск сервера разработки (`npm run dev`)</h4>
+            <p>В `package.json` есть секция `scripts` с командами. Чтобы запустить скрипт, используется команда `npm run
+                имя_скрипта`.</p>
+            <p>Скрипт `dev` запускает локальный сервер разработки Vite:</p>
+            <ol>
+                <li>Находясь в папке проекта, выполни: <code>npm run dev</code></li>
+                <li>Vite запустит сервер и покажет в терминале локальный адрес (например, `http://localhost:5173/`).
+                </li>
+                <li>Открой этот адрес в браузере.</li>
+                <li>При сохранении изменений в коде страница в браузере будет обновляться автоматически (HMR).</li>
+            </ol>
+            <p>Чтобы **остановить** сервер, нажми в терминале `Ctrl + C`.</p>
+            <p>[Изображение терминала после запуска `npm run dev` с указанием адреса]</p>
+        </section>
+
+        <section id="npm-install-packages" class="scroll-reveal">
+            <h4>Установка и использование пакетов</h4>
+            <p>Допустим, нам нужен пакет `validator` для проверки email.</p>
+            <ol>
+                <li><strong>Установка:</strong> В терминале (в папке проекта) выполни:
+                    <code>npm install validator</code> (или <code>npm i validator</code>).
+                </li>
+                <li>NPM скачает пакет в `node_modules` и добавит его в `dependencies` в `package.json`.</li>
+                <li><strong>Использование:</strong> В своем JS-файле (например, `main.js`) импортируй пакет и используй
+                    его функции:</li>
+            </ol>
+            <div class="code-block">
+                <pre><code class="language-javascript">// ===== Использование пакета validator =====
+console.log("===== Пример использования пакета validator =====");
+
+// Предполагается, что пакет validator УЖЕ УСТАНОВЛЕН через 'npm install validator'
+
+// Импортируем пакет (Vite найдет его в node_modules)
+import validator from 'validator';
+
+const email1 = "test@example.com";
+const email2 = "не_email";
+
+// Используем метод isEmail() из пакета
+console.log(`Является ли "${email1}" валидным email?`, validator.isEmail(email1)); // true
+console.log(`Является ли "${email2}" валидным email?`, validator.isEmail(email2)); // false
+
+// Важно: Чтобы этот код работал, его нужно запускать в среде,
+// которая поддерживает модули и установку пакетов (например, через Vite 'npm run dev').
+// Просто открыть HTML-файл в браузере не сработает без сборки.</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output">Этот код требует установленного пакета 'validator' и запуска через сборщик
+                    (например, Vite). Результат смотрите в консоли разработчика при запуске 'npm run dev'.</div>
+            </div>
+        </section>
+
+        <section id="npm-uninstall-packages" class="scroll-reveal">
+            <h4>Удаление пакетов</h4>
+            <p>Если пакет больше не нужен:</p>
+            <ol>
+                <li>Удали его использование из кода.</li>
+                <li>В терминале (в папке проекта) выполни: <code>npm uninstall validator</code> (или
+                    <code>npm r validator</code>).
+                </li>
+            </ol>
+            <p>NPM удалит пакет из `node_modules` и из `package.json`.</p>
+        </section>
+
+        <section id="npm-dep-types" class="scroll-reveal">
+            <h4>Типы зависимостей: `dependencies` vs `devDependencies`</h4>
+            <p>При установке пакета можно указать его тип:</p>
+            <ul>
+                <li><strong>Основные зависимости (`dependencies`):</strong> Нужны для работы самого приложения у
+                    пользователя (например, слайдеры, валидаторы). Устанавливаются по умолчанию (`npm i пакет`) или с
+                    флагом `--save`. Код попадает в финальную сборку.</li>
+                <li><strong>Зависимости для разработки (`devDependencies`):</strong> Нужны только в процессе разработки
+                    (Vite, линтеры, тесты). Устанавливаются с флагом `--save-dev` или `-D` (`npm i пакет -D`). Код НЕ
+                    попадает в финальную сборку.</li>
+            </ul>
+            <p>Разделение помогает уменьшить размер финального кода и понять структуру проекта.</p>
+            <p>Пример установки зависимости для разработки:</p>
+            <div class="code-block">
+                <pre><code class="language-bash"># Установка пакета 'eslint' (линтер) как зависимости для разработки
+npm install eslint --save-dev
+
+# или короче
+npm i eslint -D</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules-intro" class="scroll-reveal">
+            <h2 id="modules-title">Модульность кода: Организация проекта</h2>
+            <p>Когда проект растет, хранить весь JavaScript-код в одном файле неудобно. <strong>Модульность</strong> —
+                это подход, при котором код разбивается на небольшие, логически связанные части —
+                <strong>модули</strong> (обычно отдельные `.js` файлы).
+            </p>
+            <p><strong>Преимущества модулей:</strong></p>
+            <ul>
+                <li><strong>Поддержка:</strong> Легче понимать, изменять и исправлять ошибки в изолированных частях.
+                </li>
+                <li><strong>Избегание конфликтов имен:</strong> Переменные внутри модуля не мешают переменным в других
+                    модулях.</li>
+                <li><strong>Повторное использование:</strong> Модули можно легко использовать в разных частях проекта
+                    или в других проектах.</li>
+            </ul>
+        </section>
+
+        <section id="esm-intro" class="scroll-reveal">
+            <h4>ECMAScript Модули (ESM): Стандарт JavaScript</h4>
+            <p><strong>ECMAScript Modules (ESM)</strong> — это официальный стандарт JavaScript для организации кода с
+                помощью модулей. Он определяет, как один модуль может <strong>экспортировать</strong> (`export`) свои
+                данные, а другой — <strong>импортировать</strong> (`import`) их.</p>
+            <p><strong>Основная идея:</strong></p>
+            <ul>
+                <li>Каждый `.js` файл — это модуль.</li>
+                <li>Модуль экспортирует что-то наружу (`export`).</li>
+                <li>Другой модуль импортирует это (`import`) и использует.</li>
+            </ul>
+            <p>Инструменты вроде **Vite** позволяют легко использовать ESM в разработке, обеспечивая совместимость с
+                браузерами.</p>
+        </section>
+
+        <section id="default-export-import" class="scroll-reveal">
+            <h4>1. Экспорт и импорт по умолчанию (`default`)</h4>
+            <ul>
+                <li><strong>Суть:</strong> Используется для экспорта одной "главной" сущности из модуля.</li>
+                <li><strong>Правило:</strong> Только <strong>один</strong> `export default` на файл.</li>
+                <li><strong>Синтаксис экспорта:</strong> <code>export default значение;</code></li>
+                <li><strong>Синтаксис импорта:</strong> <code>import любое_имя from "./путь/к/файлу";</code> (имя при
+                    импорте выбираешь сам).</li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: calculator.js
+
+const calculator = {
+  add(a, b) { return a + b; },
+  subtract(a, b) { return a - b; }
+};
+
+// Экспортируем объект calculator как экспорт по умолчанию
+export default calculator;</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: app.js
+console.log("===== Пример импорта по умолчанию =====");
+
+// Импортируем значение по умолчанию из 'calculator.js'
+// Даем ему имя 'myCalc' (могли выбрать любое)
+// Важно: Этот import сработает только в модульной среде (Vite, Node.js)
+// import myCalc from './calculator.js'; // Закомментировано, т.к. не сработает в простом скрипте
+
+// --- Симуляция импорта для демонстрации ---
+// В реальном коде был бы import выше. Здесь мы просто создадим объект для примера.
+const myCalc_simulated = { add(a, b) { return a + b; }, subtract(a, b) { return a - b; } };
+console.log("Симулированный импорт:", myCalc_simulated);
+
+// Используем импортированный (симулированный) объект
+const sum = myCalc_simulated.add(10, 5);
+const difference = myCalc_simulated.subtract(10, 5);
+
+console.log(`Результат сложения (10 + 5): ${sum}`);
+console.log(`Результат вычитания (10 - 5): ${difference}`);</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="default-import-simulated">Запустить симуляцию</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output">Этот пример симулирует результат импорта. Настоящий `import` требует модульной
+                    среды.</div>
+            </div>
+        </section>
+
+        <section id="named-export-import" class="scroll-reveal">
+            <h4>2. Именованный экспорт и импорт (`named`)</h4>
+            <ul>
+                <li><strong>Суть:</strong> Используется для экспорта <strong>нескольких</strong> сущностей под их
+                    конкретными именами.</li>
+                <li><strong>Правило:</strong> <strong>Сколько угодно</strong> именованных экспортов на файл.</li>
+                <li><strong>Синтаксис экспорта:</strong><br>
+                    <code>export const имяПеременной = значение;</code><br>
+                    <code>export function имяФункции() { ... }</code><br>
+                    *Или:* <code>export { имя1, имя2 };</code>
+                </li>
+                <li><strong>Синтаксис импорта:</strong> <code>import { имя1, имя2 } from "./путь/к/файлу";</code> (имена
+                    должны совпадать, используются фигурные скобки `{}`).</li>
+            </ul>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: utils.js
+
+// Экспортируем константу PI под ее именем
+export const PI = 3.14159;
+
+// Экспортируем функцию greet под ее именем
+export function greet(name) {
+  return `Привет, ${name}!`;
+}
+
+// Экспортируем еще одну константу
+export const E = 2.71828;</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: mainApp.js
+console.log("===== Пример именованного импорта =====");
+
+// Импортируем ТОЛЬКО PI и greet из utils.js по их именам.
+// Важно: Этот import сработает только в модульной среде (Vite, Node.js)
+// import { PI, greet } from "./utils.js"; // Закомментировано
+
+// --- Симуляция импорта для демонстрации ---
+const PI_simulated = 3.14159;
+function greet_simulated(name) { return `Привет, ${name}!`; }
+console.log("Симулированный импорт: PI =", PI_simulated, ", greet =", greet_simulated);
+
+// Используем импортированные (симулированные) значения
+console.log(`Значение PI: ${PI_simulated}`);
+const greeting = greet_simulated("Алиса");
+console.log(greeting);
+
+// Попытка использовать E вызовет ошибку, так как мы его не импортировали (даже в симуляции).
+// console.log(E); // Ошибка</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="named-import-simulated">Запустить симуляцию</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output">Этот пример симулирует результат импорта. Настоящий `import` требует модульной
+                    среды.</div>
+            </div>
+            <p><strong>Совмещение:</strong> В одном файле можно использовать и `export default`, и именованные `export`.
+            </p>
+        </section>
+
+        <section id="rename-import" class="scroll-reveal">
+            <h4>Переименование при импорте (`as`)</h4>
+            <p>Если имя экспортируемой сущности неудобно или конфликтует с существующим, при <strong>именованном
+                    импорте</strong> можно дать ей новое имя с помощью `as`.</p>
+            <p><strong>Синтаксис:</strong> <code>import { оригинальноеИмя as новоеИмя } from "./путь";</code></p>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: library.js
+export function veryLongFunctionNameForProcessing(data) {
+  console.log("Обработка:", data);
+  return true;
+}
+export const CONFIG_OPTIONS = { timeout: 5000 };</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: consumer.js
+console.log("===== Пример импорта с переименованием (as) =====");
+
+// Импортируем veryLongFunctionNameForProcessing как 'processData'
+// Импортируем CONFIG_OPTIONS как 'options'
+// Важно: Этот import сработает только в модульной среде (Vite, Node.js)
+// import {
+//   veryLongFunctionNameForProcessing as processData,
+//   CONFIG_OPTIONS as options
+// } from "./library.js"; // Закомментировано
+
+// --- Симуляция импорта для демонстрации ---
+function processData_simulated(data) { console.log("Обработка:", data); return true; }
+const options_simulated = { timeout: 5000 };
+console.log("Симулированный импорт: processData =", processData_simulated, ", options =", options_simulated);
+
+// Используем импортированные (симулированные) сущности под новыми именами
+const result = processData_simulated("Тестовые данные");
+console.log(`Результат processData: ${result}`);
+console.log(`Таймаут из options: ${options_simulated.timeout}`);</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="rename-import-simulated">Запустить симуляцию</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output">Этот пример симулирует результат импорта. Настоящий `import` требует модульной
+                    среды.</div>
+            </div>
+        </section>
+
+        <section id="namespace-import" class="scroll-reveal">
+            <h4>Импорт всего модуля как объекта (`import * as ...`)</h4>
+            <p>Если нужно импортировать много именованных сущностей из модуля, можно импортировать их все как свойства
+                одного объекта.</p>
+            <p><strong>Синтаксис:</strong> <code>import * as имяОбъекта from "./путь";</code></p>
+            <p><strong>Важно:</strong> Импортирует **только именованные экспорты**. `export default` не попадает в этот
+                объект.</p>
+            <p>Пример:</p>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: helpers.js
+export const MAX_RETRIES = 3;
+export function validateInput(input) { return input.length > 0; }
+export function formatError(msg) { return `[ОШИБКА] ${msg}`; }</code></pre>
+                <div class="button-group">
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+            </div>
+            <div class="code-block">
+                <pre><code class="language-javascript">// Файл: setup.js
+console.log("===== Пример импорта пространства имен (*) =====");
+
+// Импортируем ВСЕ именованные экспорты из 'helpers.js' в объект 'h'
+// Важно: Этот import сработает только в модульной среде (Vite, Node.js)
+// import * as h from "./helpers.js"; // Закомментировано
+
+// --- Симуляция импорта для демонстрации ---
+const h_simulated = {
+  MAX_RETRIES: 3,
+  validateInput(input) { return input.length > 0; },
+  formatError(msg) { return `[ОШИБКА] ${msg}`; }
+};
+console.log("Симулированный импорт (объект h):", h_simulated);
+
+// Доступ к экспортированным сущностям через объект 'h'
+console.log(`Макс. попыток: ${h_simulated.MAX_RETRIES}`);
+
+const isValid = h_simulated.validateInput("текст");
+console.log(`Результат валидации: ${isValid}`);
+
+const errorMsg = h_simulated.formatError("Что-то пошло не так");
+console.log(errorMsg);</code></pre>
+                <div class="button-group">
+                    <button class="run-code" data-example="namespace-import-simulated">Запустить симуляцию</button>
+                    <button class="copy-code">Скопировать</button>
+                    <button class="toggle-code">Скрыть код</button>
+                </div>
+                <div class="output">Этот пример симулирует результат импорта. Настоящий `import` требует модульной
+                    среды.</div>
+            </div>
+        </section>
+
+        <div class="navigation-buttons">
+            <a href="oop-classes.html" class="button">← ООП и классы</a>
+            <a href="exercises.html" class="button">Упражнения →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 JavaScript: Полное руководство для изучения. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Прокрутить наверх" style="display: none;">↑</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"
+        defer></script>
+
+    <script src="../main.js" defer></script>
+
+    <script src="../js/module4_page.js" defer></script>
+
+</body>
+
+</html>
