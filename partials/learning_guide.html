@@ -22,42 +22,39 @@
     <header>
         <div class="header-container">
             <div class="logo"></div>
-            <a href="../index.html">
+            <a href="index.html">
                 <h1>JavaScript</h1>
             </a>
 
             <button id="theme-toggle" aria-label="Переключить тему">
                 Светлая тема
             </button>
+            <!-- Кнопка бургер-меню (появляется на мобильных по CSS) -->
             <button id="menu-toggle" class="menu-toggle-btn" aria-label="Открыть меню" aria-expanded="false">
                 ☰
             </button>
 
+            <!-- Основная навигация -->
             <nav id="main-nav">
+                <!-- Кнопка закрытия меню (появляется в модальном окне по CSS) -->
                 <button id="menu-close" class="menu-close-btn" aria-label="Закрыть меню">
                     ×
                 </button>
+                <!-- Убедитесь, что этот UL имеет ID -->
                 <ul id="main-nav-list">
                     <li><a href="../index.html">Главная</a></li>
                     <li><a href="learning_guide.html" class="active animate-neon-fill">Гайд по обучению</a></li>
-                    <li class="has-submenu">
-                        <a href="basics.html">Основы и Деструктуризация</a>
-                        <ul class="submenu">
-                            <li><a href="basics.html#деструктуризация-объектов">Деструктуризация</a></li>
-                            <li><a href="basics.html#переменные">Переменные</a></li>
-                            <li><a href="basics.html#операторы">Операторы</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="basics.html">Основы и Деструктуризация</a></li>
                     <li><a href="arrays.html">Массивы</a></li>
                     <li><a href="functions.html">Функции</a></li>
                     <li><a href="loops.html">Циклы</a></li>
                     <li><a href="objects.html">Объекты</a></li>
                     <li><a href="oop-classes.html">ООП и классы</a></li>
-                    <li><a href="module4_page.html">JSON, Хранилище, Инструменты, Модули</a></li>
-                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
+                    <li><a href="modules4_page.html">JSON, Хранилище, Инструменты, Модули</a></li>
                     <li><a href="exercises.html">Упражнения</a></li>
                     <li><a href="projects.html">Проекты</a></li>
                     <li><a href="resources.html">Ресурсы</a></li>
+                    <li><a href="dom_summary.html">Памятка по DOM</a></li>
                     <li><a href="gallery.html">Галерея(пример)</a></li>
                 </ul>
             </nav>
